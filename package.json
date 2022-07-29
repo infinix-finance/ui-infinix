@@ -1,0 +1,29 @@
+{
+  "name": "ui-infinix",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "git@github.com:infinix-finance/ui-infinix.git",
+  "author": "Daniel Palanki <daniel.palanki79@gmail.com>",
+  "license": "UNLICENSED",
+  "workspaces": [
+    "app"
+  ],
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "start": "yarn --cwd app dev",
+    "build": "yarn --cwd app build",
+    "storybook": "yarn --cwd app storybook",
+    "storybook:build": "yarn --cwd app build-storybook",
+    "test": "yarn --cwd app test",
+    "test:watch": "yarn --cwd app test:watch",
+    "lint": "yarn --cwd app lint",
+    "lint:report": "yarn --cwd app lint:report"
+  },
+  "devDependencies": {
+    "husky": ">=6"
+  },
+  "lint-staged": {
+    "app/**/*.{js,jsx,ts,tsx}": "eslint"
+  }
+}
