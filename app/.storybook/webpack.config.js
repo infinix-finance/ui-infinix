@@ -10,6 +10,8 @@ module.exports = ({ config }) => {
     "@/contexts": path.resolve(__dirname, "..", "contexts"),
     "@/hooks": path.resolve(__dirname, "..", "hooks"),
     "@/stores": path.resolve(__dirname, "..", "stores"),
+    "@/defi": path.resolve(__dirname, "..", "defi"),
+    "@/types": path.resolve(__dirname, "..", "types"),
   };
 
   config.module.rules.push({

@@ -1,13 +1,17 @@
 import { alpha, Theme } from "@mui/material";
 import { OverridesStyleRules } from "@mui/material/styles/overrides";
 
-export const buttonOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
+export const buttonOverrides = (
+  theme: Theme
+): Partial<OverridesStyleRules> => ({
   styleOverrides: {
     root: {
       textTransform: "none",
       boxShadow: "none",
       whiteSpace: "no-wrap",
       minWidth: "maxContent",
+      borderRadius: "0.5rem",
+      fontWeight: "500",
       "&:hover": {
         boxShadow: "none",
       },
@@ -16,65 +20,117 @@ export const buttonOverrides = (theme: Theme): Partial<OverridesStyleRules> => (
       lineHeight: theme.custom.lineHeight.small,
     },
     sizeLarge: {
-      padding: "1.125rem",
-      fontSize: "1.25rem",
+      padding: "1.25rem",
+      fontSize: "1.5rem",
       height: "4rem",
-      [theme.breakpoints.down("sm")]: {
-        padding: "0.9375rem",
-        fontSize: "1.125rem",
-        height: "3.5rem",
-      },
     },
     sizeMedium: {
-      padding: "0.9375rem",
-      fontSize: "1.125rem",
-      height: "3.5rem",
-      [theme.breakpoints.down("sm")]: {
-        padding: "0.75rem",
-        fontSize: "1rem",
-        height: "3rem",
-      },
+      padding: "0.875rem",
+      fontSize: "0.875rem",
+      height: "3rem",
     },
     sizeSmall: {
-      padding: "0.6875rem",
-      fontSize: "1.125rem",
-      height: "3rem",
-      [theme.breakpoints.down("sm")]: {
-        padding: "0.5625rem",
-        fontSize: "1rem",
-        height: "2.5rem",
-      },
+      padding: "0.5rem",
+      fontSize: "0.75rem",
+      height: "2rem",
     },
     containedPrimary: {
-      backgroundColor: theme.palette.primary.light,
+      color: theme.palette.secondary.deepestBlackberry,
+      backgroundColor: theme.palette.primary.plum,
       "&:hover": {
-        backgroundColor: alpha(theme.palette.primary.light, theme.custom.opacity.light),
+        backgroundColor: theme.palette.primary.deepPlum,
       },
       "&:disabled": {
-        backgroundColor: theme.palette.secondary.light,
-        color: alpha(theme.palette.common.white, theme.custom.opacity.main),
+        color: theme.palette.secondary.deepestBlackberry,
+        backgroundColor: theme.palette.secondary.graishLavender,
       },
     },
     outlinedPrimary: {
-      borderColor: theme.palette.primary.light,
-      color: theme.palette.common.white,
+      color: theme.palette.primary.plum,
+      borderColor: "transparent",
+      backgroundColor: alpha(
+        theme.palette.primary.plum,
+        theme.custom.opacity._10percent
+      ),
       "&:hover": {
-        backgroundColor: alpha(theme.palette.primary.main, theme.custom.opacity.light),
-        borderColor: theme.palette.primary.light,
+        borderColor: "transparent",
+        backgroundColor: alpha(
+          theme.palette.primary.plum,
+          theme.custom.opacity._30percent
+        ),
       },
       "&:disabled": {
-        borderColor: alpha(theme.palette.common.white, theme.custom.opacity.main),
-        color: alpha(theme.palette.common.white, theme.custom.opacity.main),
+        borderColor: "transparent",
+        color: theme.palette.secondary.graishLavender,
       },
     },
     textPrimary: {
-      color: theme.palette.primary.light,
+      color: theme.palette.primary.plum,
+      backgroundColor: "transparent",
       "&:hover": {
-        backgroundColor: alpha(theme.palette.primary.light, theme.custom.opacity.lighter),
+        backgroundColor: alpha(
+          theme.palette.primary.plum,
+          theme.custom.opacity._10percent
+        ),
       },
       "&:disabled": {
-        color: alpha(theme.palette.common.white, theme.custom.opacity.main),
+        color: theme.palette.secondary.graishLavender,
       },
     },
   },
+  variants: [
+    {
+      props: {
+        variant: "dark" as const,
+      },
+      style: {
+        backgroundColor: alpha(
+          theme.palette.secondary.deepestBlackberry,
+          theme.custom.opacity._10percent
+        ),
+        color: theme.palette.secondary.deepestBlackberry,
+        "&:hover": {
+          backgroundColor: alpha(
+            theme.palette.secondary.deepestBlackberry,
+            theme.custom.opacity._20percent
+          ),
+        },
+        "&:disabled": {
+          color: theme.palette.secondary.lavender,
+        },
+      },
+    },
+    {
+      props: {
+        variant: "long" as const,
+      },
+      style: {
+        backgroundColor: theme.palette.alert.lemon,
+        color: theme.palette.secondary.deepestBlackberry,
+        "&:hover": {
+          backgroundColor: theme.palette.alert.deepLemon,
+        },
+        "&:disabled": {
+          backgroundColor: theme.palette.secondary.graishLavender,
+          color: theme.palette.secondary.deepestBlackberry,
+        },
+      },
+    },
+    {
+      props: {
+        variant: "short" as const,
+      },
+      style: {
+        backgroundColor: theme.palette.alert.guava,
+        color: theme.palette.secondary.deepestBlackberry,
+        "&:hover": {
+          backgroundColor: theme.palette.alert.deepGuava,
+        },
+        "&:disabled": {
+          backgroundColor: theme.palette.secondary.graishLavender,
+          color: theme.palette.secondary.deepestBlackberry,
+        },
+      },
+    },
+  ],
 });

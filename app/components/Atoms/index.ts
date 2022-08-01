@@ -18,9 +18,6 @@ export { TabPanel } from "./TabPanel";
 export type { TabItem, TabsProps } from "./Tabs";
 export { Tabs } from "./Tabs";
 
-export type { AreaChartProps } from "./AreaChart";
-export { AreaChart } from "./AreaChart";
-
 export type { AlertProps } from "./Alert";
 export { Alert } from "./Alert";
 

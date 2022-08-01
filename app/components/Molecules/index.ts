@@ -6,9 +6,6 @@ export { Snackbar } from "./Snackbar";
 export type { FeaturedBoxProps } from "./FeaturedBox";
 export { FeaturedBox } from "./FeaturedBox";
 
-export type { ChartProps } from "./Chart";
-export { Chart } from "./Chart";
-
 export type { DropdownCombinedInputProps } from "./DropdownCombinedInput";
 export { DropdownCombinedInput } from "./DropdownCombinedInput";
 

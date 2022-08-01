@@ -3,11 +3,18 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Box, Typography, Button as MuiButton } from "@mui/material";
 
 type Size = "large" | "medium" | "small";
-type Variant = "contained" | "outlined" | "text";
+type Variant = "contained" | "outlined" | "text" | "dark" | "long" | "short";
 
 const ButtonGuide: React.FC = () => {
   const sizes: Size[] = ["large", "medium", "small"];
-  const variants: Variant[] = ["contained", "outlined", "text"];
+  const variants: Variant[] = [
+    "contained",
+    "outlined",
+    "text",
+    "dark",
+    "long",
+    "short",
+  ];
 
   return (
     <>
