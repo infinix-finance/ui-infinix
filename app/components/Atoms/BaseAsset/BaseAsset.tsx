@@ -1,49 +1,56 @@
 import React from "react";
-import { Box, BoxProps, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
-export type BaseAssetProps = {
-  icon?: string;
-  label?: string;
-  iconSize?: number;
-  centeredLabel?: boolean;
-} & BoxProps;
+import { getContainerProps, getIconStyle } from "./BaseAsset.styles";
+import { BaseAssetProps } from "./types";
 
-export const BaseAsset: React.FC<BaseAssetProps> = ({
-  icon,
-  label,
+const SEPARATOR = "/";
+
+export const BaseAsset = ({
+  assets,
   iconSize = 24,
-  centeredLabel,
+  iconOnly = false,
+  label,
+  LabelProps,
+  disabled = false,
   ...rest
-}) => {
+}: BaseAssetProps) => {
+  if (![1, 2].includes(assets.length)) {
+    throw new Error("Assets array can include either 1 or 2 assets");
+  }
+
+  const assetLabel = assets
+    .filter((asset) => Boolean(asset.label))
+    .map((asset) => asset.label)
+    .join(SEPARATOR);
+
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent={centeredLabel ? "center" : undefined}
-      position="relative"
-      width="100%"
-      gap={label ? 2 : 0}
-      flex="none"
-      {...rest}
-    >
-      {icon && (
-        <Box
-          display="flex"
-          position={centeredLabel ? "absolute" : undefined}
-          left={centeredLabel ? 0 : undefined}
-          alignItems="center"
-        >
-          <Box display="flex">
-            <Image src={icon} alt={label} width={iconSize} height={iconSize} />
+    <Box {...getContainerProps(iconOnly)} {...rest}>
+      <Box display="flex" alignItems="center">
+        {assets.map((asset, index) => (
+          <Box
+            key={index}
+            display="flex"
+            sx={getIconStyle(index, iconSize, disabled)}
+            aria-label="Base Asset Icon"
+          >
+            <Image
+              src={asset.icon}
+              alt={asset.label}
+              width={iconSize}
+              height={iconSize}
+            />
           </Box>
-        </Box>
-      )}
-      {label && (
-        <Typography variant="body2" color="text.primary">
-          {label}
-        </Typography>
-      )}
+        ))}
+      </Box>
+      <Typography
+        variant="body2"
+        color={disabled ? "secondary.graishLavender" : "primary.ice"}
+        {...LabelProps}
+      >
+        {label || `${assetLabel}`}
+      </Typography>
     </Box>
   );
 };

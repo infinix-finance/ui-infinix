@@ -3,9 +3,6 @@ export { Logo } from "./Logo";
 export type { BaseAssetProps } from "./BaseAsset";
 export { BaseAsset } from "./BaseAsset";
 
-export type { PairAssetProps } from "./PairAsset";
-export { PairAsset } from "./PairAsset";
-
 export type { LabelProps } from "./Label";
 export { Label } from "./Label";
 
@@ -20,9 +17,3 @@ export { Tabs } from "./Tabs";
 
 export type { AlertProps } from "./Alert";
 export { Alert } from "./Alert";
-
-export type { InputProps } from "./Input";
-export { Input } from "./Input";
-
-export type { SelectProps } from "./Select";
-export { Select } from "./Select";

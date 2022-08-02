@@ -1,9 +1,10 @@
 import { Box, SxProps } from "@mui/material";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { BaseAssetProps, BaseAsset } from "./BaseAsset";
+import { BaseAsset } from "./BaseAsset";
+import { BaseAssetProps } from "./types";
 
-const BaseAssetsStories = (props: BaseAssetProps) => {
+const BaseAssetStories = (props: BaseAssetProps) => {
   const boxStyle: Partial<SxProps> = {
     display: "flex",
     flexDirection: "column",
@@ -18,20 +19,69 @@ const BaseAssetsStories = (props: BaseAssetProps) => {
     </Box>
   );
 };
+
 export default {
   title: "atoms/BaseAsset",
   component: BaseAsset,
 } as ComponentMeta<typeof BaseAsset>;
 
-const defaultArgs = {
-  icon: "/dummy/token.svg",
-  label: "ETH",
+const singleAsset = (withLabel: boolean = true) => ({
+  assets: [
+    {
+      icon: "/dummy/token.svg",
+      label: withLabel ? "Token1" : undefined,
+    },
+  ],
   iconSize: 24,
-};
+});
 
-const Template: ComponentStory<typeof BaseAssetsStories> = (args) => (
-  <BaseAssetsStories {...defaultArgs} {...args} />
+const pairAssets = (withLabel: boolean = true) => ({
+  assets: [
+    {
+      icon: "/dummy/token.svg",
+      label: withLabel ? "Token1" : undefined,
+    },
+    {
+      icon: "/dummy/token.svg",
+      label: withLabel ? "Token2" : undefined,
+    },
+  ],
+  iconSize: 24,
+});
+
+const Template: ComponentStory<typeof BaseAsset> = (args) => (
+  <BaseAssetStories {...args} />
 );
 
-export const DefaultBaseAsset = Template.bind({});
-DefaultBaseAsset.args = defaultArgs;
+export const SingleAsset = Template.bind({});
+SingleAsset.args = singleAsset();
+
+export const SingleAssetWithOverrideLabel = Template.bind({});
+SingleAssetWithOverrideLabel.args = {
+  ...singleAsset(true),
+  label: "Single Asset",
+};
+
+export const SingleAssetWithoutLabel = Template.bind({});
+SingleAssetWithoutLabel.args = singleAsset(false);
+
+export const PairAssets = Template.bind({});
+PairAssets.args = pairAssets();
+
+export const PairAssetsWithOverrideLabel = Template.bind({});
+PairAssetsWithOverrideLabel.args = { ...pairAssets(), label: "Pair Assets" };
+
+export const PairAssetsWithoutLabel = Template.bind({});
+PairAssetsWithoutLabel.args = pairAssets(false);
+
+export const PairAssetCustomSize = Template.bind({});
+PairAssetCustomSize.args = {
+  ...pairAssets(),
+  iconSize: 48,
+  LabelProps: {
+    variant: "h6",
+  },
+};
+
+export const DisabledPairAssets = Template.bind({});
+DisabledPairAssets.args = { ...pairAssets(), disabled: true };

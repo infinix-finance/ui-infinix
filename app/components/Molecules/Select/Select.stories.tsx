@@ -25,7 +25,7 @@ const SelectsStories = (props: SelectProps) => {
 };
 
 export default {
-  title: "atoms/Select",
+  title: "molecules/Select",
   component: Select,
 } as ComponentMeta<typeof Select>;
 

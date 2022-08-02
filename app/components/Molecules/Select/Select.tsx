@@ -14,8 +14,8 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { InputProps, Input } from "../Input";
-import { BaseAsset } from "../BaseAsset";
-import { SearchInput } from "../SearchInput";
+import { BaseAsset } from "@/components/Atoms/BaseAsset";
+import { SearchInput } from "@/components/Atoms/SearchInput";
 
 type Option = {
   value: any;

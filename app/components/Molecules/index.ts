@@ -17,3 +17,12 @@ export { PageTitle } from "./PageTitle";
 
 export type { LabeledSwitchProps } from "./LabeledSwitch";
 export { LabeledSwitch } from "./LabeledSwitch";
+
+export type { ProductAssetProps, ProductIds } from "./ProductAsset";
+export { ProductAsset } from "./ProductAsset";
+
+export type { InputProps } from "./Input";
+export { Input } from "./Input";
+
+export type { SelectProps } from "./Select";
+export { Select } from "./Select";

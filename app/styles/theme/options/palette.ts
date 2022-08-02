@@ -46,14 +46,14 @@ export const paletteOptions = {
       dark: "#002C1E",
     },
     error: {
-      main: "#E10036",
-      light: "#850020",
-      dark: "#450011",
+      main: "#AF3240",
+      light: "#F46172",
+      dark: "#801F2A",
     },
     warning: {
-      main: "#C59A04",
-      light: "#846700",
-      dark: "#2E2400",
+      main: "#FFA44F",
+      light: "#FFA44F",
+      dark: "#773900",
     },
     common: {
       white: "#FFFFFF",
