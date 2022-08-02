@@ -46,14 +46,18 @@ export const inputOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
         "&.MuiInputBase-adornedStart": {
           paddingLeft: theme.spacing(2),
         },
+        "&.MuiInputAdornment-positionEnd > .MuiTypography-root": {
+          color: theme.palette.secondary.graishLavender,
+          paddingLeft: theme.spacing(2),
+        },
         "& .MuiOutlinedInput-input": {
           fontWeight: 300,
           fontSize: "1rem",
           paddingLeft: theme.spacing(2),
           paddingRight: theme.spacing(2),
           "&::placeholder": {
-            color: theme.palette.primary.ice,
-            opacity: theme.custom.opacity._60percent,
+            color: theme.palette.secondary.graishLavender,
+            opacity: 1,
           },
           "&.Mui-disabled": {
             WebkitTextFillColor: "unset",

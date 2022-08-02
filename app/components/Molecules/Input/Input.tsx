@@ -24,7 +24,7 @@ export const Input: React.FC<InputProps> = ({
   };
 
   const handleFocus = () => {
-    if (!ref.current) return;
+    if (!ref.current || !alignEnd) return;
 
     const input = ref.current.querySelector("input")!;
 

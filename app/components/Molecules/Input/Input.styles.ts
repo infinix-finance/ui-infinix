@@ -1,4 +1,4 @@
-import { Theme } from "@mui/material";
+import { alpha, Theme } from "@mui/material";
 
 export const inputStyle =
   (alert: boolean, alignEnd: boolean) => (theme: Theme) =>
@@ -10,6 +10,9 @@ export const inputStyle =
           borderColor: alert
             ? `${theme.palette.warning.main} !important`
             : undefined,
+        },
+        "&.Mui-focused:not(.Mui-error) .MuiOutlinedInput-notchedOutline": {
+          backgroundColor: alert ? "transparent !important" : undefined,
         },
         "& .MuiOutlinedInput-input": {
           textAlign: alignEnd ? "end" : "start",
