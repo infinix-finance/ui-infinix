@@ -1,17 +1,17 @@
 export const containerProps = {
   display: "flex",
-  alignItems: "center",
-  position: "relative",
+  alignItems: "flex-start",
   width: "100%",
   gap: 1.5,
   flex: "none",
 } as const;
 
-export const getIconStyle = (
-  index: number,
-  iconSize: number,
-  disabled: boolean
-) => ({
+export const getIconStyle = (index: number, iconSize: number) => ({
   marginLeft: index === 0 ? undefined : `${-(iconSize / 3)}px`,
-  opacity: disabled ? 0.5 : 1,
 });
+
+export const textContainerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 0.25,
+};

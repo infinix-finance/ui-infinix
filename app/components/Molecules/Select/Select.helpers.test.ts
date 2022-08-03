@@ -1,6 +1,6 @@
 import { TokenId } from "@/defi";
-import { filterOptions } from "./helpers";
-import { Option } from "./types";
+import { filterOptions } from "./Select.helpers";
+import { Option } from "./Select.types";
 
 const assetOptions: Option[] = [
   {

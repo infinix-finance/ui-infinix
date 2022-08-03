@@ -30,6 +30,7 @@ const singleAsset = (withLabel: boolean = true, withIcon: boolean = true) => ({
     {
       icon: withIcon ? "/dummy/token.svg" : undefined,
       label: withLabel ? "Token1" : undefined,
+      description: withLabel ? "Token1 label" : undefined,
     },
   ],
   iconSize: 24,
@@ -40,10 +41,12 @@ const pairAssets = (withLabel: boolean = true, withIcon: boolean = true) => ({
     {
       icon: withIcon ? "/dummy/token.svg" : undefined,
       label: withLabel ? "Token1" : undefined,
+      description: withLabel ? "Token1 label" : undefined,
     },
     {
       icon: withIcon ? "/dummy/token.svg" : undefined,
       label: withLabel ? "Token2" : undefined,
+      description: withLabel ? "Token2 label" : undefined,
     },
   ],
   iconSize: 24,
@@ -71,6 +74,12 @@ SingleAssetWithoutIcon.args = singleAsset(true, false);
 export const PairAssets = Template.bind({});
 PairAssets.args = pairAssets();
 
+export const PairAssetsWithDescription = Template.bind({});
+PairAssetsWithDescription.args = {
+  ...pairAssets(),
+  showDescription: true,
+};
+
 export const PairAssetsWithOverrideLabel = Template.bind({});
 PairAssetsWithOverrideLabel.args = { ...pairAssets(), label: "Pair Assets" };
 
@@ -85,6 +94,3 @@ PairAssetCustomSize.args = {
     variant: "h6",
   },
 };
-
-export const DisabledPairAssets = Template.bind({});
-DisabledPairAssets.args = { ...pairAssets(), disabled: true };

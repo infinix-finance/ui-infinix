@@ -11,14 +11,7 @@ export type Option = {
 
 export type SelectProps = {
   value?: any;
-  options?: Option[];
-  noBorder?: boolean;
-  borderRight?: boolean;
-  minWidth?: number;
-  mobileWidth?: number;
+  options: Option[];
   searchable?: boolean;
-  centeredLabel?: boolean;
-  dropdownForceWidth?: number;
-  dropdownOffsetX?: number;
-  dropdownOffsetY?: number;
+  maxHeight?: number;
 } & InputProps;

@@ -3,6 +3,7 @@ import { BoxProps, TypographyProps } from "@mui/material";
 export type BaseAssetEntry = {
   icon?: string;
   label?: string;
+  description?: string;
 };
 
 export type BaseAssetProps = {
@@ -10,6 +11,6 @@ export type BaseAssetProps = {
   iconSize?: number;
   label?: string;
   LabelProps?: TypographyProps;
-  disabled?: boolean;
   filter?: string;
+  showDescription?: boolean;
 } & BoxProps;

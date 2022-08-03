@@ -12,6 +12,7 @@ export const ProductAsset = ({ productIds, ...props }: ProductAssetProps) => {
     return {
       icon: product.icon,
       label: product.symbol,
+      description: product.name,
     };
   });
 

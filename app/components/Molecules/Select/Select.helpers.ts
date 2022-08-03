@@ -1,5 +1,5 @@
 import { getProduct, Product } from "@/defi";
-import { Option } from "./types";
+import { Option } from "./Select.types";
 
 export const filterOptions = (
   options: Option[],

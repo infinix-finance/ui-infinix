@@ -25,6 +25,9 @@ export const inputOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
               theme.custom.opacity._10percent
             ),
           },
+          "& img": {
+            opacity: 0.6,
+          },
         },
         "&.Mui-focused:not(.Mui-error)": {
           "& fieldset.MuiOutlinedInput-notchedOutline": {
@@ -63,10 +66,7 @@ export const inputOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
             WebkitTextFillColor: "unset",
             color: theme.palette.secondary.graishLavender,
             "& .MuiTypography-root": {
-              color: alpha(
-                theme.palette.primary.ice,
-                theme.custom.opacity._30percent
-              ),
+              color: theme.palette.secondary.graishLavender,
             },
           },
         },

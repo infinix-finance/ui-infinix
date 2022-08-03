@@ -8,6 +8,7 @@ const {
   SingleAssetWithoutLabel,
   SingleAssetWithoutIcon,
   PairAssets,
+  PairAssetsWithDescription,
   PairAssetsWithOverrideLabel,
   PairAssetsWithoutLabel,
 } = composeStories(stories);
@@ -41,11 +42,20 @@ describe("BaseAsset", () => {
     expect(screen.queryAllByLabelText("Base Asset Icon")).toHaveLength(0);
   });
 
-  test("PairAssets", () => {
+  test("PairAssets without description", () => {
     render(<PairAssets />);
 
     expect(screen.queryAllByText("Token1/Token2")).toHaveLength(1);
     expect(screen.queryAllByLabelText("Base Asset Icon")).toHaveLength(2);
+    expect(screen.queryAllByText("Token1 label/Token2 label")).toHaveLength(0);
+  });
+
+  test("PairAssets with description", () => {
+    render(<PairAssetsWithDescription />);
+
+    expect(screen.queryAllByText("Token1/Token2")).toHaveLength(1);
+    expect(screen.queryAllByLabelText("Base Asset Icon")).toHaveLength(2);
+    expect(screen.queryAllByText("Token1 label/Token2 label")).toHaveLength(1);
   });
 
   test("PairAssets with override label", () => {

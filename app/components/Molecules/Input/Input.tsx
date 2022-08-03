@@ -51,7 +51,7 @@ export const Input: React.FC<InputProps> = ({
           ref,
           startAdornment: productIds && (
             <InputAdornment position="start">
-              <ProductAsset productIds={productIds} disabled={rest.disabled} />
+              <ProductAsset productIds={productIds} />
             </InputAdornment>
           ),
           endAdornment: trailingText && (

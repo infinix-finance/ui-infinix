@@ -2,7 +2,11 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
-import { containerProps, getIconStyle } from "./BaseAsset.styles";
+import {
+  containerProps,
+  getIconStyle,
+  textContainerStyle,
+} from "./BaseAsset.styles";
 import { BaseAssetProps } from "./types";
 
 const SEPARATOR = "/";
@@ -12,7 +16,7 @@ export const BaseAsset = ({
   iconSize = 24,
   label,
   LabelProps,
-  disabled = false,
+  showDescription = false,
   ...rest
 }: BaseAssetProps) => {
   if (![1, 2].includes(assets.length)) {
@@ -20,10 +24,13 @@ export const BaseAsset = ({
   }
 
   const iconsPresent = assets.some((asset) => Boolean(asset.icon));
-  const assetLabel = assets
-    .filter((asset) => Boolean(asset.label))
-    .map((asset) => asset.label)
-    .join(SEPARATOR);
+  const assetLabelCreator = (prop: "label" | "description") =>
+    assets
+      .filter((asset) => Boolean(asset[prop]))
+      .map((asset) => asset[prop])
+      .join(SEPARATOR);
+  const assetLabel = assetLabelCreator("label");
+  const assetDescription = assetLabelCreator("description");
 
   return (
     <Box {...containerProps} {...rest}>
@@ -33,7 +40,7 @@ export const BaseAsset = ({
             <Box
               key={index}
               display="flex"
-              sx={getIconStyle(index, iconSize, disabled)}
+              sx={getIconStyle(index, iconSize)}
               aria-label="Base Asset Icon"
             >
               {asset.icon && (
@@ -48,13 +55,21 @@ export const BaseAsset = ({
           ))}
         </Box>
       )}
-      <Typography
-        variant="body2"
-        color={disabled ? "secondary.graishLavender" : "primary.ice"}
-        {...LabelProps}
-      >
-        {label || `${assetLabel}`}
-      </Typography>
+      <Box sx={textContainerStyle}>
+        <Typography
+          height={iconSize}
+          variant="body2"
+          color="primary.ice"
+          {...LabelProps}
+        >
+          {label || `${assetLabel}`}
+        </Typography>
+        {showDescription && (
+          <Typography variant="body3" color="secondary.graishLavender">
+            {assetDescription}
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 };

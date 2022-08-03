@@ -1,41 +1,36 @@
 import React from "react";
-import {
-  alpha,
-  ListSubheader,
-  MenuItem,
-  useTheme,
-  useMediaQuery,
-  Typography,
-  Box,
-} from "@mui/material";
+import { MenuItem } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import CheckIcon from "@mui/icons-material/Check";
-import CloseIcon from "@mui/icons-material/Close";
 
 import { Input } from "../Input";
-import { SearchInput } from "@/components/Atoms/SearchInput";
 import { Item } from "./Item";
-import { getProduct } from "@/defi";
-import { Option, SelectProps } from "./types";
-import { filterOptions } from "./helpers";
+import { SelectProps, Option } from "./Select.types";
+import { filterOptions } from "./Select.helpers";
+import { Header } from "./Header";
 
-export const Select: React.FC<SelectProps> = ({
+import { selectBackdropStyle, selectPaperStyle } from "./Select.styles";
+
+const renderValue = (options: Option[]) => (value: any) => {
+  const option = options!.find((option: any) => option.value == value);
+  return (
+    option && (
+      <Item
+        productIds={option.productIds}
+        assets={option.assets}
+        showDescription={false}
+      />
+    )
+  );
+};
+
+export const Select = ({
   value,
   options,
-  noBorder,
-  borderRight,
-  minWidth,
-  mobileWidth,
   searchable,
-  centeredLabel,
-  dropdownForceWidth,
-  dropdownOffsetX,
-  dropdownOffsetY,
+  maxHeight = 57,
   ...rest
-}) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+}: SelectProps) => {
   const [keyword, setKeyword] = React.useState<string>("");
   const [open, setOpen] = React.useState<boolean>(false);
 
@@ -43,9 +38,14 @@ export const Select: React.FC<SelectProps> = ({
     setKeyword(event.target.value);
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLInputElement>) => {
+  const handleClick = () => {
     setKeyword("");
     !rest.disabled && setOpen(true);
+  };
+
+  const handleClose = (event: React.MouseEvent<any>) => {
+    event.stopPropagation();
+    setOpen(false);
   };
 
   return (
@@ -57,118 +57,40 @@ export const Select: React.FC<SelectProps> = ({
         MenuProps: {
           open: open,
           BackdropProps: {
-            onClick: (e) => {
-              e.stopPropagation();
-              setOpen(false);
-            },
-            sx: {
-              opacity: "0 !important",
-            },
+            onClick: handleClose,
+            sx: selectBackdropStyle,
           },
           PaperProps: {
             onClick: (e) => e.stopPropagation(),
-            sx: {
-              width: dropdownForceWidth,
-              marginLeft: dropdownOffsetX,
-              marginTop: dropdownOffsetY,
-              padding: 0,
-              backgroundColor: theme.palette.secondary.dark,
-              [theme.breakpoints.down("sm")]: {
-                width: "inherit",
-                marginLeft: 0,
-                marginTop: 0,
-                top: "0 !important",
-                left: "0 !important",
-                bottom: 0,
-                right: 0,
-                maxWidth: "100%",
-              },
-            },
+            sx: selectPaperStyle(maxHeight),
           },
         },
         IconComponent: open ? ExpandLessIcon : ExpandMoreIcon,
-        renderValue: (v: any) => {
-          const option = options!.find((option: any) => option.value == v);
-          return (
-            option && (
-              <Item productIds={option.productIds} assets={option.assets} />
-            )
-          );
-        },
-      }}
-      sx={{
-        borderRight: borderRight
-          ? `1px solid ${alpha(
-              theme.palette.common.white,
-              theme.custom.opacity.main
-            )}`
-          : undefined,
-        "& .MuiOutlinedInput-root.MuiInputBase-root": {
-          borderWidth: noBorder ? 0 : undefined,
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderWidth: noBorder ? 0 : undefined,
-          },
-        },
-        minWidth: {
-          md: minWidth,
-        },
-        width: {
-          xs: mobileWidth,
-          md: "100%",
-        },
+        renderValue: renderValue(options),
       }}
       {...rest}
     >
-      {isMobile && (
-        <ListSubheader>
-          <Box textAlign="right">
-            <CloseIcon
-              sx={{
-                color: theme.palette.primary.main,
-              }}
-              onClick={() => setOpen(false)}
-            />
-          </Box>
-        </ListSubheader>
-      )}
-      {isMobile && (
-        <ListSubheader>
-          <Typography variant="h6" color="text.primary" textAlign="center">
-            Select option
-          </Typography>
-        </ListSubheader>
-      )}
-      {searchable && (
-        <ListSubheader>
-          <SearchInput
-            fullWidth
-            value={keyword}
-            setValue={setKeyword}
-            onChange={handleKewordChange}
-            onKeyDown={(e) => e.stopPropagation()}
-            onClick={(e) => e.stopPropagation()}
+      <Header
+        searchable={searchable}
+        keyword={keyword}
+        setKeyword={setKeyword}
+        onClose={handleClose}
+        onKewordChange={handleKewordChange}
+      />
+      {filterOptions(options, value, keyword).map((option) => (
+        <MenuItem
+          key={option.value}
+          value={option.value}
+          disabled={option.disabled}
+          onClick={handleClose}
+        >
+          <Item
+            productIds={option.productIds}
+            assets={option.assets}
+            showDescription={Boolean(option.productIds)}
           />
-        </ListSubheader>
-      )}
-      {options &&
-        filterOptions(options, value, keyword).map((option) => (
-          <MenuItem
-            key={option.value}
-            value={option.value}
-            disabled={option.disabled}
-            onClick={() => setOpen(false)}
-          >
-            <Item productIds={option.productIds} assets={option.assets} />
-            {value == option.value && (
-              <CheckIcon
-                sx={{
-                  position: "absolute",
-                  right: theme.spacing(3),
-                }}
-              />
-            )}
-          </MenuItem>
-        ))}
+        </MenuItem>
+      ))}
     </Input>
   );
 };

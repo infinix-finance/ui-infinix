@@ -25,6 +25,13 @@ TokenAssets.args = {
   productIds: [TokenId.eth, TokenId.ftm],
 };
 
+export const TokenAssetsWithDescription = Template.bind({});
+TokenAssetsWithDescription.args = {
+  ...defaultArgs,
+  productIds: [TokenId.eth, TokenId.ftm],
+  showDescription: true,
+};
+
 export const MarketAsset = Template.bind({});
 MarketAsset.args = {
   ...defaultArgs,
