@@ -25,24 +25,24 @@ export default {
   component: BaseAsset,
 } as ComponentMeta<typeof BaseAsset>;
 
-const singleAsset = (withLabel: boolean = true) => ({
+const singleAsset = (withLabel: boolean = true, withIcon: boolean = true) => ({
   assets: [
     {
-      icon: "/dummy/token.svg",
+      icon: withIcon ? "/dummy/token.svg" : undefined,
       label: withLabel ? "Token1" : undefined,
     },
   ],
   iconSize: 24,
 });
 
-const pairAssets = (withLabel: boolean = true) => ({
+const pairAssets = (withLabel: boolean = true, withIcon: boolean = true) => ({
   assets: [
     {
-      icon: "/dummy/token.svg",
+      icon: withIcon ? "/dummy/token.svg" : undefined,
       label: withLabel ? "Token1" : undefined,
     },
     {
-      icon: "/dummy/token.svg",
+      icon: withIcon ? "/dummy/token.svg" : undefined,
       label: withLabel ? "Token2" : undefined,
     },
   ],
@@ -64,6 +64,9 @@ SingleAssetWithOverrideLabel.args = {
 
 export const SingleAssetWithoutLabel = Template.bind({});
 SingleAssetWithoutLabel.args = singleAsset(false);
+
+export const SingleAssetWithoutIcon = Template.bind({});
+SingleAssetWithoutIcon.args = singleAsset(true, false);
 
 export const PairAssets = Template.bind({});
 PairAssets.args = pairAssets();

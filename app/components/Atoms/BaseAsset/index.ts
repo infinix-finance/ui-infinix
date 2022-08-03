@@ -1,3 +1,3 @@
 export { BaseAsset } from "./BaseAsset";
 
-export type { BaseAssetProps } from "./types";
+export type { BaseAssetProps, BaseAssetEntry } from "./types";

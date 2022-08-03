@@ -1,12 +1,11 @@
-export const getContainerProps = (iconOnly: boolean) =>
-  ({
-    display: "flex",
-    alignItems: "center",
-    position: "relative",
-    width: "100%",
-    gap: iconOnly ? 0 : 1.5,
-    flex: "none",
-  } as const);
+export const containerProps = {
+  display: "flex",
+  alignItems: "center",
+  position: "relative",
+  width: "100%",
+  gap: 1.5,
+  flex: "none",
+} as const;
 
 export const getIconStyle = (
   index: number,

@@ -1,6 +1,6 @@
 export { Logo } from "./Logo";
 
-export type { BaseAssetProps } from "./BaseAsset";
+export type { BaseAssetProps, BaseAssetEntry } from "./BaseAsset";
 export { BaseAsset } from "./BaseAsset";
 
 export type { LabelProps } from "./Label";

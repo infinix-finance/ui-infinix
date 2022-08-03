@@ -13,30 +13,12 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { InputProps, Input } from "../Input";
-import { BaseAsset } from "@/components/Atoms/BaseAsset";
+import { Input } from "../Input";
 import { SearchInput } from "@/components/Atoms/SearchInput";
-
-type Option = {
-  value: any;
-  label?: string;
-  icon?: string;
-  disabled?: boolean;
-};
-
-export type SelectProps = {
-  value?: any;
-  options?: Option[];
-  noBorder?: boolean;
-  borderRight?: boolean;
-  minWidth?: number;
-  mobileWidth?: number;
-  searchable?: boolean;
-  centeredLabel?: boolean;
-  dropdownForceWidth?: number;
-  dropdownOffsetX?: number;
-  dropdownOffsetY?: number;
-} & InputProps;
+import { Item } from "./Item";
+import { getProduct } from "@/defi";
+import { Option, SelectProps } from "./types";
+import { filterOptions } from "./helpers";
 
 export const Select: React.FC<SelectProps> = ({
   value,
@@ -64,16 +46,6 @@ export const Select: React.FC<SelectProps> = ({
   const handleClick = (event: React.MouseEvent<HTMLInputElement>) => {
     setKeyword("");
     !rest.disabled && setOpen(true);
-  };
-
-  const searchOptions = (options: Option[], keyword: string) => {
-    return options.filter(
-      (option) =>
-        value == option.value ||
-        (option.label || option.value)
-          .toLowerCase()
-          .indexOf(keyword.toLowerCase()) != -1
-    );
   };
 
   return (
@@ -116,14 +88,10 @@ export const Select: React.FC<SelectProps> = ({
         },
         IconComponent: open ? ExpandLessIcon : ExpandMoreIcon,
         renderValue: (v: any) => {
-          const option = options!.find((option) => option.value == v);
+          const option = options!.find((option: any) => option.value == v);
           return (
             option && (
-              <BaseAsset
-                label={option.label || option.value}
-                icon={option.icon}
-                centeredLabel={centeredLabel}
-              />
+              <Item productIds={option.productIds} assets={option.assets} />
             )
           );
         },
@@ -183,18 +151,14 @@ export const Select: React.FC<SelectProps> = ({
         </ListSubheader>
       )}
       {options &&
-        searchOptions(options, keyword).map((option) => (
+        filterOptions(options, value, keyword).map((option) => (
           <MenuItem
             key={option.value}
             value={option.value}
             disabled={option.disabled}
             onClick={() => setOpen(false)}
           >
-            <BaseAsset
-              label={option.label || option.value}
-              icon={option.icon}
-              centeredLabel={centeredLabel}
-            />
+            <Item productIds={option.productIds} assets={option.assets} />
             {value == option.value && (
               <CheckIcon
                 sx={{

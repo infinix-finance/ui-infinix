@@ -6,6 +6,7 @@ const {
   SingleAsset,
   SingleAssetWithOverrideLabel,
   SingleAssetWithoutLabel,
+  SingleAssetWithoutIcon,
   PairAssets,
   PairAssetsWithOverrideLabel,
   PairAssetsWithoutLabel,
@@ -31,6 +32,13 @@ describe("BaseAsset", () => {
 
     expect(screen.queryAllByText("Token1")).toHaveLength(0);
     expect(screen.queryAllByLabelText("Base Asset Icon")).toHaveLength(1);
+  });
+
+  test("SingleAsset without icon", () => {
+    render(<SingleAssetWithoutIcon />);
+
+    expect(screen.queryAllByText("Token1")).toHaveLength(1);
+    expect(screen.queryAllByLabelText("Base Asset Icon")).toHaveLength(0);
   });
 
   test("PairAssets", () => {

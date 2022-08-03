@@ -60,3 +60,6 @@ export type Market = {
   symbol: string;
   icon: string;
 };
+
+export type ProductId = TokenId | MarketId | NetworkId;
+export type Product = Token | Market | Network;

@@ -7,6 +7,8 @@ import {
   MarketId,
   Network,
   NetworkId,
+  Product,
+  ProductId,
   Protocol,
   ProtocolId,
   Token,
@@ -34,3 +36,11 @@ export const getMarket = (marketId: MarketId): Market => MARKETS[marketId];
 
 export const isMarket = (value: any): boolean =>
   Object.values(MarketId).includes(value);
+
+export const getProduct = (value: ProductId): Product => {
+  return (
+    (isToken(value) && getToken(value as TokenId)) ||
+    (isMarket(value) && getMarket(value as MarketId)) ||
+    getNetwork(value as NetworkId)
+  );
+};

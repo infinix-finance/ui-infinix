@@ -1,15 +1,15 @@
 import { BoxProps, TypographyProps } from "@mui/material";
 
-export type Asset = {
-  icon: string;
+export type BaseAssetEntry = {
+  icon?: string;
   label?: string;
 };
 
 export type BaseAssetProps = {
-  assets: Asset[];
+  assets: BaseAssetEntry[];
   iconSize?: number;
-  iconOnly?: boolean;
   label?: string;
   LabelProps?: TypographyProps;
   disabled?: boolean;
+  filter?: string;
 } & BoxProps;

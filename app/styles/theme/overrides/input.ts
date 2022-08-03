@@ -46,7 +46,7 @@ export const inputOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
         "&.MuiInputBase-adornedStart": {
           paddingLeft: theme.spacing(2),
         },
-        "&.MuiInputAdornment-positionEnd > .MuiTypography-root": {
+        "& .MuiInputAdornment-positionEnd > .MuiTypography-root": {
           color: theme.palette.secondary.graishLavender,
           paddingLeft: theme.spacing(2),
         },

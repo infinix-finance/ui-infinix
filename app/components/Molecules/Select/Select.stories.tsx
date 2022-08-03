@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Box, SxProps } from "@mui/material";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { Select, SelectProps } from "./Select";
+import { Select } from "./Select";
+import { TokenId } from "@/defi";
+import { SelectProps } from "./types";
 
 const SelectsStories = (props: SelectProps) => {
   const boxStyle: Partial<SxProps> = {
@@ -33,150 +35,91 @@ const Template: ComponentStory<typeof SelectsStories> = (args) => (
   <SelectsStories {...args} />
 );
 
-const labelProps = {
-  label: "Label master here",
-  TypographyProps: {},
-  TooltipProps: {
-    title: "Tooltip master here",
-    children: <></>,
-  },
-};
-
 export const TextOnlySelects = Template.bind({});
 TextOnlySelects.args = {
-  LabelProps: labelProps,
-  searchable: true,
   options: [
     {
       value: "select1",
-      label: "Select 1",
+      assets: [{ label: "Select 1" }],
     },
     {
       value: "select2",
-      label: "Select 2",
+      assets: [{ label: "Select 2" }],
     },
     {
       value: "select3",
-      label: "Select 3",
+      assets: [{ label: "Select 3" }],
     },
     {
       value: "select4",
-      label: "Select 4",
-    },
-    {
-      value: "select5",
-      label: "Select 5",
+      assets: [{ label: "Select 4" }],
     },
   ],
 };
 
-export const IconSelects = Template.bind({});
-IconSelects.args = {
-  LabelProps: labelProps,
+export const SearchableTextOnlySelects = Template.bind({});
+SearchableTextOnlySelects.args = {
   searchable: true,
   options: [
     {
       value: "select1",
-      label: "Select 1",
-      icon: "/dummy/token.svg",
+      assets: [{ label: "Select 1" }],
     },
     {
       value: "select2",
-      label: "Select 2",
-      icon: "/dummy/token.svg",
+      assets: [{ label: "Select 2" }],
     },
     {
       value: "select3",
-      label: "Select 3",
-      icon: "/dummy/token.svg",
+      assets: [{ label: "Select 3" }],
     },
     {
       value: "select4",
-      label: "Select 4",
-      icon: "/dummy/token.svg",
-      disabled: true,
-    },
-    {
-      value: "select5",
-      label: "Select 5",
-      icon: "/dummy/token.svg",
+      assets: [{ label: "Select 4" }],
     },
   ],
 };
 
-export const CenteredSelects = Template.bind({});
-CenteredSelects.args = {
-  LabelProps: labelProps,
+export const SingleTokenSelects = Template.bind({});
+SingleTokenSelects.args = {
   searchable: true,
-  centeredLabel: true,
   options: [
     {
       value: "select1",
-      label: "Select 1",
-      icon: "/dummy/token.svg",
+      productIds: [TokenId.ftm],
     },
     {
       value: "select2",
-      label: "Select 2",
-      icon: "/dummy/token.svg",
+      productIds: [TokenId.usdc],
     },
     {
       value: "select3",
-      label: "Select 3",
-      icon: "/dummy/token.svg",
+      productIds: [TokenId.avax],
     },
     {
       value: "select4",
-      label: "Select 4",
-      icon: "/dummy/token.svg",
+      productIds: [TokenId.chaos],
       disabled: true,
-    },
-    {
-      value: "select5",
-      label: "Select 5",
-      icon: "/dummy/token.svg",
     },
   ],
 };
 
-export const LabeledSelectsWithBalance = Template.bind({});
-LabeledSelectsWithBalance.args = {
-  LabelProps: {
-    ...labelProps,
-    BalanceProps: {
-      title: "Balance:",
-      TitleTypographyProps: {},
-      balance: "435 KSM",
-      BalanceTypographyProps: {},
-    },
-  },
+export const MultiTokenSelects = Template.bind({});
+MultiTokenSelects.args = {
   searchable: true,
   options: [
     {
       value: "select1",
-      label: "Select 1",
-      icon: "/dummy/token.svg",
-    },
-    {
-      value: "select2",
-      label: "Select 2",
-      icon: "/dummy/token.svg",
+      productIds: [TokenId.ftm, TokenId.usdc],
     },
     {
       value: "select3",
-      label: "Select 3",
-      icon: "/dummy/token.svg",
+      productIds: [TokenId.avax, TokenId.usdc],
     },
     {
       value: "select4",
-      label: "Select 4",
-      icon: "/dummy/token.svg",
+      productIds: [TokenId.chaos, TokenId.usdc],
       disabled: true,
-    },
-    {
-      value: "select5",
-      label: "Select 5",
-      icon: "/dummy/token.svg",
     },
   ],
 };
