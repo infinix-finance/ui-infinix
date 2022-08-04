@@ -1,5 +1,4 @@
-import { NamedSet } from "zustand/middleware";
-import { AppState, StoreSlice } from "./types";
+import { AppState, CustomStateCreator } from "./types";
 
 interface CommonProps {
   status: string;
@@ -11,16 +10,13 @@ export interface CommonSlice {
   };
 }
 
-export const createCommonSlice: StoreSlice<CommonSlice> = (
-  set: NamedSet<CommonSlice>
-) => ({
+export const createCommonSlice: CustomStateCreator<CommonSlice> = (set) => ({
   common: {
     status: "",
 
-    setStatus: async (status: string) => {
+    setStatus: async (status: string) =>
       set(function setStatus(state: AppState) {
-        state.common.status = status;
-      });
-    },
+        state.other.status = status;
+      }),
   },
 });

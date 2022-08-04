@@ -41,7 +41,7 @@
     "react-dom": "^18.1.0",
     "react-hotjar": "^4.0.0",
     "uuid": "^8.3.2",
-    "zustand": "^3.7.2"
+    "zustand": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",

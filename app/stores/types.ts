@@ -1,17 +1,11 @@
-import { GetState, State, StoreApi } from "zustand";
-import { NamedSet } from "zustand/middleware";
+import { StateCreator } from "zustand";
+
 import { CommonSlice } from "./common";
+import { OtherSlice } from "./other";
 
-export type StoreSlice<T extends object> = (
-  set: NamedSet<T>,
-  get: GetState<T>
-) => T;
+type Mutators = [["zustand/devtools", never], ["zustand/immer", never]];
 
-export type CustomStateCreator<
-  T extends State,
-  CustomSetState = NamedSet<T>,
-  CustomGetState = GetState<T>,
-  CustomStoreApi extends StoreApi<T> = StoreApi<T>
-> = (set: CustomSetState, get: CustomGetState, api: CustomStoreApi) => T;
+export interface CustomStateCreator<T>
+  extends StateCreator<AppState, Mutators, [], T> {}
 
-export type AppState = CommonSlice; // & OtherSlice & ....
+export type AppState = CommonSlice & OtherSlice;

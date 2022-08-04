@@ -3,8 +3,18 @@ import { Container, Typography, Box } from "@mui/material";
 import Default from "@/components/Templates/Default";
 import Head from "next/head";
 import { HeadPartytown } from "@/components/Atoms/HeadPartytown";
+import { useStore } from "@/stores/root";
+import { useEffect } from "react";
 
 const Home: NextPage = () => {
+  const store = useStore();
+
+  useEffect(() => {
+    setTimeout(() => {
+      store.other.setCommonStatus("Set common from OTHER");
+      store.common.setStatus("Set other from COMMON");
+    }, 5000);
+  }, []);
   return (
     <Default>
       <Head>
