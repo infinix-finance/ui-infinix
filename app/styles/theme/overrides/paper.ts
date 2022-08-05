@@ -6,31 +6,6 @@ export const paperOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
     root: {
       padding: theme.spacing(2),
       backgroundImage: "none",
-      /* width */
-      "&::-webkit-scrollbar": {
-        width: 16,
-      },
-
-      /* Track */
-      "&::-webkit-scrollbar-track": {
-        background: alpha(
-          theme.palette.common.white,
-          theme.custom.opacity.light
-        ),
-        borderRadius: "0 12px 12px 0",
-      },
-
-      /* Handle */
-      "&::-webkit-scrollbar-thumb": {
-        background: theme.palette.common.white,
-        border: "7px solid rgb(45 37 27)",
-        borderRadius: 12,
-      },
-
-      /* Handle on hover */
-      "&::-webkit-scrollbar-thumb:hover": {
-        background: theme.palette.common.white,
-      },
     },
     outlined: {
       border: `1px solid ${theme.palette.primary.main}`,

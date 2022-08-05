@@ -37,6 +37,7 @@ import {
   cssBaselineOverrides,
   inputOverrides,
 } from "./overrides";
+import { toggleButtonOverrides } from "./overrides/toggleButton";
 
 export const createTheme = (mode: PaletteMode) => {
   const theme = createBaseTheme(mode);
@@ -62,6 +63,7 @@ export const createTheme = (mode: PaletteMode) => {
     components: {
       MuiCssBaseline: cssBaselineOverrides(theme),
       MuiButton: buttonOverrides(theme),
+      MuiToggleButtonGroup: toggleButtonOverrides(theme),
       MuiTypography: typographyOverrides(),
       MuiSwitch: switchOverrides(theme),
       MuiAppBar: appBarOverrides(),

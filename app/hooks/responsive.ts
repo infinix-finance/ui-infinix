@@ -1,32 +1,36 @@
-import { useTheme, useMediaQuery } from "@mui/material";
+import { useEffect, useState } from "react";
+
+const MIN_WIDTH = 1024;
+const MIN_HEIGHT = 700;
 
 export const useLayout = () => {
-  const theme = useTheme();
+  const [unsupportedWidth, setUnsupportedWidth] = useState(false);
+  const [unsupportedHeight, setUnsupportedHeight] = useState(false);
+  const [flippable, setFlippable] = useState(false);
 
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // < 600px
-  const isTablet = useMediaQuery(theme.breakpoints.down("md")); // < 900px
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md")); // >= 900px
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const isSmallWidth = window.innerWidth < MIN_WIDTH;
+      const isSmallHeight = window.innerHeight < MIN_HEIGHT;
+      const isFlippable =
+        window.innerWidth < window.innerHeight &&
+        window.innerWidth >= MIN_HEIGHT &&
+        window.innerHeight >= MIN_WIDTH;
 
-  const isXlUp = useMediaQuery(theme.breakpoints.up("xl")); // >= 1536px
-  const isXlDown = useMediaQuery(theme.breakpoints.down("xl")); // < 1536px
-  const isLgUp = useMediaQuery(theme.breakpoints.up("lg")); // >= 1200px
-  const isLgDown = useMediaQuery(theme.breakpoints.down("lg")); // < 1200px
-  const isMdUp = useMediaQuery(theme.breakpoints.up("md")); // >= 900px
-  const isMdDown = useMediaQuery(theme.breakpoints.down("md")); // < 900px
-  const isSmUp = useMediaQuery(theme.breakpoints.up("sm")); // >= 600px
-  const isSmDown = useMediaQuery(theme.breakpoints.down("sm")); // < 600px
+      setUnsupportedWidth(isSmallWidth);
+      setUnsupportedHeight(isSmallHeight);
+      setFlippable(isFlippable);
+    };
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   return {
-    isMobile,
-    isTablet,
-    isDesktop,
-    isXlUp,
-    isXlDown,
-    isLgUp,
-    isLgDown,
-    isMdUp,
-    isMdDown,
-    isSmUp,
-    isSmDown,
+    unsupportedWidth,
+    unsupportedHeight,
+    unsupportedResolution: unsupportedWidth || unsupportedHeight,
+    flippable,
   };
 };

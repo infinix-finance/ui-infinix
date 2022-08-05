@@ -24,11 +24,11 @@ export const Header = ({
   onKewordChange,
   onClose,
 }: HeaderProps) => {
-  const { isMobile } = useLayout();
+  const { unsupportedWidth } = useLayout();
 
   return (
     <>
-      {isMobile && (
+      {unsupportedWidth && (
         <ListSubheader>
           <Box textAlign="right">
             <CloseIcon sx={closeIconStyle} onClick={onClose} />

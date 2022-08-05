@@ -201,13 +201,6 @@ export const createBaseTheme = (mode: PaletteMode) =>
         _60percent: 0.6,
       },
       lineHeight: {
-        /* tiniest: "110%",
-        tiny: "120%",
-        smaller: "140%",
-        small: "150%",
-        medium: "160%",
-        large: "170%",
-        larger: "180%", */
         tiniest: "normal",
         tiny: "normal",
         smaller: "normal",
