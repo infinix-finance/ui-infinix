@@ -60,19 +60,3 @@ export const toggleButtonOverrides = (
     },
   },
 });
-
-/*
-
-color: theme.palette.primary.plum,
-      backgroundColor: "transparent",
-      "&:hover": {
-        backgroundColor: alpha(
-          theme.palette.primary.plum,
-          theme.custom.opacity._10percent
-        ),
-      },
-      "&:disabled": {
-        color: theme.palette.secondary.graishLavender,
-      },
-
-      */

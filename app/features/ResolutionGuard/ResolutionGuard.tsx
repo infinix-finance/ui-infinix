@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import TabletIcon from "@mui/icons-material/Tablet";
+import ScreenRotationIcon from "@mui/icons-material/ScreenRotation";
+import DesktopAccessDisabledIcon from "@mui/icons-material/DesktopAccessDisabled";
 
 import {
   containerStyle,
@@ -20,23 +21,23 @@ export const ResolutionGuard = ({ children }: UnsupportedResolutionProps) => {
     return <>{children}</>;
   }
 
+  const IconComponent = flippable
+    ? ScreenRotationIcon
+    : DesktopAccessDisabledIcon;
+  const message = flippable
+    ? "Switch to Landscape view to reveal the content."
+    : "Switch to 1024x768 resolution or above to reveal the content.";
+
   return (
     <Box sx={containerStyle}>
       <Box sx={contentStyle}>
-        {!flippable && (
-          <Typography sx={messageStyle} variant="body2">
-            Unsupported screen resolution. Your device has to support at least
-            1024 * 700
-          </Typography>
-        )}
-        {flippable && (
-          <>
-            <TabletIcon sx={iconStyle} />
-            <Typography sx={messageStyle} variant="body2">
-              Switch to Landscape view to reveal the content.
-            </Typography>
-          </>
-        )}
+        <IconComponent sx={iconStyle} />
+        <Typography sx={messageStyle} variant="body2">
+          Unsupported screen resolution.
+        </Typography>
+        <Typography sx={messageStyle} variant="body2">
+          {message}
+        </Typography>
       </Box>
     </Box>
   );

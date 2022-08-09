@@ -22,9 +22,14 @@ export const useLayout = () => {
       setFlippable(isFlippable);
     };
 
-    window.addEventListener("resize", checkScreenSize);
+    // A possible workaround for storybook as we can't register an event
+    // listener on window object if there is an iframe in-between
+    const wrapper = document.querySelector(".sb-show-main") || window;
 
-    return () => window.removeEventListener("resize", checkScreenSize);
+    wrapper.addEventListener("resize", checkScreenSize);
+    checkScreenSize();
+
+    return () => wrapper.removeEventListener("resize", checkScreenSize);
   }, []);
 
   return {

@@ -9,5 +9,8 @@ export const containerStyle = (theme: Theme) => ({
 });
 
 export const contentStyle = {
-  backgroundColor: "#4A518B",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  height: "750px",
 };

@@ -13,13 +13,14 @@ export const contentStyle = (theme: Theme) => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  gap: theme.spacing(2),
+  gap: theme.spacing(1),
 });
 
 export const iconStyle = (theme: Theme) => ({
   color: theme.palette.primary.plum,
   height: "4rem",
   width: "6rem",
+  marginBottom: theme.spacing(2),
 });
 
 export const messageStyle = (theme: Theme) => ({

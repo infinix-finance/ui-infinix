@@ -5,13 +5,7 @@ import { containerStyle, contentStyle } from "./TradingSidebar.styles";
 export const TradingSidebar = () => {
   return (
     <Box sx={containerStyle}>
-      <Box sx={contentStyle}>
-        {Array(37)
-          .fill("")
-          .map(() => (
-            <div>TradingSidebar</div>
-          ))}
-      </Box>
+      <Box sx={contentStyle}>TradingSidebar</Box>
     </Box>
   );
 };

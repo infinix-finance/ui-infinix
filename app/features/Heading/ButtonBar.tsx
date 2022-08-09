@@ -1,14 +1,13 @@
-import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import { useState } from "react";
+import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
-export const ButtonBar = () => {
-  const [alignment, setAlignment] = useState<string | null>("left");
+import { buttonStyle, iconStyle } from "./Heading.styles";
 
-  const iconStyle = { width: "1.25rem", height: "1.25rem" };
-  const buttonStyle = { width: "3rem", height: "3rem" };
+export const ButtonBar = () => {
+  const [alignment, setAlignment] = useState<string | null>("notifications");
 
   const handleAlignment = (
     _: React.MouseEvent<HTMLElement>,
@@ -19,13 +18,13 @@ export const ButtonBar = () => {
 
   return (
     <ToggleButtonGroup value={alignment} exclusive onChange={handleAlignment}>
-      <ToggleButton sx={buttonStyle} value="left">
+      <ToggleButton sx={buttonStyle} value="notifications">
         <NotificationsNoneOutlinedIcon sx={iconStyle} />
       </ToggleButton>
-      <ToggleButton sx={buttonStyle} value="center">
+      <ToggleButton sx={buttonStyle} value="wallet">
         <AccountBalanceWalletOutlinedIcon sx={iconStyle} />
       </ToggleButton>
-      <ToggleButton sx={buttonStyle} value="right">
+      <ToggleButton sx={buttonStyle} value="menu">
         <MoreHorizIcon sx={iconStyle} />
       </ToggleButton>
     </ToggleButtonGroup>
