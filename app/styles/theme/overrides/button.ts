@@ -9,8 +9,8 @@ export const buttonOverrides = (
       textTransform: "none",
       boxShadow: "none",
       whiteSpace: "no-wrap",
-      minWidth: "maxContent",
       borderRadius: "0.5rem",
+      minWidth: "max-content",
       fontWeight: "500",
       "&:hover": {
         boxShadow: "none",

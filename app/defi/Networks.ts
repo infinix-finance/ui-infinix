@@ -14,4 +14,15 @@ export const NETWORKS: {
     publicRpcUrl: "",
     nativeToken: TokenId.eth,
   },
+  42161: {
+    name: "Arbitrum",
+    symbol: "Arbitrum",
+    rpcUrl: process.env.RPC_URL_42161!,
+    infoPageUrl: "https://arbiscan.io/tx/",
+    infoPage: "Arbiscan",
+    icon: "/networks/mainnet.svg",
+    defaultTokenSymbol: "ETH",
+    publicRpcUrl: "https://arb1.arbitrum.io/rpc",
+    nativeToken: TokenId.eth,
+  },
 };

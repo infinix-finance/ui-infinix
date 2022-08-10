@@ -20,6 +20,7 @@ export type Token = {
 
 export enum NetworkId {
   ethereum = 1,
+  arbitrum = 42161,
 }
 
 export type Network = {

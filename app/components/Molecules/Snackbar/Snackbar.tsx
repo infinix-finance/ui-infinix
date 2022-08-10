@@ -4,14 +4,14 @@ import {
   Snackbar as MuiSnackbar,
   SnackbarProps as MuiSnackbarProps,
 } from "@mui/material";
-import { Alert, AlertProps } from "@/components/Atoms";
+// import { Alert, AlertProps } from "@/components/Atoms";
 
 export type SnackbarProps = {
-  AlertProps: AlertProps;
+  /*AlertProps: AlertProps;*/
 } & MuiSnackbarProps;
 
 export const Snackbar: FC<SnackbarProps> = ({
-  AlertProps,
+  /* AlertProps, */
   autoHideDuration = 6000,
   ...rest
 }) => {
@@ -22,9 +22,7 @@ export const Snackbar: FC<SnackbarProps> = ({
       sx={{ width: "100%" }}
       {...rest}
     >
-      <Box sx={{ width: "100%" }}>
-        <Alert {...AlertProps} />
-      </Box>
+      <Box sx={{ width: "100%" }}>{/*<Alert {...AlertProps} />*/}</Box>
     </MuiSnackbar>
   );
 };

@@ -15,7 +15,4 @@ export { TabPanel } from "./TabPanel";
 export type { TabItem, TabsProps } from "./Tabs";
 export { Tabs } from "./Tabs";
 
-export type { AlertProps } from "./Alert";
-export { Alert } from "./Alert";
-
 export { HeadPartytown } from "./HeadPartytown";
