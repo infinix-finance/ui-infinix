@@ -1,0 +1,1 @@
+export { RecentTrades } from "./RecentTrades";

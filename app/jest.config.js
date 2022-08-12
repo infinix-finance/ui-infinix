@@ -19,6 +19,7 @@ module.exports = {
     "^@/(.*)$": "<rootDir>/$1",
     "^pages(.*)$": "<rootDir>/pages$1",
     "^components(.*)$": "<rootDir>/components$1",
+    "^features(.*)$": "<rootDir>/features$1",
     "^contexts(.*)$": "<rootDir>/contexts$1",
     "^hooks(.*)$": "<rootDir>/hooks$1",
     "^styles(.*)$": "<rootDir>/styles$1",

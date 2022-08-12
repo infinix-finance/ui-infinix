@@ -18,9 +18,9 @@ type DefaultLayoutProps = {
 export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
   const { children, breadcrumbs } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const { isTablet } = useLayout();
+  const { unsupportedWidth } = useLayout();
   const theme = useTheme();
-  const drawerWidth = isTablet
+  const drawerWidth = unsupportedWidth
     ? theme.custom.drawerWidth.tablet
     : theme.custom.drawerWidth.desktop;
 

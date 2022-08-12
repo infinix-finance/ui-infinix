@@ -17,3 +17,5 @@ export { Tabs } from "./Tabs";
 
 export type { AlertProps } from "./Alert";
 export { Alert } from "./Alert";
+
+export { HeadPartytown } from "./HeadPartytown";
