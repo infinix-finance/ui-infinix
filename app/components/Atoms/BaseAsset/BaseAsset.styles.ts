@@ -1,7 +1,6 @@
 export const containerProps = {
   display: "flex",
   alignItems: "flex-start",
-  width: "100%",
   gap: 1.5,
   flex: "none",
 } as const;

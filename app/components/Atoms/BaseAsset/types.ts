@@ -10,7 +10,10 @@ export type BaseAssetProps = {
   assets: BaseAssetEntry[];
   iconSize?: number;
   label?: string;
+  description?: string;
   LabelProps?: TypographyProps;
-  filter?: string;
+  DescriptionProps?: TypographyProps;
+  showLabel?: boolean;
   showDescription?: boolean;
+  filter?: string;
 } & BoxProps;

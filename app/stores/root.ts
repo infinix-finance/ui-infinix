@@ -6,6 +6,7 @@ import { createCommonSlice } from "./common";
 import { createOtherSlice } from "./other";
 import { AppState, CustomStateCreator } from "./types";
 import { createConnectionSlice } from "./slices/connection";
+import { createNotificationsSlice } from "./slices/notifications";
 
 export const addMiddlewares = (storeCreator: CustomStateCreator<AppState>) => {
   return devtools(immer(storeCreator));
@@ -16,5 +17,6 @@ export const useStore = create<AppState>()(
     ...createCommonSlice(...params),
     ...createOtherSlice(...params),
     ...createConnectionSlice(...params),
+    ...createNotificationsSlice(...params),
   }))
 );

@@ -1,10 +1,6 @@
-import { NetworkId } from "@/defi";
+import { getWallet, NetworkId, WalletId } from "@/defi";
 import { mockRequest } from "@/utils/mock";
 import { AppState, CustomStateCreator } from "../types";
-
-interface Account {
-  address: string;
-}
 
 interface Wallet {
   name: string;
@@ -12,7 +8,7 @@ interface Wallet {
 }
 
 interface ConnectionProps {
-  account: Account;
+  accounts: string[];
   wallet: Wallet;
   connected: boolean;
 }
@@ -20,7 +16,9 @@ interface ConnectionProps {
 export interface ConnectionSlice {
   connection: ConnectionProps & {
     connect: () => void;
-    disconnect: () => void;
+    restore: (networkId: NetworkId, accounts: string[]) => void;
+    changeAccounts: (accounts: string[]) => void;
+    changeNetwork: (networkId: NetworkId) => void;
   };
 }
 
@@ -28,9 +26,7 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
   set
 ) => ({
   connection: {
-    account: {
-      address: "",
-    },
+    accounts: [],
     wallet: {
       name: "",
       network: null,
@@ -38,18 +34,36 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
     connected: false,
 
     connect: async () => {
-      await mockRequest(null, 1000);
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      console.log(accounts);
 
       set(function connect(state: AppState) {
         state.connection.connected = true;
+        state.connection.accounts = accounts;
       });
     },
 
-    disconnect: async () => {
-      await mockRequest(null, 1000);
-
+    restore: (networkId: NetworkId, accounts: string[]) => {
       set(function connect(state: AppState) {
-        state.connection.connected = false;
+        state.connection.connected = true;
+        state.connection.accounts = accounts;
+        state.connection.wallet.network = networkId;
+        state.connection.wallet.name = getWallet(WalletId.metamask).name;
+      });
+    },
+
+    changeAccounts: (accounts: string[]) => {
+      set(function connect(state: AppState) {
+        state.connection.accounts = accounts;
+      });
+    },
+
+    changeNetwork: (networkId: NetworkId) => {
+      set(function connect(state: AppState) {
+        state.connection.wallet.network = networkId;
       });
     },
   },

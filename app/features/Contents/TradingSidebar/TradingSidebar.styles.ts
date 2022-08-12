@@ -4,7 +4,7 @@ export const containerStyle = (theme: Theme) => ({
   backgroundColor: theme.palette.secondary.blackberry,
   width: "17.5rem",
   [theme.breakpoints.up("xl")]: {
-    width: "20rem",
+    width: "22.5rem",
   },
 });
 

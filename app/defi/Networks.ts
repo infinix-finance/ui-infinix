@@ -3,7 +3,7 @@ import { Network, NetworkId, TokenId } from "./types";
 export const NETWORKS: {
   [networkId in NetworkId]: Network;
 } = {
-  1: {
+  [NetworkId.ethereum]: {
     name: "Ethereum",
     symbol: "Ethereum",
     rpcUrl: process.env.RPC_URL_1!,
@@ -14,15 +14,59 @@ export const NETWORKS: {
     publicRpcUrl: "",
     nativeToken: TokenId.eth,
   },
-  42161: {
+  [NetworkId.arbitrum]: {
     name: "Arbitrum",
     symbol: "Arbitrum",
     rpcUrl: process.env.RPC_URL_42161!,
     infoPageUrl: "https://arbiscan.io/tx/",
     infoPage: "Arbiscan",
-    icon: "/networks/mainnet.svg",
+    icon: "/networks/arbitrum.svg",
     defaultTokenSymbol: "ETH",
     publicRpcUrl: "https://arb1.arbitrum.io/rpc",
     nativeToken: TokenId.eth,
+  },
+  [NetworkId.polygon]: {
+    name: "Polygon",
+    symbol: "Polygon",
+    rpcUrl: process.env.RPC_URL_137!,
+    infoPageUrl: "https://polygonscan.com/tx/",
+    infoPage: "Polygonscan",
+    icon: "/networks/polygon.svg",
+    defaultTokenSymbol: "MATIC",
+    publicRpcUrl: "https://rpc-mainnet.maticvigil.com/",
+    nativeToken: TokenId.eth,
+  },
+  [NetworkId.avalanche]: {
+    name: "Avalanche",
+    symbol: "Avalanche",
+    rpcUrl: process.env.RPC_URL_43114!,
+    infoPageUrl: "https://cchain.explorer.avax.network/tx/",
+    infoPage: "Avax Scan",
+    icon: "/networks/avalanche.svg",
+    defaultTokenSymbol: "AVAX",
+    publicRpcUrl: "https://api.avax.network/ext/bc/C/rpc",
+    nativeToken: TokenId.avax,
+  },
+  [NetworkId.moonriver]: {
+    name: "Moonriver",
+    symbol: "Moonriver",
+    rpcUrl: process.env.RPC_URL_1285!,
+    infoPageUrl: "https://blockscout.moonriver.moonbeam.network/tx/",
+    infoPage: "Moonriver Blockscout",
+    icon: "/networks/moonriver.svg",
+    defaultTokenSymbol: "MOVR",
+    publicRpcUrl: "https://rpc.moonriver.moonbeam.network",
+    nativeToken: TokenId.eth,
+  },
+  [NetworkId.fantom]: {
+    name: "Fantom",
+    symbol: "Fantom",
+    rpcUrl: process.env.RPC_URL_250!,
+    infoPageUrl: "https://ftmscan.com/tx/",
+    infoPage: "Fantom Scan",
+    icon: "/networks/fantom.svg",
+    defaultTokenSymbol: "FTM",
+    publicRpcUrl: "https://rpc.ftm.tools",
+    nativeToken: TokenId.ftm,
   },
 };
