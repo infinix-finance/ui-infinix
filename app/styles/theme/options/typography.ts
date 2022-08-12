@@ -1,119 +1,111 @@
-import { Theme } from "@mui/material"
+import { Theme } from "@mui/material";
 
 export const typographyOptions = (theme: Theme) => ({
   fontFamily: `"${theme.custom.fontFamily.primary}", "${theme.custom.fontFamily.secondary}", sans-serif`,
   htmlFontSize: 16,
   h1: {
     fontFamily: `"${theme.custom.fontFamily.secondary}"`,
-    lineHeight: theme.custom.lineHeight.small,
+    lineHeight: theme.custom.lineHeight.tiniest,
     fontSize: "6rem",
-    fontWeight: "normal",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "4.5rem",
-    },
+    fontWeight: "700",
   },
   h2: {
     fontFamily: `"${theme.custom.fontFamily.secondary}"`,
-    lineHeight: theme.custom.lineHeight.small,
+    lineHeight: theme.custom.lineHeight.tiny,
     fontSize: "4.5rem",
-    fontWeight: "normal",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "4rem",
-    },
+    fontWeight: "700",
   },
   h3: {
     fontFamily: `"${theme.custom.fontFamily.secondary}"`,
-    lineHeight: theme.custom.lineHeight.large,
+    lineHeight: theme.custom.lineHeight.smaller,
     fontSize: "4rem",
-    fontWeight: "normal",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "3rem",
-    },
+    fontWeight: "700",
   },
   h4: {
     fontFamily: `"${theme.custom.fontFamily.secondary}"`,
-    lineHeight: theme.custom.lineHeight.larger,
+    lineHeight: theme.custom.lineHeight.small,
     fontSize: "3rem",
-    fontWeight: "normal",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "2rem",
-    },
+    fontWeight: "700",
   },
   h5: {
     fontFamily: `"${theme.custom.fontFamily.primary}"`,
-    lineHeight: theme.custom.lineHeight.larger,
+    lineHeight: theme.custom.lineHeight.small,
     fontSize: "2rem",
-    fontWeight: "normal",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1.5rem",
-    },
+    fontWeight: "600",
   },
   h6: {
     fontFamily: `"${theme.custom.fontFamily.primary}"`,
-    lineHeight: theme.custom.lineHeight.larger,
+    lineHeight: theme.custom.lineHeight.medium,
     fontSize: "1.5rem",
-    fontWeight: "normal",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1.25rem",
-    },
+    fontWeight: "500",
   },
   subtitle1: {
     fontFamily: `"${theme.custom.fontFamily.primary}"`,
-    lineHeight: theme.custom.lineHeight.larger,
-    fontSize: "1.25rem",
-    fontWeight: "light",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1.125rem",
-    },
-  },
-  subtitle2: {
-    fontFamily: `"${theme.custom.fontFamily.primary}"`,
-    lineHeight: theme.custom.lineHeight.larger,
+    lineHeight: theme.custom.lineHeight.large,
     fontSize: "1.125rem",
-    fontWeight: "normal",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1rem",
-    },
+    fontWeight: "500",
   },
   body1: {
     fontFamily: `"${theme.custom.fontFamily.primary}"`,
-    lineHeight: theme.custom.lineHeight.larger,
-    fontSize: "1.25rem",
-    fontWeight: "light",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1.125rem",
-    },
+    lineHeight: theme.custom.lineHeight.medium,
+    fontSize: "1rem",
+    fontWeight: "normal",
   },
   body2: {
     fontFamily: `"${theme.custom.fontFamily.primary}"`,
-    lineHeight: theme.custom.lineHeight.larger,
-    fontSize: "1.125rem",
-    fontWeight: "light",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1rem",
-    },
-  },
-  button: {
-    fontFamily: `"${theme.custom.fontFamily.primary}"`,
     lineHeight: theme.custom.lineHeight.large,
-    fontSize: "1.125rem",
-    width: "max-content",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1rem",
-    },
+    fontSize: "0.875rem",
+    fontWeight: "normal",
   },
-  caption: {
+  body3: {
     fontFamily: `"${theme.custom.fontFamily.primary}"`,
     lineHeight: theme.custom.lineHeight.larger,
     fontSize: "0.75rem",
     fontWeight: "normal",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "0.625rem",
-    },
+  },
+  buttonLarge: {
+    fontFamily: `"${theme.custom.fontFamily.primary}"`,
+    lineHeight: theme.custom.lineHeight.small,
+    fontSize: "1rem",
+    fontWeight: "500",
+    width: "max-content",
+  },
+  buttonMedium: {
+    fontFamily: `"${theme.custom.fontFamily.primary}"`,
+    lineHeight: theme.custom.lineHeight.smaller,
+    fontSize: "0.875rem",
+    fontWeight: "500",
+    width: "max-content",
+  },
+  buttonSmall: {
+    fontFamily: `"${theme.custom.fontFamily.primary}"`,
+    lineHeight: theme.custom.lineHeight.tiny,
+    fontSize: "0.75rem",
+    fontWeight: "500",
+    width: "max-content",
+  },
+  caption: {
+    fontFamily: `"${theme.custom.fontFamily.primary}"`,
+    lineHeight: theme.custom.lineHeight.larger,
+    fontSize: "0.625rem",
+    fontWeight: "500",
   },
   inputLabel: {
     fontFamily: `"${theme.custom.fontFamily.primary}"`,
-    lineHeight: theme.custom.lineHeight.larger,
+    lineHeight: theme.custom.lineHeight.large,
+    fontSize: "0.875rem",
+    fontWeight: "normal",
+  },
+  helperText: {
+    fontFamily: `"${theme.custom.fontFamily.primary}"`,
+    lineHeight: theme.custom.lineHeight.large,
+    fontSize: "0.875rem",
+    fontWeight: "normal",
+  },
+  inputText: {
+    fontFamily: `"${theme.custom.fontFamily.primary}"`,
+    lineHeight: theme.custom.lineHeight.medium,
     fontSize: "1rem",
+    fontWeight: "normal",
   },
 });

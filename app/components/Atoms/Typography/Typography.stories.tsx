@@ -2,11 +2,15 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Box, Typography as Typo } from "@mui/material";
 
+const Label = ({ children }: { children: React.ReactNode }) => (
+  <Typo color="#bbbbbb">{children}</Typo>
+);
+
 const TypeGuide: React.FC = () => {
   const boxStyles = {
     display: "flex",
     gap: 3,
-    alignItems: "flex-end",
+    alignItems: "center",
     border: "1px dotted gray",
     borderRadius: "5px",
     p: 2,
@@ -15,76 +19,94 @@ const TypeGuide: React.FC = () => {
 
   return (
     <>
-      <h1>Styleguide</h1>
-      <h2>Typography</h2>
       <Box>
         <Box sx={boxStyles}>
-          <p>h1</p>
+          <Label>h1</Label>
           <Typo variant="h1">The quick brown fox jumps over the lazy dog</Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>h2</p>
+          <Label>h2</Label>
           <Typo variant="h2">The quick brown fox jumps over the lazy dog</Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>h3</p>
+          <Label>h3</Label>
           <Typo variant="h3">The quick brown fox jumps over the lazy dog</Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>h4</p>
+          <Label>h4</Label>
           <Typo variant="h4">The quick brown fox jumps over the lazy dog</Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>h5</p>
+          <Label>h5</Label>
           <Typo variant="h5">The quick brown fox jumps over the lazy dog</Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>h6</p>
-
+          <Label>h6</Label>
           <Typo variant="h6">The quick brown fox jumps over the lazy dog</Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>subtitle1</p>
-
+          <Label>subtitle1</Label>
           <Typo variant="subtitle1">
             The quick brown fox jumps over the lazy dog
           </Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>subtitle2</p>
-
-          <Typo variant="subtitle2">
-            The quick brown fox jumps over the lazy dog
-          </Typo>
-        </Box>
-        <Box sx={boxStyles}>
-          <p>body1</p>
+          <Label>body1</Label>
           <Typo variant="body1">
             The quick brown fox jumps over the lazy dog
           </Typo>
         </Box>
-
         <Box sx={boxStyles}>
-          <p>body2</p>
+          <Label>body2</Label>
           <Typo variant="body2">
             The quick brown fox jumps over the lazy dog
           </Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>caption</p>
+          <Label>body3</Label>
+          <Typo variant="body3">
+            The quick brown fox jumps over the lazy dog
+          </Typo>
+        </Box>
+        <Box sx={boxStyles}>
+          <Label>buttonLarge</Label>
+          <Typo variant="buttonLarge">
+            The quick brown fox jumps over the lazy dog
+          </Typo>
+        </Box>
+        <Box sx={boxStyles}>
+          <Label>buttonMedium</Label>
+          <Typo variant="buttonMedium">
+            The quick brown fox jumps over the lazy dog
+          </Typo>
+        </Box>
+        <Box sx={boxStyles}>
+          <Label>buttonSmall</Label>
+          <Typo variant="buttonSmall">
+            The quick brown fox jumps over the lazy dog
+          </Typo>
+        </Box>
+        <Box sx={boxStyles}>
+          <Label>caption</Label>
           <Typo variant="caption">
             The quick brown fox jumps over the lazy dog
           </Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>button</p>
-          <Typo variant="button">
+          <Label>inputLabel</Label>
+          <Typo variant="inputLabel">
             The quick brown fox jumps over the lazy dog
           </Typo>
         </Box>
         <Box sx={boxStyles}>
-          <p>overline</p>
-          <Typo variant="overline">
+          <Label>helperText</Label>
+          <Typo variant="helperText">
+            The quick brown fox jumps over the lazy dog
+          </Typo>
+        </Box>
+        <Box sx={boxStyles}>
+          <Label>inputText</Label>
+          <Typo variant="inputText">
             The quick brown fox jumps over the lazy dog
           </Typo>
         </Box>

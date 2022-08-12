@@ -13,15 +13,6 @@ const loadEnvironments = () => loadEnvConfig(process.cwd());
 loadEnvironments();
 setGlobalConfig(globalConfig);
 
-jest.mock("react-apexcharts", () => {
-  return {
-    __esModule: true,
-    default: () => {
-      return <div />;
-    },
-  };
-});
-
 jest.isolateModules(() => {
   const preloadAll = require("jest-next-dynamic");
   beforeAll(async () => {

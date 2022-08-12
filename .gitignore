@@ -40,3 +40,4 @@ app/public/workbox-*.js
 app/public/fallback*.js
 .DS_Store
 app/eslint_report.json
+app/storybook-static

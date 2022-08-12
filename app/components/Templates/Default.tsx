@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { NavBar } from "../Organisms";
 import { alpha, Breadcrumbs, useTheme, Typography } from "@mui/material";
-import { useTablet } from "@/hooks/responsive";
+import { useLayout } from "@/hooks/responsive";
 
 type DefaultLayoutProps = {
   breadcrumbs?: React.ReactNode[];
@@ -18,7 +18,7 @@ type DefaultLayoutProps = {
 export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
   const { children, breadcrumbs } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const isTablet = useTablet();
+  const { isTablet } = useLayout();
   const theme = useTheme();
   const drawerWidth = isTablet
     ? theme.custom.drawerWidth.tablet

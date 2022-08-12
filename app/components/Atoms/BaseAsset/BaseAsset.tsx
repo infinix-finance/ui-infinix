@@ -1,49 +1,75 @@
 import React from "react";
-import { Box, BoxProps, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
-export type BaseAssetProps = {
-  icon?: string;
-  label?: string;
-  iconSize?: number;
-  centeredLabel?: boolean;
-} & BoxProps;
+import {
+  containerProps,
+  getIconStyle,
+  textContainerStyle,
+} from "./BaseAsset.styles";
+import { BaseAssetProps } from "./types";
 
-export const BaseAsset: React.FC<BaseAssetProps> = ({
-  icon,
-  label,
+const SEPARATOR = "/";
+
+export const BaseAsset = ({
+  assets,
   iconSize = 24,
-  centeredLabel,
+  label,
+  LabelProps,
+  showDescription = false,
   ...rest
-}) => {
+}: BaseAssetProps) => {
+  if (![1, 2].includes(assets.length)) {
+    throw new Error("Assets array can include either 1 or 2 assets");
+  }
+
+  const iconsPresent = assets.some((asset) => Boolean(asset.icon));
+  const assetLabelCreator = (prop: "label" | "description") =>
+    assets
+      .filter((asset) => Boolean(asset[prop]))
+      .map((asset) => asset[prop])
+      .join(SEPARATOR);
+  const assetLabel = assetLabelCreator("label");
+  const assetDescription = assetLabelCreator("description");
+
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      justifyContent={centeredLabel ? "center" : undefined}
-      position="relative"
-      width="100%"
-      gap={label ? 2 : 0}
-      flex="none"
-      {...rest}
-    >
-      {icon && (
-        <Box
-          display="flex"
-          position={centeredLabel ? "absolute" : undefined}
-          left={centeredLabel ? 0 : undefined}
-          alignItems="center"
-        >
-          <Box display="flex">
-            <Image src={icon} alt={label} width={iconSize} height={iconSize} />
-          </Box>
+    <Box {...containerProps} {...rest}>
+      {iconsPresent && (
+        <Box display="flex" alignItems="center">
+          {assets.map((asset, index) => (
+            <Box
+              key={index}
+              display="flex"
+              sx={getIconStyle(index, iconSize)}
+              aria-label="Base Asset Icon"
+            >
+              {asset.icon && (
+                <Image
+                  src={asset.icon}
+                  alt={asset.label}
+                  width={iconSize}
+                  height={iconSize}
+                />
+              )}
+            </Box>
+          ))}
         </Box>
       )}
-      {label && (
-        <Typography variant="body2" color="text.primary">
-          {label}
+      <Box sx={textContainerStyle}>
+        <Typography
+          height={iconSize}
+          variant="body2"
+          color="primary.ice"
+          {...LabelProps}
+        >
+          {label || `${assetLabel}`}
         </Typography>
-      )}
+        {showDescription && (
+          <Typography variant="body3" color="secondary.graishLavender">
+            {assetDescription}
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 };

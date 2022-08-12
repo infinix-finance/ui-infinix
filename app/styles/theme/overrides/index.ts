@@ -27,3 +27,4 @@ export { accordionDetailsOverrides } from "./accordionDetails";
 export { alertOverrides } from "./alert";
 export { tooltipOverrides } from "./tooltip";
 export { cssBaselineOverrides } from "./cssBaseline";
+export { inputOverrides } from "./input";

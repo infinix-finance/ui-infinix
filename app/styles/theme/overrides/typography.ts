@@ -4,6 +4,8 @@ export const typographyOverrides = (): Partial<OverridesStyleRules> => ({
   styleOverrides: {
     root: {
       textTransform: "none",
+      display: "flex",
+      alignItems: "center",
     },
   },
 });

@@ -6,7 +6,7 @@ export const chipOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
     root: {
       padding: "0.4rem",
       borderRadius: "0.5rem",
-      fontFamily: '"Be Vietnam Pro"',
+      fontFamily: "Sora",
       fontSize: "1rem",
       backgroundColor: alpha(theme.palette.primary.main, theme.custom.opacity.light),
       color: theme.palette.warning.main,
