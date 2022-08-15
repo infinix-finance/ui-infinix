@@ -1,10 +1,13 @@
 import { Theme } from "@mui/material";
 
 export const containerStyle = (theme: Theme) => ({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
   height: "100%",
+  display: "block",
+});
+
+export const titleStyle = (theme: Theme) => ({
+  margin: theme.spacing(0, 2, 5),
+  color: theme.palette.secondary.graishLavender,
 });
 
 export const contentStyle = (connected: boolean) => (theme: Theme) => ({
@@ -15,6 +18,8 @@ export const contentStyle = (connected: boolean) => (theme: Theme) => ({
 });
 
 export const disconnectButtonStyle = (theme: Theme) => ({
-  marginBottom: "5rem",
-  margin: theme.spacing(0, 2, 10),
+  position: "absolute",
+  bottom: theme.spacing(10),
+  margin: theme.spacing(0, 2),
+  width: `calc(100% - ${theme.spacing(4)})`,
 });

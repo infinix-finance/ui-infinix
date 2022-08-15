@@ -1,10 +1,9 @@
-import { getWallet, NetworkId, WalletId } from "@/defi";
-import { mockRequest } from "@/utils/mock";
+import { NetworkId, WalletId } from "@/defi";
 import { AppState, CustomStateCreator } from "../types";
 
 interface Wallet {
-  name: string;
-  network: NetworkId | null;
+  walletId: WalletId | null;
+  networkId: NetworkId | null;
 }
 
 interface ConnectionProps {
@@ -16,6 +15,7 @@ interface ConnectionProps {
 export interface ConnectionSlice {
   connection: ConnectionProps & {
     connect: () => void;
+    disconnect: () => void;
     restore: (networkId: NetworkId, accounts: string[]) => void;
     changeAccounts: (accounts: string[]) => void;
     changeNetwork: (networkId: NetworkId) => void;
@@ -28,8 +28,8 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
   connection: {
     accounts: [],
     wallet: {
-      name: "",
-      network: null,
+      walletId: null,
+      networkId: null,
     },
     connected: false,
 
@@ -38,37 +38,51 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
         method: "eth_requestAccounts",
       });
 
-      console.log(accounts);
-
       set(function connect(state: AppState) {
         state.connection.connected = true;
         state.connection.accounts = accounts;
+      });
+    },
+
+    disconnect: async () => {
+      set(function disconnect(state: AppState) {
+        state.connection.connected = false;
+        state.connection.accounts = [];
+        state.connection.wallet = {
+          walletId: null,
+          networkId: null,
+        };
       });
     },
 
     restore: (networkId: NetworkId, accounts: string[]) => {
-      set(function connect(state: AppState) {
+      set(function restore(state: AppState) {
         state.connection.connected = true;
         state.connection.accounts = accounts;
-        state.connection.wallet.network = networkId;
-        state.connection.wallet.name = getWallet(WalletId.metamask).name;
+        state.connection.wallet.networkId = networkId;
+        state.connection.wallet.walletId = WalletId.metamask;
       });
     },
 
     changeAccounts: (accounts: string[]) => {
-      set(function connect(state: AppState) {
+      set(function changeAccounts(state: AppState) {
         state.connection.accounts = accounts;
       });
     },
 
     changeNetwork: (networkId: NetworkId) => {
-      set(function connect(state: AppState) {
-        state.connection.wallet.network = networkId;
+      set(function changeNetwork(state: AppState) {
+        state.connection.wallet.networkId = networkId;
+        state.connection.wallet.walletId = WalletId.metamask;
       });
     },
   },
 });
 
 export const isSupportedNetwork = (state: AppState) => {
-  return state.connection.wallet.network === NetworkId.arbitrum;
+  return state.connection.wallet.networkId === NetworkId.arbitrum;
+};
+
+export const getAccount = (state: AppState) => {
+  return state.connection.accounts?.[0] || "";
 };

@@ -26,6 +26,7 @@
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "@svgr/webpack": "^6.1.2",
+    "@types/ramda": "^0.28.15",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/network-connector": "^6.1.9",

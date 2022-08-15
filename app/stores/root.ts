@@ -1,6 +1,7 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import * as R from "ramda";
 
 import { createCommonSlice } from "./common";
 import { createOtherSlice } from "./other";
@@ -20,3 +21,6 @@ export const useStore = create<AppState>()(
     ...createNotificationsSlice(...params),
   }))
 );
+
+const initialState = useStore.getState();
+export const getInitialState = () => R.clone(initialState);

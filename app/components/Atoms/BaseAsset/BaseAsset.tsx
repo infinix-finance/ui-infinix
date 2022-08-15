@@ -25,7 +25,7 @@ export const BaseAsset = ({
   if (![1, 2].includes(assets.length)) {
     throw new Error("Assets array can include either 1 or 2 assets");
   }
-  console.log("....", description);
+
   const iconsPresent = assets.some((asset) => Boolean(asset.icon));
   const assetLabelCreator = (prop: "label" | "description") =>
     assets

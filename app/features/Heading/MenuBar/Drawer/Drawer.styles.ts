@@ -39,7 +39,7 @@ export const titleStyle = (smallerPaddingTop: boolean) => (theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   gap: 2,
-  margin: theme.spacing(smallerPaddingTop ? 4 : 10.25, 3, 8),
+  margin: theme.spacing(smallerPaddingTop ? 4 : 10.25, 2, 8),
 });
 
 export const iconStyle = (theme: Theme) => ({

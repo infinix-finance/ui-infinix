@@ -29,7 +29,9 @@ const iconMapping = {
 
 interface DrawerProps {
   selected: Selections | null;
-  AlertNotificationProps?: AlertNotificationProps;
+  AlertNotificationProps: {
+    visible: boolean;
+  } & AlertNotificationProps;
   onClose: () => void;
 }
 
@@ -39,7 +41,7 @@ export const Drawer = ({
   onClose,
 }: DrawerProps) => {
   const IconComponent = selected ? iconMapping[selected] : () => <></>;
-  const showNotification = Boolean(AlertNotificationProps);
+  const showNotification = AlertNotificationProps.visible;
   const title = selected ? titleMapping[selected] : "";
 
   return (
@@ -49,7 +51,9 @@ export const Drawer = ({
       open={Boolean(selected)}
       onClose={onClose}
     >
-      {showNotification && <AlertNotification {...AlertNotificationProps} />}
+      {showNotification && (
+        <AlertNotification {...AlertNotificationProps} inline />
+      )}
       <Box sx={titleStyle(showNotification)}>
         <IconComponent sx={iconStyle} />
         <Typography variant="h6">{title}</Typography>

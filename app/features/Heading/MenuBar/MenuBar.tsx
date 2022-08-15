@@ -1,3 +1,5 @@
+import { useStore } from "@/stores/root";
+import { getSidebarNotifications } from "@/stores/slices/notifications";
 import { useState } from "react";
 
 import { ButtonBar } from "./ButtonBar";
@@ -6,6 +8,7 @@ import { Drawer } from "./Drawer";
 
 export const MenuBar = () => {
   const [selected, setSelected] = useState<Selections | null>(null);
+  const sidebarNotifications = useStore(getSidebarNotifications);
 
   return (
     <>
@@ -16,13 +19,7 @@ export const MenuBar = () => {
       />
       <Drawer
         selected={selected}
-        AlertNotificationProps={{
-          severity: "error",
-          title: "You need to connect to avalanche",
-          actionLabel: "Switch",
-          inline: true,
-          onAction: () => {},
-        }}
+        AlertNotificationProps={sidebarNotifications}
         onClose={() => setSelected(null)}
       />
     </>
