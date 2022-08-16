@@ -9,6 +9,7 @@ import { Drawer } from "./Drawer";
 export const MenuBar = () => {
   const [selected, setSelected] = useState<Selections | null>(null);
   const sidebarNotifications = useStore(getSidebarNotifications);
+  const { chainId } = useStore((state) => state.connection);
 
   return (
     <>
@@ -16,6 +17,7 @@ export const MenuBar = () => {
         selected={selected}
         onSelect={setSelected}
         notification={Notifications.inactive}
+        networkId={chainId}
       />
       <Drawer
         selected={selected}

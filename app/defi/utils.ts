@@ -53,3 +53,9 @@ export const getProduct = (value: ProductId): Product => {
     getWallet(value as WalletId)
   );
 };
+
+export const isSupportedNetwork = (networkId?: NetworkId | null) => {
+  return [NetworkId.avalanche, NetworkId.avalancheTestnet].some(
+    (id) => id === networkId
+  );
+};

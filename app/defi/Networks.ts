@@ -36,6 +36,17 @@ export const NETWORKS: {
     publicRpcUrl: "https://rpc-mainnet.maticvigil.com/",
     nativeToken: TokenId.eth,
   },
+  [NetworkId.avalancheTestnet]: {
+    name: "Avalanche Fuji",
+    symbol: "Avalanche Testnet",
+    rpcUrl: process.env.RPC_URL_43113!,
+    infoPageUrl: "https://cchain.explorer.avax.network/tx/",
+    infoPage: "Avax Scan",
+    icon: "/networks/avalanche.svg",
+    defaultTokenSymbol: "AVAX",
+    publicRpcUrl: "https://api.avax.network/ext/bc/C/rpc",
+    nativeToken: TokenId.avax,
+  },
   [NetworkId.avalanche]: {
     name: "Avalanche",
     symbol: "Avalanche",

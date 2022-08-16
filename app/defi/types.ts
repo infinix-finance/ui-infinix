@@ -19,12 +19,13 @@ export type Token = {
 };
 
 export enum NetworkId {
-  ethereum = 0x1, // 1
-  arbitrum = 0xa4b1, // 42161
-  polygon = 0x89, // 137
-  avalanche = 0xa86a, // 43114
-  moonriver = 0x505, // 1285
-  fantom = 0xfa, // 250
+  ethereum = 1,
+  arbitrum = 42161,
+  polygon = 137,
+  avalancheTestnet = 43113,
+  avalanche = 43114,
+  moonriver = 1285,
+  fantom = 250,
 }
 
 export type Network = {

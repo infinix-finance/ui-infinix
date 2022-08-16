@@ -41,7 +41,8 @@ export const Drawer = ({
   onClose,
 }: DrawerProps) => {
   const IconComponent = selected ? iconMapping[selected] : () => <></>;
-  const showNotification = AlertNotificationProps.visible;
+  const showNotification =
+    AlertNotificationProps.visible && selected === Selections.wallet;
   const title = selected ? titleMapping[selected] : "";
 
   return (

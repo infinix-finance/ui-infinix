@@ -11,16 +11,15 @@ import {
   titleStyle,
 } from "./Wallets.styles";
 import { useStore } from "@/stores/root";
-import { getAccount } from "@/stores/slices/connection";
 import { shortenAddress } from "@/utils/formatters";
 
 const ConnectWallet = () => {
-  const { connect } = useStore((store) => store.connection);
+  const { activate } = useStore((store) => store.connection);
 
   return (
     <Box sx={contentStyle(false)}>
       <ProductAsset productIds={[WalletId.metamask]} description="EVM" />
-      <Button variant="text" size="small" onClick={connect}>
+      <Button variant="text" size="small" onClick={activate}>
         <PowerOutlinedIcon />
       </Button>
     </Box>
@@ -28,14 +27,13 @@ const ConnectWallet = () => {
 };
 
 const ConnectedWallet = () => {
-  const account = useStore(getAccount);
-  const { networkId, walletId } = useStore((state) => state.connection.wallet);
+  const { chainId, walletId, account } = useStore((state) => state.connection);
 
   return (
     <Box sx={contentStyle(true)}>
       <ProductAsset
-        productIds={[networkId!]}
-        description={shortenAddress(account)}
+        productIds={[chainId!]}
+        description={shortenAddress(account!)}
       />
       <ProductAsset productIds={[walletId!]} showLabel={false} />
     </Box>
@@ -43,19 +41,19 @@ const ConnectedWallet = () => {
 };
 
 export const Wallets = () => {
-  const { connected, disconnect } = useStore((store) => store.connection);
+  const { active, deactivate } = useStore((store) => store.connection);
 
   return (
     <Box sx={containerStyle}>
       <Typography sx={titleStyle} variant="body2">
-        {connected ? "Connected wallet" : "Available wallets"}
+        {active ? "Connected wallet" : "Available wallets"}
       </Typography>
-      {connected ? <ConnectedWallet /> : <ConnectWallet />}
+      {active ? <ConnectedWallet /> : <ConnectWallet />}
       <Button
         sx={disconnectButtonStyle}
         variant="outlined"
-        disabled={!connected}
-        onClick={disconnect}
+        disabled={!active}
+        onClick={deactivate}
       >
         Disconnect
       </Button>

@@ -5,6 +5,9 @@ import { AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
+import { Web3ReactProvider } from "@web3-react/core";
+import { Web3Provider } from "@ethersproject/providers";
+
 import createEmotionCache from "@/styles/createEmotionCache";
 import { createTheme } from "@/styles/theme";
 import { ColorModeContext } from "@/contexts/ColorMode";
@@ -23,6 +26,10 @@ const initializeContentful = async () => {
   // });
   // console.log(fields);
 };
+
+function getLibrary(provider: any): Web3Provider {
+  return new Web3Provider(provider);
+}
 
 const initializeHotjar = () => {
   if (
@@ -80,9 +87,11 @@ export default function MyApp(props: MyAppProps) {
       />
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
+          <Web3ReactProvider getLibrary={getLibrary}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Component {...pageProps} />
+          </Web3ReactProvider>
         </ThemeProvider>
       </ColorModeContext.Provider>
     </CacheProvider>

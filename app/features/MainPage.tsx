@@ -3,12 +3,13 @@ import { Box } from "@mui/material";
 import { Contents } from "./Contents";
 import { Heading } from "./Heading";
 
-import { containerStyle } from "./MainPage.styles";
+import { useMetamaskConnection } from "@/hooks/wallet";
 import { ResolutionGuard } from "./ResolutionGuard";
-import useConnection from "@/hooks/useConnection";
+
+import { containerStyle } from "./MainPage.styles";
 
 export const MainPage = () => {
-  useConnection();
+  useMetamaskConnection();
 
   return (
     <Box sx={containerStyle}>

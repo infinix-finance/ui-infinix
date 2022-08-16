@@ -13,6 +13,7 @@ const nextConfig = {
     dest: "public",
     skipWaiting: true, // Turn this to false once you're ready to deploy a banner to develop update prompt.
     mode: process.env.NODE_ENV === "production" ? "production" : "development", // This will create worker-box production build.
+    disable: process.env.NODE_ENV === "development", // This is to disable the annoying workbox log tsunami during develompment.
   },
   webpack(config) {
     config.module.rules.push({

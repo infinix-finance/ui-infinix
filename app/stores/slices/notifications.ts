@@ -12,6 +12,7 @@ interface NotificationEntry {
   title?: string;
   description?: string;
   actionLabel?: string;
+  onAction?: () => void;
 }
 
 interface NotificationsProps {
@@ -66,8 +67,5 @@ export const createNotificationsSlice: CustomStateCreator<NotificationsSlice> =
   });
 
 export const getSidebarNotifications = (state: AppState) => {
-  return {
-    ...state.notifications.sidebar,
-    onAction: state.notifications.hideSidebarNotification,
-  };
+  return state.notifications.sidebar;
 };

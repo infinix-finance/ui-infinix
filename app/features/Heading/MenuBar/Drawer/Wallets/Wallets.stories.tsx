@@ -10,20 +10,15 @@ export default {
   component: Wallets,
 } as Meta<typeof Wallets>;
 
-const createStore = (networkId?: NetworkId) => {
+const createStore = (chainId?: NetworkId) => {
   const store = getInitialState();
 
-  if (networkId) {
-    store.connection.connected = true;
-    store.connection.accounts = ["0x09f0F5035f9633c58b3493D4C4334291E643B262"];
-    store.connection.wallet = {
-      networkId,
-      walletId: WalletId.metamask,
-    };
+  if (chainId) {
+    store.connection.active = true;
+    store.connection.account = "0x09f0F5035f9633c58b3493D4C4334291E643B262";
+    store.connection.chainId = chainId;
+    store.connection.walletId = WalletId.metamask;
   }
-
-  store.connection.connect = () => {};
-  store.connection.disconnect = () => {};
 
   useStore.setState(store);
 };
