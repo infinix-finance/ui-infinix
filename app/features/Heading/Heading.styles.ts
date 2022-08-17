@@ -18,13 +18,3 @@ export const toolBarStyle = {
   justifyContent: "space-between",
   height: "100%",
 };
-
-export const iconStyle = {
-  width: "1.25rem",
-  height: "1.25rem",
-};
-
-export const buttonStyle = {
-  width: "3rem",
-  height: "3rem",
-};

@@ -17,3 +17,6 @@ export { Input } from "./Input";
 
 export type { SelectProps } from "./Select";
 export { Select } from "./Select";
+
+export type { AlertNotificationProps } from "./AlertNotification";
+export { AlertNotification } from "./AlertNotification";

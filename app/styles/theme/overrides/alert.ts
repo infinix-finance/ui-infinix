@@ -4,14 +4,9 @@ import { OverridesStyleRules } from "@mui/material/styles/overrides";
 export const alertOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
   styleOverrides: {
     root: {
+      borderRadius: "0.5rem",
       "& .MuiSvgIcon-root": {
-        fill: (
-          alpha(
-            theme.palette.common.white, 
-            theme.custom.opacity.dark
-          )
-        ),
-        ml: theme.spacing(0.5),
+        fill: theme.palette.secondary.deepestBlackberry,
       },
       "& .MuiAlert-icon": {
         display: "grid",
@@ -20,7 +15,7 @@ export const alertOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
       "& .MuiAlert-message": {
         display: "flex",
         alignItems: "center",
-        width: '100%',
+        width: "100%",
       },
       "& .MuiAlert-action": {
         display: "flex",
@@ -30,38 +25,16 @@ export const alertOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
       },
     },
     filledSuccess: {
-      background: (
-        (
-          alpha(
-            theme.palette.success.main, 
-            theme.custom.opacity.light
-          )
-        )
-      ),
+      background: theme.palette.success.main,
     },
     filledError: {
-      background: (
-        alpha(
-          theme.palette.error.main, 
-          theme.custom.opacity.light
-        )
-      ),
+      background: theme.palette.error.main,
     },
     filledInfo: {
-      background: (
-        alpha(
-          theme.palette.info.main, 
-          theme.custom.opacity.light
-        )
-      ),
+      background: theme.palette.info.main,
     },
     filledWarning: {
-      background: (
-        alpha(
-          theme.palette.warning.main, 
-          theme.custom.opacity.light
-        )
-      ),
+      background: theme.palette.warning.main,
     },
   },
 });

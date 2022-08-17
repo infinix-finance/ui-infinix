@@ -19,6 +19,7 @@ declare module "@mui/material/styles" {
         _20percent: number;
         _30percent: number;
         _60percent: number;
+        _80percent: number;
       };
       lineHeight: {
         larger: string;
@@ -57,6 +58,7 @@ declare module "@mui/material/styles" {
         _20percent?: number;
         _30percent?: number;
         _60percent?: number;
+        _80percent: number;
       };
       lineHeight?: {
         larger?: string;
@@ -199,6 +201,7 @@ export const createBaseTheme = (mode: PaletteMode) =>
         _20percent: 0.2,
         _30percent: 0.3,
         _60percent: 0.6,
+        _80percent: 0.8,
       },
       lineHeight: {
         tiniest: "normal",

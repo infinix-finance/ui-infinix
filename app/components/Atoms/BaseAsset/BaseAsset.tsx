@@ -15,7 +15,10 @@ export const BaseAsset = ({
   assets,
   iconSize = 24,
   label,
+  description,
   LabelProps,
+  DescriptionProps,
+  showLabel = true,
   showDescription = false,
   ...rest
 }: BaseAssetProps) => {
@@ -55,21 +58,27 @@ export const BaseAsset = ({
           ))}
         </Box>
       )}
-      <Box sx={textContainerStyle}>
-        <Typography
-          height={iconSize}
-          variant="body2"
-          color="primary.ice"
-          {...LabelProps}
-        >
-          {label || `${assetLabel}`}
-        </Typography>
-        {showDescription && (
-          <Typography variant="body3" color="secondary.graishLavender">
-            {assetDescription}
+      {showLabel && (
+        <Box sx={textContainerStyle}>
+          <Typography
+            height={iconSize}
+            variant="body2"
+            color="primary.ice"
+            {...LabelProps}
+          >
+            {label || assetLabel}
           </Typography>
-        )}
-      </Box>
+          {(showDescription || description) && (
+            <Typography
+              variant="body3"
+              color="secondary.graishLavender"
+              {...DescriptionProps}
+            >
+              {description || assetDescription}
+            </Typography>
+          )}
+        </Box>
+      )}
     </Box>
   );
 };

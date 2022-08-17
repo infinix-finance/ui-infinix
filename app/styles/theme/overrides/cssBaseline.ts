@@ -8,7 +8,6 @@ export const cssBaselineOverrides = (
     body: {
       background: theme.palette.secondary.deepestBlackberry,
       fontFamily: "Sora",
-      overflow: "hidden",
     },
 
     "&::-webkit-scrollbar": {

@@ -36,24 +36,24 @@ export const paletteOptions = {
       deeperPeach: "#773900",
     },
     info: {
-      main: "#0286FF",
-      light: "#004686",
-      dark: "#001931",
+      main: "#46B1FF",
+      light: "#46B1FF",
+      dark: "#0080DD",
     },
     success: {
-      main: "#009B6D",
-      light: "#005A3F",
-      dark: "#002C1E",
+      main: "#4CD7A6",
+      light: "#4CD7A6",
+      dark: "#22976E",
     },
     error: {
-      main: "#AF3240",
+      main: "#F46172",
       light: "#F46172",
-      dark: "#801F2A",
+      dark: "#AF3240",
     },
     warning: {
       main: "#FFA44F",
       light: "#FFA44F",
-      dark: "#773900",
+      dark: "#C35E00",
     },
     common: {
       white: "#FFFFFF",

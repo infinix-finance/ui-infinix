@@ -81,7 +81,7 @@ define(['./workbox-79b83782'], (function (workbox) { 'use strict';
   * See https://goo.gl/2aRDsh
   */
 
-  importScripts("fallback-development.js");
+  importScripts("worker-development.js", "fallback-development.js");
   self.skipWaiting();
   workbox.clientsClaim();
   workbox.registerRoute("/", new workbox.NetworkFirst({

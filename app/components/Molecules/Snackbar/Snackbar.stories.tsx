@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof Snackbar> = (args) => (
 export const Snackbars = Template.bind({});
 
 Snackbars.args = {
-  AlertProps: {
+  /* AlertProps: {
     severity: "success",
     alertText: "I will close in 6 seconds...",
     underlined: false,
@@ -26,6 +26,6 @@ Snackbars.args = {
         <OpenInNewRoundedIcon />
       </Link>
     ),
-  },
+  }, */
   open: true,
 };

@@ -6,8 +6,10 @@ export const backdropOverrides = (
 ): Partial<OverridesStyleRules> => ({
   styleOverrides: {
     root: {
-      backdropFilter: "blur(32px)",
-      background: theme.palette.primary.main,
+      background: alpha(
+        theme.palette.secondary.deepestBlackberry,
+        theme.custom.opacity._60percent
+      ),
     },
   },
 });
