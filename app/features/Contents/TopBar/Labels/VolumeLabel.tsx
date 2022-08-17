@@ -6,11 +6,15 @@ import {
   textStyle,
 } from "./Labels.styles";
 
-export const VolumeLabel = () => {
+interface VolumeLabelProps {
+  value: string;
+}
+
+export const VolumeLabel = ({ value }: VolumeLabelProps) => {
   return (
     <Box sx={[labelContainerStyle, extraGapStyle]}>
       <Typography sx={labelStyle}>24h Volume</Typography>
-      <Typography sx={textStyle}>$175.22</Typography>
+      <Typography sx={textStyle}>{value}</Typography>
     </Box>
   );
 };

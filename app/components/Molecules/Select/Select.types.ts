@@ -1,6 +1,6 @@
 import { BaseAssetEntry } from "@/components/Atoms";
+import { ProductIds } from "@/defi";
 import { InputProps } from "../Input/types";
-import { ProductIds } from "../ProductAsset";
 
 export type Option = {
   value: any;

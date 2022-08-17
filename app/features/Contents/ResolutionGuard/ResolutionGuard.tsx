@@ -10,15 +10,11 @@ import {
 } from "./ResolutionGuard.styles";
 import { useLayout } from "@/hooks/responsive";
 
-interface UnsupportedResolutionProps {
-  children: React.ReactNode;
-}
-
-export const ResolutionGuard = ({ children }: UnsupportedResolutionProps) => {
-  const { unsupportedResolution, flippable } = useLayout();
+export const ResolutionGuard = () => {
+  const { unsupportedResolution, flippable, minWidth, minHeight } = useLayout();
 
   if (!unsupportedResolution) {
-    return <>{children}</>;
+    return null;
   }
 
   const IconComponent = flippable
@@ -26,7 +22,7 @@ export const ResolutionGuard = ({ children }: UnsupportedResolutionProps) => {
     : DesktopAccessDisabledIcon;
   const message = flippable
     ? "Switch to Landscape view to reveal the content."
-    : "Switch to 1024x768 resolution or above to reveal the content.";
+    : `Switch to ${minWidth}x${minHeight} resolution or above to reveal the content.`;
 
   return (
     <Box sx={containerStyle}>

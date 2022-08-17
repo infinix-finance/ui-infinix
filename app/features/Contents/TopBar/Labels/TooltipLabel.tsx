@@ -11,18 +11,19 @@ import {
 
 interface TooltipLabelProps {
   label: string;
+  value: string;
 }
 
-export const TooltipLabel = ({ label }: TooltipLabelProps) => {
+export const TooltipLabel = ({ label, value }: TooltipLabelProps) => {
   return (
     <Box sx={labelContainerStyle}>
       <Box sx={withTooltipStyle}>
         <Typography sx={labelStyle}>{label}</Typography>
-        <Tooltip title="Tooltip master here" arrow>
+        <Tooltip title="Tooltip master here" arrow disableHoverListener>
           <InfoOutlinedIcon sx={infoIconStyle} />
         </Tooltip>
       </Box>
-      <Typography sx={textStyle}>$175.22</Typography>
+      <Typography sx={textStyle}>{value}</Typography>
     </Box>
   );
 };

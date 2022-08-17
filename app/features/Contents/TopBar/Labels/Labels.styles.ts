@@ -30,14 +30,14 @@ export const withTooltipStyle = (theme: Theme) => ({
   gap: theme.spacing(1.5),
 });
 
-export const withIconStyle = (theme: Theme) => ({
+export const withIconStyle = (positive: boolean) => (theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   gap: theme.spacing(1),
 
   "& > *": {
-    color: theme.palette.alert.lemon,
+    color: positive ? theme.palette.alert.lemon : theme.palette.alert.guava,
   },
 });
 
@@ -50,18 +50,22 @@ export const infoIconStyle = (theme: Theme) => ({
 
 export const labelStyle = (theme: Theme) => ({
   fontSize: theme.typography.caption.fontSize,
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("xl")]: {
     fontSize: theme.typography.body3.fontSize,
   },
 });
 
 export const textStyle = (theme: Theme) => ({
   fontSize: theme.typography.body2.fontSize,
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("xl")]: {
     fontSize: theme.typography.subtitle1.fontSize,
   },
 });
 
 export const countdownTextStyle = (theme: Theme) => ({
   color: theme.palette.alert.lemon,
+  minWidth: "4.5rem",
+  [theme.breakpoints.up("xl")]: {
+    minWidth: "5.75rem",
+  },
 });

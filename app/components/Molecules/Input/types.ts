@@ -1,6 +1,6 @@
+import { ProductIds } from "@/defi";
 import { TextFieldProps } from "@mui/material";
 
-import { ProductIds } from "../ProductAsset";
 import { InputLabelProps } from "./InputLabel";
 
 export type InputProps = {

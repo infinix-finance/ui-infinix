@@ -1,4 +1,4 @@
-import { getNetwork, NetworkId, WalletId } from "@/defi";
+import { NetworkId, WalletId } from "@/defi";
 import { getInitialState, useStore } from "@/stores/root";
 import { Box } from "@mui/material";
 import { Meta, Story } from "@storybook/react";

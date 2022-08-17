@@ -8,6 +8,7 @@ import { createOtherSlice } from "./other";
 import { AppState, CustomStateCreator } from "./types";
 import { createConnectionSlice } from "./slices/connection";
 import { createNotificationsSlice } from "./slices/notifications";
+import { createRatesSlice } from "./slices/rates";
 
 export const addMiddlewares = (storeCreator: CustomStateCreator<AppState>) => {
   return devtools(immer(storeCreator));
@@ -19,6 +20,7 @@ export const useStore = create<AppState>()(
     ...createOtherSlice(...params),
     ...createConnectionSlice(...params),
     ...createNotificationsSlice(...params),
+    ...createRatesSlice(...params),
   }))
 );
 

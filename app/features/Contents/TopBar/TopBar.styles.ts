@@ -12,7 +12,7 @@ export const dropdownContainerStyle = (theme: Theme) => ({
   display: "flex",
   gap: theme.spacing(1),
 
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("xl")]: {
     gap: theme.spacing(2),
   },
 });
@@ -22,7 +22,7 @@ export const selectStyle = (theme: Theme) => ({
     display: "none",
   },
 
-  [theme.breakpoints.up("lg")]: {
+  [theme.breakpoints.up("xl")]: {
     "& .MuiSelect-select > .MuiBox-root > .MuiBox-root:first-of-type": {
       display: "flex !important",
     },

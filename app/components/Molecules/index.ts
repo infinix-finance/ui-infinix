@@ -9,7 +9,7 @@ export { Modal } from "./Modal";
 export type { LabeledSwitchProps } from "./LabeledSwitch";
 export { LabeledSwitch } from "./LabeledSwitch";
 
-export type { ProductAssetProps, ProductIds } from "./ProductAsset";
+export type { ProductAssetProps } from "./ProductAsset";
 export { ProductAsset } from "./ProductAsset";
 
 export type { InputProps } from "./Input";

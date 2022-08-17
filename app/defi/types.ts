@@ -1,4 +1,5 @@
 export enum TokenId {
+  btc = "btc",
   usdc = "usdc",
   eth = "eth",
   matic = "matic",
@@ -13,6 +14,28 @@ export enum TokenId {
 
 export type Token = {
   id: TokenId;
+  icon: string;
+  symbol: string;
+  name: string;
+};
+
+export enum CommodityId {
+  gold = "gold",
+}
+
+export type Commodity = {
+  id: CommodityId;
+  icon: string;
+  symbol: string;
+  name: string;
+};
+
+export enum IndexId {
+  goog = "goog",
+}
+
+export type Index = {
+  id: IndexId;
   icon: string;
   symbol: string;
   name: string;
@@ -78,5 +101,36 @@ export type Wallet = {
   icon: string;
 };
 
-export type ProductId = TokenId | MarketId | NetworkId | WalletId;
-export type Product = Token | Market | Network | Wallet;
+export type ProductId =
+  | TokenId
+  | CommodityId
+  | IndexId
+  | MarketId
+  | NetworkId
+  | WalletId;
+export type ProductIds =
+  | TokenId[]
+  | CommodityId[]
+  | IndexId[]
+  | MarketId[]
+  | NetworkId[]
+  | WalletId[];
+export type TradedProductId = TokenId | CommodityId | IndexId;
+export type Product = Token | Commodity | Index | Market | Network | Wallet;
+
+export enum PairId {
+  btcusdc = "btcusdc",
+  ethusdc = "ethusdc",
+  avaxusdc = "avaxusdc",
+  ftmusdc = "ftmusdc",
+  movrusdc = "movrusdc",
+  chaosusdc = "chaosusdc",
+  xauusdc = "xausdc",
+  googusdc = "googusdc",
+}
+
+export type Pair = {
+  id: PairId;
+  marketId: MarketId;
+  productIds: ProductIds;
+};

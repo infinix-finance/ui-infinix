@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import {
   labelContainerStyle,
@@ -8,14 +9,24 @@ import {
   withIconStyle,
 } from "./Labels.styles";
 
-export const PercentageChangeLabel = () => {
+interface PercentageChangeLabelProps {
+  change: number;
+  value: string;
+}
+
+export const PercentageChangeLabel = ({
+  change,
+  value,
+}: PercentageChangeLabelProps) => {
+  const isPositiveChange = change > 0;
+
   return (
     <Box sx={labelContainerStyle}>
-      <Box sx={withIconStyle}>
-        <ArrowDropUpIcon />
-        <Typography sx={labelStyle}>1.0%</Typography>
+      <Box sx={withIconStyle(isPositiveChange)}>
+        {isPositiveChange ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+        <Typography sx={labelStyle}>{`${change.toFixed(1)}%`}</Typography>
       </Box>
-      <Typography sx={textStyle}>$175.22</Typography>
+      <Typography sx={textStyle}>{value}</Typography>
     </Box>
   );
 };
