@@ -71,6 +71,7 @@ export const getProduct = (value: ProductId): Product => {
     (isIndex(value) && getIndex(value as IndexId)) ||
     (isMarket(value) && getMarket(value as MarketId)) ||
     (isNetwork(value) && getNetwork(value as NetworkId)) ||
+    (isProtocol(value) && getProtocol(value as ProtocolId)) ||
     getWallet(value as WalletId)
   );
 };
@@ -82,9 +83,9 @@ export const isSupportedNetwork = (networkId?: NetworkId | null) => {
 };
 
 export const getPairs = (marketId?: MarketId) => {
-  if (!marketId) return Object.values(PAIRS);
-
-  return Object.values(PAIRS).filter((values) => {
-    return values.marketId === marketId;
-  });
+  return !marketId
+    ? Object.values(PAIRS)
+    : Object.values(PAIRS).filter((values) => {
+        return values.marketId === marketId;
+      });
 };

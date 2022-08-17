@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TopBar utils generateMarketDropdownProps should generate S&P 500 market dropdown props 1`] = `
+Object {
+  "options": Array [
+    Object {
+      "productIds": Array [
+        "gold",
+        "usdc",
+      ],
+      "value": "xausdc",
+    },
+  ],
+  "searchable": true,
+}
+`;
+
+exports[`TopBar utils generateMarketDropdownProps should generate commodities market dropdown props 1`] = `
+Object {
+  "options": Array [
+    Object {
+      "productIds": Array [
+        "goog",
+        "usdc",
+      ],
+      "value": "googusdc",
+    },
+  ],
+  "searchable": true,
+}
+`;
+
+exports[`TopBar utils generateMarketDropdownProps should generate crypto market dropdown props 1`] = `
+Object {
+  "options": Array [
+    Object {
+      "productIds": Array [
+        "btc",
+        "usdc",
+      ],
+      "value": "btcusdc",
+    },
+    Object {
+      "productIds": Array [
+        "eth",
+        "usdc",
+      ],
+      "value": "ethusdc",
+    },
+    Object {
+      "productIds": Array [
+        "avax",
+        "usdc",
+      ],
+      "value": "avaxusdc",
+    },
+    Object {
+      "productIds": Array [
+        "chaos",
+        "usdc",
+      ],
+      "value": "chaosusdc",
+    },
+    Object {
+      "productIds": Array [
+        "ftm",
+        "usdc",
+      ],
+      "value": "ftmusdc",
+    },
+    Object {
+      "productIds": Array [
+        "movr",
+        "usdc",
+      ],
+      "value": "movrusdc",
+    },
+  ],
+  "searchable": true,
+}
+`;
+
+exports[`TopBar utils generateMarketDropdownProps should generate market dropdown props 1`] = `
+Object {
+  "options": Array [
+    Object {
+      "productIds": Array [
+        "sp500",
+      ],
+      "value": "sp500",
+    },
+    Object {
+      "productIds": Array [
+        "crypto",
+      ],
+      "value": "crypto",
+    },
+    Object {
+      "productIds": Array [
+        "commodities",
+      ],
+      "value": "commodities",
+    },
+  ],
+  "searchable": true,
+}
+`;

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Box, Typography } from "@mui/material";
 import ScreenRotationIcon from "@mui/icons-material/ScreenRotation";
 import DesktopAccessDisabledIcon from "@mui/icons-material/DesktopAccessDisabled";

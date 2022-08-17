@@ -11,7 +11,14 @@ describe("TopBar", () => {
   test("should render the not yet initialized state", () => {
     render(<WithoutData />);
 
-    checkScreenTexts(["0.0%", "$0.00", "0.00%", "00:00:00"]);
+    checkScreenTexts([
+      "Crypto",
+      "BTC/USDC",
+      "0.0%",
+      "$0.00",
+      "0.00%",
+      "00:00:00",
+    ]);
     expect(screen.queryAllByTestId("InfoOutlinedIcon")).toHaveLength(3);
   });
 

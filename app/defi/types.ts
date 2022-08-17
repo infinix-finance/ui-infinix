@@ -107,16 +107,18 @@ export type ProductId =
   | IndexId
   | MarketId
   | NetworkId
-  | WalletId;
-export type ProductIds =
-  | TokenId[]
-  | CommodityId[]
-  | IndexId[]
-  | MarketId[]
-  | NetworkId[]
-  | WalletId[];
+  | WalletId
+  | ProtocolId;
+export type ProductIds = ProductId[];
 export type TradedProductId = TokenId | CommodityId | IndexId;
-export type Product = Token | Commodity | Index | Market | Network | Wallet;
+export type Product =
+  | Token
+  | Commodity
+  | Index
+  | Market
+  | Network
+  | Wallet
+  | Protocol;
 
 export enum PairId {
   btcusdc = "btcusdc",

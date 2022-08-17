@@ -58,6 +58,7 @@ export const useMetamaskConnection = () => {
   useEffect(() => {
     if (!error) return;
 
+    // TODO: Show the error on the top notification bar
     const message = `${error.message} Probably you have to manually open your Metamask wallet and unlock it.`;
     alert(message);
   }, [error]);
@@ -66,7 +67,7 @@ export const useMetamaskConnection = () => {
     injectedConnector.isAuthorized().then((authorized) => {
       authorized && web3Activate(injectedConnector);
     });
-  }, []);
+  }, [web3Activate]);
 
   useEffect(() => {
     updateDetails({
@@ -78,5 +79,14 @@ export const useMetamaskConnection = () => {
       deactivate,
       switchNetwork: switchNetwork(library),
     });
-  }, [active, chainId, account, error, activate, deactivate]);
+  }, [
+    active,
+    chainId,
+    account,
+    error,
+    library,
+    updateDetails,
+    activate,
+    deactivate,
+  ]);
 };

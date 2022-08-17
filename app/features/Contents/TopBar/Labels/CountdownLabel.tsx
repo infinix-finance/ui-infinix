@@ -19,12 +19,11 @@ export const CountdownLabel = ({ startMillis = 0 }: CountdownLabelProps) => {
 
   useEffect(() => {
     const timerId = setInterval(() => {
-      if (time === 0) {
-        clearInterval(timerId);
-        return;
-      }
-
-      setTime((time) => (time >= 1000 ? time - 1000 : 0));
+      setTime((time) => {
+        const isZero = time === 0;
+        isZero && clearInterval(timerId);
+        return isZero ? 0 : time - 1000;
+      });
     }, 1000);
 
     return () => clearInterval(timerId);

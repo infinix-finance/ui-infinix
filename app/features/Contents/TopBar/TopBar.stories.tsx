@@ -24,6 +24,8 @@ const createStore = (initialize: boolean, positiveChange: boolean = true) => {
   }
 
   store.rates.fetchDetails = () => {};
+  store.rates.changeMarket = () => {};
+  store.rates.changePair = () => {};
 
   useStore.setState(store);
 };
