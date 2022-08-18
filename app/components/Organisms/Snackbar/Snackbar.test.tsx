@@ -42,4 +42,13 @@ describe("Snackbar", () => {
 
     expect(screen.queryAllByText("Snackbar title")).toHaveLength(3);
   });
+
+  test("should remove snackbar from screen when hitting the close button", async () => {
+    render(<Snackbars />);
+
+    const user = userEvent.setup();
+    await user.click(screen.getAllByRole("button")[2]);
+
+    expect(screen.queryAllByText("Snackbar title")).toHaveLength(0);
+  });
 });

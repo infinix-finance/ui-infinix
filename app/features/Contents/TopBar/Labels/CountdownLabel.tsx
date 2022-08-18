@@ -18,6 +18,10 @@ export const CountdownLabel = ({ startMillis = 0 }: CountdownLabelProps) => {
   const [time, setTime] = useState(startMillis);
 
   useEffect(() => {
+    setTime(startMillis);
+  }, [startMillis]);
+
+  useEffect(() => {
     const timerId = setInterval(() => {
       setTime((time) => {
         const isZero = time === 0;
@@ -27,7 +31,7 @@ export const CountdownLabel = ({ startMillis = 0 }: CountdownLabelProps) => {
     }, 1000);
 
     return () => clearInterval(timerId);
-  }, []);
+  }, [startMillis]);
 
   return (
     <Box

@@ -19,6 +19,7 @@ module.exports = {
 
     // Impossible to test wallet interactions
     "!**/hooks/wallet.ts",
+    "!**/hooks/useNotistack.ts",
   ],
   collectCoverage: true,
   moduleNameMapper: {
