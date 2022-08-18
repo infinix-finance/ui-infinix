@@ -44,12 +44,18 @@ export const TopBar = () => {
   }, []);
 
   const { enqueueSnackbar } = useSnackbar();
-  const { showSnackbar } = useStore((store) => store.notifications);
+  const { showSnackbar, showTopNotification, hideTopNotification } = useStore(
+    (store) => store.notifications
+  );
 
   const handleClick = () => {
     enqueueSnackbar({
       title: "this is the title" + Math.random(),
       description: "this is the current description",
+      severity: "success",
+    });
+    showTopNotification({
+      description: "This is the top notis decription.",
       severity: "success",
     });
   };
@@ -60,6 +66,7 @@ export const TopBar = () => {
       description: "this is the current description",
       severity: "warning",
     });
+    hideTopNotification();
   };
 
   return (

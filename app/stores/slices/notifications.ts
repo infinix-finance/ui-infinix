@@ -32,6 +32,8 @@ export interface NotificationsSlice {
     hideNotification: (kind: NotificaitonKind) => void;
     showSidebarNotification: (props: NotificationEntry) => void;
     hideSidebarNotification: () => void;
+    showTopNotification: (props: NotificationEntry) => void;
+    hideTopNotification: () => void;
     showSnackbar: (props: NotificationEntry) => void;
   };
 }
@@ -88,6 +90,14 @@ export const createNotificationsSlice: CustomStateCreator<NotificationsSlice> =
 
       hideSidebarNotification: () => {
         get().notifications.hideNotification(NotificaitonKind.sidebar);
+      },
+
+      showTopNotification: (props: NotificationEntry) => {
+        get().notifications.showNotification(props, NotificaitonKind.top);
+      },
+
+      hideTopNotification: () => {
+        get().notifications.hideNotification(NotificaitonKind.top);
       },
 
       showSnackbar: (props: NotificationEntry) => {

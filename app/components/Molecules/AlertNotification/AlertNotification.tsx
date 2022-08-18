@@ -1,4 +1,4 @@
-import { Alert, AlertColor } from "@mui/material";
+import { Alert, AlertColor, SxProps, Theme } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
@@ -19,6 +19,7 @@ export type AlertNotificationProps = {
   inline?: boolean;
   actionLabel?: string;
   duration?: number;
+  sx?: SxProps<Theme>;
   onClose?: () => void;
   onAction?: () => void;
 };
@@ -39,14 +40,19 @@ export const AlertNotification = ({
   inline = false,
   actionLabel = "",
   duration = 6000,
+  sx,
   onClose,
   onAction,
 }: AlertNotificationProps) => {
   const [playing, setPlaying] = useState(true);
+  const combinedStyles = [
+    ...(Array.isArray(sx) ? sx : [sx]),
+    containerStyle(inline),
+  ];
 
   return (
     <Alert
-      sx={containerStyle(inline)}
+      sx={combinedStyles}
       variant="filled"
       color={severity}
       icon={iconMapping[severity]}
