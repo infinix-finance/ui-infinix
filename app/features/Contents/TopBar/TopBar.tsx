@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useEffect } from "react";
 
-import { Select } from "@/components";
+import { Select, useSnackbar } from "@/components";
 import { MarketId, PairId } from "@/defi";
 import { useStore } from "@/stores/root";
 
@@ -43,15 +43,25 @@ export const TopBar = () => {
     rates.fetchDetails();
   }, []);
 
-  const { showSnackbar } = useStore((state) => state.notifications);
+  const { enqueueSnackbar } = useSnackbar();
+  const { showSnackbar } = useStore((store) => store.notifications);
 
   const handleClick = () => {
-    showSnackbar({
+    enqueueSnackbar({
       title: "this is the title" + Math.random(),
       description: "this is the current description",
       severity: "success",
     });
   };
+
+  const handleClick2 = () => {
+    showSnackbar({
+      title: "this is the title" + Math.random(),
+      description: "this is the current description",
+      severity: "warning",
+    });
+  };
+
   return (
     <Box sx={containerStyle}>
       <Box sx={dropdownContainerStyle}>
@@ -78,6 +88,7 @@ export const TopBar = () => {
       <VolumeLabel value={rates.volumeValue} />
       <CountdownLabel startMillis={rates.startMillis} />
       <Button onClick={handleClick}>clickme</Button>
+      <Button onClick={handleClick2}>clickme</Button>
     </Box>
   );
 };

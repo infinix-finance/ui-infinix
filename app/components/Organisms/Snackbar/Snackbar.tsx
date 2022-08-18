@@ -1,10 +1,11 @@
 import { Box } from "@mui/material";
-import { useSnackbar } from "notistack";
 import { forwardRef } from "react";
+
 import {
   AlertNotification,
   AlertNotificationProps,
-} from "../AlertNotification";
+} from "@/components/Molecules/AlertNotification";
+import { useSnackbar } from "./useSnackbar";
 import { AUTO_HIDE_DURATION } from "./SnackbarProvider";
 
 export interface SnackbarProps extends AlertNotificationProps {

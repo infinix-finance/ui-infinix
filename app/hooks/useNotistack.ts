@@ -1,15 +1,15 @@
-import { useSnackbar } from "notistack";
 import { useEffect } from "react";
 
+import { useSnackbar } from "@/components";
 import { useStore } from "@/stores/root";
 
 export const useNotistack = () => {
-  const snackbarProps = useStore((state) => state.notifications.snackbar);
   const { enqueueSnackbar } = useSnackbar();
+  const { snackbar } = useStore((store) => store.notifications);
 
   useEffect(() => {
-    if (!snackbarProps.visible) return;
+    if (!snackbar.title || !snackbar.description) return;
 
-    enqueueSnackbar(snackbarProps as any);
-  }, [snackbarProps]);
+    enqueueSnackbar({ ...snackbar, showProgress: true } as any);
+  }, [snackbar.title, snackbar.description]);
 };

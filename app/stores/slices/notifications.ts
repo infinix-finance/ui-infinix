@@ -33,7 +33,6 @@ export interface NotificationsSlice {
     showSidebarNotification: (props: NotificationEntry) => void;
     hideSidebarNotification: () => void;
     showSnackbar: (props: NotificationEntry) => void;
-    hideSnackbar: () => void;
   };
 }
 
@@ -76,6 +75,8 @@ export const createNotificationsSlice: CustomStateCreator<NotificationsSlice> =
         set(function hideSidebarNotification(state: AppState) {
           state.notifications[kind] = {
             ...state.notifications[kind],
+            title: "",
+            description: "",
             visible: false,
           };
         });
@@ -91,10 +92,6 @@ export const createNotificationsSlice: CustomStateCreator<NotificationsSlice> =
 
       showSnackbar: (props: NotificationEntry) => {
         get().notifications.showNotification(props, NotificaitonKind.snackbar);
-      },
-
-      hideSnackbar: () => {
-        get().notifications.hideNotification(NotificaitonKind.snackbar);
       },
     },
   });
