@@ -28,41 +28,44 @@ import { WALLETS } from "./Wallets";
 export const getToken = (tokenId: keyof typeof TokenId): Token =>
   TOKENS[tokenId];
 
-export const isToken = (value: any) => Object.values(TokenId).includes(value);
+export const isToken = (value: ProductId) =>
+  Object.values(TokenId).some((val) => val === value);
 
 export const getCommodity = (
   commodityId: keyof typeof CommodityId
 ): Commodity => COMMODITIES[commodityId];
 
-export const isCommodity = (value: any) =>
-  Object.values(CommodityId).includes(value);
+export const isCommodity = (value: ProductId) =>
+  Object.values(CommodityId).some((val) => val === value);
 
 export const getIndex = (indexId: keyof typeof IndexId): Index =>
   INDEXES[indexId];
 
-export const isIndex = (value: any) => Object.values(IndexId).includes(value);
+export const isIndex = (value: ProductId) =>
+  Object.values(IndexId).some((val) => val === value);
 
 export const getNetwork = (networkId: NetworkId): Network =>
   NETWORKS[networkId];
 
-export const isNetwork = (value: any) =>
-  Object.values(NetworkId).includes(value);
+export const isNetwork = (value: ProductId) =>
+  Object.values(NetworkId).some((val) => val === value);
 
 export const getProtocol = (protocolId: ProtocolId): Protocol =>
   PROTOCOLS[protocolId];
 
-export const isProtocol = (value: any) =>
-  Object.values(ProtocolId).includes(value);
+export const isProtocol = (value: ProductId) =>
+  Object.values(ProtocolId).some((val) => val === value);
 
 export const getMarket = (marketId: MarketId): Market => MARKETS[marketId];
 
-export const isMarket = (value: any): boolean =>
-  Object.values(MarketId).includes(value);
+export const isMarket = (value: ProductId): boolean =>
+  Object.values(MarketId).some((val) => val === value);
 
 export const getWallet = (walletId: keyof typeof WalletId): Wallet =>
   WALLETS[walletId];
 
-export const isWallet = (value: any) => Object.values(WalletId).includes(value);
+export const isWallet = (value: ProductId) =>
+  Object.values(WalletId).some((val) => val === value);
 
 export const getProduct = (value: ProductId): Product => {
   return (
