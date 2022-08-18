@@ -147,6 +147,14 @@ declare module "@mui/material/styles" {
       deeperPeach?: string;
     };
   }
+
+  interface TypographyVariants {
+    body3: React.CSSProperties;
+  }
+
+  interface TypographyVariantsOptions {
+    body3?: React.CSSProperties;
+  }
 }
 
 declare module "@mui/material/Typography" {

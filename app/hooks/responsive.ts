@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const MIN_WIDTH = 1024;
+const MIN_WIDTH = 1180;
 const MIN_HEIGHT = 700;
 
 export const useLayout = () => {
@@ -37,5 +37,7 @@ export const useLayout = () => {
     unsupportedHeight,
     unsupportedResolution: unsupportedWidth || unsupportedHeight,
     flippable,
+    minWidth: MIN_WIDTH,
+    minHeight: MIN_HEIGHT,
   };
 };

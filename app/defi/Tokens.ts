@@ -1,6 +1,12 @@
 import { Token, TokenId } from "./types";
 
 export const TOKENS: { [key in TokenId]: Token } = {
+  [TokenId.btc]: {
+    id: TokenId.btc,
+    icon: "/tokens/bitcoin.svg",
+    symbol: "BTC",
+    name: "Bitcoin",
+  },
   [TokenId.usdc]: {
     id: TokenId.usdc,
     icon: "/tokens/usd-coin-usdc.svg",

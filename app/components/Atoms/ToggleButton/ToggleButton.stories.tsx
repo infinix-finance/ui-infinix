@@ -41,10 +41,10 @@ export default {
 const Template: Story<typeof ButtonGroupStories> = (args) => (
   <Box display="flex" flexDirection="column" gap={2}>
     {colors.map((color) => (
-      <>
+      <Box key={color}>
         <Typography>color: {color}</Typography>
         <ButtonGroupStories {...args} value="center" color={color} />
-      </>
+      </Box>
     ))}
   </Box>
 );

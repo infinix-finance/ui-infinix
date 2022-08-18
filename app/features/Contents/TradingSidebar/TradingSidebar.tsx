@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Box } from "@mui/material";
 
 import { containerStyle, contentStyle } from "./TradingSidebar.styles";

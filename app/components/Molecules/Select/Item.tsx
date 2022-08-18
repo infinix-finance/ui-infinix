@@ -1,5 +1,6 @@
 import { BaseAsset, BaseAssetEntry } from "@/components/Atoms";
-import { ProductAsset, ProductIds } from "../ProductAsset";
+import { ProductIds } from "@/defi";
+import { ProductAsset } from "../ProductAsset";
 
 interface ItemProps {
   productIds?: ProductIds;

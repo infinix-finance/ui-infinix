@@ -33,6 +33,7 @@
     "@web3-react/network-connector": "^6.2.9",
     "bignumber.js": "^9.0.2",
     "contentful": "^9.1.5",
+    "date-fns": "^2.29.1",
     "imagemin-svgo": "^10.0.1",
     "immer": "^9.0.14",
     "next": "^12.1.6",

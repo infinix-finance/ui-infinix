@@ -1,6 +1,25 @@
 // jest.config.js
 module.exports = {
-  collectCoverageFrom: ["**/*.{ts,tsx}", "!**/*.d.ts", "!**/node_modules/**"],
+  collectCoverageFrom: [
+    "**/*.{ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!**/.storybook/**",
+    "!**/pages/**",
+    "!**/styles/**",
+    "!**/*.stories.tsx",
+    "!**/*.styles.ts",
+    "!**/*.test.{ts,tsx}",
+    "!**/index.{ts,tsx}",
+    "!**/(*.types|types).ts",
+    "!**/utils/(Contentful|mock|testUtils).ts",
+
+    // This will be included once their data are not mocked and static
+    "!**/stores/**",
+
+    // Impossible to test wallet interactions
+    "!**/hooks/wallet.ts",
+  ],
   collectCoverage: true,
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
