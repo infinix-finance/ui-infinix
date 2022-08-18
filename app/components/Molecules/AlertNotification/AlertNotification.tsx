@@ -10,8 +10,6 @@ import { Progress } from "./Progress";
 import { useState } from "react";
 import { containerStyle } from "./AlertNotification.styles";
 
-const ANIMATION_DURATION = 4000;
-
 export type AlertNotificationProps = {
   severity?: AlertColor;
   title?: string;
@@ -20,6 +18,7 @@ export type AlertNotificationProps = {
   showProgress?: boolean;
   inline?: boolean;
   actionLabel?: string;
+  duration?: number;
   onClose?: () => void;
   onAction?: () => void;
 };
@@ -39,6 +38,7 @@ export const AlertNotification = ({
   showProgress = false,
   inline = false,
   actionLabel = "",
+  duration = 6000,
   onClose,
   onAction,
 }: AlertNotificationProps) => {
@@ -68,7 +68,7 @@ export const AlertNotification = ({
           severity={severity}
           playAnimation={playing}
           inline={inline}
-          duration={ANIMATION_DURATION}
+          duration={duration}
           onProgressEnd={onClose}
         />
       )}

@@ -1,28 +1,28 @@
-import { FC } from "react";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
+import { useSnackbar } from "notistack";
+import { forwardRef } from "react";
 import {
-  Snackbar as MuiSnackbar,
-  SnackbarProps as MuiSnackbarProps,
-} from "@mui/material";
-// import { Alert, AlertProps } from "@/components/Atoms";
+  AlertNotification,
+  AlertNotificationProps,
+} from "../AlertNotification";
+import { AUTO_HIDE_DURATION } from "./SnackbarProvider";
 
-export type SnackbarProps = {
-  /*AlertProps: AlertProps;*/
-} & MuiSnackbarProps;
+export interface SnackbarProps extends AlertNotificationProps {
+  id: number;
+}
 
-export const Snackbar: FC<SnackbarProps> = ({
-  /* AlertProps, */
-  autoHideDuration = 6000,
-  ...rest
-}) => {
-  return (
-    <MuiSnackbar
-      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      autoHideDuration={autoHideDuration}
-      sx={{ width: "100%" }}
-      {...rest}
-    >
-      <Box sx={{ width: "100%" }}>{/*<Alert {...AlertProps} />*/}</Box>
-    </MuiSnackbar>
-  );
-};
+export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(
+  ({ id, ...rest }, forwardedRef) => {
+    const { closeSnackbar } = useSnackbar();
+
+    return (
+      <Box ref={forwardedRef}>
+        <AlertNotification
+          duration={AUTO_HIDE_DURATION}
+          {...rest}
+          onClose={() => closeSnackbar(id)}
+        />
+      </Box>
+    );
+  }
+);

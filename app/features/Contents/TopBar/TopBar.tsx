@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useEffect } from "react";
 
 import { Select } from "@/components";
@@ -43,6 +43,15 @@ export const TopBar = () => {
     rates.fetchDetails();
   }, []);
 
+  const { showSnackbar } = useStore((state) => state.notifications);
+
+  const handleClick = () => {
+    showSnackbar({
+      title: "this is the title" + Math.random(),
+      description: "this is the current description",
+      severity: "success",
+    });
+  };
   return (
     <Box sx={containerStyle}>
       <Box sx={dropdownContainerStyle}>
@@ -68,6 +77,7 @@ export const TopBar = () => {
       <TooltipLabel label="Funding" value={rates.funding} />
       <VolumeLabel value={rates.volumeValue} />
       <CountdownLabel startMillis={rates.startMillis} />
+      <Button onClick={handleClick}>clickme</Button>
     </Box>
   );
 };
