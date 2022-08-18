@@ -10,9 +10,9 @@ export const ProductAsset = ({ productIds, ...props }: ProductAssetProps) => {
   const assets = productIds.map((productId) => {
     const product = getProduct(productId);
     return {
-      icon: product.icon,
-      label: product.symbol,
-      description: product.name,
+      icon: product?.icon || "/static/unknown.svg",
+      label: product?.symbol || "Unknown",
+      description: product?.name || "",
     };
   });
 
