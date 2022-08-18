@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import { useEffect } from "react";
 
 import { Select, useSnackbar } from "@/components";
-import { MarketId, PairId } from "@/defi";
+import { getMarket, getPairs, MarketId, PairId } from "@/defi";
 import { useStore } from "@/stores/root";
 
 import {
@@ -32,10 +32,30 @@ export const TopBar = () => {
     const selectedMarketId = maketId as MarketId;
     rates.changeMarket(selectedMarketId);
     rates.changePair(pairDropdownProps[selectedMarketId].options[0].value);
+
+    // TODO: Remove after demo
+    enqueueSnackbar({
+      title: "Market change",
+      description:
+        "You have changed the market to " + getMarket(selectedMarketId).name,
+      severity: "success",
+    });
+    showTopNotification({
+      description:
+        "You have changed the market to " + getMarket(selectedMarketId).name,
+      severity: "success",
+    });
   };
 
   const handlePairChange = (pair: string) => {
     rates.changePair(pair as PairId);
+
+    // TODO: Remove after demo
+    showSnackbar({
+      title: "Pair change",
+      description: "You have changed the pair to " + pair,
+      severity: "warning",
+    });
   };
 
   // TODO: Remove when connecting with real data
@@ -47,27 +67,6 @@ export const TopBar = () => {
   const { showSnackbar, showTopNotification, hideTopNotification } = useStore(
     (store) => store.notifications
   );
-
-  const handleClick = () => {
-    enqueueSnackbar({
-      title: "this is the title" + Math.random(),
-      description: "this is the current description",
-      severity: "success",
-    });
-    showTopNotification({
-      description: "This is the top notis decription.",
-      severity: "success",
-    });
-  };
-
-  const handleClick2 = () => {
-    showSnackbar({
-      title: "this is the title" + Math.random(),
-      description: "this is the current description",
-      severity: "warning",
-    });
-    hideTopNotification();
-  };
 
   return (
     <Box sx={containerStyle}>
@@ -94,8 +93,6 @@ export const TopBar = () => {
       <TooltipLabel label="Funding" value={rates.funding} />
       <VolumeLabel value={rates.volumeValue} />
       <CountdownLabel startMillis={rates.startMillis} />
-      <Button onClick={handleClick}>clickme</Button>
-      <Button onClick={handleClick2}>clickme</Button>
     </Box>
   );
 };
