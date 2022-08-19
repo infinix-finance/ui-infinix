@@ -3,14 +3,14 @@ import { Option } from "./Select.types";
 
 export const filterOptions = (
   options: Option[],
-  selectedOption: any,
-  filterText: string
+  filterText: string,
+  selectedOption?: any
 ) => {
   const matcher = (value: any) =>
     value.toLowerCase().includes(filterText.toLowerCase());
 
   const filterFn = (option: Option) => {
-    if (option.value === selectedOption) {
+    if (selectedOption && option.value === selectedOption) {
       return true;
     }
 
@@ -29,4 +29,8 @@ export const filterOptions = (
   };
 
   return options.filter(filterFn);
+};
+
+export const findText = (options: Option[], filterText: string) => {
+  return Boolean(filterOptions(options, filterText).length);
 };
