@@ -1,4 +1,4 @@
-import { Alert, AlertColor } from "@mui/material";
+import { Alert, AlertColor, SxProps, Theme } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
@@ -10,8 +10,6 @@ import { Progress } from "./Progress";
 import { useState } from "react";
 import { containerStyle } from "./AlertNotification.styles";
 
-const ANIMATION_DURATION = 4000;
-
 export type AlertNotificationProps = {
   severity?: AlertColor;
   title?: string;
@@ -20,6 +18,8 @@ export type AlertNotificationProps = {
   showProgress?: boolean;
   inline?: boolean;
   actionLabel?: string;
+  duration?: number;
+  sx?: SxProps<Theme>;
   onClose?: () => void;
   onAction?: () => void;
 };
@@ -39,14 +39,20 @@ export const AlertNotification = ({
   showProgress = false,
   inline = false,
   actionLabel = "",
+  duration = 6000,
+  sx,
   onClose,
   onAction,
 }: AlertNotificationProps) => {
   const [playing, setPlaying] = useState(true);
+  const combinedStyles = [
+    ...(Array.isArray(sx) ? sx : [sx]),
+    containerStyle(inline),
+  ];
 
   return (
     <Alert
-      sx={containerStyle(inline)}
+      sx={combinedStyles}
       variant="filled"
       color={severity}
       icon={iconMapping[severity]}
@@ -68,7 +74,7 @@ export const AlertNotification = ({
           severity={severity}
           playAnimation={playing}
           inline={inline}
-          duration={ANIMATION_DURATION}
+          duration={duration}
           onProgressEnd={onClose}
         />
       )}

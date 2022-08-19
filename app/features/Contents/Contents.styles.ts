@@ -1,13 +1,32 @@
 import { Theme } from "@mui/material";
 
-export const containerStyle = (hideScrollBar: boolean) => (theme: Theme) => ({
+export const containerStyle = (theme: Theme) => ({
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "column",
   position: "relative",
   backgroundColor: theme.palette.secondary.deeperBlackberry,
   flex: 1,
-  overflowY: hideScrollBar ? "hidden" : "auto",
-  overflowX: "hidden",
+  overflowY: "hidden",
+});
+
+export const subContainerStyle =
+  (hideScrollBar: boolean) => (theme: Theme) => ({
+    display: "flex",
+    flexDirection: "row",
+    position: "relative",
+    backgroundColor: theme.palette.secondary.deeperBlackberry,
+    flex: 1,
+    overflowY: hideScrollBar ? "hidden" : "auto",
+    overflowX: "hidden",
+  });
+
+export const notificationStyle = (theme: Theme) => ({
+  [theme.breakpoints.up("lg")]: {
+    px: theme.spacing(4),
+  },
+  [theme.breakpoints.up("xl")]: {
+    px: theme.spacing(6),
+  },
 });
 
 export const mainContentStyle = (theme: Theme) => ({

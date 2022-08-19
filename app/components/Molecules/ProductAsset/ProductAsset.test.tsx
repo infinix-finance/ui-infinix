@@ -3,8 +3,13 @@ import { composeStories } from "@storybook/testing-react";
 
 import * as stories from "./ProductAsset.stories";
 
-const { TokenAssets, TokenAssetsWithDescription, MarketAsset, NetworkAsset } =
-  composeStories(stories);
+const {
+  TokenAssets,
+  TokenAssetsWithDescription,
+  MarketAsset,
+  NetworkAsset,
+  UnknownAsset,
+} = composeStories(stories);
 
 describe("ProductAsset", () => {
   test("renders token assets without description", () => {
@@ -37,5 +42,12 @@ describe("ProductAsset", () => {
 
     expect(screen.getByText("Ethereum")).toBeInTheDocument();
     expect(screen.getByAltText("Ethereum")).toBeInTheDocument();
+  });
+
+  test("renders unknown asset", () => {
+    render(<UnknownAsset />);
+
+    expect(screen.getByText("Unknown")).toBeInTheDocument();
+    expect(screen.getByAltText("Unknown")).toBeInTheDocument();
   });
 });

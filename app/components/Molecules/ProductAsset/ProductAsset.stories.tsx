@@ -43,3 +43,9 @@ NetworkAsset.args = {
   ...defaultArgs,
   productIds: [NetworkId.ethereum],
 };
+
+export const UnknownAsset = Template.bind({});
+UnknownAsset.args = {
+  ...defaultArgs,
+  productIds: ["unknown" as any],
+};
