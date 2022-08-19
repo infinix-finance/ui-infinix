@@ -5,7 +5,7 @@ export const tabsOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
   styleOverrides: {
     root: {
       "& .MuiTabs-indicator": {
-        backgroundColor: theme.palette.primary.light,
+        backgroundColor: theme.palette.primary.plum,
       },
     },
   },

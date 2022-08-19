@@ -2,6 +2,8 @@ import React from "react";
 import { Box, SxProps } from "@mui/material";
 import Image from "next/image";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 import { TabsProps, TabItem, Tabs } from "./Tabs";
 
@@ -16,8 +18,8 @@ const TabsStories = (props: TabsProps) => {
 
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleChange = (value: number) => {
+    setValue(value);
   };
 
   return (
@@ -47,20 +49,35 @@ const textOnlyItems: TabItem[] = [
 const iconItems: TabItem[] = [
   {
     label: "Tab 1",
-    icon: (
-      <Image src="/dummy/network.svg" alt="Arbitrum" width={24} height={24} />
-    ),
+    icon: <ArrowUpwardIcon />,
   },
   {
     label: "Tab 2",
-    icon: (
-      <Image src="/dummy/network.svg" alt="Arbitrum" width={24} height={24} />
-    ),
+    icon: <ArrowDownwardIcon />,
   },
   {
     label: "Tab 3",
     icon: (
-      <Image src="/dummy/network.svg" alt="Arbitrum" width={24} height={24} />
+      <Image src="/dummy/network.svg" alt="Ethereum" width={24} height={24} />
+    ),
+  },
+];
+
+const overriddenColorItems: TabItem[] = [
+  {
+    label: "Lemon color",
+    icon: <ArrowUpwardIcon />,
+    colorOverride: "alert.lemon",
+  },
+  {
+    label: "Guava color",
+    icon: <ArrowDownwardIcon />,
+    colorOverride: "alert.guava",
+  },
+  {
+    label: "Default color",
+    icon: (
+      <Image src="/dummy/network.svg" alt="Ethereum" width={24} height={24} />
     ),
   },
 ];
@@ -77,4 +94,9 @@ TextOnlyTabs.args = {
 export const IconTabs = Template.bind({});
 IconTabs.args = {
   items: iconItems,
+};
+
+export const IconTabsWithOverriddenColors = Template.bind({});
+IconTabsWithOverriddenColors.args = {
+  items: overriddenColorItems,
 };
