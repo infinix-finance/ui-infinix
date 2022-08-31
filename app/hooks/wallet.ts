@@ -3,6 +3,7 @@ import { useCallback, useEffect } from "react";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
 import { useStore } from "@/stores/root";
+import { useSnackbar } from "@/components";
 
 const injectedConnector = new InjectedConnector({});
 
@@ -50,6 +51,7 @@ export const useMetamaskConnection = () => {
     library,
   } = useWeb3React();
   const { updateDetails } = useStore((store) => store.connection);
+  const { showTopNotification } = useStore((store) => store.notifications);
 
   const activate = useCallback(() => {
     web3Activate(injectedConnector);
@@ -58,9 +60,11 @@ export const useMetamaskConnection = () => {
   useEffect(() => {
     if (!error) return;
 
-    // TODO: Show the error on the top notification bar
-    const message = `${error.message} Probably you have to manually open your Metamask wallet and unlock it.`;
-    alert(message);
+    const message = `${error.message} You have to manually open your Metamask wallet and unlock it.`;
+    showTopNotification({
+      description: message,
+      severity: "warning",
+    });
   }, [error]);
 
   useEffect(() => {

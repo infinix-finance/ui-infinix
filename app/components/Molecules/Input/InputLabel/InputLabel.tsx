@@ -15,13 +15,15 @@ export const InputLabel = ({
   return (
     <Box sx={boxStyle} {...boxProps}>
       <Box display="flex" alignItems="center" gap={2}>
-        <Typography
-          variant="inputLabel"
-          color={error ? "alert.guava" : "secondary.graishLavender"}
-          {...LabelProps.TypographyProps}
-        >
-          {LabelProps.value}
-        </Typography>
+        {LabelProps && (
+          <Typography
+            variant="inputLabel"
+            color={error ? "alert.guava" : "secondary.graishLavender"}
+            {...LabelProps.TypographyProps}
+          >
+            {LabelProps.value}
+          </Typography>
+        )}
       </Box>
       <Box sx={inputBox}>
         {SecondaryLabelProps && (
