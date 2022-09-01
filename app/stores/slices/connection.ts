@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js";
+
 import { isSupportedNetwork, NetworkId, WalletId } from "@/defi";
 import { AppState, CustomStateCreator } from "../types";
 
@@ -6,6 +8,7 @@ interface ConnectionProps {
   chainId?: NetworkId;
   walletId?: WalletId;
   error?: Error;
+  balance: BigNumber;
   active: boolean;
   activate: () => void;
   deactivate: () => void;
@@ -24,6 +27,7 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
 ) => ({
   connection: {
     active: false,
+    balance: new BigNumber(0),
     activate: () => {},
     deactivate: () => {},
     switchNetwork: () => {},
@@ -46,3 +50,6 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
     },
   },
 });
+
+export const getBalance = (state: AppState): BigNumber =>
+  state.connection.balance as BigNumber;

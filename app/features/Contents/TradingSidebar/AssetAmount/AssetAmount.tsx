@@ -1,26 +1,14 @@
 import { Box } from "@mui/material";
-import BigNumber from "bignumber.js";
 
 import { Input } from "@/components";
-import { PairId } from "@/defi";
 import useAssetAmount from "./useAssetAmount";
 
 import { containerStyle } from "./AssetAmount.styles";
 
-export interface AssetAmountProps {
-  pairId: PairId;
-  balance: BigNumber;
-  exchangeRate: BigNumber;
-}
-
-export const AssetAmount = ({
-  pairId,
-  balance = new BigNumber(0),
-  exchangeRate,
-}: AssetAmountProps) => {
+export const AssetAmount = () => {
   const {
-    baseAmount,
-    quoteAmount,
+    base,
+    quote,
     baseProduct,
     quoteProduct,
     formattedBalance,
@@ -28,12 +16,12 @@ export const AssetAmount = ({
     handleMaxClick,
     handleBaseAmountChange,
     handleQuoteAmountChange,
-  } = useAssetAmount(pairId, balance, exchangeRate);
+  } = useAssetAmount();
 
   return (
     <Box sx={containerStyle}>
       <Input
-        value={baseAmount}
+        value={base}
         productIds={[baseProduct]}
         TopLabelProps={{
           LabelProps: {
@@ -47,7 +35,7 @@ export const AssetAmount = ({
         {...commonProps}
       />
       <Input
-        value={quoteAmount}
+        value={quote}
         productIds={[quoteProduct]}
         BottomLabelProps={{
           SecondaryLabelProps: {

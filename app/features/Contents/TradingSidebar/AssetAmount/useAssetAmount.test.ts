@@ -5,16 +5,40 @@ import { PairId } from "@/defi";
 
 import useAssetAmount from "./useAssetAmount";
 import React from "react";
+import { getInitialState, useStore } from "@/stores/root";
+
+const createStore = (balance: number, exchangeRate: number) => {
+  const store = getInitialState();
+
+  store.tradingSidebar = {
+    ...store.tradingSidebar,
+    amounts: {
+      base: "",
+      baseValue: new BigNumber(0),
+      quote: "",
+      quoteValue: new BigNumber(0),
+    },
+  };
+
+  store.rates = {
+    ...store.rates,
+    pair: PairId.ethusdc,
+    exchangeRate: new BigNumber(exchangeRate),
+  };
+
+  store.connection.balance = new BigNumber(balance);
+
+  useStore.setState(store);
+};
 
 describe("useAssetAmount", () => {
   test("should return initial values when no balance and exchange rate is provided", () => {
-    const { result } = renderHook(() =>
-      useAssetAmount(PairId.ethusdc, new BigNumber(0), new BigNumber(0))
-    );
+    createStore(0, 0);
+    const { result } = renderHook(useAssetAmount);
 
     expect(result.current).toMatchObject({
-      baseAmount: "",
-      quoteAmount: "",
+      base: "",
+      quote: "",
       baseProduct: "eth",
       quoteProduct: "usdc",
       formattedBalance: "Balance: 0.00 USDC",
@@ -25,16 +49,15 @@ describe("useAssetAmount", () => {
   });
 
   test("should return initial values when balance and exchange rate is provided", () => {
-    const { result } = renderHook(() =>
-      useAssetAmount(PairId.ethusdc, new BigNumber(22000), new BigNumber(1000))
-    );
+    createStore(22000, 1000);
+    const { result } = renderHook(useAssetAmount);
 
     expect(result.current).toMatchObject({
-      baseAmount: "",
-      quoteAmount: "",
+      base: "",
+      quote: "",
       baseProduct: "eth",
       quoteProduct: "usdc",
-      formattedBalance: "Balance: 22000.00 USDC",
+      formattedBalance: "Balance: 22,000.00 USDC",
       commonProps: {
         disabled: false,
       },
@@ -42,9 +65,8 @@ describe("useAssetAmount", () => {
   });
 
   test("should update both amounts when base amount is set", () => {
-    const { result } = renderHook(() =>
-      useAssetAmount(PairId.ethusdc, new BigNumber(22000), new BigNumber(100))
-    );
+    createStore(22000, 100);
+    const { result } = renderHook(useAssetAmount);
 
     act(() => {
       result.current.handleBaseAmountChange({
@@ -53,15 +75,14 @@ describe("useAssetAmount", () => {
     });
 
     expect(result.current).toMatchObject({
-      baseAmount: "10",
-      quoteAmount: "1000.00",
+      base: "10",
+      quote: "1000.00",
     });
   });
 
   test("should update both amounts when quote amount is set", () => {
-    const { result } = renderHook(() =>
-      useAssetAmount(PairId.ethusdc, new BigNumber(22000), new BigNumber(100))
-    );
+    createStore(22000, 100);
+    const { result } = renderHook(useAssetAmount);
 
     act(() => {
       result.current.handleQuoteAmountChange({
@@ -70,23 +91,22 @@ describe("useAssetAmount", () => {
     });
 
     expect(result.current).toMatchObject({
-      baseAmount: "0.10",
-      quoteAmount: "10",
+      base: "0.10",
+      quote: "10",
     });
   });
 
   test("should max out both inputs when max button is clicked", () => {
-    const { result } = renderHook(() =>
-      useAssetAmount(PairId.ethusdc, new BigNumber(22000), new BigNumber(100))
-    );
+    createStore(22000, 100);
+    const { result } = renderHook(useAssetAmount);
 
     act(() => {
       result.current.handleMaxClick();
     });
 
     expect(result.current).toMatchObject({
-      baseAmount: "220.00",
-      quoteAmount: "22000.00",
+      base: "220.00",
+      quote: "22000.00",
     });
   });
 });

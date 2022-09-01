@@ -9,6 +9,7 @@ export const toggleButtonOverrides = (
       gap: theme.spacing(2),
 
       "& .MuiToggleButtonGroup-grouped": {
+        fontFamily: theme.custom.fontFamily.primary,
         border: 0,
         lineHeight: "normal",
         padding: theme.spacing(2),

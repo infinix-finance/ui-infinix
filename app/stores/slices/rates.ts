@@ -1,9 +1,11 @@
 import { MarketId, PairId } from "@/defi";
+import BigNumber from "bignumber.js";
 import { AppState, CustomStateCreator } from "../types";
 
 interface RatesProps {
   market: MarketId;
   pair: PairId;
+  exchangeRate: BigNumber;
   percentageChange: number;
   percentageValue: string;
   markPrice: string;
@@ -25,6 +27,7 @@ export const createRatesSlice: CustomStateCreator<RatesSlice> = (set, get) => ({
   rates: {
     market: MarketId.crypto,
     pair: PairId.btcusdc,
+    exchangeRate: new BigNumber(0),
     percentageChange: 0,
     percentageValue: "$0.00",
     markPrice: "$0.00",
@@ -58,3 +61,6 @@ export const createRatesSlice: CustomStateCreator<RatesSlice> = (set, get) => ({
       }),
   },
 });
+
+export const getExchangeRate = (state: AppState): BigNumber =>
+  state.rates.exchangeRate as BigNumber;

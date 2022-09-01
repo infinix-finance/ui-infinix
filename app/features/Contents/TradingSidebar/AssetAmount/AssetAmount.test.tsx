@@ -14,7 +14,7 @@ describe("AssetAmount", () => {
       "Amount",
       "ETH",
       "USDC",
-      "Balance: 22100.35 USDC",
+      "Balance: 22,100.35 USDC",
       "Max",
     ]);
   });

@@ -1,8 +1,8 @@
-import BigNumber from "bignumber.js";
-import { useState } from "react";
-
-import { getPair, PairId } from "@/defi";
-import { formatAmount } from "@/utils/formatters";
+import { getPair } from "@/defi";
+import { formatAmount, toFixedAmount } from "@/utils/formatters";
+import { useStore } from "@/stores/root";
+import { getBalance } from "@/stores/slices/connection";
+import { getExchangeRate } from "@/stores/slices/rates";
 
 import {
   calculateBaseAmount,
@@ -11,15 +11,16 @@ import {
   convertQuoteToBaseAmount,
 } from "./helpers";
 
-export default function useAssetAmount(
-  pairId: PairId,
-  balance: BigNumber,
-  exchangeRate: BigNumber
-) {
-  const [baseAmount, setBaseAmount] = useState<string>("");
-  const [quoteAmount, setQuoteAmount] = useState<string>("");
+export default function useAssetAmount() {
+  const { pair } = useStore((state) => state.rates);
+  const {
+    amounts: { base, quote },
+    setAmounts,
+  } = useStore((state) => state.tradingSidebar);
+  const exchangeRate = useStore(getExchangeRate);
+  const balance = useStore(getBalance);
 
-  const [baseProduct, quoteProduct] = getPair(pairId).productIds;
+  const [baseProduct, quoteProduct] = getPair(pair).productIds;
   const formattedBalance = `Balance: ${formatAmount(balance, {
     productId: quoteProduct,
   })}`;
@@ -39,11 +40,10 @@ export default function useAssetAmount(
   };
 
   const handleMaxClick = () => {
-    const baseAmount = formatAmount(balance.dividedBy(exchangeRate));
-    const quoteAmount = formatAmount(balance);
+    const baseAmount = toFixedAmount(balance.dividedBy(exchangeRate));
+    const quoteAmount = toFixedAmount(balance);
 
-    setBaseAmount(baseAmount);
-    setQuoteAmount(quoteAmount);
+    setAmounts(baseAmount, quoteAmount);
   };
 
   const handleBaseAmountChange = ({
@@ -56,8 +56,7 @@ export default function useAssetAmount(
       exchangeRate
     );
 
-    setBaseAmount(baseAmount);
-    setQuoteAmount(quoteAmount);
+    setAmounts(baseAmount, quoteAmount);
   };
 
   const handleQuoteAmountChange = ({
@@ -70,13 +69,12 @@ export default function useAssetAmount(
       exchangeRate
     );
 
-    setQuoteAmount(quoteAmount);
-    setBaseAmount(baseAmount);
+    setAmounts(baseAmount, quoteAmount);
   };
 
   return {
-    baseAmount,
-    quoteAmount,
+    base,
+    quote,
     baseProduct,
     quoteProduct,
     formattedBalance,
