@@ -4,7 +4,7 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 
 import { useStore } from "@/stores/root";
 import { formatNumber } from "@/utils/formatters";
-import { getIsValid } from "../TradingSidebar.slice";
+import { getIsBalanceSet } from "../TradingSidebar.slice";
 
 import {
   actionStyle,
@@ -15,7 +15,7 @@ import {
 
 export const SlippageEditor = () => {
   const { slippage } = useStore((state) => state.tradingSidebar);
-  const isValid = useStore(getIsValid);
+  const isValid = useStore(getIsBalanceSet);
   const formattedSlippage = formatNumber(new BigNumber(slippage), {
     base: 1,
     suffix: "%",

@@ -6,6 +6,7 @@ import {
   formatPercentage,
   formatUsdValue,
 } from "@/utils/formatters";
+import { Directions } from "@/defi/Directions";
 
 interface TradingSidebarStoreProps {
   amounts: {
@@ -14,12 +15,14 @@ interface TradingSidebarStoreProps {
     quote: string;
     quoteValue: BigNumber;
   };
+  direction: Directions;
   slippage: number;
   leverage: number;
 }
 
 export interface TradingSidebarSlice {
   tradingSidebar: TradingSidebarStoreProps & {
+    setDirection: (value: Directions) => void;
     setLeverage: (value: number) => void;
     setAmounts: (base: string, quote: string) => void;
   };
@@ -34,8 +37,14 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
         quote: "",
         quoteValue: new BigNumber(0),
       },
+      direction: Directions.Long,
       slippage: 0,
       leverage: 10,
+
+      setDirection: (value: Directions) =>
+        set(function setDirection(state: AppState) {
+          state.tradingSidebar.direction = value;
+        }),
 
       setLeverage: (value: number) =>
         set(function setLeverage(state: AppState) {
@@ -54,8 +63,12 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
     },
   });
 
-export const getIsValid = (state: AppState) => {
+export const getIsBalanceSet = (state: AppState) => {
   return state.connection.balance.isGreaterThan(0);
+};
+
+export const getIsQuoteSet = (state: AppState) => {
+  return state.tradingSidebar.amounts.quoteValue.isGreaterThan(0);
 };
 
 export const getPriceDetails = (state: AppState) => {
@@ -74,7 +87,7 @@ const calculateAccountDetails = (state: AppState) => {
     leverage,
   } = state.tradingSidebar;
 
-  const isQuoteValueSet = quoteValue.isGreaterThan(0);
+  const isQuoteValueSet = getIsQuoteSet(state);
   const marginRatio = isQuoteValueSet
     ? quoteValue.dividedBy(balanceValue).multipliedBy(100)
     : new BigNumber(0);
@@ -83,7 +96,7 @@ const calculateAccountDetails = (state: AppState) => {
     balanceValue,
     isQuoteValueSet,
     leverage,
-    isValid: getIsValid(state),
+    isBalanceSet: getIsBalanceSet(state),
     freeCollateral: balanceValue.minus(quoteValue),
     buyingPower: balanceValue.multipliedBy(leverage),
     freeBuyingPower: balanceValue.minus(quoteValue).multipliedBy(leverage),
@@ -93,7 +106,7 @@ const calculateAccountDetails = (state: AppState) => {
 };
 
 export const getAccountDetails = (state: AppState) => {
-  const { isValid, isQuoteValueSet, freeMargin, ...details } =
+  const { isBalanceSet, isQuoteValueSet, freeMargin, ...details } =
     calculateAccountDetails(state);
 
   const balance = formatUsdValue(details.balanceValue as BigNumber);
@@ -109,32 +122,32 @@ export const getAccountDetails = (state: AppState) => {
     data: [
       {
         label: "Net USDC Value",
-        value: isValid ? balance : "-",
+        value: isBalanceSet ? balance : "-",
       },
       {
         label: "Free Collateral",
-        value: isValid ? balance : "-",
+        value: isBalanceSet ? balance : "-",
         value2: isQuoteValueSet ? freeCollateral : undefined,
       },
       {
         label: "Buying Power",
-        value: isValid ? buyingPower : "-",
+        value: isBalanceSet ? buyingPower : "-",
         value2: isQuoteValueSet ? freeBuyingPower : undefined,
       },
       {
         label: "Margin Ratio",
-        value: isValid ? marginRatio : "-",
+        value: isBalanceSet ? marginRatio : "-",
       },
       {
         label: "Leverage",
-        value: isValid ? leverage : "-",
+        value: isBalanceSet ? leverage : "-",
       },
       {
         label: "Risk Profile",
-        value: isValid ? riskProfile : "-",
+        value: isBalanceSet ? riskProfile : "-",
       },
     ],
-    isValid,
+    isBalanceSet,
     freeMargin,
   };
 };

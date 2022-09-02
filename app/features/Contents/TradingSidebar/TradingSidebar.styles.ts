@@ -10,6 +10,10 @@ export const containerStyle = (theme: Theme) => ({
   },
 });
 
+export const innerContainerStyle = (theme: Theme) => ({
+  backgroundColor: theme.palette.secondary.blackberry,
+});
+
 export const contentStyle = (theme: Theme) => ({
   display: "flex",
   flexDirection: "column",

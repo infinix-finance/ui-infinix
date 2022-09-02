@@ -1,6 +1,6 @@
 import { useStore } from "@/stores/root";
 import { formatNumber } from "@/utils/formatters";
-import { getIsValid } from "../TradingSidebar.slice";
+import { getIsBalanceSet } from "../TradingSidebar.slice";
 
 export default function useLeverageSelector() {
   const {
@@ -8,7 +8,7 @@ export default function useLeverageSelector() {
     leverage,
     setLeverage,
   } = useStore((store) => store.tradingSidebar);
-  const isValid = useStore(getIsValid);
+  const isValid = useStore(getIsBalanceSet);
 
   const buyingPowerLabel = `Buying power (${leverage}x)`;
   const buyingPower = formatNumber(quoteValue.multipliedBy(leverage), {

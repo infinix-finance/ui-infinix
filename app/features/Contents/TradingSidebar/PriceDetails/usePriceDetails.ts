@@ -1,11 +1,11 @@
 import { useLayout } from "@/hooks/responsive";
 import { useStore } from "@/stores/root";
 
-import { getIsValid, getPriceDetails } from "../TradingSidebar.slice";
+import { getIsBalanceSet, getPriceDetails } from "../TradingSidebar.slice";
 
 export default function usePriceDetails() {
   const priceDetails = useStore(getPriceDetails);
-  const isValid = useStore(getIsValid);
+  const isValid = useStore(getIsBalanceSet);
   const { isSmallDesktop } = useLayout();
 
   const dataProvider = [
