@@ -1,5 +1,5 @@
 import { getPair } from "@/defi";
-import { formatAmount, toFixedAmount } from "@/utils/formatters";
+import { formatNumber, toFixedNumber } from "@/utils/formatters";
 import { useStore } from "@/stores/root";
 import { getBalance } from "@/stores/slices/connection";
 import { getExchangeRate } from "@/stores/slices/rates";
@@ -21,7 +21,7 @@ export default function useAssetAmount() {
   const balance = useStore(getBalance);
 
   const [baseProduct, quoteProduct] = getPair(pair).productIds;
-  const formattedBalance = `Balance: ${formatAmount(balance, {
+  const formattedBalance = `Balance: ${formatNumber(balance, {
     productId: quoteProduct,
   })}`;
   const isDisabled = balance.isEqualTo(0);
@@ -40,8 +40,8 @@ export default function useAssetAmount() {
   };
 
   const handleMaxClick = () => {
-    const baseAmount = toFixedAmount(balance.dividedBy(exchangeRate));
-    const quoteAmount = toFixedAmount(balance);
+    const baseAmount = toFixedNumber(balance.dividedBy(exchangeRate));
+    const quoteAmount = toFixedNumber(balance);
 
     setAmounts(baseAmount, quoteAmount);
   };

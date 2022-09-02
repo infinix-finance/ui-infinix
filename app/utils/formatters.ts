@@ -16,36 +16,38 @@ const defaultFormat = (
   suffix,
 });
 
-interface FormatAmountOptions {
+interface FormatNumberOptions {
   productId?: ProductId;
   base?: number;
   prefix?: string;
+  suffix?: string;
   withThousandSeparator?: boolean;
 }
 
-export const formatAmount = (
+export const formatNumber = (
   amount: BigNumber,
   {
     productId,
     base = 2,
     prefix = "",
+    suffix = "",
     withThousandSeparator = true,
-  }: FormatAmountOptions = {}
+  }: FormatNumberOptions = {}
 ) => {
   if (amount.isNaN()) return "";
 
   const product = productId ? getProduct(productId).symbol : null;
-  const suffix = product ? ` ${product}` : "";
+  const calculatedSuffix = suffix ? suffix : product ? ` ${product}` : "";
   const formattedAmount = amount.toFormat(
     base,
-    defaultFormat(withThousandSeparator, prefix, suffix)
+    defaultFormat(withThousandSeparator, prefix, calculatedSuffix)
   );
 
   return formattedAmount;
 };
 
-export const toFixedAmount = (amount: BigNumber, base: number = 2) => {
-  return formatAmount(amount, { base, withThousandSeparator: false });
+export const toFixedNumber = (amount: BigNumber, base: number = 2) => {
+  return formatNumber(amount, { base, withThousandSeparator: false });
 };
 
 export const shortenAddress = (address: string | null) => {

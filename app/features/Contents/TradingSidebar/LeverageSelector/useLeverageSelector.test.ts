@@ -10,11 +10,10 @@ const createStore = () => {
   store.tradingSidebar = {
     ...store.tradingSidebar,
     leverage: 3,
-  };
-
-  store.connection = {
-    ...store.connection,
-    balance: new BigNumber(100),
+    amounts: {
+      ...store.tradingSidebar.amounts,
+      quoteValue: new BigNumber(100),
+    },
   };
 
   useStore.setState(store);

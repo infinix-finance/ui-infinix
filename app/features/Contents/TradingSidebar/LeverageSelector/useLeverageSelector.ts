@@ -1,12 +1,15 @@
 import { useStore } from "@/stores/root";
-import { formatAmount } from "@/utils/formatters";
+import { formatNumber } from "@/utils/formatters";
 
 export default function useLeverageSelector() {
-  const { balance } = useStore((store) => store.connection);
-  const { leverage, setLeverage } = useStore((store) => store.tradingSidebar);
+  const {
+    amounts: { quoteValue },
+    leverage,
+    setLeverage,
+  } = useStore((store) => store.tradingSidebar);
 
   const buyingPowerLabel = `Buying power(up to ${leverage}x)`;
-  const buyingPower = formatAmount(balance.multipliedBy(leverage), {
+  const buyingPower = formatNumber(quoteValue.multipliedBy(leverage), {
     prefix: "$",
   });
 

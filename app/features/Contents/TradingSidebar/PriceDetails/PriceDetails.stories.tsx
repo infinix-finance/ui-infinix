@@ -3,12 +3,12 @@ import { Meta, Story } from "@storybook/react";
 
 import { getInitialState, useStore } from "@/stores/root";
 
-import { LeverageSelector } from "./LeverageSelector";
+import { PriceDetails } from "./PriceDetails";
 
 export default {
-  title: "features/Contents/TradingSidebar/LeverageSelector",
-  component: LeverageSelector,
-} as Meta<typeof LeverageSelector>;
+  title: "features/Contents/TradingSidebar/PriceDetails",
+  component: PriceDetails,
+} as Meta<typeof PriceDetails>;
 
 const createStore = () => {
   const store = getInitialState();
@@ -25,8 +25,8 @@ const createStore = () => {
   useStore.setState(store);
 };
 
-const Template: Story<typeof LeverageSelector> = (args) => {
-  return <LeverageSelector {...args} />;
+const Template: Story<typeof PriceDetails> = (args) => {
+  return <PriceDetails {...args} />;
 };
 
 export const Default = Template.bind({});

@@ -1,4 +1,4 @@
-import { toFixedAmount } from "@/utils/formatters";
+import { toFixedNumber } from "@/utils/formatters";
 import BigNumber from "bignumber.js";
 
 export const calculateBaseAmount = (
@@ -10,14 +10,14 @@ export const calculateBaseAmount = (
   const maxBaseAmount = balance.dividedBy(exchangeRate);
 
   return baseAmount.isGreaterThan(maxBaseAmount)
-    ? toFixedAmount(maxBaseAmount)
+    ? toFixedNumber(maxBaseAmount)
     : amount;
 };
 
 export const calculateQuoteAmount = (amount: string, balance: BigNumber) => {
   const bigNumAmount = new BigNumber(amount);
 
-  return bigNumAmount.isGreaterThan(balance) ? toFixedAmount(balance) : amount;
+  return bigNumAmount.isGreaterThan(balance) ? toFixedNumber(balance) : amount;
 };
 
 export const convertQuoteToBaseAmount = (
@@ -28,7 +28,7 @@ export const convertQuoteToBaseAmount = (
   const convertedAmount = new BigNumber(quoteAmount).dividedBy(exchangeRate);
   const maxAmount = balance.dividedBy(exchangeRate);
 
-  return toFixedAmount(BigNumber.min(convertedAmount, maxAmount));
+  return toFixedNumber(BigNumber.min(convertedAmount, maxAmount));
 };
 
 export const convertBaseToQuoteAmount = (
@@ -38,5 +38,5 @@ export const convertBaseToQuoteAmount = (
 ) => {
   const convertedAmount = new BigNumber(baseAmount).multipliedBy(exchangeRate);
 
-  return toFixedAmount(BigNumber.min(convertedAmount, balance));
+  return toFixedNumber(BigNumber.min(convertedAmount, balance));
 };

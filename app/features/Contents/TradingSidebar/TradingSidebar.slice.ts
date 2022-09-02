@@ -1,6 +1,7 @@
 import BigNumber from "bignumber.js";
 
 import { AppState, CustomStateCreator } from "@/stores/types";
+import { formatNumber } from "@/utils/formatters";
 
 interface TradingSidebarStoreProps {
   amounts: {
@@ -9,6 +10,7 @@ interface TradingSidebarStoreProps {
     quote: string;
     quoteValue: BigNumber;
   };
+  slippage: number;
   leverage: number;
 }
 
@@ -28,6 +30,7 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
         quote: "",
         quoteValue: new BigNumber(0),
       },
+      slippage: 0,
       leverage: 10,
 
       setLeverage: (value: number) =>
@@ -46,3 +49,12 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
         }),
     },
   });
+
+export const getPriceDetails = (state: AppState) => {
+  return {
+    entry: formatNumber(new BigNumber(171.12), { prefix: "$" }),
+    liquidation: formatNumber(new BigNumber(90.12), { prefix: "$" }),
+    impact: formatNumber(new BigNumber(2), { base: 0, suffix: "%" }),
+    tradingFee: formatNumber(new BigNumber(0.05), { prefix: "$" }),
+  };
+};
