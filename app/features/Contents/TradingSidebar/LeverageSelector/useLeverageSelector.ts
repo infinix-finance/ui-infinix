@@ -11,9 +11,9 @@ export default function useLeverageSelector() {
   const isValid = useStore(getIsBalanceSet);
 
   const buyingPowerLabel = `Buying power (${leverage}x)`;
-  const buyingPower = formatNumber(quoteValue.multipliedBy(leverage), {
-    prefix: "$",
-  });
+  const buyingPower = isValid
+    ? formatNumber(quoteValue.multipliedBy(leverage), { prefix: "$" })
+    : "-";
 
   const handleChangeLeverage = (
     _: React.MouseEvent<HTMLElement>,

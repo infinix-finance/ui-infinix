@@ -48,6 +48,7 @@ export const LeverageSelector = () => {
           value={leverage}
           exclusive
           color="primary"
+          disabled={!isValid}
           onChange={handleChangeLeverage}
         >
           {LEVERAGES.map((leverage) => (

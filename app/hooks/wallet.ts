@@ -65,7 +65,7 @@ export const useMetamaskConnection = () => {
       description: message,
       severity: "warning",
     });
-  }, [error]);
+  }, [showTopNotification, error]);
 
   useEffect(() => {
     injectedConnector.isAuthorized().then((authorized) => {

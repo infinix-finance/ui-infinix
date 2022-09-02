@@ -56,6 +56,9 @@ export const toggleButtonOverrides = (
           "&:hover": {
             backgroundColor: theme.palette.primary.plum,
           },
+          "&.Mui-disabled": {
+            backgroundColor: theme.palette.secondary.graishLavender,
+          },
         },
       },
     },

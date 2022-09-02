@@ -1,18 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
+import { containerStyle } from "./NotFound.styles";
+
 export const NotFound = () => {
   return (
-    <Box
-      sx={{
-        margin: "2rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "1.5rem",
-      }}
-    >
+    <Box sx={containerStyle}>
       <Image
         src="/static/notfound.svg"
         alt="Token not found"

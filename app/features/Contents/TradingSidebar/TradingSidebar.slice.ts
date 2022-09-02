@@ -72,11 +72,13 @@ export const getIsQuoteSet = (state: AppState) => {
 };
 
 export const getPriceDetails = (state: AppState) => {
+  const isBalanceSet = getIsBalanceSet(state);
+
   return {
-    entry: formatUsdValue(new BigNumber(171.12)),
-    liquidation: formatUsdValue(new BigNumber(90.12)),
-    impact: formatPercentage(new BigNumber(2)),
-    tradingFee: formatUsdValue(new BigNumber(0.05)),
+    entry: isBalanceSet ? formatUsdValue(new BigNumber(171.12)) : "-",
+    liquidation: isBalanceSet ? formatUsdValue(new BigNumber(90.12)) : "-",
+    impact: isBalanceSet ? formatPercentage(new BigNumber(2)) : "-",
+    tradingFee: isBalanceSet ? formatUsdValue(new BigNumber(0.05)) : "-",
   };
 };
 

@@ -17,7 +17,7 @@ interface ConnectionProps {
 
 export interface ConnectionSlice {
   connection: ConnectionProps & {
-    updateDetails: (details: ConnectionProps) => void;
+    updateDetails: (details: Omit<ConnectionProps, "balance">) => void;
   };
 }
 
@@ -32,7 +32,7 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
     deactivate: () => {},
     switchNetwork: () => {},
 
-    updateDetails: (details: ConnectionProps) => {
+    updateDetails: (details: Omit<ConnectionProps, "balance">) => {
       details.chainId && !isSupportedNetwork(details.chainId)
         ? get().notifications.showSidebarNotification({
             severity: "error",
