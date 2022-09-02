@@ -29,7 +29,7 @@ describe("useLeverageSelector", () => {
 
     expect(result.current).toMatchObject({
       leverage: 3,
-      buyingPowerLabel: "Buying power(up to 3x)",
+      buyingPowerLabel: "Buying power (3x)",
       buyingPower: "$300.00",
     });
   });
@@ -46,7 +46,7 @@ describe("useLeverageSelector", () => {
 
     expect(result.current).toMatchObject({
       leverage: 7,
-      buyingPowerLabel: "Buying power(up to 7x)",
+      buyingPowerLabel: "Buying power (7x)",
       buyingPower: "$700.00",
     });
   });

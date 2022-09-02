@@ -11,6 +11,6 @@ describe("AssetAmount", () => {
     render(<Default />);
 
     checkScreenTexts(["Leverage", "1X", "3X", "5X", "7X", "10X"]);
-    checkScreenTexts(["Buying power(up to 3x)", "$300.00"]);
+    checkScreenTexts(["Buying power (3x)", "$300.00"]);
   });
 });

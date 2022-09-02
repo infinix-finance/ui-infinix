@@ -13,3 +13,9 @@ export const rowStyle = (theme: Theme) => ({
   display: "flex",
   justifyContent: "space-between",
 });
+
+export const labelStyle = (isValid: boolean) => (theme: Theme) => ({
+  color: isValid
+    ? theme.palette.primary.ice
+    : theme.palette.secondary.graishLavender,
+});

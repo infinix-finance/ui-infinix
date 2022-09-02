@@ -10,7 +10,7 @@ export default {
   component: LeverageSelector,
 } as Meta<typeof LeverageSelector>;
 
-const createStore = () => {
+const createStore = (balance: number) => {
   const store = getInitialState();
 
   store.tradingSidebar = {
@@ -20,6 +20,11 @@ const createStore = () => {
       ...store.tradingSidebar.amounts,
       quoteValue: new BigNumber(100),
     },
+  };
+
+  store.connection = {
+    ...store.connection,
+    balance: new BigNumber(balance),
   };
 
   useStore.setState(store);
@@ -32,7 +37,15 @@ const Template: Story<typeof LeverageSelector> = (args) => {
 export const Default = Template.bind({});
 Default.decorators = [
   (Story) => {
-    createStore();
+    createStore(0);
+    return <Story />;
+  },
+];
+
+export const Valid = Template.bind({});
+Valid.decorators = [
+  (Story) => {
+    createStore(1000);
     return <Story />;
   },
 ];

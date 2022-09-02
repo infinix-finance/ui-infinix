@@ -14,3 +14,11 @@ export const buyingPowerStyle = (theme: Theme) => ({
   display: "flex",
   justifyContent: "space-between",
 });
+
+export const buyingPowerLabelStyle = (isValid: boolean) => (theme: Theme) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  color: isValid
+    ? theme.palette.primary.ice
+    : theme.palette.secondary.graishLavender,
+});

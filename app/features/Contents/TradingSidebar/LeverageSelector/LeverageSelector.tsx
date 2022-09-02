@@ -6,26 +6,44 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useLayout } from "@/hooks/responsive";
+
 import useLeverageSelector from "./useLeverageSelector";
 
-import { buyingPowerStyle, containerStyle } from "./LeverageSelector.styles";
+import {
+  buyingPowerLabelStyle,
+  buyingPowerStyle,
+  containerStyle,
+} from "./LeverageSelector.styles";
 
 const LEVERAGES = [1, 3, 5, 7, 10];
 
 export const LeverageSelector = () => {
-  const { leverage, buyingPowerLabel, buyingPower, handleChangeLeverage } =
-    useLeverageSelector();
+  const {
+    isValid,
+    leverage,
+    buyingPowerLabel,
+    buyingPower,
+    handleChangeLeverage,
+  } = useLeverageSelector();
+  const { isSmallDesktop } = useLayout();
 
   return (
     <Box sx={containerStyle}>
       <Box sx={buyingPowerStyle}>
-        <Typography variant="inputLabel">{buyingPowerLabel}</Typography>
-        <Typography variant="inputLabel">{buyingPower}</Typography>
+        <Typography sx={buyingPowerLabelStyle(isValid)} variant="inputLabel">
+          {buyingPowerLabel}
+        </Typography>
+        <Typography sx={buyingPowerLabelStyle(isValid)} variant="inputLabel">
+          {buyingPower}
+        </Typography>
       </Box>
       <Box sx={buyingPowerStyle}>
-        <Typography variant="inputLabel" color="secondary.graishLavender">
-          Leverage
-        </Typography>
+        {!isSmallDesktop && (
+          <Typography variant="inputLabel" color="secondary.graishLavender">
+            Leverage
+          </Typography>
+        )}
         <ToggleButtonGroup
           value={leverage}
           exclusive

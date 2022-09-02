@@ -4,15 +4,18 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 
 import { useStore } from "@/stores/root";
 import { formatNumber } from "@/utils/formatters";
+import { getIsValid } from "../TradingSidebar.slice";
 
 import {
   actionStyle,
   containerStyle,
   iconStyle,
+  slippageLabelStyle,
 } from "./SlippageEditor.styles";
 
 export const SlippageEditor = () => {
   const { slippage } = useStore((state) => state.tradingSidebar);
+  const isValid = useStore(getIsValid);
   const formattedSlippage = formatNumber(new BigNumber(slippage), {
     base: 1,
     suffix: "%",
@@ -20,9 +23,13 @@ export const SlippageEditor = () => {
 
   return (
     <Box sx={containerStyle}>
-      <Typography variant="inputLabel">Slippage</Typography>
+      <Typography sx={slippageLabelStyle(isValid)} variant="inputLabel">
+        Slippage
+      </Typography>
       <Box sx={actionStyle}>
-        <Typography variant="inputLabel">{formattedSlippage}</Typography>
+        <Typography sx={slippageLabelStyle(isValid)} variant="inputLabel">
+          {formattedSlippage}
+        </Typography>
         <Button variant="outlined" size="small">
           <CreateOutlinedIcon sx={iconStyle} />
         </Button>

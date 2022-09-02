@@ -6,6 +6,12 @@ export const containerStyle = (theme: Theme) => ({
   justifyContent: "space-between",
 });
 
+export const slippageLabelStyle = (isValid: boolean) => (theme: Theme) => ({
+  color: isValid
+    ? theme.palette.primary.ice
+    : theme.palette.secondary.graishLavender,
+});
+
 export const actionStyle = (theme: Theme) => ({
   display: "flex",
   alignItems: "center",

@@ -14,12 +14,12 @@ import {
 } from "./AccountDetails.styles";
 
 export const AccountDetails = () => {
-  const { data, freeMargin } = useStore(getAccountDetails);
+  const { data, isValid, freeMargin } = useStore(getAccountDetails);
 
   return (
     <Box sx={containerStyle}>
       {data.map((row) => (
-        <Box sx={rowStyle} key={row.label}>
+        <Box sx={rowStyle(isValid)} key={row.label}>
           <Typography variant="body2">{row.label}</Typography>
           <Box sx={valuesStyle}>
             {row.value && <Typography variant="body2">{row.value}</Typography>}

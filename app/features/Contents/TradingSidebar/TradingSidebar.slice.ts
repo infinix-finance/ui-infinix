@@ -3,7 +3,6 @@ import BigNumber from "bignumber.js";
 import { AppState, CustomStateCreator } from "@/stores/types";
 import {
   formatLeverage,
-  formatNumber,
   formatPercentage,
   formatUsdValue,
 } from "@/utils/formatters";
@@ -55,6 +54,10 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
     },
   });
 
+export const getIsValid = (state: AppState) => {
+  return state.connection.balance.isGreaterThan(0);
+};
+
 export const getPriceDetails = (state: AppState) => {
   return {
     entry: formatUsdValue(new BigNumber(171.12)),
@@ -64,13 +67,13 @@ export const getPriceDetails = (state: AppState) => {
   };
 };
 
-const calculateAccountDetails = ({
-  connection: { balance: balanceValue },
-  tradingSidebar: {
+const calculateAccountDetails = (state: AppState) => {
+  const { balance: balanceValue } = state.connection;
+  const {
     amounts: { quoteValue },
     leverage,
-  },
-}: AppState) => {
+  } = state.tradingSidebar;
+
   const isQuoteValueSet = quoteValue.isGreaterThan(0);
   const marginRatio = isQuoteValueSet
     ? quoteValue.dividedBy(balanceValue).multipliedBy(100)
@@ -80,7 +83,7 @@ const calculateAccountDetails = ({
     balanceValue,
     isQuoteValueSet,
     leverage,
-    isBalanceSet: balanceValue.isGreaterThan(0),
+    isValid: getIsValid(state),
     freeCollateral: balanceValue.minus(quoteValue),
     buyingPower: balanceValue.multipliedBy(leverage),
     freeBuyingPower: balanceValue.minus(quoteValue).multipliedBy(leverage),
@@ -90,7 +93,7 @@ const calculateAccountDetails = ({
 };
 
 export const getAccountDetails = (state: AppState) => {
-  const { isBalanceSet, isQuoteValueSet, freeMargin, ...details } =
+  const { isValid, isQuoteValueSet, freeMargin, ...details } =
     calculateAccountDetails(state);
 
   const balance = formatUsdValue(details.balanceValue as BigNumber);
@@ -106,31 +109,32 @@ export const getAccountDetails = (state: AppState) => {
     data: [
       {
         label: "Net USDC Value",
-        value: isBalanceSet ? balance : "-",
+        value: isValid ? balance : "-",
       },
       {
         label: "Free Collateral",
-        value: isBalanceSet ? balance : "-",
+        value: isValid ? balance : "-",
         value2: isQuoteValueSet ? freeCollateral : undefined,
       },
       {
         label: "Buying Power",
-        value: isBalanceSet ? buyingPower : "-",
+        value: isValid ? buyingPower : "-",
         value2: isQuoteValueSet ? freeBuyingPower : undefined,
       },
       {
         label: "Margin Ratio",
-        value: isBalanceSet ? marginRatio : "-",
+        value: isValid ? marginRatio : "-",
       },
       {
         label: "Leverage",
-        value: isBalanceSet ? leverage : "-",
+        value: isValid ? leverage : "-",
       },
       {
         label: "Risk Profile",
-        value: isBalanceSet ? riskProfile : "-",
+        value: isValid ? riskProfile : "-",
       },
     ],
+    isValid,
     freeMargin,
   };
 };

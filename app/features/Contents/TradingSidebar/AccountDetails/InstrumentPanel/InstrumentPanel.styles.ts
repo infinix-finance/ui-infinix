@@ -4,6 +4,7 @@ export const containerStyle = (theme: Theme) => ({
   position: "relative",
   display: "flex",
   height: "2.5rem",
+  marginTop: theme.spacing(1),
 });
 
 export const alertLevelStyle = (theme: Theme) => ({

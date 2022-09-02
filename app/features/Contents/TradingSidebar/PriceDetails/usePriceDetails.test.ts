@@ -6,7 +6,7 @@ describe("usePriceDetails", () => {
   test("should return initial values", () => {
     const { result } = renderHook(() => usePriceDetails());
 
-    expect(result.current).toEqual([
+    expect(result.current.dataProvider).toEqual([
       {
         label: "Entry Price",
         value: "$171.12",

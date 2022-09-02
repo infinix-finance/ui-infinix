@@ -1,9 +1,12 @@
+import { useLayout } from "@/hooks/responsive";
 import { useStore } from "@/stores/root";
 
-import { getPriceDetails } from "../TradingSidebar.slice";
+import { getIsValid, getPriceDetails } from "../TradingSidebar.slice";
 
 export default function usePriceDetails() {
   const priceDetails = useStore(getPriceDetails);
+  const isValid = useStore(getIsValid);
+  const { isSmallDesktop } = useLayout();
 
   const dataProvider = [
     {
@@ -11,7 +14,7 @@ export default function usePriceDetails() {
       value: priceDetails.entry,
     },
     {
-      label: "Liquidation Price (est.)",
+      label: isSmallDesktop ? "Liq Price (est.)" : "Liquidation Price (est.)",
       value: priceDetails.liquidation,
     },
     {
@@ -24,5 +27,8 @@ export default function usePriceDetails() {
     },
   ];
 
-  return dataProvider;
+  return {
+    dataProvider,
+    isValid,
+  };
 }
