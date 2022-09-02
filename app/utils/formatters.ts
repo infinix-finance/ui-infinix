@@ -25,7 +25,7 @@ interface FormatNumberOptions {
 }
 
 export const formatNumber = (
-  amount: BigNumber,
+  num: BigNumber | number,
   {
     productId,
     base = 2,
@@ -34,11 +34,13 @@ export const formatNumber = (
     withThousandSeparator = true,
   }: FormatNumberOptions = {}
 ) => {
-  if (amount.isNaN()) return "";
+  const convertedNum = new BigNumber(num);
+
+  if (convertedNum.isNaN()) return "";
 
   const product = productId ? getProduct(productId).symbol : null;
   const calculatedSuffix = suffix ? suffix : product ? ` ${product}` : "";
-  const formattedAmount = amount.toFormat(
+  const formattedAmount = convertedNum.toFormat(
     base,
     defaultFormat(withThousandSeparator, prefix, calculatedSuffix)
   );
@@ -46,8 +48,23 @@ export const formatNumber = (
   return formattedAmount;
 };
 
-export const toFixedNumber = (amount: BigNumber, base: number = 2) => {
+export const toFixedNumber = (amount: BigNumber | number, base: number = 2) => {
   return formatNumber(amount, { base, withThousandSeparator: false });
+};
+
+export const formatUsdValue = (value: BigNumber | number, base: number = 2) => {
+  return formatNumber(value, { base, prefix: "$" });
+};
+
+export const formatPercentage = (
+  value: BigNumber | number,
+  base: number = 0
+) => {
+  return formatNumber(value, { base, suffix: "%" });
+};
+
+export const formatLeverage = (value: BigNumber | number, base: number = 0) => {
+  return formatNumber(value, { base, suffix: "X" });
 };
 
 export const shortenAddress = (address: string | null) => {
