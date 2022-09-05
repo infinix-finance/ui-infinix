@@ -6,10 +6,11 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { Input } from "../Input";
 import { Item } from "./Item";
 import { SelectProps, Option } from "./Select.types";
-import { filterOptions } from "./Select.helpers";
+import { filterOptions, findText } from "./Select.helpers";
 import { Header } from "./Header";
 
 import { selectBackdropStyle, selectPaperStyle } from "./Select.styles";
+import { NotFound } from "./NotFound";
 
 const renderValue = (options: Option[]) => (value: any) => {
   const option = options!.find((option: any) => option.value == value);
@@ -33,6 +34,7 @@ export const Select = ({
 }: SelectProps) => {
   const [keyword, setKeyword] = React.useState<string>("");
   const [open, setOpen] = React.useState<boolean>(false);
+  const notFoundItem = !findText(options, keyword);
 
   const handleKewordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value);
@@ -77,7 +79,7 @@ export const Select = ({
         onClose={handleClose}
         onKewordChange={handleKewordChange}
       />
-      {filterOptions(options, value, keyword).map((option) => (
+      {filterOptions(options, keyword, value).map((option) => (
         <MenuItem
           key={option.value}
           value={option.value}
@@ -91,6 +93,7 @@ export const Select = ({
           />
         </MenuItem>
       ))}
+      {notFoundItem && <NotFound />}
     </Input>
   );
 };

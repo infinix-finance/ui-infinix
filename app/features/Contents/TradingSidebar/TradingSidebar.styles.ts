@@ -1,6 +1,8 @@
 import { Theme } from "@mui/material";
 
 export const containerStyle = (theme: Theme) => ({
+  display: "flex",
+  flexDirection: "column",
   backgroundColor: theme.palette.secondary.blackberry,
   width: "17.5rem",
   [theme.breakpoints.up("xl")]: {
@@ -8,9 +10,18 @@ export const containerStyle = (theme: Theme) => ({
   },
 });
 
-export const contentStyle = {
+export const innerContainerStyle = (theme: Theme) => ({
+  backgroundColor: theme.palette.secondary.blackberry,
+});
+
+export const contentStyle = (theme: Theme) => ({
   display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "750px",
-};
+  flexDirection: "column",
+  padding: theme.spacing(2),
+  gap: theme.spacing(2),
+});
+
+export const dividerStyle = (theme: Theme) => ({
+  height: "0.25rem",
+  backgroundColor: theme.palette.secondary.deeperBlackberry,
+});

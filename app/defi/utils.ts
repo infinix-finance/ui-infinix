@@ -14,6 +14,8 @@ import {
   MarketId,
   Network,
   NetworkId,
+  Pair,
+  PairId,
   Product,
   ProductId,
   Protocol,
@@ -66,6 +68,8 @@ export const getWallet = (walletId: keyof typeof WalletId): Wallet =>
 
 export const isWallet = (value: ProductId) =>
   Object.values(WalletId).some((val) => val === value);
+
+export const getPair = (pairId: PairId): Pair => PAIRS[pairId];
 
 export const getProduct = (value: ProductId): Product => {
   return (

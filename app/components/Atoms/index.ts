@@ -9,9 +9,6 @@ export { Label } from "./Label";
 export type { SearchInputProps } from "./SearchInput";
 export { SearchInput } from "./SearchInput";
 
-export type { TabPanelProps } from "./TabPanel";
-export { TabPanel } from "./TabPanel";
-
 export type { TabItem, TabsProps } from "./Tabs";
 export { Tabs } from "./Tabs";
 

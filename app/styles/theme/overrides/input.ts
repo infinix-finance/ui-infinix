@@ -28,6 +28,9 @@ export const inputOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
           "& img": {
             opacity: 0.6,
           },
+          "& .MuiInputAdornment-root .MuiTypography-root": {
+            color: theme.palette.secondary.graishLavender,
+          },
         },
         "&.Mui-focused:not(.Mui-error)": {
           "& fieldset.MuiOutlinedInput-notchedOutline": {

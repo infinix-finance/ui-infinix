@@ -4,40 +4,29 @@ import { OverridesStyleRules } from "@mui/material/styles/overrides";
 export const tabOverrides = (theme: Theme): Partial<OverridesStyleRules> => ({
   styleOverrides: {
     root: {
+      fontFamily: theme.custom.fontFamily.primary,
+      fontWeight: 400,
       textTransform: "none",
-      color: theme.palette.common.white,
-      padding: theme.spacing(2.25, 3),
-      lineHeight: 1.45,
-      gap: theme.spacing(2),
-      [theme.breakpoints.down("sm")]: {
-        gap: theme.spacing(1.5),
-        padding: theme.spacing(1.875, 0),
-      },
-      borderBottom: `3px solid ${alpha(
-        theme.palette.primary.main,
-        theme.custom.opacity.light
-      )}`,
+      color: theme.palette.secondary.graishLavender,
+      gap: theme.spacing(1),
+      height: "3.5rem",
+      borderBottom: `2px solid ${theme.palette.secondary.graishLavender}`,
       "&:hover": {
-        background: alpha(
-          theme.palette.primary.main,
-          theme.custom.opacity.lighter
-        ),
-        borderBottom: `3px solid ${alpha(
-          theme.palette.primary.main,
-          theme.custom.opacity.main
-        )}`,
+        background: theme.palette.secondary.blackberry,
       },
       "&.Mui-selected": {
-        color: theme.palette.common.white,
-        borderBottom: `2px solid ${theme.palette.primary.light}`,
+        background: theme.palette.secondary.blackberry,
       },
       "&.Mui-disabled": {
         color: theme.palette.common.white,
-        borderBottom: `3px solid ${theme.palette.secondary.light}`,
+        borderBottom: `2px solid ${theme.palette.secondary.light}`,
         opacity: theme.custom.opacity.main,
       },
       "&.MuiTab-labelIcon": {
         minHeight: "auto",
+      },
+      "& .MuiSvgIcon-root": {
+        margin: 0,
       },
     },
   },

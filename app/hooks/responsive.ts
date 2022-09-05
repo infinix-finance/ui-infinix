@@ -1,3 +1,4 @@
+import { useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const MIN_WIDTH = 1180;
@@ -6,7 +7,10 @@ const MIN_HEIGHT = 700;
 export const useLayout = () => {
   const [unsupportedWidth, setUnsupportedWidth] = useState(false);
   const [unsupportedHeight, setUnsupportedHeight] = useState(false);
+  const theme = useTheme();
   const [flippable, setFlippable] = useState(false);
+
+  const isSmallDesktop = useMediaQuery(theme.breakpoints.down("xl")); // < 1536px
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -33,6 +37,7 @@ export const useLayout = () => {
   }, []);
 
   return {
+    isSmallDesktop,
     unsupportedWidth,
     unsupportedHeight,
     unsupportedResolution: unsupportedWidth || unsupportedHeight,

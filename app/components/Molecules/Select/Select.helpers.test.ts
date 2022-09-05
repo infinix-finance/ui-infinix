@@ -1,5 +1,5 @@
 import { TokenId } from "@/defi";
-import { filterOptions } from "./Select.helpers";
+import { filterOptions, findText } from "./Select.helpers";
 import { Option } from "./Select.types";
 
 const assetOptions: Option[] = [
@@ -44,25 +44,25 @@ describe("Select helpers", () => {
   describe("filterOptions", () => {
     describe("assets provided", () => {
       test("Should return all values when no filter text is provided", () => {
-        const filteredOptions = filterOptions(assetOptions, "item1", "");
+        const filteredOptions = filterOptions(assetOptions, "", "item1");
 
         expect(filteredOptions).toHaveLength(4);
       });
 
       test("Should return all values when 'Item' filter text is applied", () => {
-        const filteredOptions = filterOptions(assetOptions, "item1", "Item");
+        const filteredOptions = filterOptions(assetOptions, "Item", "item1");
 
         expect(filteredOptions).toHaveLength(4);
       });
 
       test("Should return 2 values when 'Item 3' filter text applied", () => {
-        const filteredOptions = filterOptions(assetOptions, "item1", "Item 3");
+        const filteredOptions = filterOptions(assetOptions, "Item 3", "item1");
 
         expect(filteredOptions).toHaveLength(2);
       });
 
       test("Should return 2 values when 'item3' filter text applied", () => {
-        const filteredOptions = filterOptions(assetOptions, "item1", "Item 3");
+        const filteredOptions = filterOptions(assetOptions, "Item 3", "item1");
 
         expect(filteredOptions).toHaveLength(2);
       });
@@ -70,8 +70,8 @@ describe("Select helpers", () => {
       test("Should return 1 value when 'Nonexistent Item' filter text applied", () => {
         const filteredOptions = filterOptions(
           assetOptions,
-          "item1",
-          "Nonexistent Item"
+          "Nonexistent Item",
+          "item1"
         );
 
         expect(filteredOptions).toHaveLength(1);
@@ -80,33 +80,89 @@ describe("Select helpers", () => {
 
     describe("products provided", () => {
       test("Should return all values when no filter text is provided", () => {
-        const filteredOptions = filterOptions(productOptions, "item1", "");
+        const filteredOptions = filterOptions(productOptions, "", "item1");
 
         expect(filteredOptions).toHaveLength(4);
       });
 
       test("Should return 2 values when 'USDC' filter text is applied", () => {
-        const filteredOptions = filterOptions(productOptions, "item1", "USDC");
+        const filteredOptions = filterOptions(productOptions, "USDC", "item1");
 
         expect(filteredOptions).toHaveLength(2);
       });
 
       test("Should return 2 values when 'FTM' or 'ETH' filter text is applied", () => {
-        let filteredOptions = filterOptions(productOptions, "item1", "FTM");
+        let filteredOptions = filterOptions(productOptions, "FTM", "item1");
         expect(filteredOptions).toHaveLength(2);
 
-        filteredOptions = filterOptions(productOptions, "item1", "ETH");
+        filteredOptions = filterOptions(productOptions, "ETH", "item1");
         expect(filteredOptions).toHaveLength(2);
       });
 
       test("Should return 1 value when 'Nonexistent Item' filter text applied", () => {
         const filteredOptions = filterOptions(
           productOptions,
-          "item1",
-          "Nonexistent Item"
+          "Nonexistent Item",
+          "item1"
         );
 
         expect(filteredOptions).toHaveLength(1);
+      });
+    });
+  });
+
+  describe("findText", () => {
+    describe("assets provided", () => {
+      test("Should return true for when no filter text is provided", () => {
+        const result = findText(assetOptions, "");
+
+        expect(result).toBe(true);
+      });
+
+      test("Should return true when 'Item 3' filter text applied", () => {
+        const result = findText(assetOptions, "Item 3");
+
+        expect(result).toBe(true);
+      });
+
+      test("Should return true when 'item3' filter text applied", () => {
+        const result = findText(assetOptions, "item3");
+
+        expect(result).toBe(true);
+      });
+
+      test("Should return false when'Nonexistent Item' filter text applied", () => {
+        const result = findText(assetOptions, "Nonexistent Item");
+
+        expect(result).toBe(false);
+      });
+    });
+
+    describe("products provided", () => {
+      test("Should return true when no filter text is provided", () => {
+        const result = findText(productOptions, "");
+
+        expect(result).toBe(true);
+      });
+
+      test("Should return true when 'USDC' filter text is applied", () => {
+        const result = findText(productOptions, "USDC");
+
+        expect(result).toBe(true);
+      });
+
+      test("Should return 2 values when 'FTM' or 'ETH' filter text is applied", () => {
+        let result = findText(productOptions, "FTM");
+        expect(result).toBe(true);
+
+        result = findText(productOptions, "ETH");
+        expect(result).toBe(true);
+      });
+
+      test("Should return false when 'Nonexistent Item' filter text applied", () => {
+        const result = findText(productOptions, "Nonexistent Item");
+
+        expect(result).toBe(false);
       });
     });
   });

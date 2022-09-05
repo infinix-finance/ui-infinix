@@ -1,7 +1,7 @@
 import { BoxProps, ButtonProps, TypographyProps } from "@mui/material";
 
 export type InputLabelProps = {
-  LabelProps: {
+  LabelProps?: {
     value: string;
     TypographyProps?: TypographyProps;
   };
