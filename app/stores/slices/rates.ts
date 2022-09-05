@@ -20,6 +20,7 @@ export interface RatesSlice {
     fetchDetails: () => void;
     changeMarket: (marketId: MarketId) => void;
     changePair: (pairId: PairId) => void;
+    updateExchangeRate: (exchangeRate: BigNumber) => void;
   };
 }
 
@@ -58,6 +59,14 @@ export const createRatesSlice: CustomStateCreator<RatesSlice> = (set, get) => ({
     changePair: (pairId: PairId) =>
       set(function changePair(state: AppState) {
         state.rates.pair = pairId;
+      }),
+
+    updateExchangeRate: (exchangeRate: BigNumber) =>
+      set(function updateExchangeRate(state: AppState) {
+        state.rates = {
+          ...state.rates,
+          exchangeRate,
+        };
       }),
   },
 });

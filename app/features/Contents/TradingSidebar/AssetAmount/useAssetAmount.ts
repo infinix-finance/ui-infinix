@@ -1,4 +1,4 @@
-import { getPair } from "@/defi";
+import { getPair, PairId } from "@/defi";
 import { formatNumber, toFixedNumber } from "@/utils/formatters";
 import { useStore } from "@/stores/root";
 import { getBalance } from "@/stores/slices/connection";
@@ -10,13 +10,18 @@ import {
   convertBaseToQuoteAmount,
   convertQuoteToBaseAmount,
 } from "./helpers";
+import { useSocketConnection } from "@/hooks/socket";
+import { useEffect } from "react";
 
 export default function useAssetAmount() {
   const { pair } = useStore((state) => state.rates);
   const {
     amounts: { base, quote },
+    dummyValue,
     setAmounts,
+    setDummy,
   } = useStore((state) => state.tradingSidebar);
+  const { socket, connected } = useSocketConnection();
   const exchangeRate = useStore(getExchangeRate);
   const balance = useStore(getBalance);
 
@@ -39,9 +44,26 @@ export default function useAssetAmount() {
     placeholder: "0",
   };
 
+  const handleDummy = (dummy: string) => {
+    setDummy(dummy);
+  };
+
+  useEffect(() => {
+    if (!connected) return;
+
+    socket.on("DUMMY", handleDummy);
+  }, [socket]);
+
   const handleMaxClick = () => {
     const baseAmount = toFixedNumber(balance.dividedBy(exchangeRate));
     const quoteAmount = toFixedNumber(balance);
+
+    // Let's say we need to ask for the exchange rate of a different
+    // pair when clicking this button...
+    socket.emit("RATES", PairId.avaxusdc);
+
+    // "Local" subscriptions and event handling
+    socket.emit("SUBSCRIBE_DUMMY");
 
     setAmounts(baseAmount, quoteAmount);
   };
@@ -79,6 +101,7 @@ export default function useAssetAmount() {
     quoteProduct,
     formattedBalance,
     commonProps,
+    dummyValue,
     handleMaxClick,
     handleBaseAmountChange,
     handleQuoteAmountChange,

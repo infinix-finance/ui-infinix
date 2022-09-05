@@ -18,6 +18,7 @@ interface ConnectionProps {
 export interface ConnectionSlice {
   connection: ConnectionProps & {
     updateDetails: (details: Omit<ConnectionProps, "balance">) => void;
+    updateBalance: (balance: BigNumber) => void;
   };
 }
 
@@ -48,6 +49,14 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
         state.connection.walletId = WalletId.metamask;
       });
     },
+
+    updateBalance: (balance: BigNumber) =>
+      set(function updateBalance(state: AppState) {
+        state.connection = {
+          ...state.connection,
+          balance,
+        };
+      }),
   },
 });
 

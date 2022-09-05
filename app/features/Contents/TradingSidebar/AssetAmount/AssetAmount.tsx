@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { Input } from "@/components";
 import useAssetAmount from "./useAssetAmount";
@@ -13,6 +13,7 @@ export const AssetAmount = () => {
     quoteProduct,
     formattedBalance,
     commonProps,
+    dummyValue,
     handleMaxClick,
     handleBaseAmountChange,
     handleQuoteAmountChange,
@@ -49,6 +50,7 @@ export const AssetAmount = () => {
         onChange={handleQuoteAmountChange}
         {...commonProps}
       />
+      <Typography>{dummyValue}</Typography>
     </Box>
   );
 };
