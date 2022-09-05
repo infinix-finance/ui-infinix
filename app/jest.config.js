@@ -45,6 +45,7 @@ module.exports = {
     "^styles(.*)$": "<rootDir>/styles$1",
     "^store(.*)$": "<rootDir>/store$1",
     "^utils(.*)$": "<rootDir>/utils$1",
+    "^constants(.*)$": "<rootDir>/constants$1",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
