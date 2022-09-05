@@ -8,6 +8,7 @@ const nextConfig = {
   },
   env: {
     GA_TRACKING_ID: process.env.GA_TRACKING_ID,
+    API_URL: process.env.API_URL,
   },
   pwa: {
     dest: "public",
