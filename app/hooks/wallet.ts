@@ -23,7 +23,7 @@ const switchNetwork = (library: any) => () => {
           params: [
             {
               chainId: "0xa869",
-              chainName: "Avalanche C-Chain",
+              chainName: "Avalanche FUJI Testnet",
               nativeCurrency: {
                 name: "Avalanche",
                 symbol: "AVAX",
