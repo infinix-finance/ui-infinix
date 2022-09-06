@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 import { useStore } from "@/stores/root";
-import { Markets, Amm } from "@/types/api";
+import { Markets, Amm, PriceUpdate, Position } from "@/types/api";
 
 export const socket = io(process.env.API_URL!);
 
@@ -34,7 +34,7 @@ export const useSocketConnection = () => {
 
   useEffect(() => {
     addChannelCommunication(socket, "markets", (data) => handleMarkets(data));
-    addChannelCommunication(socket, "connect", () => setConnected(true));
+    addChannelCommunication(socket, "connection", () => setConnected(true));
     addChannelCommunication(socket, "disconnect", () => setConnected(false));
   }, [handleMarkets]);
 
@@ -59,4 +59,38 @@ export const useSocketAmmInfo = (address: string) => {
     if (connected)
       addChannelCommunication(socket, "amm_info", handleAmmInfo, address);
   }, [address, connected, socket, handleAmmInfo]);
+};
+
+export const useSocketPriceFeed = (feedKey: string) => {
+  const { connected, socket } = useSocketConnection();
+  const { setPriceFeed } = useStore((state) => state.price);
+
+  const handlePriceFeed = useCallback(
+    (data: { history: PriceUpdate[] }) => {
+      setPriceFeed(data.history);
+    },
+    [setPriceFeed]
+  );
+
+  useEffect(() => {
+    if (connected)
+      addChannelCommunication(socket, "pair_prices", handlePriceFeed, feedKey);
+  }, [feedKey, connected, socket, handlePriceFeed]);
+};
+
+export const useSocketUserPositions = (user: string) => {
+  const { connected, socket } = useSocketConnection();
+  const { setPositions } = useStore((state) => state.positions);
+
+  const handlePositions = useCallback(
+    (data: Position[]) => {
+      setPositions(data);
+    },
+    [setPositions]
+  );
+
+  useEffect(() => {
+    if (connected)
+      addChannelCommunication(socket, "user_positions", handlePositions, user);
+  }, [user, connected, socket, handlePositions]);
 };
