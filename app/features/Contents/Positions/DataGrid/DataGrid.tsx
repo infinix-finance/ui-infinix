@@ -25,10 +25,10 @@ const columns = [
     title: "",
     key: "close",
     align: "left",
-    width: "10rem",
+    width: "1px",
     headerRenderer: (column: any, onClick: any) => (
       <Button variant="contained" size="small" onClick={() => onClick(column)}>
-        Close all positions
+        Close All
       </Button>
     ),
     cellRenderer: (row: any, column: any, onClick: any) => (
@@ -45,7 +45,7 @@ const columns = [
     title: "",
     key: "share",
     align: "right",
-    width: "4rem",
+    width: "1px",
     cellRenderer: (row: any, column: any, onClick: any) => (
       <Button
         variant="outlined"
