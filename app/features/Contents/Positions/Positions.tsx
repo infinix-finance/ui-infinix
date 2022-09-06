@@ -1,13 +1,12 @@
 /* istanbul ignore file */
+import { useState } from "react";
 import { Box } from "@mui/material";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
-import { TabItem, Tabs } from "@/components";
+import { TabItem, Tabs, DataGrid } from "@/components";
 
 import { containerStyle } from "./Positions.styles";
-import { useState } from "react";
-import { DataGrid } from "./DataGrid";
 
 const tabItems: TabItem[] = [
   {

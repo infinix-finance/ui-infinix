@@ -42,7 +42,22 @@ export const rowStyle = (theme: Theme) => ({
   },
 });
 
-export const shareIconStyle = {
-  width: "0.875rem",
-  height: "0.875rem",
-};
+export const emptyBodyStyle = (theme: Theme) => ({
+  height: "10rem",
+  border: "0px",
+  backgroundColor: theme.palette.secondary.deepBlackberry,
+
+  "&:first-of-type": {
+    borderRadius: 0,
+  },
+  "&:last-of-type": {
+    borderRadius: 0,
+  },
+});
+
+export const contentStyle = (theme: Theme) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 2,
+});
