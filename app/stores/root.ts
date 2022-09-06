@@ -10,6 +10,7 @@ import { createConnectionSlice } from "./slices/connection";
 import { createNotificationsSlice } from "./slices/notifications";
 import { createRatesSlice } from "./slices/rates";
 import { createMarketsSlice } from "./slices/api/markets";
+import { createAmmSlice } from "./slices/api/amm";
 
 export const addMiddlewares = (storeCreator: CustomStateCreator<AppState>) => {
   return devtools(immer(storeCreator));
@@ -23,6 +24,7 @@ export const useStore = create<AppState>()(
     ...createNotificationsSlice(...params),
     ...createRatesSlice(...params),
     ...createMarketsSlice(...params),
+    ...createAmmSlice(...params),
   }))
 );
 

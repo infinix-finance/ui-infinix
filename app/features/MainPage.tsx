@@ -12,7 +12,7 @@ import { useNotistack } from "@/hooks/useNotistack";
 export const MainPage = () => {
   useMetamaskConnection();
   useSocketConnection();
-  // TODO: Remove later after testing
+  // TODO: Remove after testing
   useSocketAmmInfo("0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1");
   useNotistack();
 

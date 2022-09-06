@@ -6,6 +6,7 @@ import { ConnectionSlice } from "./slices/connection";
 import { NotificationsSlice } from "./slices/notifications";
 import { RatesSlice } from "./slices/rates";
 import { MarketsSlice } from "./slices/api/markets";
+import { AmmSlice } from "./slices/api/amm";
 
 type Mutators = [["zustand/devtools", never], ["zustand/immer", never]];
 
@@ -17,4 +18,5 @@ export type AppState = CommonSlice &
   ConnectionSlice &
   NotificationsSlice &
   RatesSlice &
-  MarketsSlice;
+  MarketsSlice &
+  AmmSlice;

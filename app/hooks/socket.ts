@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 import { useStore } from "@/stores/root";
-import { Markets } from "@/types/api";
+import { Markets, Amm } from "@/types/api";
 
 export const socket = io(process.env.API_URL!);
 
@@ -20,9 +20,6 @@ const addChannelCommunication = (
     socket.off(channel, listener);
   };
 };
-
-// TODO: States and console logs should be replaced with slices
-// tmp - https://github.com/infinix-finance/ui-infinix/blob/f57d204b1df87eda60ffe97184af48ad818dd003/app/hooks/socket.ts
 
 export const useSocketConnection = () => {
   const [connected, setConnected] = useState(false);
@@ -49,10 +46,14 @@ export const useSocketConnection = () => {
 
 export const useSocketAmmInfo = (address: string) => {
   const { connected, socket } = useSocketConnection();
+  const { setAmmInfo } = useStore((state) => state.amm);
 
-  const handleAmmInfo = useCallback((data: any) => {
-    console.log(data);
-  }, []);
+  const handleAmmInfo = useCallback(
+    (data: Amm) => {
+      setAmmInfo(data);
+    },
+    [setAmmInfo]
+  );
 
   useEffect(() => {
     if (connected)

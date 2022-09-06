@@ -2,7 +2,7 @@ import { AppState, CustomStateCreator } from "../../types";
 import { Markets } from "@/types/api";
 
 interface MarketsProps {
-  data: Markets;
+  list: Markets;
 }
 
 export interface MarketsSlice {
@@ -16,10 +16,10 @@ export const createMarketsSlice: CustomStateCreator<MarketsSlice> = (
   _get
 ) => ({
   markets: {
-    data: {},
+    list: {},
     setMarkets: (markets: Markets) => {
       set(function setMarkets(state: AppState) {
-        state.markets.data = markets;
+        state.markets.list = markets;
       });
     },
   },
