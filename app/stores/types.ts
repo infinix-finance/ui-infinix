@@ -5,6 +5,7 @@ import { OtherSlice } from "./other";
 import { ConnectionSlice } from "./slices/connection";
 import { NotificationsSlice } from "./slices/notifications";
 import { RatesSlice } from "./slices/rates";
+import { MarketsSlice } from "./slices/api/markets";
 
 type Mutators = [["zustand/devtools", never], ["zustand/immer", never]];
 
@@ -15,4 +16,5 @@ export type AppState = CommonSlice &
   OtherSlice &
   ConnectionSlice &
   NotificationsSlice &
-  RatesSlice;
+  RatesSlice &
+  MarketsSlice;

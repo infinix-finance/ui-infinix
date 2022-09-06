@@ -1,25 +1,24 @@
 import { useCallback, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
+import { useStore } from "@/stores/root";
+import { Markets } from "@/types/api";
+
 export const socket = io(process.env.API_URL!);
 
-const startCommunication = (
+const addChannelCommunication = (
   socket: Socket,
   channel: string,
-  listener: (args: any[]) => void,
+  listener: (args: any) => void,
   param?: string
 ) => {
   param && socket.emit(channel, param);
   socket.on(channel, listener);
 
   return () => {
+    socket.emit(channel, "STOP");
     socket.off(channel, listener);
   };
-};
-
-// TODO: we need to figure out whether and how to use this
-const stopCommunication = (socket: Socket, channel: string) => {
-  socket.emit(channel, "STOP");
 };
 
 // TODO: States and console logs should be replaced with slices
@@ -27,15 +26,19 @@ const stopCommunication = (socket: Socket, channel: string) => {
 
 export const useSocketConnection = () => {
   const [connected, setConnected] = useState(false);
+  const { setMarkets } = useStore((state) => state.markets);
 
-  const handleMarkets = useCallback((data: any) => {
-    console.log(data);
-  }, []);
+  const handleMarkets = useCallback(
+    (data: Markets) => {
+      setMarkets(data);
+    },
+    [setMarkets]
+  );
 
   useEffect(() => {
-    startCommunication(socket, "markets", (data) => handleMarkets(data));
-    startCommunication(socket, "connect", () => setConnected(true));
-    startCommunication(socket, "disconnect", () => setConnected(false));
+    addChannelCommunication(socket, "markets", (data) => handleMarkets(data));
+    addChannelCommunication(socket, "connect", () => setConnected(true));
+    addChannelCommunication(socket, "disconnect", () => setConnected(false));
   }, [handleMarkets]);
 
   return {
@@ -53,6 +56,6 @@ export const useSocketAmmInfo = (address: string) => {
 
   useEffect(() => {
     if (connected)
-      startCommunication(socket, "amm_info", handleAmmInfo, address);
+      addChannelCommunication(socket, "amm_info", handleAmmInfo, address);
   }, [address, connected, socket, handleAmmInfo]);
 };
