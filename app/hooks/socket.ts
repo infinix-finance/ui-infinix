@@ -34,7 +34,7 @@ export const useSocketConnection = () => {
 
   useEffect(() => {
     addChannelCommunication(socket, "markets", (data) => handleMarkets(data));
-    addChannelCommunication(socket, "connection", () => setConnected(true));
+    addChannelCommunication(socket, "connect", () => setConnected(true));
     addChannelCommunication(socket, "disconnect", () => setConnected(false));
   }, [handleMarkets]);
 
@@ -63,7 +63,7 @@ export const useSocketAmmInfo = (address: string) => {
 
 export const useSocketPriceFeed = (feedKey: string) => {
   const { connected, socket } = useSocketConnection();
-  const { setPriceFeed } = useStore((state) => state.price);
+  const { setPriceFeed } = useStore((state) => state.priceHistory);
 
   const handlePriceFeed = useCallback(
     (data: { history: PriceUpdate[] }) => {
@@ -80,7 +80,7 @@ export const useSocketPriceFeed = (feedKey: string) => {
 
 export const useSocketUserPositions = (user: string) => {
   const { connected, socket } = useSocketConnection();
-  const { setPositions } = useStore((state) => state.positions);
+  const { setPositions } = useStore((state) => state.userPositions);
 
   const handlePositions = useCallback(
     (data: Position[]) => {

@@ -3,12 +3,12 @@ import { PriceUpdate } from "@/types/api";
 
 interface PriceHistoryProps {
   latest: string;
-  history: PriceUpdate[];
+  feed: PriceUpdate[];
 }
 
 export interface PriceHistorySlice {
-  price: PriceHistoryProps & {
-    setPriceFeed: (prices: PriceUpdate[]) => void;
+  priceHistory: PriceHistoryProps & {
+    setPriceFeed: (feed: PriceUpdate[]) => void;
   };
 }
 
@@ -16,14 +16,14 @@ export const createPriceHistorySlice: CustomStateCreator<PriceHistorySlice> = (
   set,
   _get
 ) => ({
-  price: {
+  priceHistory: {
     latest: "0",
-    history: [],
+    feed: [],
     setPriceFeed: (feed: PriceUpdate[]) => {
       set(function setPriceFeed(state: AppState) {
         const latest = feed[0] ? feed[feed.length - 1].price : "0";
-        state.price.latest = latest;
-        state.price.history = feed;
+        state.priceHistory.latest = latest;
+        state.priceHistory.feed = feed;
       });
     },
   },

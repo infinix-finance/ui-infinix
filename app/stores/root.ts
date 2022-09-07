@@ -12,7 +12,7 @@ import { createRatesSlice } from "./slices/rates";
 import { createMarketsSlice } from "./slices/api/markets";
 import { createAmmSlice } from "./slices/api/amm";
 import { createPriceHistorySlice } from "./slices/api/priceHistory";
-import { createPositionsSlice } from "./slices/api/positions";
+import { createUserPositionsSlice } from "./slices/api/userPositions";
 
 export const addMiddlewares = (storeCreator: CustomStateCreator<AppState>) => {
   return devtools(immer(storeCreator));
@@ -28,7 +28,7 @@ export const useStore = create<AppState>()(
     ...createMarketsSlice(...params),
     ...createAmmSlice(...params),
     ...createPriceHistorySlice(...params),
-    ...createPositionsSlice(...params),
+    ...createUserPositionsSlice(...params),
   }))
 );
 
