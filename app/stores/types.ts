@@ -9,6 +9,7 @@ import { MarketsSlice } from "./slices/api/markets";
 import { AmmSlice } from "./slices/api/amm";
 import { PriceHistorySlice } from "./slices/api/priceHistory";
 import { UserPositionsSlice } from "./slices/api/userPositions";
+import { RecentPositionsSlice } from "./slices/api/recentPositions";
 
 type Mutators = [["zustand/devtools", never], ["zustand/immer", never]];
 
@@ -23,4 +24,5 @@ export type AppState = CommonSlice &
   MarketsSlice &
   AmmSlice &
   PriceHistorySlice &
-  UserPositionsSlice;
+  UserPositionsSlice &
+  RecentPositionsSlice;

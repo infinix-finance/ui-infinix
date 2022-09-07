@@ -2,7 +2,13 @@ import { useCallback, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 import { useStore } from "@/stores/root";
-import { Markets, Amm, PriceUpdate, Position } from "@/types/api";
+import {
+  Markets,
+  Amm,
+  PriceUpdate,
+  Position,
+  PositionEvent,
+} from "@/types/api";
 
 export const socket = io(process.env.API_URL!);
 
@@ -93,4 +99,21 @@ export const useSocketUserPositions = (user: string) => {
     if (connected)
       addChannelCommunication(socket, "user_positions", handlePositions, user);
   }, [user, connected, socket, handlePositions]);
+};
+
+export const useSocketRecentPositions = (amm: string) => {
+  const { connected, socket } = useSocketConnection();
+  const { setPositions } = useStore((state) => state.recentPositions);
+
+  const handlePositions = useCallback(
+    (data: PositionEvent[]) => {
+      setPositions(data);
+    },
+    [setPositions]
+  );
+
+  useEffect(() => {
+    if (connected)
+      addChannelCommunication(socket, "amm_positions", handlePositions, amm);
+  }, [amm, connected, socket, handlePositions]);
 };

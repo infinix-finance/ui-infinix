@@ -12,6 +12,7 @@ import {
   useSocketAmmInfo,
   useSocketPriceFeed,
   useSocketUserPositions,
+  useSocketRecentPositions,
 } from "@/hooks/socket";
 
 export const MainPage = () => {
@@ -24,6 +25,7 @@ export const MainPage = () => {
     "0xc197aeec5e904b487c37360d0044097a925037f038c6d2b7d92ad20bc689539e"
   );
   useSocketUserPositions("0xb9c3a80c8e903df935f1cdf9688f5bd154002b8b");
+  useSocketRecentPositions("0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1");
   useNotistack();
 
   return (
