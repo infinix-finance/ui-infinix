@@ -1,9 +1,10 @@
 import BigNumber from "bignumber.js";
 
-import { TokenId } from "@/defi";
+import { PairId, TokenId } from "@/defi";
 import {
   capitalize,
   formatNumber,
+  formatPair,
   shortenAddress,
   toFixedNumber,
 } from "@/utils/formatters";
@@ -100,6 +101,14 @@ describe("formatters", () => {
       const result = capitalize("cAPITALIZED");
 
       expect(result).toBe("Capitalized");
+    });
+  });
+
+  describe("formatPair", () => {
+    it("should format BTC/USDC", () => {
+      const result = formatPair(PairId.btcusdc);
+
+      expect(result).toBe("BTC/USDC");
     });
   });
 });

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import BigNumber from "bignumber.js";
 
 import { ColumnProps, RowProps } from "@/components";

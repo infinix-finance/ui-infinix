@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Box, Button, Typography } from "@mui/material";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";

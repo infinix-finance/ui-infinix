@@ -3,15 +3,12 @@ import { composeStories } from "@storybook/testing-react";
 
 import * as stories from "./Label.stories";
 
-const { TooltipLabels, TooltipLabelsWithBalance } = composeStories(stories);
+const { TooltipLabels } = composeStories(stories);
 
-test("renders Text Only Selects", () => {
-  render(<TooltipLabels />);
-  expect(screen.getByText("Label master here")).toBeInTheDocument();
-});
+describe("Label", () => {
+  test("renders label with icon", () => {
+    render(<TooltipLabels />);
 
-test("Render <TooltipLabelsWithBalance />", () => {
-  render(<TooltipLabelsWithBalance />);
-  expect(screen.getByText("Balance")).toBeInTheDocument();
-  expect(screen.getByText("Amount")).toBeInTheDocument();
+    expect(screen.getByText("Label master here")).toBeInTheDocument();
+  });
 });

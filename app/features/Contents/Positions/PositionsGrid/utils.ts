@@ -1,4 +1,5 @@
-import { Directions, getPair, Pair, PairId } from "@/defi";
+/* istanbul ignore file */
+import { Directions, getPair } from "@/defi";
 import {
   capitalize,
   formatNumber,

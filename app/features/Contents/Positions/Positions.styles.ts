@@ -4,7 +4,40 @@ export const containerStyle = (theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   width: "100%",
-  height: "200px",
+  height: "280px",
+});
+
+export const headingStyle = (theme: Theme) => ({
+  display: "flex",
+  justifyContent: "space-between",
+});
+
+export const rightGroupStyle = (theme: Theme) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: 4,
+  marginRight: 2,
+});
+
+export const toggleButtonStyle = (theme: Theme) => ({
+  "&.MuiButtonBase-root": {
+    padding: 1,
+    height: "2rem",
+  },
+
+  "& .MuiSvgIcon-root": {
+    width: "1rem",
+    height: "1rem",
+  },
+});
+
+export const tabsStyle = (theme: Theme) => ({
+  "& .MuiButtonBase-root:first-of-type": {
+    borderTopLeftRadius: "0.5rem",
+  },
+  "& .MuiButtonBase-root:last-of-type": {
+    borderTopRightRadius: "0.5rem",
+  },
 });
 
 export const positivePnlStyle = {

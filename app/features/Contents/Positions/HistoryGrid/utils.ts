@@ -1,9 +1,9 @@
-import { Directions, getPair, Pair, PairId } from "@/defi";
+/* istanbul ignore file */
+import { Directions, getPair } from "@/defi";
 import {
   capitalize,
   formatNumber,
   formatPair,
-  formatPercentage,
   formatUsdValue,
 } from "@/utils/formatters";
 import { format } from "date-fns";

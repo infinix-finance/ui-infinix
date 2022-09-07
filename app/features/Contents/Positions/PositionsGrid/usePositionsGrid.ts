@@ -1,6 +1,9 @@
+/* istanbul ignore file */
+import BigNumber from "bignumber.js";
+
 import { ColumnProps, RowProps } from "@/components";
 import { Directions, PairId } from "@/defi";
-import BigNumber from "bignumber.js";
+
 import { createDataProvider } from "./utils";
 
 const positions = [
