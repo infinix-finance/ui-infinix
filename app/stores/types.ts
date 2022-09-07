@@ -7,7 +7,7 @@ import { NotificationsSlice } from "./slices/notifications";
 import { RatesSlice } from "./slices/rates";
 import { MarketsSlice } from "./slices/api/markets";
 import { AmmSlice } from "./slices/api/amm";
-import { PriceSlice } from "./slices/api/price";
+import { PriceHistorySlice } from "./slices/api/priceHistory";
 import { PositionsSlice } from "./slices/api/positions";
 
 type Mutators = [["zustand/devtools", never], ["zustand/immer", never]];
@@ -22,5 +22,5 @@ export type AppState = CommonSlice &
   RatesSlice &
   MarketsSlice &
   AmmSlice &
-  PriceSlice &
+  PriceHistorySlice &
   PositionsSlice;

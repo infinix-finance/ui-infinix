@@ -1,18 +1,18 @@
 import { AppState, CustomStateCreator } from "../../types";
 import { PriceUpdate } from "@/types/api";
 
-interface PriceProps {
+interface PriceHistoryProps {
   latest: string;
   history: PriceUpdate[];
 }
 
-export interface PriceSlice {
-  price: PriceProps & {
+export interface PriceHistorySlice {
+  price: PriceHistoryProps & {
     setPriceFeed: (prices: PriceUpdate[]) => void;
   };
 }
 
-export const createPriceSlice: CustomStateCreator<PriceSlice> = (
+export const createPriceHistorySlice: CustomStateCreator<PriceHistorySlice> = (
   set,
   _get
 ) => ({
