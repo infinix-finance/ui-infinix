@@ -12,17 +12,13 @@ export interface BodyProps {
 export const Body = ({ columns, dataProvider, onClick }: BodyProps) => (
   <TableBody>
     {dataProvider.map((row) => (
-      <TableRow key={row.name} sx={rowStyle} hover>
+      <TableRow key={`row-${row.id}`} sx={rowStyle} hover>
         {columns.map((column) => (
-          <TableCell
-            key={`${row.id}-${column.key}`}
-            align={column?.align || "center"}
-            width={column?.width}
-          >
+          <TableCell key={`cell-${row.id}-${column.key}`} width={column?.width}>
             {column.cellRenderer?.(row, column, onClick) || (
               <Typography
                 variant="body3"
-                justifyContent={column?.align || "center"}
+                justifyContent={column?.align || "left"}
               >
                 {row[column.key]}
               </Typography>

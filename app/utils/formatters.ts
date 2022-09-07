@@ -1,4 +1,4 @@
-import { getProduct, ProductId } from "@/defi";
+import { getPair, getProduct, PairId, ProductId } from "@/defi";
 import BigNumber from "bignumber.js";
 
 const defaultFormat = (
@@ -69,4 +69,22 @@ export const formatLeverage = (value: BigNumber | number, base: number = 0) => {
 
 export const shortenAddress = (address: string | null) => {
   return address ? `${address.slice(0, 5)}...${address.slice(-3)}` : "";
+};
+
+export const capitalize = (value: string | null) => {
+  if (!value) return "";
+  if (value.length === 1) return value;
+
+  return `${value.at(0)?.toUpperCase()}${value.slice(1).toLowerCase()}`;
+};
+
+export const formatPair = (pairId: PairId) => {
+  const pair = getPair(pairId);
+
+  return pair.productIds.reduce((label, productId, idx) => {
+    const separator = idx > 0 ? "/" : "";
+    const symbol = getProduct(productId as ProductId).symbol;
+
+    return `${label}${separator}${symbol}`;
+  }, "");
 };

@@ -12,11 +12,11 @@ export const Header = ({ columns, onClick }: HeaderProps) => (
   <TableHead sx={headRowStyle}>
     <TableRow>
       {columns.map((column) => (
-        <TableCell key={column.key} width={column?.width}>
+        <TableCell key={`col-${column.key}`} width={column?.width}>
           {column.headerRenderer?.(column, onClick) || (
             <Typography
               variant="body3"
-              justifyContent={column?.align || "center"}
+              justifyContent={column?.align || "left"}
             >
               {column.title}
             </Typography>

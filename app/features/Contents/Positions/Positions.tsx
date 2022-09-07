@@ -7,6 +7,8 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { TabItem, Tabs, DataGrid } from "@/components";
 
 import { containerStyle } from "./Positions.styles";
+import { PositionsGrid } from "./PositionsGrid";
+import { HistoryGrid } from "./HistoryGrid";
 
 const tabItems: TabItem[] = [
   {
@@ -34,7 +36,8 @@ export const Positions = () => {
         variant="standard"
         onChange={handleChange}
       />
-      <DataGrid />
+      {selected === 0 && <PositionsGrid />}
+      {selected === 1 && <HistoryGrid />}
     </Box>
   );
 };
