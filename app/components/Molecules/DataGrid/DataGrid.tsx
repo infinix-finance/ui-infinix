@@ -11,21 +11,24 @@ export const DataGrid = ({
   columns,
   dataProvider,
   hover = true,
+  showPlaceholder = true,
   children = null,
   onHeaderClick = () => {},
   onRowClick = () => {},
 }: DataGridProps) => {
   const visibleColumns = columns.filter((column) => !column?.invisible);
   const isPopulated = Boolean(dataProvider.length);
+  const shouldShowPlaceholder = (showPlaceholder && !isPopulated) || children;
+  const shouldShowBody = isPopulated && !children;
 
   return (
     <TableContainer>
       <Table sx={tableStyle} stickyHeader>
         <Header columns={visibleColumns} onClick={onHeaderClick} />
-        {(!isPopulated || children) && (
+        {shouldShowPlaceholder && (
           <PlaceHolder columns={visibleColumns}>{children}</PlaceHolder>
         )}
-        {isPopulated && !children && (
+        {shouldShowBody && (
           <Body
             columns={visibleColumns}
             dataProvider={dataProvider}

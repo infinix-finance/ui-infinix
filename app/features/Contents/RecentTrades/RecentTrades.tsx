@@ -32,7 +32,12 @@ export const RecentTrades = () => {
 
   return (
     <Box sx={containerStyle}>
-      <DataGrid columns={columns} dataProvider={dataProvider} hover={false} />
+      <DataGrid
+        columns={columns}
+        dataProvider={dataProvider}
+        hover={false}
+        showPlaceholder={false}
+      />
     </Box>
   );
 };
