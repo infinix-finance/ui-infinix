@@ -6,6 +6,7 @@ import { Heading } from "./Heading";
 import { containerStyle } from "./MainPage.styles";
 
 import { useMetamaskConnection } from "@/hooks/wallet";
+import { useContractConnection } from "@/hooks/contracts";
 import { useNotistack } from "@/hooks/useNotistack";
 import {
   useSocketConnection,
@@ -17,6 +18,7 @@ import {
 
 export const MainPage = () => {
   useMetamaskConnection();
+  useContractConnection();
   useSocketConnection();
 
   // TODO: Remove after testing
