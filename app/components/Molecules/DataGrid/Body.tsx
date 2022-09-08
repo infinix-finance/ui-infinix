@@ -6,13 +6,14 @@ import { rowStyle } from "./DataGrid.styles";
 export interface BodyProps {
   columns: ColumnProps[];
   dataProvider: RowProps[];
+  hover: boolean;
   onClick: RowClickFunc;
 }
 
-export const Body = ({ columns, dataProvider, onClick }: BodyProps) => (
+export const Body = ({ columns, dataProvider, hover, onClick }: BodyProps) => (
   <TableBody>
     {dataProvider.map((row) => (
-      <TableRow key={`row-${row.id}`} sx={rowStyle} hover>
+      <TableRow key={`row-${row.id}`} sx={rowStyle} hover={hover}>
         {columns.map((column) => (
           <TableCell key={`cell-${row.id}-${column.key}`} width={column?.width}>
             {column.cellRenderer?.(row, column, onClick) || (

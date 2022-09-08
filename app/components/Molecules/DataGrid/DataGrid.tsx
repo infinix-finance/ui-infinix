@@ -1,4 +1,4 @@
-import { Table } from "@mui/material";
+import { Table, TableContainer } from "@mui/material";
 import { Body } from "./Body";
 
 import { DataGridProps } from "./DataGrid.types";
@@ -10,6 +10,7 @@ import { PlaceHolder } from "./Placeholder";
 export const DataGrid = ({
   columns,
   dataProvider,
+  hover = true,
   children = null,
   onHeaderClick = () => {},
   onRowClick = () => {},
@@ -18,18 +19,21 @@ export const DataGrid = ({
   const isPopulated = Boolean(dataProvider.length);
 
   return (
-    <Table sx={tableStyle}>
-      <Header columns={visibleColumns} onClick={onHeaderClick} />
-      {(!isPopulated || children) && (
-        <PlaceHolder columns={visibleColumns}>{children}</PlaceHolder>
-      )}
-      {isPopulated && !children && (
-        <Body
-          columns={visibleColumns}
-          dataProvider={dataProvider}
-          onClick={onRowClick}
-        />
-      )}
-    </Table>
+    <TableContainer>
+      <Table sx={tableStyle} stickyHeader>
+        <Header columns={visibleColumns} onClick={onHeaderClick} />
+        {(!isPopulated || children) && (
+          <PlaceHolder columns={visibleColumns}>{children}</PlaceHolder>
+        )}
+        {isPopulated && !children && (
+          <Body
+            columns={visibleColumns}
+            dataProvider={dataProvider}
+            hover={hover}
+            onClick={onRowClick}
+          />
+        )}
+      </Table>
+    </TableContainer>
   );
 };

@@ -47,4 +47,5 @@ export const midContainerStyle = (theme: Theme) => ({
   display: "flex",
   flex: 1,
   gap: theme.spacing(3),
+  height: "60%",
 });
