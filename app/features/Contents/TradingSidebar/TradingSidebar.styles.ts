@@ -10,7 +10,12 @@ export const containerStyle = (theme: Theme) => ({
 
 export const contentStyle = {
   display: "flex",
+  flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
   height: "750px",
+};
+
+export const titleStyle = {
+  marginBottom: "1rem",
 };

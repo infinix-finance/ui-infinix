@@ -1,12 +1,19 @@
 /* istanbul ignore file */
-import { Box } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
-import { containerStyle, contentStyle } from "./TradingSidebar.styles";
+import {
+  containerStyle,
+  contentStyle,
+  titleStyle,
+} from "./TradingSidebar.styles";
 
 export const TradingSidebar = () => {
   return (
     <Box sx={containerStyle}>
-      <Box sx={contentStyle}>TradingSidebar</Box>
+      <Box sx={contentStyle}>
+        <Typography sx={titleStyle}>TradingSidebar</Typography>
+        <Button variant="outlined">Open Position</Button>
+      </Box>
     </Box>
   );
 };

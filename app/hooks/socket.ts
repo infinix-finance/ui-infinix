@@ -1,16 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
+import create from "zustand";
+import { useEffect } from "react";
 import { io, Socket } from "socket.io-client";
 
 import { useStore } from "@/stores/root";
-import {
-  Markets,
-  Amm,
-  PriceUpdate,
-  Position,
-  PositionEvent,
-} from "@/types/api";
 
-export const socket = io(process.env.API_URL!);
+interface SocketStore {
+  socket: Socket;
+  connected: boolean;
+  setConnected: (connected: boolean) => void;
+}
+
+const useSocketStore = create<SocketStore>((set) => ({
+  socket: io(process.env.API_URL!),
+  connected: false,
+  setConnected: (connected: boolean) => set(() => ({ connected })),
+}));
 
 const addChannelCommunication = (
   socket: Socket,
@@ -28,92 +32,53 @@ const addChannelCommunication = (
 };
 
 export const useSocketConnection = () => {
-  const [connected, setConnected] = useState(false);
+  const { socket, connected, setConnected } = useSocketStore((state) => state);
   const { setMarkets } = useStore((state) => state.markets);
 
-  const handleMarkets = useCallback(
-    (data: Markets) => {
-      setMarkets(data);
-    },
-    [setMarkets]
-  );
-
   useEffect(() => {
-    addChannelCommunication(socket, "markets", (data) => handleMarkets(data));
+    if (connected) return;
     addChannelCommunication(socket, "connect", () => setConnected(true));
     addChannelCommunication(socket, "disconnect", () => setConnected(false));
-  }, [handleMarkets]);
-
-  return {
-    socket,
-    connected,
-  };
+    addChannelCommunication(socket, "markets", (data) => setMarkets(data));
+  }, [socket, connected, setConnected, setMarkets]);
 };
 
 export const useSocketAmmInfo = (address: string) => {
-  const { connected, socket } = useSocketConnection();
+  const { socket, connected } = useSocketStore((state) => state);
   const { setAmmInfo } = useStore((state) => state.amm);
 
-  const handleAmmInfo = useCallback(
-    (data: Amm) => {
-      setAmmInfo(data);
-    },
-    [setAmmInfo]
-  );
-
   useEffect(() => {
-    if (connected)
-      addChannelCommunication(socket, "amm_info", handleAmmInfo, address);
-  }, [address, connected, socket, handleAmmInfo]);
+    if (!connected) return;
+    addChannelCommunication(socket, "amm_info", setAmmInfo, address);
+  }, [address, connected, socket, setAmmInfo]);
 };
 
 export const useSocketPriceFeed = (feedKey: string) => {
-  const { connected, socket } = useSocketConnection();
+  const { socket, connected } = useSocketStore((state) => state);
   const { setPriceFeed } = useStore((state) => state.priceHistory);
 
-  const handlePriceFeed = useCallback(
-    (data: { history: PriceUpdate[] }) => {
-      setPriceFeed(data.history);
-    },
-    [setPriceFeed]
-  );
-
   useEffect(() => {
-    if (connected)
-      addChannelCommunication(socket, "pair_prices", handlePriceFeed, feedKey);
-  }, [feedKey, connected, socket, handlePriceFeed]);
+    if (!connected) return;
+    addChannelCommunication(socket, "pair_prices", setPriceFeed, feedKey);
+  }, [feedKey, connected, socket, setPriceFeed]);
 };
 
 export const useSocketUserPositions = (user: string) => {
-  const { connected, socket } = useSocketConnection();
+  const { socket, connected } = useSocketStore((state) => state);
   const { setPositions } = useStore((state) => state.userPositions);
 
-  const handlePositions = useCallback(
-    (data: Position[]) => {
-      setPositions(data);
-    },
-    [setPositions]
-  );
-
   useEffect(() => {
-    if (connected)
-      addChannelCommunication(socket, "user_positions", handlePositions, user);
-  }, [user, connected, socket, handlePositions]);
+    if (!connected) return;
+    addChannelCommunication(socket, "user_positions", setPositions, user);
+  }, [user, connected, socket, setPositions]);
 };
 
 export const useSocketRecentPositions = (amm: string) => {
-  const { connected, socket } = useSocketConnection();
+  const { socket, connected } = useSocketStore((state) => state);
   const { setPositions } = useStore((state) => state.recentPositions);
 
-  const handlePositions = useCallback(
-    (data: PositionEvent[]) => {
-      setPositions(data);
-    },
-    [setPositions]
-  );
-
   useEffect(() => {
-    if (connected)
-      addChannelCommunication(socket, "amm_positions", handlePositions, amm);
-  }, [amm, connected, socket, handlePositions]);
+    if (!connected) return;
+    addChannelCommunication(socket, "amm_positions", setPositions, amm);
+  }, [amm, connected, socket, setPositions]);
 };
