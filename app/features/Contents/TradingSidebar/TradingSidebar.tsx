@@ -23,8 +23,8 @@ export const TradingSidebar = () => {
 
   return (
     <Box sx={containerStyle}>
+      <DirectionSelector />
       <Box sx={innerContainerStyle}>
-        <DirectionSelector />
         <Box sx={contentStyle}>
           <AssetAmount />
           <LeverageSelector />

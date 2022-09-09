@@ -1,10 +1,13 @@
-import { TokenId } from "@/defi";
+import BigNumber from "bignumber.js";
+
+import { PairId, TokenId } from "@/defi";
 import {
+  capitalize,
   formatNumber,
+  formatPair,
   shortenAddress,
   toFixedNumber,
 } from "@/utils/formatters";
-import BigNumber from "bignumber.js";
 
 describe("formatters", () => {
   describe("shortenAddress", () => {
@@ -78,6 +81,34 @@ describe("formatters", () => {
       const result = toFixedNumber(new BigNumber(1129320.123456), 4);
 
       expect(result).toBe("1129320.1235");
+    });
+  });
+
+  describe("capitalize", () => {
+    it("should return an empty string if no value has been provided", () => {
+      const result = capitalize(null);
+
+      expect(result).toBe("");
+    });
+
+    it("should return the same string if one char has been provided", () => {
+      const result = capitalize("a");
+
+      expect(result).toBe("a");
+    });
+
+    it("should return the capitalized variant of the string", () => {
+      const result = capitalize("cAPITALIZED");
+
+      expect(result).toBe("Capitalized");
+    });
+  });
+
+  describe("formatPair", () => {
+    it("should format BTC/USDC", () => {
+      const result = formatPair(PairId.btcusdc);
+
+      expect(result).toBe("BTC/USDC");
     });
   });
 });
