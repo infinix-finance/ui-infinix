@@ -20,6 +20,10 @@ export const chartConfig = {
     color: "red",
     fontStyle: "normal",
   },
+  timeScale: {
+    timeVisible: true,
+    secondsVisible: false,
+  },
 };
 
 export const lineSeriesConfig = {
