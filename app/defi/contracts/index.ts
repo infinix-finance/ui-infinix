@@ -1,4 +1,4 @@
-import clearingHouseAbi from "./abi/clearingHouse.json";
+import clearingHouseAbi from "./abi/ClearingHouse.json";
 
 const contractConfig = {
   clearingHouse: {
