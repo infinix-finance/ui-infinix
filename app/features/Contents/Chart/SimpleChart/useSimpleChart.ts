@@ -25,8 +25,6 @@ export default function useSimpleChart(initialData: any[], update: any[]) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (chart) return;
-
     const chartInstance = createChart(chartContainerRef.current!, chartConfig);
     const lineSeriesInstance = chartInstance.addLineSeries(lineSeriesConfig);
     lineSeriesInstance.setData(initialData);
@@ -58,7 +56,7 @@ export default function useSimpleChart(initialData: any[], update: any[]) {
   }, [initialData]);
 
   useEffect(() => {
-    if (!chart) return;
+    if (!chart || !update.length) return;
 
     update.forEach((tickData) => lineSeries?.update(tickData));
   }, [update]);

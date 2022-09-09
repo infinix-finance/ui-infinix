@@ -66,7 +66,7 @@ export const formatUsdValue = (value: BigNumber | number, base: number = 2) => {
 export const formatPercentage = (
   value: BigNumber | number,
   base: number = 0,
-  options: FormatNumberOptions
+  options: FormatNumberOptions = {}
 ) => {
   return formatNumber(value, { base, suffix: "%", ...options });
 };

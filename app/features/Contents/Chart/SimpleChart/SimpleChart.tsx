@@ -1,26 +1,30 @@
 /* istanbul ignore file */
 import { Box } from "@mui/material";
 
-import { Header } from "./Header";
+import { Header, HeaderProps } from "./Header";
+import useSimpleChart from "./useSimpleChart";
 
 import {
   containerStyle,
   chartContainerStyle,
   chartStyle,
 } from "./SimpleChart.styles";
-import useSimpleChart from "./useSimpleChart";
 
-export interface SimpleChartProps {
+export interface SimpleChartProps extends HeaderProps {
   initialData: any[];
-  update: any[];
+  update?: any[];
 }
 
-export default function SimpleChart({ initialData, update }: SimpleChartProps) {
+export default function SimpleChart({
+  initialData,
+  update = [],
+  ...rest
+}: SimpleChartProps) {
   const { chartContainerRef } = useSimpleChart(initialData, update);
 
   return (
     <Box sx={containerStyle}>
-      <Header />
+      <Header {...rest} />
       <Box sx={chartContainerStyle}>
         <Box ref={chartContainerRef} sx={chartStyle} />
       </Box>
