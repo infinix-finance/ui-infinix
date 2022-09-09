@@ -5,10 +5,12 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
+import BigNumber from "bignumber.js";
 import FilterVintageOutlinedIcon from "@mui/icons-material/FilterVintageOutlined";
 
 import { ProductAsset } from "@/components";
-import { TokenId } from "@/defi";
+import { getPair, getProduct, PairId, Timeframes, TokenId } from "@/defi";
+import { formatNumber, formatPercentage } from "@/utils/formatters";
 
 import {
   topStyle,
@@ -22,9 +24,30 @@ import {
   priceAndDetailsStyle,
 } from "./Header.styles";
 
-const TIMEFRAMES = ["1d", "1m", "3m", "1y", "5y", "all"];
+export interface HeaderProps {
+  timeframe?: Timeframes;
+  pairId?: PairId;
+  price?: BigNumber;
+  change?: BigNumber;
+  percentage?: number;
+  onChange?: (event: React.MouseEvent<HTMLElement>, value: Timeframes) => void;
+}
 
-export const Header = () => {
+export const Header = ({
+  timeframe = Timeframes._1d,
+  pairId = PairId.btcusdc,
+  price = new BigNumber(140.32),
+  change = new BigNumber(0.1234),
+  percentage = 12.44,
+  onChange = () => {},
+}: HeaderProps) => {
+  const [baseProductId, quoteProductId] = getPair(pairId).productIds;
+  const baseProduct = getProduct(baseProductId);
+  const quoteProduct = getProduct(quoteProductId);
+  const changeValue = formatNumber(change, { showSign: true });
+  const changePercentage = formatPercentage(percentage, 2, { showSign: true });
+  const changeColor = change.gt(0) ? "alert.lemon" : "alert.guava";
+
   return (
     <Box sx={containerStyle}>
       <Box sx={topStyle}>
@@ -37,7 +60,7 @@ export const Header = () => {
         <Box sx={contentStyle}>
           <Box sx={productStyle}>
             <Typography variant="body1" color="secondary.graishLavender">
-              Bitcoint Inc.
+              {baseProduct.name}
             </Typography>
             <Button sx={productButtonStyle} variant="outlined" size="small">
               <FilterVintageOutlinedIcon />
@@ -46,7 +69,7 @@ export const Header = () => {
 
           <Box sx={priceAndDetailsStyle}>
             <Typography variant="h5" color="primary.ice">
-              170.00
+              {formatNumber(price)}
             </Typography>
             <Box sx={detailsContainerStyle}>
               <Typography variant="body1" color="featured.grape">
@@ -54,13 +77,13 @@ export const Header = () => {
               </Typography>
               <Box sx={detailsStyle}>
                 <Typography variant="body3" color="secondary.graishLavender">
-                  USDC
+                  {quoteProduct.symbol}
                 </Typography>
-                <Typography variant="body1" color="alert.lemon">
-                  +2.21
+                <Typography variant="body1" color={changeColor}>
+                  {changeValue}
                 </Typography>
-                <Typography variant="body1" color="alert.lemon">
-                  +4.10%
+                <Typography variant="body1" color={changeColor}>
+                  {changePercentage}
                 </Typography>
               </Box>
             </Box>
@@ -70,13 +93,13 @@ export const Header = () => {
 
       <ToggleButtonGroup
         sx={buttonGroupStyle}
-        value={"1d"}
+        value={timeframe}
         exclusive
         color="primary"
         disabled={false}
-        onChange={() => {}}
+        onChange={onChange}
       >
-        {TIMEFRAMES.map((timeframe) => (
+        {Object.values(Timeframes).map((timeframe) => (
           <ToggleButton key={timeframe} value={timeframe}>
             {timeframe.toUpperCase()}
           </ToggleButton>

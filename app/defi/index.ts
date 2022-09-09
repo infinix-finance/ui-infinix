@@ -9,3 +9,4 @@ export * from "./Protocols";
 export * from "./Wallets";
 export * from "./utils";
 export * from "./Directions";
+export * from "./Timeframes";

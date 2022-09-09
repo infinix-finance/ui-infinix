@@ -8,9 +8,13 @@ export const containerStyle = {
   height: "100%",
 };
 
-export const headerStyle = (theme: Theme) => ({});
-
-export const chartStyle = {
+export const chartContainerStyle = {
   position: "relative",
   flex: 1,
+};
+
+export const chartStyle = {
+  width: "100%",
+  height: "100%",
+  position: "absolute",
 };

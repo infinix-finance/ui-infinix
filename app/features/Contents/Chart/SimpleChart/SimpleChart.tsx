@@ -1,8 +1,13 @@
-import { useEffect, useRef } from "react";
-import { createChart, ColorType, LineStyle } from "lightweight-charts";
+import { useRef } from "react";
 import { Box } from "@mui/material";
-import { chartStyle, containerStyle, headerStyle } from "./SimpleChart.styles";
+
+import {
+  containerStyle,
+  chartContainerStyle,
+  chartStyle,
+} from "./SimpleChart.styles";
 import { Header } from "./Header";
+import useSimpleChart from "./useSimpleChart";
 
 const initialData = [
   { time: "2018-12-14", value: 12.51 },
@@ -25,107 +30,20 @@ const initialData = [
   { time: "2018-12-31", value: 22.67 },
 ];
 
-export const ChartComponent = (props: any) => {
-  const {
-    data,
-    colors: {
-      backgroundColor = "white",
-      lineColor = "#2962FF",
-      textColor = "black",
-      areaTopColor = "#2962FF",
-      areaBottomColor = "rgba(41, 98, 255, 0.28)",
-    },
-    padding = 16,
-  } = {
-    data: initialData,
-    colors: {
-      backgroundColor: "transparent",
-      lineColor: "#FFFFFFFF",
-      textColor: "#8186AE",
-      areaTopColor: "#ff0000",
-      areaBottomColor: "rgba(41, 98, 255, 0.28)",
-    },
-    padding: 16,
-  };
+export interface SimpleChartProps {
+  data: any[];
+}
+
+export default function SimpleChart({ data = initialData }: SimpleChartProps) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      chart.applyOptions({
-        width: chartContainerRef.current!.clientWidth,
-        height: chartContainerRef.current!.clientHeight,
-      });
-    };
-
-    const chart = createChart(chartContainerRef.current!, {
-      layout: {
-        backgroundColor,
-        textColor: textColor,
-        fontFamily: "Sora",
-      },
-      grid: {
-        vertLines: {
-          color: "#8186AE50",
-          style: LineStyle.Dashed,
-        },
-        horzLines: {
-          color: "#8186AE50",
-          style: LineStyle.Dashed,
-        },
-      },
-      watermark: {
-        color: "red",
-        fontStyle: "normal",
-      },
-      width: chartContainerRef.current!.clientWidth,
-      height: chartContainerRef.current!.clientHeight,
-    });
-
-    const newSeries = chart.addLineSeries({
-      color: lineColor,
-      lineWidth: 2,
-    });
-    newSeries.setData(data);
-    chart.timeScale().setVisibleRange({
-      from: "2018-12-19",
-      to: "2018-12-31",
-    });
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-
-      chart.remove();
-    };
-  }, [
-    data,
-    backgroundColor,
-    lineColor,
-    textColor,
-    areaTopColor,
-    areaBottomColor,
-  ]);
+  useSimpleChart(data, chartContainerRef);
 
   return (
     <Box sx={containerStyle}>
-      <Box sx={headerStyle}>
-        <Header />
-      </Box>
-      <Box sx={chartStyle}>
-        <Box
-          ref={chartContainerRef}
-          sx={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-          }}
-        />
+      <Header />
+      <Box sx={chartContainerStyle}>
+        <Box ref={chartContainerRef} sx={chartStyle} />
       </Box>
     </Box>
   );
-};
-
-export default function SimpleChart(props: any) {
-  return <ChartComponent {...props} data={initialData}></ChartComponent>;
 }

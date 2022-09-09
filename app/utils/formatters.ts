@@ -21,6 +21,7 @@ interface FormatNumberOptions {
   base?: number;
   prefix?: string;
   suffix?: string;
+  showSign?: boolean;
   withThousandSeparator?: boolean;
 }
 
@@ -31,6 +32,7 @@ export const formatNumber = (
     base = 2,
     prefix = "",
     suffix = "",
+    showSign = false,
     withThousandSeparator = true,
   }: FormatNumberOptions = {}
 ) => {
@@ -40,9 +42,14 @@ export const formatNumber = (
 
   const product = productId ? getProduct(productId).symbol : null;
   const calculatedSuffix = suffix ? suffix : product ? ` ${product}` : "";
+  const calculatedSign = showSign && convertedNum.gt(0) ? "+" : "";
   const formattedAmount = convertedNum.toFormat(
     base,
-    defaultFormat(withThousandSeparator, prefix, calculatedSuffix)
+    defaultFormat(
+      withThousandSeparator,
+      calculatedSign || prefix,
+      calculatedSuffix
+    )
   );
 
   return formattedAmount;
@@ -58,9 +65,10 @@ export const formatUsdValue = (value: BigNumber | number, base: number = 2) => {
 
 export const formatPercentage = (
   value: BigNumber | number,
-  base: number = 0
+  base: number = 0,
+  options: FormatNumberOptions
 ) => {
-  return formatNumber(value, { base, suffix: "%" });
+  return formatNumber(value, { base, suffix: "%", ...options });
 };
 
 export const formatLeverage = (value: BigNumber | number, base: number = 0) => {
