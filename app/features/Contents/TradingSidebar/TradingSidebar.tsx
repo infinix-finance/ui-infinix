@@ -15,11 +15,13 @@ import {
   dividerStyle,
 } from "./TradingSidebar.styles";
 import { useStore } from "@/stores/root";
-import { getIsQuoteSet } from "./TradingSidebar.slice";
+import { useClearingHouse } from "@/hooks/contracts";
+// import { getIsQuoteSet } from "./TradingSidebar.slice";
 
 export const TradingSidebar = () => {
   const { direction } = useStore((state) => state.tradingSidebar);
-  const isQuoteSet = useStore(getIsQuoteSet);
+  const { openPosition } = useClearingHouse();
+  // const isQuoteSet = useStore(getIsQuoteSet);
 
   return (
     <Box sx={containerStyle}>
@@ -30,7 +32,19 @@ export const TradingSidebar = () => {
           <LeverageSelector />
           <PriceDetails />
           <SlippageEditor />
-          <Button variant={direction} disabled={!isQuoteSet}>
+          {/* TODO: Only for testing, replace with real values later */}
+          <Button
+            variant={direction}
+            onClick={() =>
+              openPosition(
+                "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
+                0,
+                "10",
+                "2",
+                "0"
+              )
+            } /*disabled={!isQuoteSet}*/
+          >
             Confirm {direction}
           </Button>
         </Box>

@@ -1,6 +1,6 @@
 import create from "zustand";
 import { useEffect } from "react";
-import { providers, Contract } from "ethers";
+import { Contract, providers, utils } from "ethers";
 
 import { useStore } from "@/stores/root";
 import contractConfig from "@/defi/contracts";
@@ -38,17 +38,26 @@ export const useContractConnection = () => {
   }, [active, setContracts]);
 };
 
-// TODO: only for testing, replace in the future
 export const useClearingHouse = () => {
   const { active } = useStore((state) => state.connection);
   const { clearingHouse } = useContractStore((state) => state);
 
-  const payFunding = async () => {
+  const openPosition = async (
+    amm: string,
+    side: number,
+    quoteAssetAmount: string,
+    leverage: string,
+    baseAssetAmountLimit: string
+  ) => {
     if (!active || !clearingHouse) return;
 
     try {
-      const result = await clearingHouse.payFunding(
-        "0xE5639cBB02eC3bd65c77E128B0c7350AeEFb2bd1"
+      const result = await clearingHouse.openPosition(
+        amm,
+        side,
+        [utils.parseEther(quoteAssetAmount)],
+        [utils.parseEther(leverage)],
+        [utils.parseEther(baseAssetAmountLimit)]
       );
       await result.wait();
     } catch (error) {
@@ -56,7 +65,21 @@ export const useClearingHouse = () => {
     }
   };
 
+  const closePosition = async (amm: string, quoteAssetAmountLimit: string) => {
+    if (!active || !clearingHouse) return;
+
+    try {
+      const result = await clearingHouse.closePosition(amm, [
+        utils.parseEther(quoteAssetAmountLimit),
+      ]);
+      await result.wait();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return {
-    payFunding,
+    openPosition,
+    closePosition,
   };
 };
