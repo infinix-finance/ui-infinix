@@ -5,6 +5,12 @@ export const containerStyle = (theme: Theme) => ({
   flexDirection: "column",
   width: "100%",
   height: "260px",
+
+  "& .MuiTableContainer-root": {
+    borderBottomLeftRadius: "0.5rem",
+    borderBottomRightRadius: "0.5rem",
+    borderTopRightRadius: "0.5rem",
+  },
 });
 
 export const headingStyle = (theme: Theme) => ({
