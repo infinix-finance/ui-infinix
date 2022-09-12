@@ -9,6 +9,7 @@ export const toggleButtonOverrides = (
       gap: theme.spacing(2),
 
       "& .MuiToggleButtonGroup-grouped": {
+        fontFamily: theme.custom.fontFamily.primary,
         border: 0,
         lineHeight: "normal",
         padding: theme.spacing(2),
@@ -54,6 +55,9 @@ export const toggleButtonOverrides = (
           backgroundColor: theme.palette.primary.plum,
           "&:hover": {
             backgroundColor: theme.palette.primary.plum,
+          },
+          "&.Mui-disabled": {
+            backgroundColor: theme.palette.secondary.graishLavender,
           },
         },
       },

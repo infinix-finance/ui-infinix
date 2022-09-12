@@ -1,24 +1,41 @@
 /* istanbul ignore file */
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Divider } from "@mui/material";
 
-import { useClearingHouse } from "@/hooks/contracts";
+import { DirectionSelector } from "./DirectionSelector";
+import { AccountDetails } from "./AccountDetails";
+import { AssetAmount } from "./AssetAmount";
+import { LeverageSelector } from "./LeverageSelector";
+import { PriceDetails } from "./PriceDetails";
+import { SlippageEditor } from "./SlippageEditor";
 
 import {
+  innerContainerStyle,
   containerStyle,
   contentStyle,
-  titleStyle,
+  dividerStyle,
 } from "./TradingSidebar.styles";
+import { useStore } from "@/stores/root";
+import { getIsQuoteSet } from "./TradingSidebar.slice";
 
 export const TradingSidebar = () => {
-  const { payFunding } = useClearingHouse();
+  const { direction } = useStore((state) => state.tradingSidebar);
+  const isQuoteSet = useStore(getIsQuoteSet);
 
   return (
     <Box sx={containerStyle}>
-      <Box sx={contentStyle}>
-        <Typography sx={titleStyle}>TradingSidebar</Typography>
-        <Button variant="outlined" onClick={payFunding}>
-          Pay Funding
-        </Button>
+      <DirectionSelector />
+      <Box sx={innerContainerStyle}>
+        <Box sx={contentStyle}>
+          <AssetAmount />
+          <LeverageSelector />
+          <PriceDetails />
+          <SlippageEditor />
+          <Button variant={direction} disabled={!isQuoteSet}>
+            Confirm {direction}
+          </Button>
+        </Box>
+        <Divider sx={dividerStyle} />
+        <AccountDetails />
       </Box>
     </Box>
   );

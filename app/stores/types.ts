@@ -1,7 +1,6 @@
 import { StateCreator } from "zustand";
+import { WritableDraft } from "immer/dist/internal";
 
-import { CommonSlice } from "./common";
-import { OtherSlice } from "./other";
 import { ConnectionSlice } from "./slices/connection";
 import { NotificationsSlice } from "./slices/notifications";
 import { RatesSlice } from "./slices/rates";
@@ -11,18 +10,21 @@ import { PriceHistorySlice } from "./slices/api/priceHistory";
 import { UserPositionsSlice } from "./slices/api/userPositions";
 import { RecentPositionsSlice } from "./slices/api/recentPositions";
 
+import { TradingSidebarSlice } from "@/features/Contents/TradingSidebar/TradingSidebar.slice";
+
 type Mutators = [["zustand/devtools", never], ["zustand/immer", never]];
 
 export interface CustomStateCreator<T>
   extends StateCreator<AppState, Mutators, [], T> {}
 
-export type AppState = CommonSlice &
-  OtherSlice &
+export type AppState = WritableDraft<
   ConnectionSlice &
-  NotificationsSlice &
-  RatesSlice &
-  MarketsSlice &
-  AmmSlice &
-  PriceHistorySlice &
-  UserPositionsSlice &
-  RecentPositionsSlice;
+    NotificationsSlice &
+    RatesSlice &
+    TradingSidebarSlice &
+    MarketsSlice &
+    AmmSlice &
+    PriceHistorySlice &
+    UserPositionsSlice &
+    RecentPositionsSlice
+>;

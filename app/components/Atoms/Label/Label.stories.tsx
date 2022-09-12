@@ -10,7 +10,6 @@ export default {
 const Template: ComponentStory<typeof Label> = (args) => <Label {...args} />;
 
 export const TooltipLabels = Template.bind({});
-
 TooltipLabels.args = {
   label: "Label master here",
   TypographyProps: {},
@@ -20,13 +19,12 @@ TooltipLabels.args = {
   },
 };
 
-export const TooltipLabelsWithBalance = Template.bind({});
-
-TooltipLabelsWithBalance.args = {
-  label: "Amount",
+export const WithoutTooltip = Template.bind({});
+WithoutTooltip.args = {
+  label: "Label master here",
   TypographyProps: {},
-  BalanceProps: {
-    title: "Balance ",
-    balance: "435",
+  TooltipProps: {
+    title: "",
+    children: <></>,
   },
 };

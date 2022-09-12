@@ -17,3 +17,13 @@ export { Select } from "./Select";
 
 export type { AlertNotificationProps } from "./AlertNotification";
 export { AlertNotification } from "./AlertNotification";
+
+export { DataGrid } from "./DataGrid";
+export type {
+  DataGridProps,
+  ColumnProps,
+  RowProps,
+  DataProviderProps,
+  HeaderClickFunc,
+  RowClickFunc,
+} from "./DataGrid";

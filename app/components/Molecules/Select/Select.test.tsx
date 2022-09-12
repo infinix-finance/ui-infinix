@@ -88,6 +88,29 @@ describe("Select", () => {
       );
     });
 
+    test("Open modal, enter a filter text that is not present in the list should show the not found icon", async () => {
+      render(<MultiTokenSelects />);
+
+      const user = userEvent.setup();
+      await user.click(screen.getAllByRole("button")[0]);
+
+      const dropdownContent = screen.getByRole("listbox");
+      const inputElement = dropdownContent.querySelector("input");
+
+      act(() => {
+        fireEvent.change(inputElement as HTMLInputElement, {
+          target: { value: "invalid value" },
+        });
+      });
+
+      expect(within(dropdownContent).queryAllByText("FTM/USDC")).toHaveLength(
+        1
+      );
+      expect(
+        within(dropdownContent).queryAllByAltText("Token not found")
+      ).toHaveLength(1);
+    });
+
     test("Open modal, select 2nd option", async () => {
       render(<MultiTokenSelects />);
 

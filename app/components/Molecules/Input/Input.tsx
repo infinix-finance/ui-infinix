@@ -28,6 +28,8 @@ export const Input: React.FC<InputProps> = ({
 
     const input = ref.current.querySelector("input")!;
 
+    if (rest.type === "number") return;
+
     input.selectionStart = input.value.length;
     input.selectionEnd = input.value.length;
   };
