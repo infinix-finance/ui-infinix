@@ -2,8 +2,7 @@
 import BigNumber from "bignumber.js";
 
 import { ColumnProps, RowProps } from "@/components";
-import { Directions, PairId } from "@/defi";
-import { PositionTypes } from "@/defi/PositionTypes";
+import { Directions, PairId, PositionChangeStatuses } from "@/defi";
 
 import { createDataProvider } from "./utils";
 
@@ -14,7 +13,7 @@ const history = [
     leverage: 1,
     liquidated: false,
     dateTime: new Date(),
-    type: PositionTypes.Market,
+    type: PositionChangeStatuses.Open,
     amount: new BigNumber(1),
     price: new BigNumber(1270.11),
     total: new BigNumber(1270.11),
@@ -27,7 +26,7 @@ const history = [
     leverage: 3,
     liquidated: true,
     dateTime: new Date(),
-    type: PositionTypes.Liquidated,
+    type: PositionChangeStatuses.Liquidated,
     amount: new BigNumber(2),
     price: new BigNumber(21000.11),
     total: new BigNumber(42000.22),
@@ -40,7 +39,7 @@ const history = [
     leverage: 1,
     liquidated: false,
     dateTime: new Date(),
-    type: PositionTypes.Market,
+    type: PositionChangeStatuses.Open,
     amount: new BigNumber(1),
     price: new BigNumber(1279.22),
     total: new BigNumber(1279.22),

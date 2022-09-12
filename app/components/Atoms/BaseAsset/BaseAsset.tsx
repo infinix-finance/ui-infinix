@@ -16,10 +16,11 @@ export const BaseAsset = ({
   iconSize = 24,
   label,
   description,
+  showDescription = false,
+  descriptionComponent,
   LabelProps,
   DescriptionProps,
   showLabel = true,
-  showDescription = false,
   ...rest
 }: BaseAssetProps) => {
   if (![1, 2].includes(assets.length)) {
@@ -68,6 +69,7 @@ export const BaseAsset = ({
           >
             {label || assetLabel}
           </Typography>
+          {descriptionComponent}
           {(showDescription || description) && (
             <Typography
               variant="body3"

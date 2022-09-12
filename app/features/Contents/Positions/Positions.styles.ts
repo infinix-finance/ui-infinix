@@ -57,14 +57,3 @@ export const neutralIndicatorStyle = (theme: Theme) => ({
     theme.custom.opacity._10percent
   ),
 });
-
-export const indicatorStyle = (isLiquidated: boolean) => (theme: Theme) => ({
-  display: "inline-block",
-  padding: 1.25,
-  borderRadius: "0.5rem",
-  color: isLiquidated ? theme.palette.alert.guava : theme.palette.primary.ice,
-  backgroundColor: alpha(
-    isLiquidated ? theme.palette.alert.guava : theme.palette.primary.ice,
-    theme.custom.opacity._10percent
-  ),
-});
