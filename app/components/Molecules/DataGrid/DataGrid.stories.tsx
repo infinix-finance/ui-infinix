@@ -71,9 +71,9 @@ const additionalColumns: ColumnProps[] = [
 ];
 
 const dataProvider: RowProps[] = [
-  { name: "Frozen yogurt", cals: 159, fat: 12.4, carbs: 20.6 },
-  { name: "Ice cream sandwich", cals: 120, fat: 22.4, carbs: 10.5 },
-  { name: "Eclair", cals: 300, fat: 11.1, carbs: 50.9 },
+  { id: 1, name: "Frozen yogurt", cals: 159, fat: 12.4, carbs: 20.6 },
+  { id: 2, name: "Ice cream sandwich", cals: 120, fat: 22.4, carbs: 10.5 },
+  { id: 3, name: "Eclair", cals: 300, fat: 11.1, carbs: 50.9 },
 ];
 
 const Template: Story<DataGridProps> = (args) => {

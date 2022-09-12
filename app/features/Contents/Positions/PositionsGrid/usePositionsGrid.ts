@@ -40,6 +40,17 @@ const positions = [
     liquidationPrice: new BigNumber(1212.11),
     unrealizedPnl: new BigNumber(101.01),
   },
+  {
+    pairId: PairId.chaosusdc,
+    direction: Directions.Short,
+    leverage: 1,
+    size: new BigNumber(2.5),
+    entryPrice: new BigNumber(1275.2205),
+    markPrice: new BigNumber(1273.22),
+    marginRatio: 2,
+    liquidationPrice: new BigNumber(1212.11),
+    unrealizedPnl: new BigNumber(101.01),
+  },
 ];
 
 export default function usePositionsGrid() {

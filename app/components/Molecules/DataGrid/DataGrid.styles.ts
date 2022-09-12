@@ -5,12 +5,11 @@ export const tableStyle = (theme: Theme) => ({
 });
 
 export const headRowStyle = (theme: Theme) => ({
-  backgroundColor: theme.palette.secondary.blackberry,
-
   "& th": {
     padding: theme.spacing(1.5),
     border: "0px",
     color: theme.palette.secondary.graishLavender,
+    backgroundColor: theme.palette.secondary.blackberry,
 
     "&:first-of-type": {
       paddingLeft: theme.spacing(3),
@@ -37,6 +36,9 @@ export const rowStyle = (theme: Theme) => ({
 
     "&:first-of-type": {
       paddingLeft: theme.spacing(3),
+      borderRadius: 0,
+    },
+    "&:last-of-type": {
       borderRadius: 0,
     },
   },

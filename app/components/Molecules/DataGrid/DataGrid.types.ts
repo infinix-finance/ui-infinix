@@ -45,6 +45,8 @@ export interface ColumnProps {
 export interface DataGridProps {
   columns: ColumnProps[];
   dataProvider: RowProps[];
+  hover?: boolean;
+  showPlaceholder?: boolean;
   children?: React.ReactNode;
   onHeaderClick?: HeaderClickFunc;
   onRowClick?: RowClickFunc;
