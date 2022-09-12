@@ -91,10 +91,10 @@ describe("formatters", () => {
       expect(result).toBe("");
     });
 
-    it("should return the same string if one char has been provided", () => {
+    it("should return the capitalized string if one char has been provided", () => {
       const result = capitalize("a");
 
-      expect(result).toBe("a");
+      expect(result).toBe("A");
     });
 
     it("should return the capitalized variant of the string", () => {

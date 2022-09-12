@@ -13,7 +13,7 @@ const switchNetwork = (library: any) => () => {
   library.provider
     .request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: "0xa86a" }],
+      params: [{ chainId: "0xa869" }],
     })
     .catch((error: any) => {
       if (error.code !== 4902) throw error;
@@ -23,15 +23,15 @@ const switchNetwork = (library: any) => () => {
           method: "wallet_addEthereumChain",
           params: [
             {
-              chainId: "0xa86a",
-              chainName: "Avalanche C-Chain",
+              chainId: "0xa869",
+              chainName: "Avalanche FUJI Testnet",
               nativeCurrency: {
                 name: "Avalanche",
                 symbol: "AVAX",
                 decimals: 18,
               },
-              rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-              blockExplorerUrls: ["https://snowtrace.io/"],
+              rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+              blockExplorerUrls: ["https://testnet.snowtrace.io/"],
             },
           ],
         })

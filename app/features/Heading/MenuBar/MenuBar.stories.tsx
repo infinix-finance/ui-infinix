@@ -1,4 +1,5 @@
 import { NetworkId, WalletId } from "@/defi";
+import { SWITCH_CONNECTION_MSG } from "@/constants/messages";
 import { getInitialState, useStore } from "@/stores/root";
 import { Meta, Story } from "@storybook/react";
 import { MenuBar } from "./MenuBar";
@@ -17,11 +18,11 @@ const createStore = (chainId?: NetworkId) => {
     store.connection.chainId = chainId;
     store.connection.walletId = WalletId.metamask;
 
-    if (chainId !== NetworkId.avalanche) {
+    if (chainId !== NetworkId.avalancheTestnet) {
       store.notifications.sidebar = {
         severity: "error",
         visible: true,
-        title: "You need to connect to Avalanche.",
+        title: SWITCH_CONNECTION_MSG,
         actionLabel: "Switch",
       };
     }

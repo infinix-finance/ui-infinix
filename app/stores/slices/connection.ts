@@ -1,6 +1,7 @@
 import BigNumber from "bignumber.js";
 
 import { isSupportedNetwork, NetworkId, WalletId } from "@/defi";
+import { SWITCH_CONNECTION_MSG } from "@/constants/messages";
 import { AppState, CustomStateCreator } from "../types";
 
 interface ConnectionProps {
@@ -37,7 +38,7 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
         ? get().notifications.showSidebarNotification({
             severity: "error",
             visible: true,
-            title: "You need to connect to Avalanche.",
+            title: SWITCH_CONNECTION_MSG,
             actionLabel: "Switch",
             onAction: details.switchNetwork,
           })

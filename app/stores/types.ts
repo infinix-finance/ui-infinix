@@ -4,6 +4,11 @@ import { WritableDraft } from "immer/dist/internal";
 import { ConnectionSlice } from "./slices/connection";
 import { NotificationsSlice } from "./slices/notifications";
 import { RatesSlice } from "./slices/rates";
+import { MarketsSlice } from "./slices/api/markets";
+import { AmmSlice } from "./slices/api/amm";
+import { PriceHistorySlice } from "./slices/api/priceHistory";
+import { UserPositionsSlice } from "./slices/api/userPositions";
+import { RecentPositionsSlice } from "./slices/api/recentPositions";
 
 import { TradingSidebarSlice } from "@/features/Contents/TradingSidebar/TradingSidebar.slice";
 
@@ -13,5 +18,13 @@ export interface CustomStateCreator<T>
   extends StateCreator<AppState, Mutators, [], T> {}
 
 export type AppState = WritableDraft<
-  ConnectionSlice & NotificationsSlice & RatesSlice & TradingSidebarSlice
+  ConnectionSlice &
+    NotificationsSlice &
+    RatesSlice &
+    TradingSidebarSlice &
+    MarketsSlice &
+    AmmSlice &
+    PriceHistorySlice &
+    UserPositionsSlice &
+    RecentPositionsSlice
 >;

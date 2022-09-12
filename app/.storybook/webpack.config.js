@@ -13,6 +13,7 @@ module.exports = ({ config }) => {
     "@/stores": path.resolve(__dirname, "..", "stores"),
     "@/defi": path.resolve(__dirname, "..", "defi"),
     "@/types": path.resolve(__dirname, "..", "types"),
+    "@/constants": path.resolve(__dirname, "..", "constants"),
   };
 
   config.module.rules.push({

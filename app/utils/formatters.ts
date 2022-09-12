@@ -73,9 +73,10 @@ export const shortenAddress = (address: string | null) => {
 
 export const capitalize = (value: string | null) => {
   if (!value) return "";
-  if (value.length === 1) return value;
 
-  return `${value.at(0)?.toUpperCase()}${value.slice(1).toLowerCase()}`;
+  return `${value.substring(0, 1).toUpperCase()}${value
+    .slice(1)
+    .toLowerCase()}`;
 };
 
 export const formatPair = (pairId: PairId) => {
