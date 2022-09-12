@@ -68,6 +68,22 @@ describe("formatters", () => {
 
       expect(result).toBe("$320.0000 USDC");
     });
+
+    it("should show positive sign prefix", () => {
+      const result = formatNumber(new BigNumber(2), {
+        showSign: true,
+      });
+
+      expect(result).toBe("+2.00");
+    });
+
+    it("should show negative sign prefix", () => {
+      const result = formatNumber(new BigNumber(-2), {
+        showSign: true,
+      });
+
+      expect(result).toBe("-2.00");
+    });
   });
 
   describe("toFixedAmount", () => {
