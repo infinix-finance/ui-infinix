@@ -4,7 +4,7 @@ export enum PositionChangeStatuses {
   Liquidated = "Liquidated",
 }
 
-enum OriginalPositionChangeStatuses {
+export enum OriginalPositionChangeStatuses {
   Open = "Opening",
   Close = "Closing",
   Chng = "Changing",

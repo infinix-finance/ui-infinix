@@ -4,7 +4,7 @@ export const containerStyle = (theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   gap: 1.5,
-  backgroundColor: theme.palette.secondary.deepBlackberry,
+  backgroundColor: theme.palette.secondary.blackberry,
   padding: 2,
   borderRadius: "0.5rem",
 });

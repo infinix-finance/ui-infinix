@@ -2,15 +2,15 @@ import { Box, Typography } from "@mui/material";
 
 import { ProductAsset } from "@/components";
 import { NotificationRow, NotificationRowProps } from "./NotificationRow";
+import { Directions, PositionChangeStatuses, ProductIds } from "@/defi";
+import { capitalize } from "@/utils/formatters";
+import { PositionStatus } from "@/components/Atoms/PositionStatus";
 
 import {
   containerStyle,
   headingStyle,
   productStyle,
 } from "./Notification.styles";
-import { Directions, PositionChangeStatuses, ProductIds } from "@/defi";
-import { capitalize } from "@/utils/formatters";
-import { PositionStatus } from "@/components/Atoms/PositionStatus";
 
 export interface NotificationProps {
   productIds: ProductIds;
@@ -43,7 +43,12 @@ export const Notification = ({
         <PositionStatus status={status} />
       </Box>
       {rows.map(({ label, value, color }) => (
-        <NotificationRow label={label} value={value} color={color} />
+        <NotificationRow
+          key={label}
+          label={label}
+          value={value}
+          color={color}
+        />
       ))}
     </Box>
   );

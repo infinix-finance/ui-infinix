@@ -5,11 +5,18 @@ import { Notifications } from "./Notifications";
 export default {
   title: "features/Heading/Notifications",
   component: Notifications,
-} as Meta<typeof Notifications>;
+} as Meta<{ mockEmpty: boolean }>;
 
-const Template: Story<typeof Notifications> = (args) => (
+const Template: Story<{ mockEmpty: boolean }> = (args) => (
   <Notifications {...args} />
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  mockEmpty: false,
+};
+
+export const Empty = Template.bind({});
+Empty.args = {
+  mockEmpty: true,
+};
