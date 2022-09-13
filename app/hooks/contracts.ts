@@ -82,7 +82,7 @@ export const useClearingHouse = () => {
     quoteAsset: string,
     side: number,
     quoteAssetAmount: string,
-    leverage: string,
+    leverage: number,
     baseAssetAmountLimit: string
   ) => {
     if (!active || !clearingHouse) return;
@@ -120,7 +120,7 @@ export const useClearingHouse = () => {
         amm,
         side,
         [amountToSpend],
-        [utils.parseEther(leverage)],
+        [utils.parseEther(leverage.toString())],
         [utils.parseEther(baseAssetAmountLimit)],
         gasLimit
       );

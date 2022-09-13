@@ -17,7 +17,7 @@ interface TradingSidebarStoreProps {
     quoteValue: BigNumber;
   };
   direction: Directions;
-  slippage: number;
+  slippage: string;
   leverage: number;
 }
 
@@ -41,8 +41,8 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
         quoteValue: new BigNumber(0),
       },
       direction: Directions.Long,
-      slippage: 0,
-      leverage: 10,
+      slippage: "0",
+      leverage: 1,
 
       setBalance: (value: string) =>
         set(function setBalance(state: AppState) {

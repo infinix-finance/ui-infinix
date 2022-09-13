@@ -15,14 +15,21 @@ import {
   dividerStyle,
 } from "./TradingSidebar.styles";
 import { useStore } from "@/stores/root";
-import { useClearingHouse, useERC20 } from "@/hooks/contracts";
+import { useClearingHouse } from "@/hooks/contracts";
+import { Directions } from "@/defi/Directions";
 import useTokenBalanceUpdate from "./useTokenBalanceUpdate";
-// import { getIsQuoteSet } from "./TradingSidebar.slice";
+import { getIsQuoteSet } from "./TradingSidebar.slice";
 
 export const TradingSidebar = () => {
-  const { direction } = useStore((state) => state.tradingSidebar);
+  const { amounts, direction, slippage, leverage } = useStore(
+    (state) => state.tradingSidebar
+  );
+  const { id, quoteAsset } = useStore((state) => state.amm);
   const { openPosition, loading } = useClearingHouse();
-  // const isQuoteSet = useStore(getIsQuoteSet);
+  const isQuoteSet = useStore(getIsQuoteSet);
+  const quoteValue = amounts.quoteValue.toString();
+  const side =
+    direction === Directions.Long ? 0 : direction === Directions.Short ? 1 : -1;
 
   useTokenBalanceUpdate();
 
@@ -35,20 +42,12 @@ export const TradingSidebar = () => {
           <LeverageSelector />
           <PriceDetails />
           <SlippageEditor />
-          {/* TODO: Only for testing, replace with real values later */}
           <Button
             variant={direction}
             onClick={() =>
-              openPosition(
-                "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
-                "0xed0748d0c60d587fd26f830c786d1f7ab8204b0a",
-                0,
-                "100",
-                "2",
-                "0"
-              )
+              openPosition(id, quoteAsset, side, quoteValue, leverage, slippage)
             }
-            disabled={loading /*!isQuoteSet*/}
+            disabled={loading || !isQuoteSet}
           >
             Confirm {direction}
           </Button>
