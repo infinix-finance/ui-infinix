@@ -17,8 +17,8 @@ import {
 import { useStore } from "@/stores/root";
 import { useClearingHouse } from "@/hooks/contracts";
 import { Directions } from "@/defi/Directions";
-import useTokenBalanceUpdate from "./useTokenBalanceUpdate";
 import { getIsQuoteSet } from "./TradingSidebar.slice";
+import useTokenBalanceUpdate from "../useTokenBalanceUpdate";
 
 export const TradingSidebar = () => {
   const { amounts, direction, slippage, leverage } = useStore(
@@ -26,12 +26,23 @@ export const TradingSidebar = () => {
   );
   const { id, quoteAsset } = useStore((state) => state.amm);
   const { openPosition, loading } = useClearingHouse();
+  const { updateBalance } = useTokenBalanceUpdate();
   const isQuoteSet = useStore(getIsQuoteSet);
-  const quoteValue = amounts.quoteValue.toString();
-  const side =
-    direction === Directions.Long ? 0 : direction === Directions.Short ? 1 : -1;
 
-  useTokenBalanceUpdate();
+  const handleOpenPosition = async () => {
+    const quoteValue = amounts.quoteValue.toString();
+    const side =
+      direction === Directions.Long
+        ? 0
+        : direction === Directions.Short
+        ? 1
+        : -1;
+
+    // making sure balance gets updated afterwards
+    openPosition(id, quoteAsset, side, quoteValue, leverage, slippage).then(
+      () => updateBalance()
+    );
+  };
 
   return (
     <Box sx={containerStyle}>
@@ -44,9 +55,7 @@ export const TradingSidebar = () => {
           <SlippageEditor />
           <Button
             variant={direction}
-            onClick={() =>
-              openPosition(id, quoteAsset, side, quoteValue, leverage, slippage)
-            }
+            onClick={handleOpenPosition}
             disabled={loading || !isQuoteSet}
           >
             Confirm {direction}
