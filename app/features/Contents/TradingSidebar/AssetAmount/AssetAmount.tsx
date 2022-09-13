@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Box } from "@mui/material";
 
 import { Input } from "@/components";
@@ -13,10 +14,15 @@ export const AssetAmount = () => {
     quoteProduct,
     formattedBalance,
     commonProps,
+    updateBalance,
     handleMaxClick,
     handleBaseAmountChange,
     handleQuoteAmountChange,
   } = useAssetAmount();
+
+  useEffect(() => {
+    updateBalance();
+  }, [updateBalance]);
 
   return (
     <Box sx={containerStyle}>

@@ -51,6 +51,24 @@ export const useContractConnection = () => {
   }, [active, setContracts]);
 };
 
+export const useERC20 = () => {
+  const { active, account } = useStore((state) => state.connection);
+  const { signer } = useContractStore((state) => state);
+
+  const getTokenBalance = async (token: string) => {
+    if (!active || !signer) return;
+
+    const erc20 = new Contract(token, contractConfig.erc20.abi, signer);
+    const result = await erc20.balanceOf(account);
+
+    return utils.formatUnits(result);
+  };
+
+  return {
+    getTokenBalance,
+  };
+};
+
 // TODO: For the future we need to make sure loading is preserved after page refresh
 // e.g. store transaction hashes in local storage and ask for their receipts to determine initial loading status
 export const useClearingHouse = () => {

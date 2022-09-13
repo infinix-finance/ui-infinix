@@ -28,6 +28,7 @@ export const MainPage = () => {
   );
   useSocketUserPositions("0xb9c3a80c8e903df935f1cdf9688f5bd154002b8b");
   useSocketRecentPositions("0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1");
+
   useNotistack();
 
   return (
