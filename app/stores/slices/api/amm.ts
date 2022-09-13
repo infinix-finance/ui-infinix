@@ -10,6 +10,7 @@ export interface AmmSlice {
 export const createAmmSlice: CustomStateCreator<AmmSlice> = (set, _get) => ({
   amm: {
     id: "",
+    quoteAsset: "",
     priceFeedKey: "",
     fundingPeriod: 0,
     setAmmInfo: (amm: Amm) => {

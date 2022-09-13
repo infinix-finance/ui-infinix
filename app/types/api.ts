@@ -6,6 +6,7 @@ export interface Markets {
 
 export interface Amm {
   id: string;
+  quoteAsset: string;
   priceFeedKey: string;
   fundingPeriod: number;
   dataFeedId?: string;
