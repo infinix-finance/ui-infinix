@@ -6,6 +6,7 @@ import { useStore } from "@/stores/root";
 import contractConfig from "@/defi/contracts";
 
 interface ContractList {
+  signer?: providers.JsonRpcSigner;
   clearingHouse?: Contract;
 }
 
@@ -29,6 +30,7 @@ export const useContractConnection = () => {
     const signer = provider.getSigner();
 
     setContracts({
+      signer,
       clearingHouse: new Contract(
         contractConfig.clearingHouse.addr,
         contractConfig.clearingHouse.abi,
@@ -40,10 +42,11 @@ export const useContractConnection = () => {
 
 export const useClearingHouse = () => {
   const { active } = useStore((state) => state.connection);
-  const { clearingHouse } = useContractStore((state) => state);
+  const { signer, clearingHouse } = useContractStore((state) => state);
 
   const openPosition = async (
     amm: string,
+    quoteAsset: string,
     side: number,
     quoteAssetAmount: string,
     leverage: string,
@@ -52,10 +55,21 @@ export const useClearingHouse = () => {
     if (!active || !clearingHouse) return;
 
     try {
+      const amountToSpend = utils.parseEther(quoteAssetAmount);
+      const erc20 = new Contract(quoteAsset, contractConfig.erc20.abi, signer);
+
+      // approve spending first
+      const approval = await erc20.approve(
+        contractConfig.clearingHouse.addr,
+        amountToSpend
+      );
+      await approval.wait();
+
+      // then open position
       const result = await clearingHouse.openPosition(
         amm,
         side,
-        [utils.parseEther(quoteAssetAmount)],
+        [amountToSpend],
         [utils.parseEther(leverage)],
         [utils.parseEther(baseAssetAmountLimit)]
       );

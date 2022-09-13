@@ -38,6 +38,7 @@ export const TradingSidebar = () => {
             onClick={() =>
               openPosition(
                 "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
+                "0xed0748d0c60d587fd26f830c786d1f7ab8204b0a",
                 0,
                 "10",
                 "2",
