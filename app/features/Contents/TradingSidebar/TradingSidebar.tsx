@@ -20,7 +20,7 @@ import { useClearingHouse } from "@/hooks/contracts";
 
 export const TradingSidebar = () => {
   const { direction } = useStore((state) => state.tradingSidebar);
-  const { openPosition } = useClearingHouse();
+  const { openPosition, loading } = useClearingHouse();
   // const isQuoteSet = useStore(getIsQuoteSet);
 
   return (
@@ -44,7 +44,8 @@ export const TradingSidebar = () => {
                 "2",
                 "0"
               )
-            } /*disabled={!isQuoteSet}*/
+            }
+            disabled={loading /*!isQuoteSet*/}
           >
             Confirm {direction}
           </Button>

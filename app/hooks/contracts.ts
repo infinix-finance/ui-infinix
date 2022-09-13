@@ -1,5 +1,5 @@
 import create from "zustand";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Contract, BigNumber, providers, utils } from "ethers";
 
 import { useStore } from "@/stores/root";
@@ -51,7 +51,10 @@ export const useContractConnection = () => {
   }, [active, setContracts]);
 };
 
+// TODO: For the future we need to make sure loading is preserved after page refresh
+// e.g. store transaction hashes in local storage and ask for their receipts to determine initial loading status
 export const useClearingHouse = () => {
+  const [loading, setLoading] = useState(false);
   const { active, account, chainId } = useStore((state) => state.connection);
   const { signer, clearingHouse } = useContractStore((state) => state);
   const gasLimit = gasAmount(chainId);
@@ -66,6 +69,7 @@ export const useClearingHouse = () => {
   ) => {
     if (!active || !clearingHouse) return;
 
+    setLoading(true);
     try {
       const amountToSpend = utils.parseEther(quoteAssetAmount);
       const erc20 = new Contract(quoteAsset, contractConfig.erc20.abi, signer);
@@ -105,12 +109,15 @@ export const useClearingHouse = () => {
       await result.wait();
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const closePosition = async (amm: string, quoteAssetAmountLimit: string) => {
     if (!active || !clearingHouse) return;
 
+    setLoading(true);
     try {
       const result = await clearingHouse.closePosition(
         amm,
@@ -120,11 +127,14 @@ export const useClearingHouse = () => {
       await result.wait();
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return {
     openPosition,
     closePosition,
+    loading,
   };
 };
