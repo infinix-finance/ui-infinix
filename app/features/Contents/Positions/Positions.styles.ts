@@ -5,6 +5,12 @@ export const containerStyle = (theme: Theme) => ({
   flexDirection: "column",
   width: "100%",
   height: "260px",
+
+  "& .MuiTableContainer-root": {
+    borderBottomLeftRadius: "0.5rem",
+    borderBottomRightRadius: "0.5rem",
+    borderTopRightRadius: "0.5rem",
+  },
 });
 
 export const headingStyle = (theme: Theme) => ({
@@ -54,17 +60,6 @@ export const neutralIndicatorStyle = (theme: Theme) => ({
   borderRadius: "0.5rem",
   backgroundColor: alpha(
     theme.palette.primary.ice,
-    theme.custom.opacity._10percent
-  ),
-});
-
-export const indicatorStyle = (isLiquidated: boolean) => (theme: Theme) => ({
-  display: "inline-block",
-  padding: 1.25,
-  borderRadius: "0.5rem",
-  color: isLiquidated ? theme.palette.alert.guava : theme.palette.primary.ice,
-  backgroundColor: alpha(
-    isLiquidated ? theme.palette.alert.guava : theme.palette.primary.ice,
     theme.custom.opacity._10percent
   ),
 });

@@ -7,6 +7,7 @@ import { containerStyle, iconStyle, titleStyle } from "./Drawer.styles";
 import { Selections } from "../ButtonBar/types";
 import Image from "next/image";
 import { Wallets } from "./Wallets";
+import { Notifications } from "./Notifications";
 
 const titleMapping = {
   [Selections.notifications]: "Notifications",
@@ -60,6 +61,7 @@ export const Drawer = ({
         <Typography variant="h6">{title}</Typography>
       </Box>
       {selected === Selections.wallet && <Wallets />}
+      {selected === Selections.notifications && <Notifications />}
     </MuiDrawer>
   );
 };

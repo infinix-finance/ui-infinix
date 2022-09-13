@@ -16,6 +16,7 @@ import {
 } from "./TradingSidebar.styles";
 import { useStore } from "@/stores/root";
 import { getIsQuoteSet } from "./TradingSidebar.slice";
+import { capitalize } from "@/utils/formatters";
 
 export const TradingSidebar = () => {
   const { direction } = useStore((state) => state.tradingSidebar);
@@ -31,7 +32,7 @@ export const TradingSidebar = () => {
           <PriceDetails />
           <SlippageEditor />
           <Button variant={direction} disabled={!isQuoteSet}>
-            Confirm {direction}
+            Confirm {capitalize(direction)}
           </Button>
         </Box>
         <Divider sx={dividerStyle} />
