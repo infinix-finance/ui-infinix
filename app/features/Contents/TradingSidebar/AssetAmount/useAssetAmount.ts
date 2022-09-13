@@ -1,12 +1,9 @@
-import { useState } from "react";
 import BigNumber from "bignumber.js";
 
 import { getPair } from "@/defi";
 import { formatNumber, toFixedNumber } from "@/utils/formatters";
 import { useStore } from "@/stores/root";
-import { getBalance } from "@/stores/slices/connection";
 import { getExchangeRate } from "@/stores/slices/rates";
-import { useERC20 } from "@/hooks/contracts";
 
 import {
   calculateBaseAmount,
@@ -16,16 +13,15 @@ import {
 } from "./helpers";
 
 export default function useAssetAmount() {
-  const [balance, setBalance] = useState(new BigNumber(0));
   const { pair } = useStore((state) => state.rates);
-  const { quoteAsset } = useStore((state) => state.amm);
-  const { getTokenBalance } = useERC20();
   const {
+    balance: balanceValue,
     amounts: { base, quote },
     setAmounts,
   } = useStore((state) => state.tradingSidebar);
   const exchangeRate = useStore(getExchangeRate);
 
+  const balance = <BigNumber>balanceValue;
   const [baseProduct, quoteProduct] = getPair(pair).productIds;
   const formattedBalance = `Balance: ${formatNumber(balance, {
     productId: quoteProduct,
@@ -43,14 +39,6 @@ export default function useAssetAmount() {
     disabled: isDisabled,
     type: "number",
     placeholder: "0",
-  };
-
-  const updateBalance = async () => {
-    // TODO: Only for testing, address should be repalced with quoteAsset
-    const result = await getTokenBalance(
-      "0x9983F755Bbd60d1886CbfE103c98C272AA0F03d6"
-    );
-    result && setBalance(new BigNumber(result));
   };
 
   const handleMaxClick = () => {
@@ -89,11 +77,11 @@ export default function useAssetAmount() {
   return {
     base,
     quote,
+    balance,
     baseProduct,
     quoteProduct,
     formattedBalance,
     commonProps,
-    updateBalance,
     handleMaxClick,
     handleBaseAmountChange,
     handleQuoteAmountChange,

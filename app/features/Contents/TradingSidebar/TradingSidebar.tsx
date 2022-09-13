@@ -1,5 +1,6 @@
 /* istanbul ignore file */
 import { Box, Button, Divider } from "@mui/material";
+import { useEffect } from "react";
 
 import { DirectionSelector } from "./DirectionSelector";
 import { AccountDetails } from "./AccountDetails";
@@ -15,13 +16,25 @@ import {
   dividerStyle,
 } from "./TradingSidebar.styles";
 import { useStore } from "@/stores/root";
-import { useClearingHouse } from "@/hooks/contracts";
+import { useClearingHouse, useERC20 } from "@/hooks/contracts";
 // import { getIsQuoteSet } from "./TradingSidebar.slice";
 
 export const TradingSidebar = () => {
-  const { direction } = useStore((state) => state.tradingSidebar);
+  const { direction, setBalance } = useStore((state) => state.tradingSidebar);
   const { openPosition, loading } = useClearingHouse();
+  const { getTokenBalance } = useERC20();
   // const isQuoteSet = useStore(getIsQuoteSet);
+
+  useEffect(() => {
+    const updateBalance = async () => {
+      // TODO: Only for testing, address should be repalced with quoteAsset
+      const result = await getTokenBalance(
+        "0x9983F755Bbd60d1886CbfE103c98C272AA0F03d6"
+      );
+      result && setBalance(result);
+    };
+    updateBalance();
+  }, [getTokenBalance, setBalance]);
 
   return (
     <Box sx={containerStyle}>

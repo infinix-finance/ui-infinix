@@ -9,6 +9,7 @@ import {
 import { Directions } from "@/defi/Directions";
 
 interface TradingSidebarStoreProps {
+  balance: BigNumber;
   amounts: {
     base: string;
     baseValue: BigNumber;
@@ -22,6 +23,7 @@ interface TradingSidebarStoreProps {
 
 export interface TradingSidebarSlice {
   tradingSidebar: TradingSidebarStoreProps & {
+    setBalance: (value: string) => void;
     setDirection: (value: Directions) => void;
     setLeverage: (value: number) => void;
     setAmounts: (base: string, quote: string) => void;
@@ -31,6 +33,7 @@ export interface TradingSidebarSlice {
 export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> =
   (set) => ({
     tradingSidebar: {
+      balance: new BigNumber(0),
       amounts: {
         base: "",
         baseValue: new BigNumber(0),
@@ -40,6 +43,11 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
       direction: Directions.Long,
       slippage: 0,
       leverage: 10,
+
+      setBalance: (value: string) =>
+        set(function setBalance(state: AppState) {
+          state.tradingSidebar.balance = new BigNumber(value);
+        }),
 
       setDirection: (value: Directions) =>
         set(function setDirection(state: AppState) {
@@ -64,7 +72,7 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
   });
 
 export const getIsBalanceSet = (state: AppState) => {
-  return state.connection.balance.isGreaterThan(0);
+  return state.tradingSidebar.balance.isGreaterThan(0);
 };
 
 export const getIsQuoteSet = (state: AppState) => {
@@ -83,8 +91,8 @@ export const getPriceDetails = (state: AppState) => {
 };
 
 const calculateAccountDetails = (state: AppState) => {
-  const { balance: balanceValue } = state.connection;
   const {
+    balance: balanceValue,
     amounts: { quoteValue },
     leverage,
   } = state.tradingSidebar;
