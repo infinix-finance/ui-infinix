@@ -1,5 +1,5 @@
 import create from "zustand";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Contract, BigNumber, providers, utils } from "ethers";
 
 import { useStore } from "@/stores/root";
@@ -53,16 +53,30 @@ export const useContractConnection = () => {
 
 export const useERC20 = () => {
   const { active, account } = useStore((state) => state.connection);
+  const { setBalance } = useStore((state) => state.tradingSidebar);
   const { signer } = useContractStore((state) => state);
 
-  const getTokenBalance = async (token: string) => {
-    if (!active || !signer) return;
+  const getTokenBalance = useCallback(
+    async (token: string) => {
+      if (!active || !signer) return;
 
-    const erc20 = new Contract(token, contractConfig.erc20.abi, signer);
-    const result = await erc20.balanceOf(account);
+      try {
+        const erc20 = new Contract(token, contractConfig.erc20.abi, signer);
+        const result = await erc20.balanceOf(account);
+        result && setBalance(utils.formatUnits(result));
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [active, account, setBalance, signer]
+  );
 
-    return utils.formatUnits(result);
-  };
+  useEffect(() => {
+    if (!active) return;
+
+    // TODO: Only for testing, address should be replaced with quoteAsset
+    getTokenBalance("0x9983F755Bbd60d1886CbfE103c98C272AA0F03d6");
+  }, [active, getTokenBalance]);
 
   return {
     getTokenBalance,

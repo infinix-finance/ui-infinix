@@ -15,10 +15,9 @@ import {
   dividerStyle,
 } from "./TradingSidebar.styles";
 import { useStore } from "@/stores/root";
-import { useClearingHouse } from "@/hooks/contracts";
+import { useERC20, useClearingHouse } from "@/hooks/contracts";
 import { Directions } from "@/defi/Directions";
 import { getIsQuoteSet } from "./TradingSidebar.slice";
-import useTokenBalanceUpdate from "../useTokenBalanceUpdate";
 
 export const TradingSidebar = () => {
   const { amounts, direction, slippage, leverage } = useStore(
@@ -26,7 +25,7 @@ export const TradingSidebar = () => {
   );
   const { id, quoteAsset } = useStore((state) => state.amm);
   const { openPosition, loading } = useClearingHouse();
-  const { updateBalance } = useTokenBalanceUpdate();
+  const { getTokenBalance } = useERC20();
   const isQuoteSet = useStore(getIsQuoteSet);
 
   const handleOpenPosition = async () => {
@@ -40,7 +39,7 @@ export const TradingSidebar = () => {
 
     // making sure balance gets updated afterwards
     openPosition(id, quoteAsset, side, quoteValue, leverage, slippage).then(
-      () => updateBalance()
+      () => getTokenBalance(quoteAsset)
     );
   };
 
