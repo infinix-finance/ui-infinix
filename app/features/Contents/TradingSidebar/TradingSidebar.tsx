@@ -44,7 +44,7 @@ export const TradingSidebar = () => {
       side,
       quoteValue,
       leverage,
-      slippage.toString()
+      amounts.baseValue.multipliedBy(slippage).toString()
     ).then(() => getTokenBalance());
   };
 
