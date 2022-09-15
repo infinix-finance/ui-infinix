@@ -80,13 +80,15 @@ export const getIsQuoteSet = (state: AppState) => {
 };
 
 export const getPriceDetails = (state: AppState) => {
-  const isBalanceSet = getIsBalanceSet(state);
+  const EMPTY = "---,---,--";
+  const isQuoteSet = getIsQuoteSet(state);
 
+  // TODO: Needs to be replaced with proper calculations
   return {
-    entry: isBalanceSet ? formatUsdValue(new BigNumber(171.12)) : "-",
-    liquidation: isBalanceSet ? formatUsdValue(new BigNumber(90.12)) : "-",
-    impact: isBalanceSet ? formatPercentage(new BigNumber(2)) : "-",
-    tradingFee: isBalanceSet ? formatUsdValue(new BigNumber(0.05)) : "-",
+    entry: isQuoteSet ? formatUsdValue(new BigNumber(0)) : EMPTY,
+    liquidation: isQuoteSet ? formatUsdValue(new BigNumber(0)) : EMPTY,
+    impact: isQuoteSet ? formatPercentage(new BigNumber(0)) : EMPTY,
+    tradingFee: isQuoteSet ? formatUsdValue(new BigNumber(0)) : EMPTY,
   };
 };
 

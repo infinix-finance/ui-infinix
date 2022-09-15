@@ -9,8 +9,15 @@ export interface Amm {
   quoteAsset: string;
   priceFeedKey: string;
   fundingPeriod: number;
-  dataFeedId?: string;
-  price?: number;
+  fundingBufferPeriod: number;
+  lastFunding: number;
+  fundingRate: string;
+  tradeLimitRatio: string;
+  tradingVolume: string;
+  underlyingPrice: string;
+  dataFeedId: string;
+  price: number;
+  nextFunding: number;
 }
 
 export interface PriceUpdate {

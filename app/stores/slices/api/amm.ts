@@ -13,6 +13,15 @@ export const createAmmSlice: CustomStateCreator<AmmSlice> = (set, _get) => ({
     quoteAsset: "",
     priceFeedKey: "",
     fundingPeriod: 0,
+    fundingBufferPeriod: 0,
+    lastFunding: 0,
+    fundingRate: "",
+    tradeLimitRatio: "",
+    tradingVolume: "",
+    underlyingPrice: "",
+    dataFeedId: "",
+    price: 0,
+    nextFunding: 0,
     setAmmInfo: (amm: Amm) => {
       set(function setAmmInfo(state: AppState) {
         state.amm = { ...state.amm, ...amm };

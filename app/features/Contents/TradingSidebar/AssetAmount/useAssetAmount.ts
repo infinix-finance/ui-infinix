@@ -3,7 +3,6 @@ import BigNumber from "bignumber.js";
 import { getPair } from "@/defi";
 import { formatNumber, toFixedNumber } from "@/utils/formatters";
 import { useStore } from "@/stores/root";
-//import { getExchangeRate } from "@/stores/slices/rates";
 
 import {
   calculateBaseAmount,
@@ -19,9 +18,8 @@ export default function useAssetAmount() {
     amounts: { base, quote },
     setAmounts,
   } = useStore((state) => state.tradingSidebar);
-  // TODO: This should be retrieved from amm as tradeLimitRatio
-  // const exchangeRate = useStore(getExchangeRate);
-  const exchangeRate = new BigNumber(1);
+  const { price } = useStore((state) => state.amm);
+  const exchangeRate = new BigNumber(price);
 
   const balance = <BigNumber>balanceValue;
   const [baseProduct, quoteProduct] = getPair(pair).productIds;
