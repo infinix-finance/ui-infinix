@@ -39,7 +39,7 @@ export const TradingSidebar = () => {
 
     // making sure balance gets updated afterwards
     openPosition(id, quoteAsset, side, quoteValue, leverage, slippage).then(
-      () => getTokenBalance(quoteAsset)
+      () => getTokenBalance()
     );
   };
 
