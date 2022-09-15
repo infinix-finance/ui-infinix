@@ -38,9 +38,14 @@ export const TradingSidebar = () => {
         : -1;
 
     // making sure balance gets updated afterwards
-    openPosition(id, quoteAsset, side, quoteValue, leverage, slippage).then(
-      () => getTokenBalance()
-    );
+    openPosition(
+      id,
+      quoteAsset,
+      side,
+      quoteValue,
+      leverage,
+      slippage.toString()
+    ).then(() => getTokenBalance());
   };
 
   return (
