@@ -103,7 +103,7 @@ export const useClearingHouse = () => {
 
     setLoading(true);
     try {
-      const amountToSpend = utils.parseEther(quoteAssetAmount);
+      const amountToSpend = utils.parseUnits(quoteAssetAmount);
       const erc20 = new Contract(quoteAsset, contractConfig.erc20.abi, signer);
 
       const allowance: BigNumber = await erc20.allowance(
@@ -134,8 +134,8 @@ export const useClearingHouse = () => {
         amm,
         side,
         [amountToSpend],
-        [utils.parseEther(leverage.toString())],
-        [utils.parseEther(baseAssetAmountLimit)],
+        [utils.parseUnits(leverage.toString())],
+        [utils.parseUnits(baseAssetAmountLimit)],
         gasLimit
       );
       await result.wait();
@@ -153,7 +153,7 @@ export const useClearingHouse = () => {
     try {
       const result = await clearingHouse.closePosition(
         amm,
-        [utils.parseEther(quoteAssetAmountLimit)],
+        [utils.parseUnits(quoteAssetAmountLimit)],
         gasLimit
       );
       await result.wait();
