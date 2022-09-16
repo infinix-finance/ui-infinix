@@ -9,7 +9,6 @@ interface ConnectionProps {
   chainId?: NetworkId;
   walletId?: WalletId;
   error?: Error;
-  balance: BigNumber;
   active: boolean;
   activate: () => void;
   deactivate: () => void;
@@ -18,7 +17,7 @@ interface ConnectionProps {
 
 export interface ConnectionSlice {
   connection: ConnectionProps & {
-    updateDetails: (details: Omit<ConnectionProps, "balance">) => void;
+    updateDetails: (details: ConnectionProps) => void;
   };
 }
 
@@ -28,12 +27,11 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
 ) => ({
   connection: {
     active: false,
-    balance: new BigNumber(0),
     activate: () => {},
     deactivate: () => {},
     switchNetwork: () => {},
 
-    updateDetails: (details: Omit<ConnectionProps, "balance">) => {
+    updateDetails: (details: ConnectionProps) => {
       details.chainId && !isSupportedNetwork(details.chainId)
         ? get().notifications.showSidebarNotification({
             severity: "error",
@@ -51,6 +49,3 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
     },
   },
 });
-
-export const getBalance = (state: AppState): BigNumber =>
-  state.connection.balance as BigNumber;

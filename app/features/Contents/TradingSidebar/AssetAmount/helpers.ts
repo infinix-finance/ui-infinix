@@ -4,7 +4,7 @@ import BigNumber from "bignumber.js";
 export const calculateBaseAmount = (
   amount: string,
   balance: BigNumber,
-  exchangeRate: BigNumber
+  exchangeRate: BigNumber | number
 ) => {
   const baseAmount = new BigNumber(amount);
   const maxBaseAmount = balance.dividedBy(exchangeRate);
@@ -23,7 +23,7 @@ export const calculateQuoteAmount = (amount: string, balance: BigNumber) => {
 export const convertQuoteToBaseAmount = (
   quoteAmount: string,
   balance: BigNumber,
-  exchangeRate: BigNumber
+  exchangeRate: BigNumber | number
 ) => {
   const convertedAmount = new BigNumber(quoteAmount).dividedBy(exchangeRate);
   const maxAmount = balance.dividedBy(exchangeRate);
@@ -34,7 +34,7 @@ export const convertQuoteToBaseAmount = (
 export const convertBaseToQuoteAmount = (
   baseAmount: string,
   balance: BigNumber,
-  exchangeRate: BigNumber
+  exchangeRate: BigNumber | number
 ) => {
   const convertedAmount = new BigNumber(baseAmount).multipliedBy(exchangeRate);
 

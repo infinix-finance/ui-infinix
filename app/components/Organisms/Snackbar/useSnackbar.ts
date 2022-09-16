@@ -10,7 +10,7 @@ export const useSnackbar = () => {
   const enqueueSnackbar = useCallback(
     (props: AlertNotificationProps) =>
       notiEnqueueSnackbar({ ...props, showProgress: true } as any),
-    []
+    [notiEnqueueSnackbar]
   );
 
   return { enqueueSnackbar, closeSnackbar };

@@ -23,6 +23,7 @@ const createStore = (balance: number, exchangeRate: number) => {
       quote: "",
       quoteValue: new BigNumber(0),
     },
+    balance: new BigNumber(balance),
   };
 
   store.rates = {
@@ -30,8 +31,6 @@ const createStore = (balance: number, exchangeRate: number) => {
     pair: PairId.ethusdc,
     exchangeRate: new BigNumber(exchangeRate),
   };
-
-  store.connection.balance = new BigNumber(balance);
 
   useStore.setState(store);
 };

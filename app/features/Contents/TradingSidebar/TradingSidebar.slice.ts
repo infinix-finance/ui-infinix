@@ -9,6 +9,7 @@ import {
 import { Directions } from "@/defi/Directions";
 
 interface TradingSidebarStoreProps {
+  balance: BigNumber;
   amounts: {
     base: string;
     baseValue: BigNumber;
@@ -22,15 +23,18 @@ interface TradingSidebarStoreProps {
 
 export interface TradingSidebarSlice {
   tradingSidebar: TradingSidebarStoreProps & {
+    setBalance: (value: string) => void;
     setDirection: (value: Directions) => void;
     setLeverage: (value: number) => void;
     setAmounts: (base: string, quote: string) => void;
+    setSlippage: (value: number) => void;
   };
 }
 
 export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> =
   (set) => ({
     tradingSidebar: {
+      balance: new BigNumber(0),
       amounts: {
         base: "",
         baseValue: new BigNumber(0),
@@ -39,7 +43,12 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
       },
       direction: Directions.Long,
       slippage: 0,
-      leverage: 10,
+      leverage: 1,
+
+      setBalance: (value: string) =>
+        set(function setBalance(state: AppState) {
+          state.tradingSidebar.balance = new BigNumber(value);
+        }),
 
       setDirection: (value: Directions) =>
         set(function setDirection(state: AppState) {
@@ -60,11 +69,16 @@ export const createTradingSidebarSlice: CustomStateCreator<TradingSidebarSlice> 
             quoteValue: new BigNumber(quote),
           };
         }),
+
+      setSlippage: (value: number) =>
+        set(function setSlippage(state: AppState) {
+          state.tradingSidebar.slippage = value;
+        }),
     },
   });
 
 export const getIsBalanceSet = (state: AppState) => {
-  return state.connection.balance.isGreaterThan(0);
+  return state.tradingSidebar.balance.isGreaterThan(0);
 };
 
 export const getIsQuoteSet = (state: AppState) => {
@@ -72,19 +86,21 @@ export const getIsQuoteSet = (state: AppState) => {
 };
 
 export const getPriceDetails = (state: AppState) => {
-  const isBalanceSet = getIsBalanceSet(state);
+  const EMPTY = "-";
+  const isQuoteSet = getIsQuoteSet(state);
 
+  // TODO: Needs to be replaced with proper calculations
   return {
-    entry: isBalanceSet ? formatUsdValue(new BigNumber(171.12)) : "-",
-    liquidation: isBalanceSet ? formatUsdValue(new BigNumber(90.12)) : "-",
-    impact: isBalanceSet ? formatPercentage(new BigNumber(2)) : "-",
-    tradingFee: isBalanceSet ? formatUsdValue(new BigNumber(0.05)) : "-",
+    entry: isQuoteSet ? formatUsdValue(new BigNumber(0)) : EMPTY,
+    liquidation: isQuoteSet ? formatUsdValue(new BigNumber(0)) : EMPTY,
+    impact: isQuoteSet ? formatPercentage(new BigNumber(0)) : EMPTY,
+    tradingFee: isQuoteSet ? formatUsdValue(new BigNumber(0)) : EMPTY,
   };
 };
 
 const calculateAccountDetails = (state: AppState) => {
-  const { balance: balanceValue } = state.connection;
   const {
+    balance: balanceValue,
     amounts: { quoteValue },
     leverage,
   } = state.tradingSidebar;

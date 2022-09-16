@@ -19,7 +19,7 @@ const createStore = (balance: number) => {
     pair: PairId.ethusdc,
     exchangeRate: new BigNumber(100),
   };
-  store.connection.balance = new BigNumber(balance);
+  store.tradingSidebar.balance = new BigNumber(balance);
   store.tradingSidebar.slippage = 1.6;
 
   useStore.setState(store);

@@ -10,7 +10,7 @@ export default {
   component: PriceDetails,
 } as Meta<typeof PriceDetails>;
 
-const createStore = (balance: number) => {
+const createStore = (amount: number) => {
   const store = getInitialState();
 
   store.tradingSidebar = {
@@ -18,13 +18,8 @@ const createStore = (balance: number) => {
     leverage: 3,
     amounts: {
       ...store.tradingSidebar.amounts,
-      quoteValue: new BigNumber(100),
+      quoteValue: new BigNumber(amount),
     },
-  };
-
-  store.connection = {
-    ...store.connection,
-    balance: new BigNumber(balance),
   };
 
   useStore.setState(store);

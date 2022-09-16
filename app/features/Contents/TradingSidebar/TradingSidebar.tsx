@@ -15,10 +15,15 @@ import {
   dividerStyle,
 } from "./TradingSidebar.styles";
 import { useStore } from "@/stores/root";
-import { getIsQuoteSet } from "./TradingSidebar.slice";
+import { useClearingHouse } from "@/hooks/contracts";
 import { capitalize } from "@/utils/formatters";
 
+import { getIsQuoteSet } from "./TradingSidebar.slice";
+import useOpenPosition from "./useOpenPosition";
+
 export const TradingSidebar = () => {
+  const { loading } = useClearingHouse();
+  const { handleOpenPosition } = useOpenPosition();
   const { direction } = useStore((state) => state.tradingSidebar);
   const isQuoteSet = useStore(getIsQuoteSet);
 
@@ -31,7 +36,11 @@ export const TradingSidebar = () => {
           <LeverageSelector />
           <PriceDetails />
           <SlippageEditor />
-          <Button variant={direction} disabled={!isQuoteSet}>
+          <Button
+            variant={direction}
+            onClick={handleOpenPosition}
+            disabled={loading || !isQuoteSet}
+          >
             Confirm {capitalize(direction)}
           </Button>
         </Box>

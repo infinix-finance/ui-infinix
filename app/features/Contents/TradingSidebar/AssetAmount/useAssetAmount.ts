@@ -1,8 +1,8 @@
+import BigNumber from "bignumber.js";
+
 import { getPair } from "@/defi";
 import { formatNumber, toFixedNumber } from "@/utils/formatters";
 import { useStore } from "@/stores/root";
-import { getBalance } from "@/stores/slices/connection";
-import { getExchangeRate } from "@/stores/slices/rates";
 
 import {
   calculateBaseAmount,
@@ -14,12 +14,16 @@ import {
 export default function useAssetAmount() {
   const { pair } = useStore((state) => state.rates);
   const {
+    balance: balanceValue,
     amounts: { base, quote },
     setAmounts,
   } = useStore((state) => state.tradingSidebar);
-  const exchangeRate = useStore(getExchangeRate);
-  const balance = useStore(getBalance);
+  const { price } = useStore((state) => state.amm);
 
+  // TODO: We need to confirm if it should not be underlyingPrice instead
+  const exchangeRate = price;
+
+  const balance = <BigNumber>balanceValue;
   const [baseProduct, quoteProduct] = getPair(pair).productIds;
   const formattedBalance = `Balance: ${formatNumber(balance, {
     productId: quoteProduct,
@@ -75,6 +79,7 @@ export default function useAssetAmount() {
   return {
     base,
     quote,
+    balance,
     baseProduct,
     quoteProduct,
     formattedBalance,

@@ -20,10 +20,6 @@ const createStore = (balance: number, quoteValue: number) => {
       ...store.tradingSidebar.amounts,
       quoteValue: new BigNumber(quoteValue),
     },
-  };
-
-  store.connection = {
-    ...store.connection,
     balance: new BigNumber(balance),
   };
 
