@@ -5,7 +5,7 @@ import { AppState, CustomStateCreator } from "../types";
 interface RatesProps {
   market: MarketId;
   pair: PairId;
-  exchangeRate: BigNumber;
+  exchangeRate: BigNumber | number;
   percentageChange: number;
   percentageValue: string;
   markPrice: string;

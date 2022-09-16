@@ -19,7 +19,9 @@ export default function useAssetAmount() {
     setAmounts,
   } = useStore((state) => state.tradingSidebar);
   const { price } = useStore((state) => state.amm);
-  const exchangeRate = new BigNumber(price);
+
+  // TODO: We need to confirm if it should not be underlyingPrice instead
+  const exchangeRate = price;
 
   const balance = <BigNumber>balanceValue;
   const [baseProduct, quoteProduct] = getPair(pair).productIds;
