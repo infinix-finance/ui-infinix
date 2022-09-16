@@ -1,5 +1,6 @@
-import { getPair, getProduct, PairId, ProductId } from "@/defi";
 import BigNumber from "bignumber.js";
+
+import { getPair, getProduct, PairId, ProductId } from "@/defi";
 
 const defaultFormat = (
   withThousandSeparator: boolean = true,
@@ -102,9 +103,8 @@ export const formatPair = (pairId: PairId) => {
 export const toBaseUnitBN = (rawAmt: string | number, decimals?: number) => {
   const raw = new BigNumber(rawAmt);
   const base = new BigNumber(10);
-  const decimalsBN = new BigNumber(decimals || 18);
 
-  return raw.times(base.pow(decimalsBN)).integerValue();
+  return raw.times(base.pow(decimals || 18)).integerValue();
 };
 
 /* Convert 10999000 to 10.999 */
@@ -113,7 +113,7 @@ export const toTokenUnitsBN = (
   tokenDecimals?: number
 ) => {
   const amt = new BigNumber(tokenAmount);
-  const digits = new BigNumber(10).pow(new BigNumber(tokenDecimals || 18));
+  const digits = new BigNumber(10).pow(tokenDecimals || 18);
 
   return amt.div(digits);
 };

@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Contract, BigNumber, providers, utils } from "ethers";
 
 import { useStore } from "@/stores/root";
+import { NetworkId } from "@/defi/types";
 import contractConfig from "@/defi/contracts";
 
 interface ContractList {
@@ -18,7 +19,7 @@ interface ContractStore extends ContractList {
 // we are using this to speed up transactions for testing
 const gasAmount = (chainId: number | undefined) => {
   switch (chainId) {
-    case 43113:
+    case NetworkId.avalancheTestnet:
       return { gasLimit: 1000000 };
     default:
       return {};

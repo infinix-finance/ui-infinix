@@ -78,13 +78,9 @@ export const SlippageEditor = () => {
           <CreateOutlinedIcon sx={iconStyle} />
         </Button>
       </Box>
-      <Modal
-        open={open}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={open}>
         <Box sx={dropdownContainerStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography variant="h6" component="h2">
             Select slippage
           </Typography>
           <Box sx={actionStyle}>
