@@ -19,8 +19,6 @@ export default function useOpenPosition() {
         ? 1
         : -1;
 
-    console.log(id, quoteAsset, side, quoteValue, leverage, slippage);
-
     // making sure balance gets updated afterwards
     openPosition(
       id,

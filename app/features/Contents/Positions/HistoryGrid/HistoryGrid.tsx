@@ -10,7 +10,8 @@ import {
   RowProps,
 } from "@/components";
 import useHistoryGrid from "./useHistoryGrid";
-import { indicatorStyle, neutralIndicatorStyle } from "../Positions.styles";
+import { neutralIndicatorStyle } from "../Positions.styles";
+import { PositionStatus } from "@/components/Atoms/PositionStatus";
 
 const symbolCellRenderer = (row: RowProps, column: ColumnProps) => (
   <Box display="flex" flexDirection="column" gap={1}>
@@ -30,11 +31,7 @@ const leverageCellRenderer = (row: RowProps, column: ColumnProps) => (
 );
 
 const typeCellRenderer = (row: RowProps, column: ColumnProps) => (
-  <Box>
-    <Typography sx={indicatorStyle(row.liquidated)} variant="body3">
-      {row[column.key]}
-    </Typography>
-  </Box>
+  <PositionStatus status={row[column.key]} inlineBlock />
 );
 
 const timeCellRenderer = (row: RowProps) => (

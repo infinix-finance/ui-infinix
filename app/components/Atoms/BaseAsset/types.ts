@@ -11,9 +11,10 @@ export type BaseAssetProps = {
   iconSize?: number;
   label?: string;
   description?: string;
+  showDescription?: boolean;
+  descriptionComponent?: React.ReactNode;
   LabelProps?: TypographyProps;
   DescriptionProps?: TypographyProps;
   showLabel?: boolean;
-  showDescription?: boolean;
   filter?: string;
 } & BoxProps;

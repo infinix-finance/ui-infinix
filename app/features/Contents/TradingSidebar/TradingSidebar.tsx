@@ -16,6 +16,8 @@ import {
 } from "./TradingSidebar.styles";
 import { useStore } from "@/stores/root";
 import { useClearingHouse } from "@/hooks/contracts";
+import { capitalize } from "@/utils/formatters";
+
 import { getIsQuoteSet } from "./TradingSidebar.slice";
 import useOpenPosition from "./useOpenPosition";
 
@@ -39,7 +41,7 @@ export const TradingSidebar = () => {
             onClick={handleOpenPosition}
             disabled={loading || !isQuoteSet}
           >
-            Confirm {direction}
+            Confirm {capitalize(direction)}
           </Button>
         </Box>
         <Divider sx={dividerStyle} />
