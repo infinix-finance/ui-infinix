@@ -1,5 +1,8 @@
+import { secondsToMilliseconds } from "date-fns";
+
 import { AppState, CustomStateCreator } from "../../types";
 import { PriceUpdate } from "@/types/api";
+import { toTokenUnit } from "@/utils/formatters";
 
 interface PriceHistoryProps {
   latest: string;
@@ -19,12 +22,24 @@ export const createPriceHistorySlice: CustomStateCreator<PriceHistorySlice> = (
   priceHistory: {
     latest: "0",
     feed: [],
-    setPriceFeed: (feed: PriceUpdate[]) => {
+    setPriceFeed: (feed: any) => {
+      // TODO
       set(function setPriceFeed(state: AppState) {
-        const latest = feed[0] ? feed[feed.length - 1].price : "0";
+        const [latest] = feed.history.slice(-1) || "0";
         state.priceHistory.latest = latest;
-        state.priceHistory.feed = feed;
+        state.priceHistory.feed = feed.history;
       });
     },
   },
 });
+
+export const getHistoryData = (state: AppState) => {
+  return state.priceHistory.feed.map(({ price, timestamp }) => {
+    const convertedPrice = toTokenUnit(price).toNumber();
+
+    return {
+      time: timestamp,
+      value: convertedPrice,
+    };
+  });
+};

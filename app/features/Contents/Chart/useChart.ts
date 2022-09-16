@@ -1,25 +1,9 @@
 /* istanbul ignore file */
-import { useEffect, useState } from "react";
-import { generateRandomTick } from "./SimpleChart/mock";
-
-import { initialData } from "./SimpleChart/mock";
+import { useStore } from "@/stores/root";
+import { getHistoryData } from "@/stores/slices/api/priceHistory";
 
 export default function useChart() {
-  const [update, setUpdate] = useState<any[]>([
-    { time: 1559075600, value: generateRandomTick() },
-  ]);
+  const initialData = useStore(getHistoryData);
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      setUpdate((last) => [
-        { time: last[0].time + 5000, value: generateRandomTick() },
-      ]);
-    }, 5000);
-
-    return () => {
-      clearInterval(id);
-    };
-  }, []);
-
-  return { initialData, update };
+  return { initialData, update: [] };
 }
