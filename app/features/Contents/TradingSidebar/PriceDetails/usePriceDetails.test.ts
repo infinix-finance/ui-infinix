@@ -7,16 +7,19 @@ import usePriceDetails from "./usePriceDetails";
 const createStore = (amount: number) => {
   const store = getInitialState();
 
-  store.connection = {
-    ...store.connection,
-    balance: new BigNumber(amount),
+  store.tradingSidebar = {
+    ...store.tradingSidebar,
+    amounts: {
+      ...store.tradingSidebar.amounts,
+      quoteValue: new BigNumber(amount),
+    },
   };
 
   useStore.setState(store);
 };
 
 describe("usePriceDetails", () => {
-  test("should return not set values when balance is not yet set", () => {
+  test("should return not set values when quote is not yet set", () => {
     createStore(0);
     const { result } = renderHook(() => usePriceDetails());
 
@@ -40,26 +43,26 @@ describe("usePriceDetails", () => {
     ]);
   });
 
-  test("should return not set values when balance is not yet set", () => {
+  test("should return not set values when quote is not yet set", () => {
     createStore(1000);
     const { result } = renderHook(() => usePriceDetails());
 
     expect(result.current.dataProvider).toEqual([
       {
         label: "Entry Price",
-        value: "$171.12",
+        value: "$0.00",
       },
       {
         label: "Liquidation Price (est.)",
-        value: "$90.12",
+        value: "$0.00",
       },
       {
         label: "Price Impact",
-        value: "2%",
+        value: "0%",
       },
       {
         label: "Trading Fee",
-        value: "$0.05",
+        value: "$0.00",
       },
     ]);
   });

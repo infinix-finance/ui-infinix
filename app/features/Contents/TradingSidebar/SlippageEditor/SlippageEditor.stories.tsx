@@ -16,10 +16,6 @@ const createStore = (balance: number) => {
   store.tradingSidebar = {
     ...store.tradingSidebar,
     slippage: 1.6,
-  };
-
-  store.connection = {
-    ...store.connection,
     balance: new BigNumber(balance),
   };
 

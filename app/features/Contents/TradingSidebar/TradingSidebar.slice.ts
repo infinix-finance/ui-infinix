@@ -86,7 +86,7 @@ export const getIsQuoteSet = (state: AppState) => {
 };
 
 export const getPriceDetails = (state: AppState) => {
-  const EMPTY = "---,---,--";
+  const EMPTY = "-";
   const isQuoteSet = getIsQuoteSet(state);
 
   // TODO: Needs to be replaced with proper calculations

@@ -1,8 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import BigNumber from "bignumber.js";
 
-import { PairId } from "@/defi";
-
 import useAssetAmount from "./useAssetAmount";
 import React from "react";
 import { getInitialState, useStore } from "@/stores/root";
@@ -18,15 +16,13 @@ const createStore = (balance: number, exchangeRate: number) => {
       quote: "",
       quoteValue: new BigNumber(0),
     },
+    balance: new BigNumber(balance),
   };
 
-  store.rates = {
-    ...store.rates,
-    pair: PairId.ethusdc,
-    exchangeRate: new BigNumber(exchangeRate),
+  store.amm = {
+    ...store.amm,
+    price: exchangeRate,
   };
-
-  store.connection.balance = new BigNumber(balance);
 
   useStore.setState(store);
 };
@@ -39,7 +35,7 @@ describe("useAssetAmount", () => {
     expect(result.current).toMatchObject({
       base: "",
       quote: "",
-      baseProduct: "eth",
+      baseProduct: "btc",
       quoteProduct: "usdc",
       formattedBalance: "Balance: 0.00 USDC",
       commonProps: {
@@ -55,7 +51,7 @@ describe("useAssetAmount", () => {
     expect(result.current).toMatchObject({
       base: "",
       quote: "",
-      baseProduct: "eth",
+      baseProduct: "btc",
       quoteProduct: "usdc",
       formattedBalance: "Balance: 22,000.00 USDC",
       commonProps: {

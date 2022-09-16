@@ -5,7 +5,6 @@ import { SWITCH_CONNECTION_MSG } from "@/constants/messages";
 import { AppState, CustomStateCreator } from "../types";
 
 interface ConnectionProps {
-  balance?: BigNumber;
   account?: string | null;
   chainId?: NetworkId;
   walletId?: WalletId;
@@ -28,7 +27,6 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
 ) => ({
   connection: {
     active: false,
-    balance: new BigNumber(0),
     activate: () => {},
     deactivate: () => {},
     switchNetwork: () => {},
