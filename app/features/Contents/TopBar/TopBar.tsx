@@ -1,32 +1,30 @@
-import { Box, Button } from "@mui/material";
-import { useEffect } from "react";
+import { Box } from "@mui/material";
 
 import { Select, useSnackbar } from "@/components";
-import { getMarket, getPairs, MarketId, PairId } from "@/defi";
+import { getMarket, MarketId, PairId } from "@/defi";
 import { useStore } from "@/stores/root";
 
 import {
   generateMarketDropdownProps,
   generatePairDropdownProps,
 } from "./utils";
-import {
-  CountdownLabel,
-  PercentageChangeLabel,
-  TooltipLabel,
-  VolumeLabel,
-} from "./Labels";
+import { CountdownLabel, TooltipLabel, VolumeLabel } from "./Labels";
 
 import {
   containerStyle,
   dropdownContainerStyle,
   selectStyle,
 } from "./TopBar.styles";
+import { getTopBarValues } from "@/stores/slices/api/amm";
+import { getMostRecentPositionPrice } from "@/stores/slices/api/recentPositions";
 
 const marketDropdownProps = generateMarketDropdownProps();
 const pairDropdownProps = generatePairDropdownProps();
 
 export const TopBar = () => {
   const rates = useStore((state) => state.rates);
+  const mostRecentPositionPrice = useStore(getMostRecentPositionPrice);
+  const priceValues = useStore(getTopBarValues);
 
   const handleMarketChange = (maketId: string) => {
     const selectedMarketId = maketId as MarketId;
@@ -58,11 +56,6 @@ export const TopBar = () => {
     });
   };
 
-  // TODO: Remove when connecting with real data
-  useEffect(() => {
-    rates.fetchDetails();
-  }, []);
-
   const { enqueueSnackbar } = useSnackbar();
   const { showSnackbar, showTopNotification, hideTopNotification } = useStore(
     (store) => store.notifications
@@ -84,15 +77,12 @@ export const TopBar = () => {
           {...pairDropdownProps[rates.market]}
         />
       </Box>
-      <PercentageChangeLabel
-        change={rates.percentageChange}
-        value={rates.percentageValue}
-      />
-      <TooltipLabel label="Mark Price" value={rates.markPrice} />
-      <TooltipLabel label="Index Price" value={rates.indexPrice} />
-      <TooltipLabel label="Funding" value={rates.funding} />
-      <VolumeLabel value={rates.volumeValue} />
-      <CountdownLabel startMillis={rates.startMillis} />
+      <TooltipLabel label="Entry Price" value={mostRecentPositionPrice} />
+      <TooltipLabel label="Mark Price" value={priceValues.markPrice} />
+      <TooltipLabel label="Index Price" value={priceValues.indexPrice} />
+      <TooltipLabel label="Funding" value={priceValues.fundingRate} />
+      <VolumeLabel value={priceValues.totalVolume} />
+      <CountdownLabel startMillis={priceValues.countDownMillis} />
     </Box>
   );
 };

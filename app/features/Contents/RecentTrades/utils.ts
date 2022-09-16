@@ -1,19 +1,25 @@
 /* istanbul ignore file */
-import { format } from "date-fns";
+import { format, secondsToMilliseconds } from "date-fns";
 
 import { Directions } from "@/defi";
-import { capitalize, formatNumber } from "@/utils/formatters";
+import { capitalize, formatNumber, toTokenUnit } from "@/utils/formatters";
+import { PositionEvent } from "@/types/api";
 
-export const createDataProvider = (recentTrades: any[]) => {
-  return recentTrades.map((trade) => {
+export const createDataProvider = (recentTrades: PositionEvent[]) => {
+  return recentTrades.map(({ size, price, timestamp }) => {
+    const convertedSize = toTokenUnit(size || 0);
+    const convertedPrice = toTokenUnit(price || 0);
+    const convertedDateTime = new Date(secondsToMilliseconds(timestamp));
+    const direction = convertedSize.lte(0) ? Directions.Short : Directions.Long;
+
     return {
       id: Math.random(),
-      price: formatNumber(trade.price),
-      direction: capitalize(trade.direction),
+      price: formatNumber(convertedPrice),
+      direction: capitalize(direction),
       directionColor:
-        trade.direction === Directions.Long ? "alert.lemon" : "alert.guava",
-      size: formatNumber(trade.size),
-      time: format(trade.dateTime, "HH:mm:ss"),
+        direction === Directions.Long ? "alert.lemon" : "alert.guava",
+      size: formatNumber(convertedSize.abs()),
+      time: format(convertedDateTime, "HH:mm:ss"),
     };
   });
 };

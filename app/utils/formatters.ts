@@ -100,7 +100,7 @@ export const formatPair = (pairId: PairId) => {
 };
 
 /* Convert 10.999 to 10999000 */
-export const toBaseUnitBN = (rawAmt: string | number, decimals?: number) => {
+export const toBaseUnit = (rawAmt: string | number, decimals?: number) => {
   const raw = new BigNumber(rawAmt);
   const base = new BigNumber(10);
 
@@ -108,7 +108,7 @@ export const toBaseUnitBN = (rawAmt: string | number, decimals?: number) => {
 };
 
 /* Convert 10999000 to 10.999 */
-export const toTokenUnitsBN = (
+export const toTokenUnit = (
   tokenAmount: string | number,
   tokenDecimals?: number
 ) => {
