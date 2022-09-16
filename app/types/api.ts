@@ -34,8 +34,8 @@ export interface PositionEvent {
   realizedPnl?: string;
   unrealizedPnlAfter?: string;
   amount?: string;
-  fundingPayment: string;
-  notification: boolean;
+  fundingPayment?: string;
+  notification?: boolean;
 }
 
 export interface PositionData {
