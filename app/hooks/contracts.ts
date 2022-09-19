@@ -4,7 +4,7 @@ import { Contract, BigNumber, providers, utils } from "ethers";
 
 import { useStore } from "@/stores/root";
 import { NetworkId } from "@/defi/types";
-import contractConfig from "@/defi/contracts";
+import contractConfig from "@/defi/contracts/hooks";
 
 interface ContractList {
   signer?: providers.JsonRpcSigner;
