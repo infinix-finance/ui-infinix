@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
+import { render, screen } from "@testing-library/react";
 
+import { checkScreenTexts } from "@/utils/testUtils";
 import * as stories from "./Notification.stories";
-import { checkScreenLabels, checkScreenTexts } from "@/utils/testUtils";
 
 const { Open, Closed, Liquidated } = composeStories(stories);
 

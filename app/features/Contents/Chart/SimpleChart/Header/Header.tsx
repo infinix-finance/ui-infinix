@@ -1,4 +1,5 @@
 /* istanbul ignore file */
+import FilterVintageOutlinedIcon from "@mui/icons-material/FilterVintageOutlined";
 import {
   Box,
   Button,
@@ -7,22 +8,21 @@ import {
   Typography,
 } from "@mui/material";
 import BigNumber from "bignumber.js";
-import FilterVintageOutlinedIcon from "@mui/icons-material/FilterVintageOutlined";
 
 import { ProductAsset } from "@/components";
 import { getPair, getProduct, PairId, Timeframes, TokenId } from "@/defi";
 import { formatNumber, formatPercentage } from "@/utils/formatters";
 
 import {
-  topStyle,
-  detailsStyle,
-  detailsContainerStyle,
-  contentStyle,
-  containerStyle,
   buttonGroupStyle,
+  containerStyle,
+  contentStyle,
+  detailsContainerStyle,
+  detailsStyle,
+  priceAndDetailsStyle,
   productButtonStyle,
   productStyle,
-  priceAndDetailsStyle,
+  topStyle,
 } from "./Header.styles";
 
 export interface HeaderProps {

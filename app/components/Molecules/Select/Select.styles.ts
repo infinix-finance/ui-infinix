@@ -1,4 +1,4 @@
-import { alpha, Theme } from "@mui/material";
+import { Theme } from "@mui/material";
 
 export const selectPaperStyle = (maxHeight: number) => (theme: Theme) => ({
   marginTop: "2px",

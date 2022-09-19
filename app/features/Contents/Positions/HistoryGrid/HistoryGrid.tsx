@@ -1,6 +1,6 @@
 /* istanbul ignore file */
-import { Box, Button, Typography } from "@mui/material";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+import { Box, Button, Typography } from "@mui/material";
 
 import {
   ColumnProps,
@@ -9,9 +9,9 @@ import {
   RowClickFunc,
   RowProps,
 } from "@/components";
-import useHistoryGrid from "./useHistoryGrid";
-import { neutralIndicatorStyle } from "../Positions.styles";
 import { PositionStatus } from "@/components/Atoms/PositionStatus";
+import { neutralIndicatorStyle } from "../Positions.styles";
+import useHistoryGrid from "./useHistoryGrid";
 
 const symbolCellRenderer = (row: RowProps, column: ColumnProps) => (
   <Box display="flex" flexDirection="column" gap={1}>

@@ -1,9 +1,6 @@
-import { secondsToMilliseconds } from "date-fns";
-
-import { AppState, CustomStateCreator } from "../../types";
 import { PositionEvent } from "@/types/api";
 import { formatUsdValue, toTokenUnit } from "@/utils/formatters";
-import { Directions } from "@/defi";
+import { AppState, CustomStateCreator } from "../../types";
 
 interface RecentPositionsProps {
   list: PositionEvent[];
@@ -24,7 +21,7 @@ export const createRecentPositionsSlice: CustomStateCreator<RecentPositionsSlice
       setPositions: (events: PositionEvent[]) => {
         set(function setPositions(state: AppState) {
           const sortedEvents = events.sort((a, b) => b.timestamp - a.timestamp);
-          state.recentPositions.list = sortedEvents;
+          state.recentPositions.list = events;
         });
       },
 
@@ -39,6 +36,6 @@ export const createRecentPositionsSlice: CustomStateCreator<RecentPositionsSlice
 export const getMostRecentPositionPrice = (state: AppState) => {
   const [mostRecentPosition] = state.recentPositions.list;
 
-  const price = toTokenUnit(mostRecentPosition?.price || 0);
+  const price = toTokenUnit(mostRecentPosition?.price);
   return formatUsdValue(price);
 };

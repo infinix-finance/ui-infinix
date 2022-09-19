@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  TableBody,
-  TableCell,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Box, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import Image from "next/image";
 
 import { contentStyle, emptyBodyStyle } from "./DataGrid.styles";

@@ -1,8 +1,7 @@
-import React from "react";
-import { Typography, Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
-import { InputLabelProps } from "./types";
 import { boxStyle, inputBox } from "./InputLabel.styles";
+import { InputLabelProps } from "./types";
 
 export const InputLabel = ({
   LabelProps,

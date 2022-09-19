@@ -1,7 +1,5 @@
-import BigNumber from "bignumber.js";
-
-import { isSupportedNetwork, NetworkId, WalletId } from "@/defi";
 import { SWITCH_CONNECTION_MSG } from "@/constants/messages";
+import { isSupportedNetwork, NetworkId, WalletId } from "@/defi";
 import { AppState, CustomStateCreator } from "../types";
 
 interface ConnectionProps {
