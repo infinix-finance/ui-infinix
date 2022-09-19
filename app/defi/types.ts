@@ -61,6 +61,8 @@ export type Network = {
   defaultTokenSymbol: string;
   publicRpcUrl: string;
   nativeToken: TokenId;
+  etherscanLink?: string;
+  secondsPerBlock?: number;
 };
 
 export enum ProtocolId {

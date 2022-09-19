@@ -7,12 +7,15 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
+import { Web3portalContextProvider } from "@web3-portal/core";
 
 import createEmotionCache from "@/styles/createEmotionCache";
 import { createTheme } from "@/styles/theme";
 import { ColorModeContext } from "@/contexts/ColorMode";
 import Script from "next/script";
 import { SnackbarProvider } from "@/components";
+import { NetworkId } from "@/defi/types";
+import { NETWORKS } from "@/defi/Networks";
 import { MetamaskUpdater } from "@/defi/contracts/hooks";
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -29,9 +32,18 @@ const initializeContentful = async () => {
   // console.log(fields);
 };
 
-function getLibrary(provider: any): Web3Provider {
-  return new Web3Provider(provider);
-}
+const getLibrary = (provider: any): Web3Provider => new Web3Provider(provider);
+
+const getSupportedChains = () => [
+  {
+    etherscanLink: NETWORKS[NetworkId.avalancheTestnet].etherscanLink!,
+    name: NETWORKS[NetworkId.avalancheTestnet].name,
+    unit: NETWORKS[NetworkId.avalancheTestnet].defaultTokenSymbol,
+    chainId: NetworkId.avalancheTestnet,
+    rpcUrl: NETWORKS[NetworkId.avalancheTestnet].publicRpcUrl,
+    secondsPerBlock: NETWORKS[NetworkId.avalancheTestnet].secondsPerBlock!,
+  },
+];
 
 const initializeHotjar = () => {
   if (
@@ -90,12 +102,14 @@ export default function MyApp(props: MyAppProps) {
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <Web3ReactProvider getLibrary={getLibrary}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <MetamaskUpdater />
-            <SnackbarProvider>
-              <Component {...pageProps} />
-            </SnackbarProvider>
+            <Web3portalContextProvider supportedChains={getSupportedChains()}>
+              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+              <CssBaseline />
+              <MetamaskUpdater />
+              <SnackbarProvider>
+                <Component {...pageProps} />
+              </SnackbarProvider>
+            </Web3portalContextProvider>
           </Web3ReactProvider>
         </ThemeProvider>
       </ColorModeContext.Provider>
