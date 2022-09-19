@@ -1,6 +1,6 @@
 import create from "zustand";
 import { useEffect, useState, useCallback } from "react";
-import { Contract, BigNumber, providers, utils } from "ethers";
+import { BigNumber, providers, utils } from "ethers";
 
 import { useStore } from "@/stores/root";
 import { NetworkId } from "@/defi/types";

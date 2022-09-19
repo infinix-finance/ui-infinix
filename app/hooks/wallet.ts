@@ -29,7 +29,7 @@ const switchNetwork = (library: any) => () => {
               chainId: getChainId(NetworkId.avalancheTestnet),
               chainName: NETWORKS[NetworkId.avalancheTestnet].name,
               nativeCurrency: {
-                name: NETWORKS[NetworkId.avalancheTestnet].symbol,
+                name: NETWORKS[NetworkId.avalancheTestnet].nativeToken,
                 symbol: NETWORKS[NetworkId.avalancheTestnet].defaultTokenSymbol,
                 decimals: 18,
               },
