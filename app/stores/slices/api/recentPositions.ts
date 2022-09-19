@@ -12,6 +12,7 @@ interface RecentPositionsProps {
 export interface RecentPositionsSlice {
   recentPositions: RecentPositionsProps & {
     setPositions: (events: PositionEvent[]) => void;
+    clear: () => void;
   };
 }
 
@@ -19,10 +20,17 @@ export const createRecentPositionsSlice: CustomStateCreator<RecentPositionsSlice
   (set, _get) => ({
     recentPositions: {
       list: [],
+
       setPositions: (events: PositionEvent[]) => {
         set(function setPositions(state: AppState) {
           const sortedEvents = events.sort((a, b) => b.timestamp - a.timestamp);
           state.recentPositions.list = sortedEvents;
+        });
+      },
+
+      clear: () => {
+        set(function clear(state: AppState) {
+          state.recentPositions.list = [];
         });
       },
     },

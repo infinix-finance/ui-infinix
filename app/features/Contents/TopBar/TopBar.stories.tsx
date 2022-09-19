@@ -7,20 +7,26 @@ export default {
   component: TopBar,
 } as Meta<typeof TopBar>;
 
-const createStore = (initialize: boolean, positiveChange: boolean = true) => {
+const createStore = (initialize: boolean) => {
   const store = getInitialState();
 
   if (initialize) {
-    store.rates = {
-      ...store.rates,
-      percentageChange: positiveChange ? 21.3456 : -3.567,
-      percentageValue: "$101.50",
-      markPrice: "$210.00",
-      indexPrice: "$350.40",
-      funding: "0.0123%",
-      volumeValue: "$222.33",
-      startMillis: 2000000,
+    store.amm = {
+      ...store.amm,
+      underlyingPrice: "44249911500751726257",
+      price: 16.69214589,
+      tradingVolume: "600000000000000000000",
+      fundingRate: "56299630959179571",
+      nextFunding: new Date().getTime() / 1000 + 605.1, // 10 minutes 5 seconds
     };
+
+    store.recentPositions.list = [
+      {
+        price: "82000000000000000000",
+        timestamp: 1654832745,
+        type: "Changing",
+      },
+    ];
   }
 
   store.rates.fetchDetails = () => {};
@@ -42,18 +48,10 @@ WithoutData.decorators = [
   },
 ];
 
-export const WithPositiveChange = Template.bind({});
-WithPositiveChange.decorators = [
+export const WithData = Template.bind({});
+WithData.decorators = [
   (Story) => {
     createStore(true);
-    return <Story />;
-  },
-];
-
-export const WithNegativeChange = Template.bind({});
-WithNegativeChange.decorators = [
-  (Story) => {
-    createStore(true, false);
     return <Story />;
   },
 ];

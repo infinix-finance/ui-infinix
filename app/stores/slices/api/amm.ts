@@ -8,31 +8,45 @@ import {
   toTokenUnit,
 } from "@/utils/formatters";
 
+const getDefaultData = () => ({
+  id: "",
+  quoteAsset: "",
+  priceFeedKey: "",
+  fundingPeriod: 0,
+  fundingBufferPeriod: 0,
+  lastFunding: 0,
+  fundingRate: "",
+  tradeLimitRatio: "",
+  tradingVolume: "",
+  underlyingPrice: "",
+  dataFeedId: "",
+  price: 0,
+  nextFunding: 0,
+});
+
 export interface AmmSlice {
   amm: Amm & {
     setAmmInfo: (amm: Amm) => void;
+    clear: () => void;
   };
 }
 
 export const createAmmSlice: CustomStateCreator<AmmSlice> = (set, _get) => ({
   amm: {
-    id: "",
-    quoteAsset: "",
-    priceFeedKey: "",
-    fundingPeriod: 0,
-    fundingBufferPeriod: 0,
-    lastFunding: 0,
-    fundingRate: "",
-    tradeLimitRatio: "",
-    tradingVolume: "",
-    underlyingPrice: "",
-    dataFeedId: "",
-    price: 0,
-    nextFunding: 0,
+    ...getDefaultData(),
 
     setAmmInfo: (amm: Amm) => {
       set(function setAmmInfo(state: AppState) {
         state.amm = { ...state.amm, ...amm };
+      });
+    },
+
+    clear: () => {
+      set(function clear(state: AppState) {
+        state.amm = {
+          ...state.amm,
+          ...getDefaultData(),
+        };
       });
     },
   },

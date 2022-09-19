@@ -11,7 +11,6 @@ export default {
 
 const defaultArgs = {
   iconSize: 24,
-  isLabelCentered: false,
   LabelProps: {},
 };
 
