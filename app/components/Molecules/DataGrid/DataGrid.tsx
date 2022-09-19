@@ -18,12 +18,14 @@ export const DataGrid = ({
 }: DataGridProps) => {
   const visibleColumns = columns.filter((column) => !column?.invisible);
   const isPopulated = Boolean(dataProvider.length);
-  const shouldShowPlaceholder = (showPlaceholder && !isPopulated) || children;
+  const shouldShowPlaceholder = Boolean(
+    (showPlaceholder && !isPopulated) || children
+  );
   const shouldShowBody = isPopulated && !children;
 
   return (
     <TableContainer>
-      <Table sx={tableStyle} stickyHeader>
+      <Table sx={tableStyle(shouldShowPlaceholder)} stickyHeader>
         <Header columns={visibleColumns} onClick={onHeaderClick} />
         {shouldShowPlaceholder && (
           <PlaceHolder columns={visibleColumns}>{children}</PlaceHolder>

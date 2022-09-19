@@ -1,9 +1,6 @@
-import { secondsToMilliseconds } from "date-fns";
-
 import { AppState, CustomStateCreator } from "../../types";
 import { PositionEvent } from "@/types/api";
 import { formatUsdValue, toTokenUnit } from "@/utils/formatters";
-import { Directions } from "@/defi";
 
 interface RecentPositionsProps {
   list: PositionEvent[];

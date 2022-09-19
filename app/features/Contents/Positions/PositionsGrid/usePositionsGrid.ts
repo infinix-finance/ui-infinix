@@ -1,12 +1,11 @@
 /* istanbul ignore file */
-import BigNumber from "bignumber.js";
 
 import { ColumnProps, RowProps } from "@/components";
-import { Directions, PairId } from "@/defi";
+import { useStore } from "@/stores/root";
 
-import { createDataProvider } from "./utils";
+// TODO: REMOVE
 
-const positions = [
+/* const positions = [
   {
     pairId: PairId.ethusdc,
     direction: Directions.Long,
@@ -51,10 +50,24 @@ const positions = [
     liquidationPrice: new BigNumber(1212.11),
     unrealizedPnl: new BigNumber(101.01),
   },
+  {
+    pairId: PairId.chaosusdc,
+    direction: Directions.Short,
+    leverage: 1,
+    size: new BigNumber(2.5),
+    entryPrice: new BigNumber(1275.2205),
+    markPrice: new BigNumber(1273.22),
+    marginRatio: 2,
+    liquidationPrice: new BigNumber(1212.11),
+    unrealizedPnl: new BigNumber(101.01),
+  },
 ];
-
+*/
 export default function usePositionsGrid() {
-  const dataProvider = createDataProvider(positions);
+  /* const dataProvider = createDataProvider([]); */
+  const userPositions = useStore((state) => state.userPositions);
+  const amm = useStore((state) => state.amm);
+  const markets = useStore((state) => state.markets);
 
   const handleHeaderClick = (column: ColumnProps) => {
     console.log("header clicked", column);
@@ -65,7 +78,7 @@ export default function usePositionsGrid() {
   };
 
   return {
-    dataProvider,
+    dataProvider: [],
     handleHeaderClick,
     handleRowClick,
   };

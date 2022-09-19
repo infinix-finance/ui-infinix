@@ -4,18 +4,22 @@ export const containerStyle = (theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   width: "100%",
-  height: "260px",
+  height: "352px",
+  backgroundColor: theme.palette.secondary.deepBlackberry,
+  borderBottomRightRadius: "0.5rem",
+  borderBottomLeftRadius: "0.5rem",
 
   "& .MuiTableContainer-root": {
-    borderBottomLeftRadius: "0.5rem",
+    height: "100%",
     borderBottomRightRadius: "0.5rem",
-    borderTopRightRadius: "0.5rem",
+    borderBottomLeftRadius: "0.5rem",
   },
 });
 
 export const headingStyle = (theme: Theme) => ({
   display: "flex",
   justifyContent: "space-between",
+  backgroundColor: theme.palette.secondary.deeperBlackberry,
 });
 
 export const rightGroupStyle = (theme: Theme) => ({

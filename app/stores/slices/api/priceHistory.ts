@@ -1,5 +1,3 @@
-import { secondsToMilliseconds } from "date-fns";
-
 import { AppState, CustomStateCreator } from "../../types";
 import { PriceUpdate } from "@/types/api";
 import { toTokenUnit } from "@/utils/formatters";
