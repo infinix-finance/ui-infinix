@@ -4,11 +4,12 @@ import { Contract, BigNumber, providers, utils } from "ethers";
 
 import { useStore } from "@/stores/root";
 import { NetworkId } from "@/defi/types";
-import contractConfig from "@/defi/contracts/hooks";
+import { ClearingHouse } from "@/defi/contracts/types";
+import { getERC20Contract, getClearingHouseContract } from "@/defi/contracts";
 
 interface ContractList {
   signer?: providers.JsonRpcSigner;
-  clearingHouse?: Contract;
+  clearingHouse?: ClearingHouse;
 }
 
 interface ContractStore extends ContractList {
@@ -43,11 +44,7 @@ export const useContractConnection = () => {
 
     setContracts({
       signer,
-      clearingHouse: new Contract(
-        contractConfig.clearingHouse.addr,
-        contractConfig.clearingHouse.abi,
-        signer
-      ),
+      clearingHouse: getClearingHouseContract(signer),
     });
   }, [active, setContracts]);
 };
@@ -59,17 +56,17 @@ export const useERC20 = () => {
   const { signer } = useContractStore((state) => state);
 
   const getTokenBalance = useCallback(async () => {
-    if (!active || !signer) return;
+    if (!active || !signer || !account) return;
 
     try {
       // for testing, "0x9983F755Bbd60d1886CbfE103c98C272AA0F03d6" can be used instead
-      const erc20 = new Contract(quoteAsset, contractConfig.erc20.abi, signer);
+      const erc20 = getERC20Contract(quoteAsset, signer);
       const result = await erc20.balanceOf(account);
       result && setBalance(utils.formatUnits(result));
     } catch (error) {
       console.error(error);
     }
-  }, [active, account, setBalance, quoteAsset, signer]);
+  }, [active, account, quoteAsset, signer, setBalance]);
 
   useEffect(() => {
     if (!active) return;
@@ -100,16 +97,16 @@ export const useClearingHouse = () => {
     leverage: number,
     baseAssetAmountLimit: string
   ) => {
-    if (!active || !clearingHouse) return;
+    if (!active || !account || !clearingHouse || !signer) return;
 
     setLoading(true);
     try {
       const amountToSpend = utils.parseUnits(quoteAssetAmount);
-      const erc20 = new Contract(quoteAsset, contractConfig.erc20.abi, signer);
+      const erc20 = getERC20Contract(quoteAsset, signer);
 
       const allowance: BigNumber = await erc20.allowance(
         account,
-        contractConfig.clearingHouse.addr
+        clearingHouse.address
       );
 
       // approve spending if necessary first
@@ -117,14 +114,14 @@ export const useClearingHouse = () => {
         // to increase allowance we first have to reduce it to 0
         if (allowance.gt(0)) {
           const reduction = await erc20.approve(
-            contractConfig.clearingHouse.addr,
+            clearingHouse.address,
             0,
             gasLimit
           );
           await reduction.wait();
         }
         const approval = await erc20.approve(
-          contractConfig.clearingHouse.addr,
+          clearingHouse.address,
           amountToSpend,
           gasLimit
         );
@@ -134,9 +131,9 @@ export const useClearingHouse = () => {
       const result = await clearingHouse.openPosition(
         amm,
         side,
-        [amountToSpend],
-        [utils.parseUnits(leverage.toString())],
-        [utils.parseUnits(baseAssetAmountLimit)],
+        { d: amountToSpend },
+        { d: utils.parseUnits(leverage.toString()) },
+        { d: utils.parseUnits(baseAssetAmountLimit) },
         gasLimit
       );
       await result.wait();
@@ -154,7 +151,7 @@ export const useClearingHouse = () => {
     try {
       const result = await clearingHouse.closePosition(
         amm,
-        [utils.parseUnits(quoteAssetAmountLimit)],
+        { d: utils.parseUnits(quoteAssetAmountLimit) },
         gasLimit
       );
       await result.wait();
