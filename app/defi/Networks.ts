@@ -44,7 +44,7 @@ export const NETWORKS: {
     infoPage: "Avax Scan",
     icon: "/networks/avalanche.svg",
     defaultTokenSymbol: "AVAX",
-    publicRpcUrl: "https://api.avax.network/ext/bc/C/rpc",
+    publicRpcUrl: "https://api.avax-test.network/ext/bc/C/rpc",
     nativeToken: TokenId.avax,
     etherscanLink: "https://testnet.snowtrace.io/",
     secondsPerBlock: 2.82,
