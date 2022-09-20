@@ -1,8 +1,15 @@
+import { PairId } from "@/defi";
+import { Position, PositionEvent } from "@/types/api";
 import { AppState, CustomStateCreator } from "../../types";
-import { Position } from "@/types/api";
 
 interface UserPositionsProps {
   list: Position[];
+}
+
+export interface HistoryPositionEvent extends PositionEvent {
+  amm: string;
+  pairId: PairId;
+  leverage: string;
 }
 
 export interface UserPositionsSlice {
@@ -22,3 +29,28 @@ export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
       },
     },
   });
+
+export const getPositions = (state: AppState) => {
+  return state.userPositions.list
+    .map(({ position }) => ({
+      ...position,
+      pairId: state.markets.getPairName(position.amm),
+    }))
+    .sort((a, b) => b.timestamp - a.timestamp);
+};
+
+export const getHistory = (state: AppState): HistoryPositionEvent[] => {
+  return state.userPositions.list
+    .reduce((target: HistoryPositionEvent[], { position, history }) => {
+      const enhancedHistory = history.map((entry) => ({
+        ...entry,
+        amm: position.amm, // What shall we do with these?
+        pairId: state.markets.getPairName(position.amm),
+        leverage: position.leverage,
+        entryPrice: position.entryPrice,
+        underlyingPrice: position.underlyingPrice,
+      }));
+      return [...target, ...enhancedHistory];
+    }, [])
+    .sort((a, b) => b.timestamp - a.timestamp);
+};

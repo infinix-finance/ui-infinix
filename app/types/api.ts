@@ -31,6 +31,8 @@ export interface PositionEvent {
   price: string;
   margin?: string;
   size?: string;
+  entryPrice?: string;
+  underlyingPrice?: string;
   fee?: string;
   realizedPnl?: string;
   unrealizedPnlAfter?: string;
@@ -50,6 +52,7 @@ export interface PositionData {
   tradingVolume: string;
   leverage: string;
   entryPrice: string;
+  underlyingPrice: string;
   fee: string;
   realizedPnl: string;
   unrealizedPnl: string;
