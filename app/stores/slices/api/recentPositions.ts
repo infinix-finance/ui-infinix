@@ -20,7 +20,6 @@ export const createRecentPositionsSlice: CustomStateCreator<RecentPositionsSlice
 
       setPositions: (events: PositionEvent[]) => {
         set(function setPositions(state: AppState) {
-          const sortedEvents = events.sort((a, b) => b.timestamp - a.timestamp);
           state.recentPositions.list = events;
         });
       },
