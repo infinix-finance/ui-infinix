@@ -16,6 +16,10 @@ interface ContractStore extends ContractList {
   setContracts: (contracts: ContractList) => void;
 }
 
+const toDecimalStruct = (d: BigNumber) => ({
+  d,
+});
+
 // TODO: We should decide whether we want to use this or not
 // we are using this to speed up transactions for testing
 const gasAmount = (chainId: number | undefined) => {
@@ -131,9 +135,9 @@ export const useClearingHouse = () => {
       const result = await clearingHouse.openPosition(
         amm,
         side,
-        { d: amountToSpend },
-        { d: utils.parseUnits(leverage.toString()) },
-        { d: utils.parseUnits(baseAssetAmountLimit) },
+        toDecimalStruct(amountToSpend),
+        toDecimalStruct(utils.parseUnits(leverage.toString())),
+        toDecimalStruct(utils.parseUnits(baseAssetAmountLimit)),
         gasLimit
       );
       await result.wait();
