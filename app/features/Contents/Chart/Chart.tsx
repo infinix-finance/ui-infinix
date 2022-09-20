@@ -1,17 +1,28 @@
 /* istanbul ignore file */
 import { Box } from "@mui/material";
 
-import { containerStyle } from "./Chart.styles";
+import { useStore } from "@/stores/root";
+import {
+  getHistoryData,
+  getLatestPriceInfo,
+} from "@/stores/slices/api/priceHistory";
 import SimpleChart from "./SimpleChart";
 
-import useChart from "./useChart";
+import { containerStyle } from "./Chart.styles";
 
 export const Chart = () => {
-  const { initialData, update } = useChart();
+  const initialData = useStore(getHistoryData);
+  const latestPriceInfo = useStore(getLatestPriceInfo);
 
   return (
     <Box sx={containerStyle}>
-      <SimpleChart initialData={initialData} update={update} />
+      <SimpleChart
+        initialData={initialData}
+        update={[]}
+        price={latestPriceInfo.lastPrice}
+        change={latestPriceInfo.change}
+        percentage={latestPriceInfo.percentageChange}
+      />
     </Box>
   );
 };

@@ -4,51 +4,26 @@ import { composeStories } from "@storybook/testing-react";
 import * as stories from "./TopBar.stories";
 import { checkScreenTexts } from "@/utils/testUtils";
 
-const { WithoutData, WithPositiveChange, WithNegativeChange } =
-  composeStories(stories);
+const { WithoutData, WithData } = composeStories(stories);
 
 describe("TopBar", () => {
   test("should render the not yet initialized state", () => {
     render(<WithoutData />);
 
-    checkScreenTexts([
-      "Crypto",
-      "BTC/USDC",
-      "0.0%",
-      "$0.00",
-      "0.00%",
-      "00:00:00",
-    ]);
-    expect(screen.queryAllByTestId("InfoOutlinedIcon")).toHaveLength(3);
+    checkScreenTexts(["Crypto", "BTC/USDC", "$0.00", "0.0000%", "00:00:00"]);
+    expect(screen.queryAllByTestId("InfoOutlinedIcon")).toHaveLength(4);
   });
 
-  test("should render the component with positive outlook", () => {
-    render(<WithPositiveChange />);
+  test("should render the component with data", () => {
+    render(<WithData />);
 
     checkScreenTexts([
-      "21.3%",
-      "$101.50",
-      "$210.00",
-      "$350.40",
-      "0.0123%",
-      "$222.33",
-      "00:33:20",
+      "$82.00",
+      "$44.25",
+      "$16.69",
+      "0.0563%",
+      "$600.00",
+      "00:10:05",
     ]);
-    expect(screen.getByTestId("ArrowDropUpIcon")).toBeInTheDocument();
-  });
-
-  test("should render the component with negative outlook", () => {
-    render(<WithNegativeChange />);
-
-    checkScreenTexts([
-      "-3.6%",
-      "$101.50",
-      "$210.00",
-      "$350.40",
-      "0.0123%",
-      "$222.33",
-      "00:33:20",
-    ]);
-    expect(screen.getByTestId("ArrowDropDownIcon")).toBeInTheDocument();
   });
 });

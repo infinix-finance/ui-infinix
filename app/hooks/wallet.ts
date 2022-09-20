@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react";
 
-import { InjectedConnector } from "@web3-react/injected-connector";
-import { useWeb3React } from "@web3-react/core";
 import { useStore } from "@/stores/root";
+import { useWeb3React } from "@web3-react/core";
+import { InjectedConnector } from "@web3-react/injected-connector";
 import { NetworkId } from "@/defi/types";
 import { NETWORKS } from "@/defi/Networks";
 

@@ -1,4 +1,4 @@
-import { alpha, Theme } from "@mui/material";
+import { Theme } from "@mui/material";
 
 export const inputStyle =
   (alert: boolean, alignEnd: boolean) => (theme: Theme) =>

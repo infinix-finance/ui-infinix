@@ -1,4 +1,4 @@
-import { getPairs, MarketId, PairId, ProductIds } from "@/defi";
+import { getPairs, MarketId } from "@/defi";
 import { MARKETS } from "@/defi/Markets";
 
 export const generateMarketDropdownProps = () => {
