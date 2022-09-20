@@ -28,9 +28,7 @@ const initializeContentful = async () => {
   // console.log(fields);
 };
 
-function getLibrary(provider: any): Web3Provider {
-  return new Web3Provider(provider);
-}
+const getLibrary = (provider: any): Web3Provider => new Web3Provider(provider);
 
 const initializeHotjar = () => {
   if (
