@@ -7,13 +7,17 @@ describe("Recent trades utils", () => {
         type: "",
         timestamp: new Date("2022-09-19 21:10:00").getTime() / 1000,
         size: "1885369532428355957",
-        price: "82000000000000000000",
+        entryPrice: "82000000000000000000",
+        underlyingPrice: "",
+        leverage: "",
       },
       {
         type: "",
         timestamp: new Date("2022-09-19 21:10:00").getTime() / 1000,
         size: "-1885369532428355957",
-        price: "82000000000000000000",
+        entryPrice: "82000000000000000000",
+        underlyingPrice: "",
+        leverage: "",
       },
     ];
     const expected = [

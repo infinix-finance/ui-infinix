@@ -20,7 +20,7 @@ export const createDataProvider = (
     const direction = size.lt(0) ? Directions.Short : Directions.Long;
     const leverage = toTokenUnit(position.leverage);
     const entryPrice = toTokenUnit(position.entryPrice);
-    const pnl = toTokenUnit(position.unrealizedPnl);
+    const markPrice = toTokenUnit(position.underlyingPrice);
 
     return {
       pair,
@@ -34,13 +34,11 @@ export const createDataProvider = (
         productId: pair.productIds[1],
       }),
       entryPrice: formatUsdValue(entryPrice),
-      markPrice: "mark", // formatUsdValue(position.markPrice),
-      marginRatio: "margin", //formatPercentage(position.marginRatio),
-      liquidationPrice: "liq", //formatUsdValue(position.liquidationPrice),
-      profitAndLoss: formatNumber(pnl, {
-        productId: pair.productIds[1],
-      }),
-      isInProfit: pnl.isGreaterThan(0),
+      markPrice: formatUsdValue(markPrice),
+      marginRatio: "",
+      liquidationPrice: "",
+      profitAndLoss: "",
+      isInProfit: false,
     };
   });
 };

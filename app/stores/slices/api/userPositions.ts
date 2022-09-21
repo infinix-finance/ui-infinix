@@ -9,7 +9,7 @@ interface UserPositionsProps {
 export interface HistoryPositionEvent extends PositionEvent {
   amm: string;
   pairId: PairId;
-  leverage: string;
+  leverage: string; // remove when Juraj is ready.
 }
 
 export interface UserPositionsSlice {
@@ -44,11 +44,8 @@ export const getHistory = (state: AppState): HistoryPositionEvent[] => {
     .reduce((target: HistoryPositionEvent[], { position, history }) => {
       const enhancedHistory = history.map((entry) => ({
         ...entry,
-        amm: position.amm, // What shall we do with these?
+        amm: position.amm,
         pairId: state.markets.getPairName(position.amm),
-        leverage: position.leverage,
-        entryPrice: position.entryPrice,
-        underlyingPrice: position.underlyingPrice,
       }));
       return [...target, ...enhancedHistory];
     }, [])

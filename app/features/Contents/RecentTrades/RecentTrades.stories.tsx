@@ -13,13 +13,17 @@ const createStore = () => {
 
   store.recentPositions.list = [
     {
-      price: "82000000000000000000",
+      entryPrice: "82000000000000000000",
+      underlyingPrice: "",
+      leverage: "",
       timestamp: 1654832745,
       size: "3453625431243266457",
       type: "Changing",
     },
     {
-      price: "82000000000000000000",
+      entryPrice: "82000000000000000000",
+      underlyingPrice: "",
+      leverage: "",
       timestamp: 1654832745,
       size: "-3453625431243266457",
       type: "Changing",

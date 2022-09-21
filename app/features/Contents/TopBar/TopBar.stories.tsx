@@ -22,7 +22,9 @@ const createStore = (initialize: boolean) => {
 
     store.recentPositions.list = [
       {
-        price: "82000000000000000000",
+        entryPrice: "82000000000000000000",
+        underlyingPrice: "",
+        leverage: "",
         timestamp: 1654832745,
         type: "Changing",
       },
