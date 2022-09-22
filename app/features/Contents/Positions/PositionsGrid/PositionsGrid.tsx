@@ -1,8 +1,8 @@
 /* istanbul ignore file */
-import { Box, Button, Typography } from "@mui/material";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+import { Box, Button, Typography } from "@mui/material";
 
 import {
   ColumnProps,
@@ -11,12 +11,14 @@ import {
   RowClickFunc,
   RowProps,
 } from "@/components";
-import usePositionsGrid from "./usePositionsGrid";
+import { useStore } from "@/stores/root";
+import { ConnectionOverlay } from "../ConnectionOverlay";
 import {
   negativePnlStyle,
   neutralIndicatorStyle,
   positivePnlStyle,
 } from "../Positions.styles";
+import usePositionsGrid from "./usePositionsGrid";
 
 const symbolCellRenderer = (row: RowProps, column: ColumnProps) => (
   <Box display="flex" flexDirection="column" gap={1}>
@@ -130,11 +132,13 @@ const columns: ColumnProps[] = [
 export const PositionsGrid = () => {
   const { dataProvider, handleHeaderClick, handleRowClick } =
     usePositionsGrid();
+  const { active } = useStore((state) => state.connection);
 
   return (
     <DataGrid
       columns={columns}
       dataProvider={dataProvider}
+      children={!active ? <ConnectionOverlay /> : null}
       onHeaderClick={handleHeaderClick}
       onRowClick={handleRowClick}
     />

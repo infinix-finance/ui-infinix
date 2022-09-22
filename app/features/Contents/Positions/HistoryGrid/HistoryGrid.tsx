@@ -10,6 +10,8 @@ import {
   RowProps,
 } from "@/components";
 import { PositionStatus } from "@/components/Atoms/PositionStatus";
+import { useStore } from "@/stores/root";
+import { ConnectionOverlay } from "../ConnectionOverlay";
 import { neutralIndicatorStyle } from "../Positions.styles";
 import useHistoryGrid from "./useHistoryGrid";
 
@@ -109,11 +111,13 @@ const columns: ColumnProps[] = [
 
 export const HistoryGrid = () => {
   const { dataProvider, handleHeaderClick, handleRowClick } = useHistoryGrid();
+  const { active } = useStore((state) => state.connection);
 
   return (
     <DataGrid
       columns={columns}
       dataProvider={dataProvider}
+      children={!active ? <ConnectionOverlay /> : null}
       onHeaderClick={handleHeaderClick}
       onRowClick={handleRowClick}
     />

@@ -13,7 +13,7 @@ interface VolumeLabelProps {
 export const VolumeLabel = ({ value }: VolumeLabelProps) => {
   return (
     <Box sx={[labelContainerStyle, extraGapStyle]}>
-      <Typography sx={labelStyle}>24h Volume</Typography>
+      <Typography sx={labelStyle}>Total Volume</Typography>
       <Typography sx={textStyle}>{value}</Typography>
     </Box>
   );
