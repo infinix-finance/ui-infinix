@@ -19,6 +19,7 @@ const createStore = () => {
       timestamp: 1654832745,
       size: "3453625431243266457",
       type: "Changing",
+      fundingPayment: "",
     },
     {
       entryPrice: "82000000000000000000",
@@ -27,6 +28,7 @@ const createStore = () => {
       timestamp: 1654832745,
       size: "-3453625431243266457",
       type: "Changing",
+      fundingPayment: "",
     },
   ];
 

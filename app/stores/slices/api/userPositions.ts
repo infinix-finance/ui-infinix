@@ -1,12 +1,12 @@
-import { PairId } from "@/defi";
-import { Position, PositionEvent } from "@/types/api";
+import { OriginalPositionChangeStatuses, PairId } from "@/defi";
+import { Position, PositionData, PositionEvent } from "@/types/api";
 import { AppState, CustomStateCreator } from "../../types";
 
 interface UserPositionsProps {
   list: Position[];
 }
 
-export interface HistoryPositionEvent extends PositionEvent {
+export interface UserPositionEvent extends PositionEvent {
   amm: string;
   pairId: PairId;
   leverage: string; // remove when Juraj is ready.
@@ -15,39 +15,55 @@ export interface HistoryPositionEvent extends PositionEvent {
 export interface UserPositionsSlice {
   userPositions: UserPositionsProps & {
     setPositions: (positions: Position[]) => void;
+    getPositions: () => PositionData[];
+    getHistory: () => UserPositionEvent[];
   };
 }
 
 export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
-  (set, _get) => ({
+  (set, get) => ({
     userPositions: {
       list: [],
+
       setPositions: (positions: Position[]) => {
         set(function setPositions(state: AppState) {
           state.userPositions.list = positions;
         });
       },
+
+      getPositions: (): PositionData[] => {
+        return get()
+          .userPositions.list.map(({ position }) => ({
+            ...position,
+            pairId: get().markets.getPairName(position.amm),
+          }))
+          .sort((a, b) => b.timestamp - a.timestamp);
+      },
+
+      getHistory: (): UserPositionEvent[] => {
+        return get()
+          .userPositions.list.reduce(
+            (target: UserPositionEvent[], { position, history }) => {
+              const enhancedHistory = history.map((current, idx) => {
+                const isMarginChanging =
+                  current.type === OriginalPositionChangeStatuses.Mgn;
+                const isPrevEntry = idx > 0;
+                const prevEntry =
+                  isMarginChanging && isPrevEntry ? history[idx - 1] : {};
+
+                return {
+                  ...prevEntry,
+                  ...current,
+                  amm: position.amm,
+                  pairId: get().markets.getPairName(position.amm),
+                } as UserPositionEvent;
+              });
+
+              return [...target, ...enhancedHistory];
+            },
+            []
+          )
+          .sort((a, b) => b.timestamp - a.timestamp);
+      },
     },
   });
-
-export const getPositions = (state: AppState) => {
-  return state.userPositions.list
-    .map(({ position }) => ({
-      ...position,
-      pairId: state.markets.getPairName(position.amm),
-    }))
-    .sort((a, b) => b.timestamp - a.timestamp);
-};
-
-export const getHistory = (state: AppState): HistoryPositionEvent[] => {
-  return state.userPositions.list
-    .reduce((target: HistoryPositionEvent[], { position, history }) => {
-      const enhancedHistory = history.map((entry) => ({
-        ...entry,
-        amm: position.amm,
-        pairId: state.markets.getPairName(position.amm),
-      }));
-      return [...target, ...enhancedHistory];
-    }, [])
-    .sort((a, b) => b.timestamp - a.timestamp);
-};

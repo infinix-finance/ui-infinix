@@ -27,6 +27,8 @@ const createStore = (initialize: boolean) => {
         leverage: "",
         timestamp: 1654832745,
         type: "Changing",
+        size: "",
+        fundingPayment: "",
       },
     ];
   }

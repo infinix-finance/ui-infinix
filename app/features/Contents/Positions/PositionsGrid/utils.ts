@@ -37,9 +37,9 @@ export const createDataProvider = (
       }),
       entryPrice: formatUsdValue(entryPrice),
       markPrice: formatUsdValue(markPrice),
-      marginRatio: "",
-      liquidationPrice: "",
-      profitAndLoss: "",
+      marginRatio: "", // TODO: provide when available
+      liquidationPrice: "", // TODO: provide when available
+      profitAndLoss: "", // TODO: provide when available
       isInProfit: false,
     };
   });

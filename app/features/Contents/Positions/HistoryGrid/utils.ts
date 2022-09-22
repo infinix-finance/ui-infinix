@@ -7,7 +7,7 @@ import {
   mapOriginalPositionStatus,
   OriginalPositionChangeStatuses,
 } from "@/defi";
-import { HistoryPositionEvent } from "@/stores/slices/api/userPositions";
+import { UserPositionEvent } from "@/stores/slices/api/userPositions";
 import {
   capitalize,
   formatNumber,
@@ -16,13 +16,13 @@ import {
   toTokenUnit,
 } from "@/utils/formatters";
 
-export const createDataProvider = (history: HistoryPositionEvent[]) => {
+export const createDataProvider = (history: UserPositionEvent[]) => {
   return history.map((historyEntry) => {
     const pair = getPair(historyEntry.pairId);
     const size = toTokenUnit(historyEntry.size!);
     const direction = size.lt(0) ? Directions.Short : Directions.Long;
     const leverage = toTokenUnit(historyEntry.leverage);
-    const entryPrice = toTokenUnit(historyEntry.entryPrice!);
+    const entryPrice = toTokenUnit(historyEntry.entryPrice);
     const totalPrice = entryPrice.multipliedBy(size).abs();
     const fee = toTokenUnit(historyEntry.fee!);
     const realizedPnl = toTokenUnit(historyEntry.realizedPnl!);
@@ -34,7 +34,6 @@ export const createDataProvider = (history: HistoryPositionEvent[]) => {
     return {
       pair,
       id: timestamp + pair.id,
-      liquidated: "->",
       symbol: formatPair(pair.id),
       direction: capitalize(direction),
       directionColor:
@@ -48,9 +47,7 @@ export const createDataProvider = (history: HistoryPositionEvent[]) => {
       price: formatUsdValue(entryPrice),
       total: formatUsdValue(totalPrice),
       fee: formatUsdValue(fee),
-      profitAndLoss: formatNumber(realizedPnl, {
-        productId: pair.productIds[1],
-      }),
+      profitAndLoss: "", // TODO: provide when available
     };
   });
 };

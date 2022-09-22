@@ -29,15 +29,15 @@ export interface PositionEvent {
   timestamp: number;
   type: string;
   margin?: string;
-  size?: string;
+  size: string;
   entryPrice: string;
   underlyingPrice: string;
-  leverage: string;
+  leverage?: string;
   fee?: string;
   realizedPnl?: string;
   unrealizedPnlAfter?: string;
   amount?: string;
-  fundingPayment?: string;
+  fundingPayment: string;
   notification?: boolean;
 }
 

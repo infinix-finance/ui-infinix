@@ -3,13 +3,13 @@
 import { ColumnProps, RowProps } from "@/components";
 import { useClearingHouse } from "@/hooks/contracts";
 import { useStore } from "@/stores/root";
-import { getPositions } from "@/stores/slices/api/userPositions";
 import { createDataProvider } from "./utils";
 
 export default function usePositionsGrid() {
-  const positions = useStore(getPositions);
-  const { closePosition } = useClearingHouse();
+  const { getPositions } = useStore((state) => state.userPositions);
   const { getPairName } = useStore((state) => state.markets);
+  const { closePosition } = useClearingHouse();
+  const positions = getPositions();
   const dataProvider = createDataProvider(positions, getPairName);
 
   const handleHeaderClick = (column: ColumnProps) => {
