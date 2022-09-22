@@ -1,5 +1,6 @@
-import { toFixedNumber } from "@/utils/formatters";
 import BigNumber from "bignumber.js";
+
+import { toFixedNumber } from "@/utils/formatters";
 
 export const calculateBaseAmount = (
   amount: string,

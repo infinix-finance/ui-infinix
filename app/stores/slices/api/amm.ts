@@ -1,12 +1,12 @@
 import { secondsToMilliseconds } from "date-fns";
 
-import { AppState, CustomStateCreator } from "../../types";
 import { Amm } from "@/types/api";
 import {
   formatPercentage,
   formatUsdValue,
   toTokenUnit,
 } from "@/utils/formatters";
+import { AppState, CustomStateCreator } from "../../types";
 
 const getDefaultData = () => ({
   id: "",
@@ -53,12 +53,12 @@ export const createAmmSlice: CustomStateCreator<AmmSlice> = (set, _get) => ({
 });
 
 export const getTopBarValues = (state: AppState) => {
-  const rawMarkPrice = toTokenUnit(state.amm.underlyingPrice || 0);
+  const rawMarkPrice = toTokenUnit(state.amm.underlyingPrice);
   const markPrice = formatUsdValue(rawMarkPrice);
   const indexPrice = formatUsdValue(state.amm.price || 0);
-  const rawTotalVolume = toTokenUnit(state.amm.tradingVolume || 0);
+  const rawTotalVolume = toTokenUnit(state.amm.tradingVolume);
   const totalVolume = formatUsdValue(rawTotalVolume);
-  const rawFundingRate = toTokenUnit(state.amm.fundingRate || 0);
+  const rawFundingRate = toTokenUnit(state.amm.fundingRate);
   const fundingRate = formatPercentage(rawFundingRate, 4);
   const nextFundingMillis = secondsToMilliseconds(state.amm.nextFunding || 0);
   const now = new Date().getTime();

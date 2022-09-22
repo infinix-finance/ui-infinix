@@ -1,14 +1,20 @@
-import erc20Abi from "./abi/ERC20.json";
-import clearingHouseAbi from "./abi/ClearingHouse.json";
+import { Contract, providers } from "ethers";
 
-const contractConfig = {
-  erc20: {
-    abi: erc20Abi,
-  },
-  clearingHouse: {
-    addr: process.env.CLEARING_HOUSE!,
-    abi: clearingHouseAbi,
-  },
-};
+import {
+  ERC20,
+  ClearingHouse,
+  ERC20__factory,
+  ClearingHouse__factory,
+} from "./types";
 
-export default contractConfig;
+export const getERC20Contract = (
+  address: string,
+  signer: providers.JsonRpcSigner
+) => new Contract(address, ERC20__factory.abi, signer) as ERC20;
+
+export const getClearingHouseContract = (signer: providers.JsonRpcSigner) =>
+  new Contract(
+    process.env.CLEARING_HOUSE!,
+    ClearingHouse__factory.abi,
+    signer
+  ) as ClearingHouse;

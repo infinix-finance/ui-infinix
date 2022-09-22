@@ -6,7 +6,9 @@ import {
   formatNumber,
   formatPair,
   shortenAddress,
+  toBaseUnit,
   toFixedNumber,
+  toTokenUnit,
 } from "@/utils/formatters";
 
 describe("formatters", () => {
@@ -125,6 +127,44 @@ describe("formatters", () => {
       const result = formatPair(PairId.btcusdc);
 
       expect(result).toBe("BTC/USDC");
+    });
+  });
+
+  describe("toBaseUnit", () => {
+    it("should convert non-zero token unit to base unit", () => {
+      const expected = new BigNumber(10000000000000000000);
+
+      expect(toBaseUnit("10")).toEqual(expected);
+      expect(toBaseUnit(10)).toEqual(expected);
+    });
+
+    it("should convert zeroable values to zero base unit", () => {
+      const expected = new BigNumber(0);
+
+      expect(toBaseUnit(0)).toEqual(expected);
+      expect(toBaseUnit("0")).toEqual(expected);
+      expect(toBaseUnit("")).toEqual(expected);
+      expect(toBaseUnit(null)).toEqual(expected);
+      expect(toBaseUnit(undefined)).toEqual(expected);
+    });
+  });
+
+  describe("toTokenUnit", () => {
+    it("should convert non-zero base unit to token unit", () => {
+      const expected = new BigNumber(10);
+
+      expect(toTokenUnit("10000000000000000000")).toEqual(expected);
+      expect(toTokenUnit(10000000000000000000)).toEqual(expected);
+    });
+
+    it("should convert zeroable values to zero token unit", () => {
+      const expected = new BigNumber(0);
+
+      expect(toTokenUnit(0)).toEqual(expected);
+      expect(toTokenUnit("0")).toEqual(expected);
+      expect(toTokenUnit("")).toEqual(expected);
+      expect(toTokenUnit(null)).toEqual(expected);
+      expect(toTokenUnit(undefined)).toEqual(expected);
     });
   });
 });

@@ -20,8 +20,7 @@ export const createRecentPositionsSlice: CustomStateCreator<RecentPositionsSlice
 
       setPositions: (events: PositionEvent[]) => {
         set(function setPositions(state: AppState) {
-          const sortedEvents = events.sort((a, b) => b.timestamp - a.timestamp);
-          state.recentPositions.list = sortedEvents;
+          state.recentPositions.list = events;
         });
       },
 
@@ -36,6 +35,6 @@ export const createRecentPositionsSlice: CustomStateCreator<RecentPositionsSlice
 export const getMostRecentPositionPrice = (state: AppState) => {
   const [mostRecentPosition] = state.recentPositions.list;
 
-  const price = toTokenUnit(mostRecentPosition?.entryPrice || 0);
+  const price = toTokenUnit(mostRecentPosition?.entryPrice);
   return formatUsdValue(price);
 };

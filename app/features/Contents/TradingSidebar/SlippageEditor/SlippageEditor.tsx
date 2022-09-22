@@ -1,7 +1,7 @@
-import { useState } from "react";
+import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import { Box, Button, Typography } from "@mui/material";
 import BigNumber from "bignumber.js";
-import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
+import { useState } from "react";
 
 import { Modal, Select } from "@/components";
 
@@ -12,10 +12,10 @@ import { getIsBalanceSet } from "../TradingSidebar.slice";
 import {
   actionStyle,
   containerStyle,
-  iconStyle,
-  slippageLabelStyle,
   dropdownContainerStyle,
+  iconStyle,
   selectStyle,
+  slippageLabelStyle,
 } from "./SlippageEditor.styles";
 
 export const SlippageEditor = () => {

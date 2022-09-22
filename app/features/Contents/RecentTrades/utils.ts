@@ -7,8 +7,8 @@ import { capitalize, formatNumber, toTokenUnit } from "@/utils/formatters";
 
 export const createDataProvider = (recentTrades: PositionEvent[]) => {
   return recentTrades.map(({ size, entryPrice, timestamp }) => {
-    const convertedSize = toTokenUnit(size || 0);
-    const convertedPrice = toTokenUnit(entryPrice || 0);
+    const convertedSize = toTokenUnit(size);
+    const convertedPrice = toTokenUnit(entryPrice);
     const convertedDateTime = new Date(secondsToMilliseconds(timestamp));
     const direction = convertedSize.lte(0) ? Directions.Short : Directions.Long;
 

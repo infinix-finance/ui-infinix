@@ -1,11 +1,14 @@
 import { useCallback, useEffect } from "react";
 
-import { InjectedConnector } from "@web3-react/injected-connector";
-import { useWeb3React } from "@web3-react/core";
 import { useStore } from "@/stores/root";
-import { useSnackbar } from "@/components";
+import { useWeb3React } from "@web3-react/core";
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { NetworkId } from "@/defi/types";
+import { NETWORKS } from "@/defi/Networks";
 
 const injectedConnector = new InjectedConnector({});
+
+const getChainId = (chainId: number) => `0x${chainId.toString(16)}`;
 
 const errorHandler = (error: any) => console.error(error);
 
@@ -13,7 +16,7 @@ const switchNetwork = (library: any) => () => {
   library.provider
     .request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: "0xa869" }],
+      params: [{ chainId: getChainId(NetworkId.avalancheTestnet) }],
     })
     .catch((error: any) => {
       if (error.code !== 4902) throw error;
@@ -23,15 +26,17 @@ const switchNetwork = (library: any) => () => {
           method: "wallet_addEthereumChain",
           params: [
             {
-              chainId: "0xa869",
-              chainName: "Avalanche FUJI Testnet",
+              chainId: getChainId(NetworkId.avalancheTestnet),
+              chainName: NETWORKS[NetworkId.avalancheTestnet].name,
               nativeCurrency: {
-                name: "Avalanche",
-                symbol: "AVAX",
+                name: NETWORKS[NetworkId.avalancheTestnet].nativeToken,
+                symbol: NETWORKS[NetworkId.avalancheTestnet].defaultTokenSymbol,
                 decimals: 18,
               },
-              rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-              blockExplorerUrls: ["https://testnet.snowtrace.io/"],
+              rpcUrls: [NETWORKS[NetworkId.avalancheTestnet].publicRpcUrl],
+              blockExplorerUrls: [
+                NETWORKS[NetworkId.avalancheTestnet].etherscanLink,
+              ],
             },
           ],
         })

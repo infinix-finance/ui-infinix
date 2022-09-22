@@ -1,5 +1,6 @@
-import { MarketId, PairId } from "@/defi";
 import BigNumber from "bignumber.js";
+
+import { MarketId, PairId } from "@/defi";
 import { AppState, CustomStateCreator } from "../types";
 
 interface RatesProps {

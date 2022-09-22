@@ -1,5 +1,6 @@
-import { AppState, CustomStateCreator } from "../../types";
 import { PriceUpdate } from "@/types/api";
+import { AppState, CustomStateCreator } from "../../types";
+
 import { toTokenUnit } from "@/utils/formatters";
 
 interface PriceHistoryProps {
@@ -9,7 +10,7 @@ interface PriceHistoryProps {
 
 export interface PriceHistorySlice {
   priceHistory: PriceHistoryProps & {
-    setPriceFeed: (feed: PriceUpdate[]) => void;
+    setPriceFeed: (feed: { history: PriceUpdate[] }) => void;
     clear: () => void;
   };
 }
@@ -22,8 +23,7 @@ export const createPriceHistorySlice: CustomStateCreator<PriceHistorySlice> = (
     latest: "0",
     feed: [],
 
-    setPriceFeed: (feed: any) => {
-      // TODO
+    setPriceFeed: (feed: { history: PriceUpdate[] }) => {
       set(function setPriceFeed(state: AppState) {
         const [latest] = feed.history.slice(-1);
         state.priceHistory.latest = latest?.price || "0";
@@ -53,15 +53,16 @@ export const getHistoryData = (state: AppState) => {
 
 export const getLatestPriceInfo = (state: AppState) => {
   const [first] = state.priceHistory.feed.slice(0);
-  const firstPrice = toTokenUnit(first?.price || 0);
-  const lastPrice = toTokenUnit(state.priceHistory.latest || 0);
+  const firstPrice = toTokenUnit(first?.price);
+  const lastPrice = toTokenUnit(state.priceHistory.latest);
   const change = lastPrice.minus(firstPrice);
-  const percentageChange =
-    lastPrice
-      .div(firstPrice)
-      .multipliedBy(100)
-      .multipliedBy(change.lt(0) ? -1 : 1)
-      .toNumber() || 0;
+  const percentageChange = change
+    ? lastPrice
+        .div(firstPrice)
+        .multipliedBy(100)
+        .multipliedBy(change.lt(0) ? -1 : 1)
+        .toNumber()
+    : 0;
 
   return {
     lastPrice,

@@ -1,10 +1,8 @@
-import React from "react";
-
 import { Meta, Story } from "@storybook/react";
 
-import { PositionStatus, PositionStatusProps } from "./PositionStatus";
-import { Box } from "@mui/material";
 import { PositionChangeStatuses } from "@/defi";
+import { Box } from "@mui/material";
+import { PositionStatus, PositionStatusProps } from "./PositionStatus";
 
 export default {
   title: "atoms/PositionStatus",

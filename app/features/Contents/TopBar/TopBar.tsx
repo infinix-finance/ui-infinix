@@ -1,8 +1,9 @@
 import { Box } from "@mui/material";
 
 import { Select } from "@/components";
-import useTopBar from "./useTopBar";
 import { CountdownLabel, TooltipLabel, VolumeLabel } from "./Labels";
+
+import useTopBar from "./useTopBar";
 
 import {
   containerStyle,

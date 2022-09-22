@@ -1,14 +1,15 @@
 /* istanbul ignore file */
-import { useState } from "react";
-import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import TableRowsOutlinedIcon from "@mui/icons-material/TableRowsOutlined";
 import HorizontalSplitOutlinedIcon from "@mui/icons-material/HorizontalSplitOutlined";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import RectangleOutlinedIcon from "@mui/icons-material/RectangleOutlined";
+import TableRowsOutlinedIcon from "@mui/icons-material/TableRowsOutlined";
+import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useState } from "react";
 
-import { TabItem, Tabs, Label } from "@/components";
+import { Label, TabItem, Tabs } from "@/components";
 
+import { HistoryGrid } from "./HistoryGrid";
 import {
   containerStyle,
   headingStyle,
@@ -17,7 +18,6 @@ import {
   toggleButtonStyle,
 } from "./Positions.styles";
 import { PositionsGrid } from "./PositionsGrid";
-import { HistoryGrid } from "./HistoryGrid";
 
 const tabItems: TabItem[] = [
   {

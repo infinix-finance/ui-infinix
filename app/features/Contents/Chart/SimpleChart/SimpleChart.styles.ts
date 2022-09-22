@@ -1,5 +1,3 @@
-import { Theme } from "@mui/material";
-
 export const containerStyle = {
   display: "flex",
   flexDirection: "column",
