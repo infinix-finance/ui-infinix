@@ -117,9 +117,10 @@ export const HistoryGrid = () => {
     <DataGrid
       columns={columns}
       dataProvider={dataProvider}
-      children={!active ? <ConnectionOverlay /> : null}
       onHeaderClick={handleHeaderClick}
       onRowClick={handleRowClick}
-    />
+    >
+      {!active && <ConnectionOverlay />}
+    </DataGrid>
   );
 };
