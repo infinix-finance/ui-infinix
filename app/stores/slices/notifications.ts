@@ -6,6 +6,7 @@ export enum NotificaitonKind {
   sidebar = "sidebar",
   top = "top",
   snackbar = "snackbar",
+  createPosition = "createPosition",
 }
 interface NotificationEntry {
   severity: AlertColor;
@@ -21,6 +22,7 @@ interface NotificationsProps {
   [NotificaitonKind.sidebar]: NotificationEntry;
   [NotificaitonKind.top]: NotificationEntry;
   [NotificaitonKind.snackbar]: NotificationEntry;
+  [NotificaitonKind.createPosition]: NotificationEntry;
 }
 
 export interface NotificationsSlice {
@@ -32,6 +34,8 @@ export interface NotificationsSlice {
     hideNotification: (kind: NotificaitonKind) => void;
     showSidebarNotification: (props: NotificationEntry) => void;
     hideSidebarNotification: () => void;
+    showCreatePositionNotification: (props: NotificationEntry) => void;
+    hideCreatePositionNotification: () => void;
     showTopNotification: (props: NotificationEntry) => void;
     hideTopNotification: () => void;
     showSnackbar: (props: NotificationEntry) => void;
@@ -61,6 +65,13 @@ export const createNotificationsSlice: CustomStateCreator<NotificationsSlice> =
         description: "",
         actionLabel: "",
         showProgress: true,
+      },
+      [NotificaitonKind.createPosition]: {
+        severity: "info",
+        visible: false,
+        title: "",
+        description: "",
+        actionLabel: "",
       },
 
       showNotification: (props: NotificationEntry, kind: NotificaitonKind) => {
@@ -92,6 +103,17 @@ export const createNotificationsSlice: CustomStateCreator<NotificationsSlice> =
         get().notifications.hideNotification(NotificaitonKind.sidebar);
       },
 
+      showCreatePositionNotification: (props: NotificationEntry) => {
+        get().notifications.showNotification(
+          props,
+          NotificaitonKind.createPosition
+        );
+      },
+
+      hideCreatePositionNotification: () => {
+        get().notifications.hideNotification(NotificaitonKind.createPosition);
+      },
+
       showTopNotification: (props: NotificationEntry) => {
         get().notifications.showNotification(props, NotificaitonKind.top);
       },
@@ -108,4 +130,8 @@ export const createNotificationsSlice: CustomStateCreator<NotificationsSlice> =
 
 export const getSidebarNotifications = (state: AppState) => {
   return state.notifications.sidebar;
+};
+
+export const getCreatePositionNotifications = (state: AppState) => {
+  return state.notifications.createPosition;
 };

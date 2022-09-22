@@ -1,10 +1,10 @@
+import { BigNumber, Contract, providers, utils } from "ethers";
+import { useCallback, useEffect, useState } from "react";
 import create from "zustand";
-import { useEffect, useState, useCallback } from "react";
-import { Contract, BigNumber, providers, utils } from "ethers";
 
-import { useStore } from "@/stores/root";
-import { NetworkId } from "@/defi/types";
 import contractConfig from "@/defi/contracts";
+import { NetworkId } from "@/defi/types";
+import { useStore } from "@/stores/root";
 
 interface ContractList {
   signer?: providers.JsonRpcSigner;
@@ -154,7 +154,7 @@ export const useClearingHouse = () => {
     try {
       const result = await clearingHouse.closePosition(
         amm,
-        [utils.parseUnits(quoteAssetAmountLimit)],
+        [utils.parseUnits(quoteAssetAmountLimit).abs()],
         gasLimit
       );
       await result.wait();

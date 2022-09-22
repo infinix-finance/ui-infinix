@@ -24,21 +24,22 @@ export const MenuBar = () => {
   return (
     <Box sx={containerStyle}>
       <Button
-        variant="outlined"
-        size="small"
-        disabled={!active}
-        onClick={handleGetAvaxClick}
-      >
-        Get AVAX
-      </Button>
-      <Button
-        variant="outlined"
-        size="small"
+        variant="text"
+        size="medium"
         disabled={!active}
         onClick={handleGetUsdcClick}
       >
         Get USDC
       </Button>
+      <Button
+        variant="text"
+        size="medium"
+        disabled={!active}
+        onClick={handleGetAvaxClick}
+      >
+        Get AVAX
+      </Button>
+
       <ButtonBar
         selected={selected}
         onSelect={setSelected}

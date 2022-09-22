@@ -4,15 +4,17 @@ export const containerStyle = (theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   width: "17.5rem",
-  borderBottomLeftRadius: "0.5rem",
   [theme.breakpoints.up("xl")]: {
     width: "22.5rem",
   },
-
-  "& .MuiTabs-root .MuiButtonBase-root:first-of-type": {
-    borderTopLeftRadius: "0.5rem",
-  },
+  borderBottomLeftRadius: "0.5rem",
+  borderTopLeftRadius: "0.5rem",
+  overflow: "hidden",
 });
+
+export const scrollContainerStyle = {
+  overflow: "auto",
+};
 
 export const innerContainerStyle = (theme: Theme) => ({
   backgroundColor: theme.palette.secondary.blackberry,

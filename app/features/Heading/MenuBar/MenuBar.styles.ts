@@ -6,6 +6,6 @@ export const containerStyle = (theme: Theme) => ({
   gap: 2,
 
   "& > button:last-of-type": {
-    marginRight: "3rem",
+    marginRight: "1rem",
   },
 });

@@ -24,6 +24,8 @@ export const createDataProvider = (
 
     return {
       pair,
+      amm: position.amm,
+      originalSize: position.size,
       id: pair.id,
       symbol: formatPair(pair.id),
       direction: capitalize(direction),
