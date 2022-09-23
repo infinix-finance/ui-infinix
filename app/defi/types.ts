@@ -88,8 +88,8 @@ export type Protocol = {
 
 export enum MarketId {
   sp500 = "sp500",
-  SPPlatts = "SPPlatts",
-  SPIndices = "SPIndices",
+  SPPlatts = "S&P Platts",
+  SPIndices = "S&P Indices",
   crypto = "crypto",
   commodities = "commodities",
 }

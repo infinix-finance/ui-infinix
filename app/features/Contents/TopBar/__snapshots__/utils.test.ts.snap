@@ -75,6 +75,13 @@ Object {
       ],
       "value": "movrusdc",
     },
+    Object {
+      "productIds": Array [
+        "solana",
+        "usdc",
+      ],
+      "value": "solsusdc",
+    },
   ],
   "searchable": true,
 }
@@ -85,21 +92,21 @@ Object {
   "options": Array [
     Object {
       "productIds": Array [
-        "sp500",
-      ],
-      "value": "sp500",
-    },
-    Object {
-      "productIds": Array [
         "crypto",
       ],
       "value": "crypto",
     },
     Object {
       "productIds": Array [
-        "commodities",
+        "SPPlatts",
       ],
-      "value": "commodities",
+      "value": "SPPlatts",
+    },
+    Object {
+      "productIds": Array [
+        "SPIndices",
+      ],
+      "value": "SPIndices",
     },
   ],
   "searchable": true,

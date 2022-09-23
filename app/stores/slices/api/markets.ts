@@ -4,12 +4,14 @@ import { AppState, CustomStateCreator } from "../../types";
 
 interface MarketsProps {
   list: Markets;
+  ready: boolean;
 }
 
 export interface MarketsSlice {
   markets: MarketsProps & {
     setMarkets: (markets: Markets) => void;
     getPairName: (amm: string) => PairId;
+    getFlattenedPairs: () => { [pair: string]: string };
   };
 }
 
@@ -19,10 +21,12 @@ export const createMarketsSlice: CustomStateCreator<MarketsSlice> = (
 ) => ({
   markets: {
     list: {},
+    ready: false,
 
     setMarkets: (markets: Markets) => {
       set(function setMarkets(state: AppState) {
         state.markets.list = markets;
+        state.markets.ready = true;
 
         // TODO: Remove when markets data provides amm address as well
         state.markets.list.Amberdata.AVAXUSDC =
@@ -42,6 +46,13 @@ export const createMarketsSlice: CustomStateCreator<MarketsSlice> = (
       }, "");
 
       return pairName.toLowerCase() as PairId;
+    },
+
+    getFlattenedPairs: () => {
+      const markets = Object.entries(get().markets.list);
+      return markets.reduce((result, [, pairs]) => {
+        return { ...result, ...pairs };
+      }, {});
     },
   },
 });

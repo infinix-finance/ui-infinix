@@ -16,8 +16,8 @@ export const TopBar = () => {
     rates,
     mostRecentPositionPrice,
     priceValues,
-    marketDropdownProps,
-    pairDropdownProps,
+    marketsList,
+    pairsList,
     handleMarketChange,
     handlePairChange,
   } = useTopBar();
@@ -29,13 +29,13 @@ export const TopBar = () => {
           sx={selectStyle}
           value={rates.market}
           setValue={handleMarketChange}
-          {...marketDropdownProps}
+          {...(marketsList || { options: [] })}
         />
         <Select
           sx={selectStyle}
           value={rates.pair}
           setValue={handlePairChange}
-          {...pairDropdownProps[rates.market]}
+          {...(pairsList?.[rates.market] || { options: [] })}
         />
       </Box>
       <TooltipLabel label="Entry Price" value={mostRecentPositionPrice} />

@@ -1,16 +1,16 @@
-import React from "react";
-import { MenuItem } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { MenuItem } from "@mui/material";
+import React from "react";
 
 import { Input } from "../Input";
-import { Item } from "./Item";
-import { SelectProps, Option } from "./Select.types";
-import { filterOptions, findText } from "./Select.helpers";
 import { Header } from "./Header";
+import { Item } from "./Item";
+import { filterOptions, findText } from "./Select.helpers";
+import { Option, SelectProps } from "./Select.types";
 
-import { selectBackdropStyle, selectPaperStyle } from "./Select.styles";
 import { NotFound } from "./NotFound";
+import { selectBackdropStyle, selectPaperStyle } from "./Select.styles";
 
 const renderValue = (options: Option[]) => (value: any) => {
   const option = options!.find((option: any) => option.value == value);

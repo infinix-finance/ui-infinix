@@ -19,13 +19,13 @@ export const MARKETS: {
     id: MarketId.SPPlatts,
     name: "S&P Platts",
     symbol: "S&P Platts",
-    icon: "/markets/sp500.svg",
+    icon: "/markets/sp500.svg", // TODO
   },
   [MarketId.SPIndices]: {
     id: MarketId.SPIndices,
     name: "S&P Indices",
     symbol: "S&P Indices",
-    icon: "/markets/sp500.svg",
+    icon: "/markets/sp500.svg", // TODO
   },
   [MarketId.commodities]: {
     id: MarketId.commodities,
