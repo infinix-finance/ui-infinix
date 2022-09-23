@@ -35,6 +35,6 @@ export const createRecentPositionsSlice: CustomStateCreator<RecentPositionsSlice
 export const getMostRecentPositionPrice = (state: AppState) => {
   const [mostRecentPosition] = state.recentPositions.list;
 
-  const price = toTokenUnit(mostRecentPosition?.price);
+  const price = toTokenUnit(mostRecentPosition?.entryPrice);
   return formatUsdValue(price);
 };

@@ -1,24 +1,24 @@
 import { Theme } from "@mui/material";
 
-export const containerStyle = (theme: Theme) => ({
+export const containerStyle = (_theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   gap: 2,
 });
 
-export const topStyle = (theme: Theme) => ({
+export const topStyle = (_theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   gap: 2,
 });
 
-export const contentStyle = (theme: Theme) => ({
+export const contentStyle = (_theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   gap: 0.5,
 });
 
-export const productStyle = (theme: Theme) => ({
+export const productStyle = (_theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   gap: 1,
@@ -31,24 +31,24 @@ export const productButtonStyle = (theme: Theme) => ({
   },
 });
 
-export const priceAndDetailsStyle = (theme: Theme) => ({
+export const priceAndDetailsStyle = (_theme: Theme) => ({
   display: "flex",
   gap: 2,
 });
 
-export const detailsContainerStyle = (theme: Theme) => ({
+export const detailsContainerStyle = (_theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
   gap: 0.5,
 });
 
-export const detailsStyle = (theme: Theme) => ({
+export const detailsStyle = (_theme: Theme) => ({
   display: "flex",
   gap: 2,
 });
 
-export const buttonGroupStyle = (theme: Theme) => ({
+export const buttonGroupStyle = (_theme: Theme) => ({
   "& .MuiButtonBase-root": {
     padding: 1,
   },

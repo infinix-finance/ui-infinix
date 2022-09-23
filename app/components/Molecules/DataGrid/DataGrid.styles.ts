@@ -1,8 +1,10 @@
 import { alpha, Theme } from "@mui/material";
 
-export const tableStyle = (theme: Theme) => ({
-  borderCollapse: "collapse",
-});
+export const tableStyle = (empty: boolean) => (_theme: Theme) =>
+  ({
+    borderCollapse: "collapse",
+    height: empty ? "100%" : undefined,
+  } as const);
 
 export const headRowStyle = (theme: Theme) => ({
   "& th": {
@@ -57,7 +59,7 @@ export const emptyBodyStyle = (theme: Theme) => ({
   },
 });
 
-export const contentStyle = (theme: Theme) => ({
+export const contentStyle = (_theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",

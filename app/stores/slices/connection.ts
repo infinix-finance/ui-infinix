@@ -1,3 +1,5 @@
+import { AlertColor } from "@mui/material";
+
 import { SWITCH_CONNECTION_MSG } from "@/constants/messages";
 import { isSupportedNetwork, NetworkId, WalletId } from "@/defi";
 import { AppState, CustomStateCreator } from "../types";
@@ -30,15 +32,11 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
     switchNetwork: () => {},
 
     updateDetails: (details: ConnectionProps) => {
-      details.chainId && !isSupportedNetwork(details.chainId)
-        ? get().notifications.showSidebarNotification({
-            severity: "error",
-            visible: true,
-            title: SWITCH_CONNECTION_MSG,
-            actionLabel: "Switch",
-            onAction: details.switchNetwork,
-          })
-        : get().notifications.hideSidebarNotification();
+      const showNotification = Boolean(
+        details.chainId && !isSupportedNetwork(details.chainId)
+      );
+
+      updateDetailsHelper(showNotification, get, details.switchNetwork);
 
       set(function updateDetails(state: AppState) {
         state.connection = { ...state.connection, ...details };
@@ -47,3 +45,29 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
     },
   },
 });
+
+const updateDetailsHelper = (
+  show: boolean,
+  get: () => AppState,
+  onAction: () => void
+) => {
+  const { notifications } = get();
+
+  if (show) {
+    const payload = {
+      severity: "error" as AlertColor,
+      visible: true,
+      title: SWITCH_CONNECTION_MSG,
+      actionLabel: "Switch",
+      onAction,
+    };
+
+    notifications.showSidebarNotification(payload);
+    notifications.showCreatePositionNotification(payload);
+
+    return;
+  }
+
+  notifications.hideSidebarNotification();
+  notifications.hideCreatePositionNotification();
+};

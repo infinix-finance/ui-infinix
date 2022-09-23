@@ -28,14 +28,16 @@ export interface PriceUpdate {
 export interface PositionEvent {
   timestamp: number;
   type: string;
-  price: string;
   margin?: string;
-  size?: string;
+  size: string;
+  entryPrice: string;
+  underlyingPrice: string;
+  leverage?: string;
   fee?: string;
   realizedPnl?: string;
   unrealizedPnlAfter?: string;
   amount?: string;
-  fundingPayment?: string;
+  fundingPayment: string;
   notification?: boolean;
 }
 
@@ -50,6 +52,7 @@ export interface PositionData {
   tradingVolume: string;
   leverage: string;
   entryPrice: string;
+  underlyingPrice: string;
   fee: string;
   realizedPnl: string;
   unrealizedPnl: string;

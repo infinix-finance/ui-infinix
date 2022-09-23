@@ -4,28 +4,32 @@ export const containerStyle = (theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   width: "100%",
-  height: "260px",
+  height: "352px",
+  backgroundColor: theme.palette.secondary.deepBlackberry,
+  borderBottomRightRadius: "0.5rem",
+  borderBottomLeftRadius: "0.5rem",
 
   "& .MuiTableContainer-root": {
-    borderBottomLeftRadius: "0.5rem",
+    height: "100%",
     borderBottomRightRadius: "0.5rem",
-    borderTopRightRadius: "0.5rem",
+    borderBottomLeftRadius: "0.5rem",
   },
 });
 
 export const headingStyle = (theme: Theme) => ({
   display: "flex",
   justifyContent: "space-between",
+  backgroundColor: theme.palette.secondary.deeperBlackberry,
 });
 
-export const rightGroupStyle = (theme: Theme) => ({
+export const rightGroupStyle = (_theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   gap: 4,
   marginRight: 2,
 });
 
-export const toggleButtonStyle = (theme: Theme) => ({
+export const toggleButtonStyle = (_theme: Theme) => ({
   "&.MuiButtonBase-root": {
     padding: 1,
     height: "2rem",
@@ -37,7 +41,7 @@ export const toggleButtonStyle = (theme: Theme) => ({
   },
 });
 
-export const tabsStyle = (theme: Theme) => ({
+export const tabsStyle = (_theme: Theme) => ({
   "& .MuiButtonBase-root:first-of-type": {
     borderTopLeftRadius: "0.5rem",
   },

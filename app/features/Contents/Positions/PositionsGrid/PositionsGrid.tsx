@@ -11,6 +11,8 @@ import {
   RowClickFunc,
   RowProps,
 } from "@/components";
+import { useStore } from "@/stores/root";
+import { ConnectionOverlay } from "../ConnectionOverlay";
 import {
   negativePnlStyle,
   neutralIndicatorStyle,
@@ -130,6 +132,7 @@ const columns: ColumnProps[] = [
 export const PositionsGrid = () => {
   const { dataProvider, handleHeaderClick, handleRowClick } =
     usePositionsGrid();
+  const { active } = useStore((state) => state.connection);
 
   return (
     <DataGrid
@@ -137,6 +140,8 @@ export const PositionsGrid = () => {
       dataProvider={dataProvider}
       onHeaderClick={handleHeaderClick}
       onRowClick={handleRowClick}
-    />
+    >
+      {!active && <ConnectionOverlay />}
+    </DataGrid>
   );
 };

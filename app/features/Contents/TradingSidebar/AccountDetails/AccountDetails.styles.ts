@@ -15,7 +15,7 @@ export const rowStyle = (isValid: boolean) => (theme: Theme) => ({
     : theme.palette.secondary.graishLavender,
 });
 
-export const valuesStyle = (theme: Theme) => ({
+export const valuesStyle = (_theme: Theme) => ({
   display: "flex",
 });
 

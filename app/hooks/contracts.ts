@@ -1,11 +1,11 @@
-import create from "zustand";
-import { useEffect, useState, useCallback } from "react";
 import { BigNumber, providers, utils } from "ethers";
+import { useCallback, useEffect, useState } from "react";
+import create from "zustand";
 
-import { useStore } from "@/stores/root";
-import { NetworkId } from "@/defi/types";
+import { getClearingHouseContract, getERC20Contract } from "@/defi/contracts";
 import { ClearingHouse } from "@/defi/contracts/types";
-import { getERC20Contract, getClearingHouseContract } from "@/defi/contracts";
+import { NetworkId } from "@/defi/types";
+import { useStore } from "@/stores/root";
 
 interface ContractList {
   signer?: providers.JsonRpcSigner;
@@ -155,7 +155,7 @@ export const useClearingHouse = () => {
     try {
       const result = await clearingHouse.closePosition(
         amm,
-        { d: utils.parseUnits(quoteAssetAmountLimit) },
+        toDecimalStruct(utils.parseUnits(quoteAssetAmountLimit).abs()),
         gasLimit
       );
       await result.wait();

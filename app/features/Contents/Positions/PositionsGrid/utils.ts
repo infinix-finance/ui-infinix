@@ -1,36 +1,46 @@
 /* istanbul ignore file */
-import { Directions, getPair } from "@/defi";
+import { Directions, getPair, PairId } from "@/defi";
+import { PositionData } from "@/types/api";
 import {
   capitalize,
   formatNumber,
   formatPair,
-  formatPercentage,
   formatUsdValue,
+  toTokenUnit,
 } from "@/utils/formatters";
 
-export const createDataProvider = (positions: any[]) => {
+export const createDataProvider = (
+  positions: PositionData[],
+  getPairName: (amm: string) => PairId
+) => {
   return positions.map((position) => {
-    const pair = getPair(position.pairId);
+    const pairId = getPairName(position.amm);
+    const pair = getPair(pairId);
+    const size = toTokenUnit(position.size);
+    const direction = size.lt(0) ? Directions.Short : Directions.Long;
+    const leverage = toTokenUnit(position.leverage);
+    const entryPrice = toTokenUnit(position.entryPrice);
+    const markPrice = toTokenUnit(position.underlyingPrice);
 
     return {
       pair,
+      amm: position.amm,
+      originalSize: position.size,
       id: pair.id,
       symbol: formatPair(pair.id),
-      direction: capitalize(position.direction),
+      direction: capitalize(direction),
       directionColor:
-        position.direction === Directions.Long ? "alert.lemon" : "alert.guava",
-      leverage: `${position.leverage}X`,
-      size: formatNumber(position.size, {
+        direction === Directions.Long ? "alert.lemon" : "alert.guava",
+      leverage: `${formatNumber(leverage, { base: 0 })}X`,
+      size: formatNumber(size, {
         productId: pair.productIds[1],
       }),
-      entryPrice: formatUsdValue(position.entryPrice),
-      markPrice: formatUsdValue(position.markPrice),
-      marginRatio: formatPercentage(position.marginRatio),
-      liquidationPrice: formatUsdValue(position.liquidationPrice),
-      profitAndLoss: formatNumber(position.unrealizedPnl, {
-        productId: pair.productIds[1],
-      }),
-      isInProfit: position.unrealizedPnl.isGreaterThan(0),
+      entryPrice: formatUsdValue(entryPrice),
+      markPrice: formatUsdValue(markPrice),
+      marginRatio: "", // TODO: provide when available
+      liquidationPrice: "", // TODO: provide when available
+      profitAndLoss: "", // TODO: provide when available
+      isInProfit: false,
     };
   });
 };

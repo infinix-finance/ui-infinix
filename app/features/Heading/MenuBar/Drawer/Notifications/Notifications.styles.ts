@@ -1,6 +1,6 @@
 import { Theme } from "@mui/material";
 
-export const containerStyle = (theme: Theme) => ({
+export const containerStyle = (_theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   flex: 1,
@@ -8,7 +8,7 @@ export const containerStyle = (theme: Theme) => ({
   overflow: "hidden",
 });
 
-export const emptyContainerStyle = (theme: Theme) => ({
+export const emptyContainerStyle = (_theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -24,7 +24,7 @@ export const bellIconStyle = (theme: Theme) => ({
   color: theme.palette.primary.plum,
 });
 
-export const buttonStyle = (theme: Theme) => ({
+export const buttonStyle = (_theme: Theme) => ({
   alignSelf: "flex-end",
   marginRight: 3,
 });

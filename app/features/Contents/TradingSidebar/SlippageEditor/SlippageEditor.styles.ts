@@ -1,6 +1,6 @@
 import { Theme } from "@mui/material";
 
-export const containerStyle = (theme: Theme) => ({
+export const containerStyle = (_theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -12,7 +12,7 @@ export const slippageLabelStyle = (isValid: boolean) => (theme: Theme) => ({
     : theme.palette.secondary.graishLavender,
 });
 
-export const actionStyle = (theme: Theme) => ({
+export const actionStyle = (_theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   gap: 3,
