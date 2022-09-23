@@ -67,4 +67,10 @@ export const TOKENS: { [key in TokenId]: Token } = {
     symbol: "CHAOS",
     name: "Chaos",
   },
+  [TokenId.sol]: {
+    id: TokenId.sol,
+    icon: "/tokens/solana.svg",
+    symbol: "SOL",
+    name: "Solana",
+  },
 };

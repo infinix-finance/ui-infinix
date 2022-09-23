@@ -10,6 +10,7 @@ export enum TokenId {
   dot = "dot",
   pica = "pica",
   chaos = "chaos",
+  sol = "solana",
 }
 
 export type Token = {
@@ -32,6 +33,12 @@ export type Commodity = {
 
 export enum IndexId {
   goog = "goog",
+  BATCH04 = "BATCH04",
+  BATCP04 = "BATCP04",
+  CNCAD00 = "CNCAD00",
+  ACRCA00 = "ACRCA00",
+  "Bitcoin Index" = "SPBTC",
+  "Ethereum Index" = "SPETH",
 }
 
 export type Index = {
@@ -81,6 +88,8 @@ export type Protocol = {
 
 export enum MarketId {
   sp500 = "sp500",
+  SPPlatts = "SPPlatts",
+  SPIndices = "SPIndices",
   crypto = "crypto",
   commodities = "commodities",
 }
@@ -129,6 +138,13 @@ export enum PairId {
   ftmusdc = "ftmusdc",
   movrusdc = "movrusdc",
   chaosusdc = "chaosusdc",
+  solusdc = "solsusdc",
+  BATCH04 = "BATCH04",
+  BATCP04 = "BATCP04",
+  CNCAD00 = "CNCAD00",
+  ACRCA00 = "ACRCA00",
+  "Bitcoin Index" = "Bitcoin Index",
+  "Ethereum Index" = "Ethereum Index",
   xauusdc = "xausdc",
   googusdc = "googusdc",
 }
