@@ -45,11 +45,10 @@ export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
           .userPositions.list.reduce(
             (target: UserPositionEvent[], { position, history }) => {
               const enhancedHistory = history.map((current, idx) => {
-                const isMarginChanging =
-                  current.type === OriginalPositionChangeStatuses.Mgn;
-                const isPrevEntry = idx > 0;
                 const prevEntry =
-                  isMarginChanging && isPrevEntry ? history[idx - 1] : {};
+                  current.type === OriginalPositionChangeStatuses.Mgn && idx > 0
+                    ? history[idx - 1]
+                    : {};
 
                 return {
                   ...prevEntry,

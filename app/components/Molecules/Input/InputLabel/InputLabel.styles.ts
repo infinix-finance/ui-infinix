@@ -1,6 +1,6 @@
 import { Theme } from "@mui/material";
 
-export const boxStyle = (theme: Theme) => ({
+export const boxStyle = (_theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",

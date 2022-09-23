@@ -9,7 +9,7 @@ export const containerStyle = (theme: Theme) => ({
   gap: theme.spacing(1.5),
 });
 
-export const rowStyle = (theme: Theme) => ({
+export const rowStyle = (_theme: Theme) => ({
   display: "flex",
   justifyContent: "space-between",
 });

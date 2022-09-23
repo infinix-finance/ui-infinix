@@ -9,11 +9,11 @@ export const containerStyle = (theme: Theme) => ({
   borderRadius: "0.5rem",
 });
 
-export const headingStyle = (theme: Theme) => ({
+export const headingStyle = (_theme: Theme) => ({
   display: "flex",
   justifyContent: "space-between",
 });
 
-export const productStyle = (theme: Theme) => ({
+export const productStyle = (_theme: Theme) => ({
   marginBottom: 2,
 });

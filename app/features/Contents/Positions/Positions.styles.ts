@@ -22,14 +22,14 @@ export const headingStyle = (theme: Theme) => ({
   backgroundColor: theme.palette.secondary.deeperBlackberry,
 });
 
-export const rightGroupStyle = (theme: Theme) => ({
+export const rightGroupStyle = (_theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   gap: 4,
   marginRight: 2,
 });
 
-export const toggleButtonStyle = (theme: Theme) => ({
+export const toggleButtonStyle = (_theme: Theme) => ({
   "&.MuiButtonBase-root": {
     padding: 1,
     height: "2rem",
@@ -41,7 +41,7 @@ export const toggleButtonStyle = (theme: Theme) => ({
   },
 });
 
-export const tabsStyle = (theme: Theme) => ({
+export const tabsStyle = (_theme: Theme) => ({
   "& .MuiButtonBase-root:first-of-type": {
     borderTopLeftRadius: "0.5rem",
   },

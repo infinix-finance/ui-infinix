@@ -1,6 +1,6 @@
 import { Theme } from "@mui/material";
 
-export const containerStyle = (inline: boolean) => (theme: Theme) =>
+export const containerStyle = (inline: boolean) => (_theme: Theme) =>
   ({
     position: "relative",
     borderRadius: inline ? 0 : undefined,

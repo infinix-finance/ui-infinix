@@ -1,6 +1,6 @@
 import { Theme } from "@mui/material";
 
-export const containerStyle = (theme: Theme) => ({
+export const containerStyle = (_theme: Theme) => ({
   display: "flex",
   flexDirection: "column",
   gap: 2,

@@ -33,7 +33,7 @@ export const indicatorStyle = (percentage: number) => (theme: Theme) => ({
   backgroundColor: theme.palette.common.white,
 });
 
-export const indicatorTextStyle = (percentage: number) => (theme: Theme) => ({
+export const indicatorTextStyle = (percentage: number) => (_theme: Theme) => ({
   position: "absolute",
   top: "1.75rem",
   left: `${percentage}%`,

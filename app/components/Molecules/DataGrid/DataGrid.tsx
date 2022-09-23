@@ -17,10 +17,8 @@ export const DataGrid = ({
   onRowClick = () => {},
 }: DataGridProps) => {
   const visibleColumns = columns.filter((column) => !column?.invisible);
-  const isPopulated = Boolean(dataProvider.length);
-  const shouldShowPlaceholder = Boolean(
-    (showPlaceholder && !isPopulated) || children
-  );
+  const isPopulated = !!dataProvider.length;
+  const shouldShowPlaceholder = (showPlaceholder && !isPopulated) || !!children;
   const shouldShowBody = isPopulated && !children;
 
   return (

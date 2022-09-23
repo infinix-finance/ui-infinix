@@ -1,6 +1,6 @@
 import { Theme } from "@mui/material";
 
-export const containerStyle = (theme: Theme) => ({
+export const containerStyle = (_theme: Theme) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",

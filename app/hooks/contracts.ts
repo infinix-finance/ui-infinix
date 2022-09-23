@@ -155,7 +155,7 @@ export const useClearingHouse = () => {
     try {
       const result = await clearingHouse.closePosition(
         amm,
-        { d: utils.parseUnits(quoteAssetAmountLimit).abs() },
+        toDecimalStruct(utils.parseUnits(quoteAssetAmountLimit).abs()),
         gasLimit
       );
       await result.wait();
