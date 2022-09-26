@@ -12,7 +12,7 @@ const Template: Story<NotificationProps> = (args) => <Notification {...args} />;
 
 export const Open = Template.bind({});
 Open.args = {
-  productIds: [TokenId.eth, TokenId.ftm],
+  productIds: [TokenId.ETH, TokenId.FTM],
   direction: Directions.Short,
   status: PositionChangeStatuses.Open,
   rows: [
@@ -26,7 +26,7 @@ Open.args = {
 
 export const Closed = Template.bind({});
 Closed.args = {
-  productIds: [IndexId.goog, TokenId.usdc],
+  productIds: [IndexId.GOOG, TokenId.USDC],
   direction: Directions.Long,
   status: PositionChangeStatuses.Closed,
   rows: [
@@ -37,7 +37,7 @@ Closed.args = {
 
 export const Liquidated = Template.bind({});
 Liquidated.args = {
-  productIds: [IndexId.goog, TokenId.usdc],
+  productIds: [IndexId.GOOG, TokenId.USDC],
   direction: Directions.Long,
   status: PositionChangeStatuses.Liquidated,
   rows: [

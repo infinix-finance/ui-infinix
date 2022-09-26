@@ -3,14 +3,14 @@ import { Market, MarketId } from "./types";
 export const MARKETS: {
   [marketId in MarketId]: Market;
 } = {
-  [MarketId.crypto]: {
-    id: MarketId.crypto,
+  [MarketId.Crypto]: {
+    id: MarketId.Crypto,
     name: "Crypto",
     symbol: "Crypto",
     icon: "/markets/crypto.svg",
   },
-  [MarketId.sp500]: {
-    id: MarketId.sp500,
+  [MarketId.SP500]: {
+    id: MarketId.SP500,
     name: "S&P500",
     symbol: "S&P500",
     icon: "/markets/sp500.svg",
@@ -27,8 +27,8 @@ export const MARKETS: {
     symbol: "S&P Indices",
     icon: "/markets/sp500.svg", // TODO
   },
-  [MarketId.commodities]: {
-    id: MarketId.commodities,
+  [MarketId.Commodities]: {
+    id: MarketId.Commodities,
     name: "Commodities",
     symbol: "Commodities",
     icon: "/markets/commodities.svg",

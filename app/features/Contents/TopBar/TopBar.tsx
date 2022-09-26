@@ -27,15 +27,16 @@ export const TopBar = () => {
       <Box sx={dropdownContainerStyle}>
         <Select
           sx={selectStyle}
-          value={rates.market}
+          value={marketsList.options.length ? rates.market : ""}
+          showDescription={false}
           setValue={handleMarketChange}
-          {...(marketsList || { options: [] })}
+          {...marketsList}
         />
         <Select
           sx={selectStyle}
-          value={rates.pair}
+          value={pairsList.options.length ? rates.pair : ""}
           setValue={handlePairChange}
-          {...(pairsList?.[rates.market] || { options: [] })}
+          {...pairsList}
         />
       </Box>
       <TooltipLabel label="Entry Price" value={mostRecentPositionPrice} />

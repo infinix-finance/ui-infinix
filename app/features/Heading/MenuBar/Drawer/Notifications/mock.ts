@@ -9,7 +9,7 @@ import {
 export const notifications = [
   {
     direction: Directions.Long,
-    productIds: [IndexId.goog, TokenId.usdc],
+    productIds: [IndexId.GOOG, TokenId.USDC],
     status: PositionChangeStatuses.Open,
     rows: [
       { label: "23/08/2022", value: "12:44:55" },
@@ -24,7 +24,7 @@ export const notifications = [
     ],
   },
   {
-    productIds: [CommodityId.gold, TokenId.usdc],
+    productIds: [CommodityId.XAU, TokenId.USDC],
     direction: Directions.Short,
     status: PositionChangeStatuses.Closed,
     rows: [
@@ -33,7 +33,7 @@ export const notifications = [
     ],
   },
   {
-    productIds: [TokenId.btc, TokenId.usdc],
+    productIds: [TokenId.BTC, TokenId.USDC],
     direction: Directions.Long,
     status: PositionChangeStatuses.Liquidated,
     rows: [
@@ -43,7 +43,7 @@ export const notifications = [
   },
   {
     direction: Directions.Long,
-    productIds: [TokenId.avax, TokenId.usdc],
+    productIds: [TokenId.AVAX, TokenId.USDC],
     status: PositionChangeStatuses.Open,
     rows: [
       { label: "23/08/2022", value: "12:44:55" },
@@ -58,7 +58,7 @@ export const notifications = [
     ],
   },
   {
-    productIds: [TokenId.chaos, TokenId.usdc],
+    productIds: [TokenId.CHAOS, TokenId.USDC],
     direction: Directions.Short,
     status: PositionChangeStatuses.Closed,
     rows: [
@@ -67,7 +67,7 @@ export const notifications = [
     ],
   },
   {
-    productIds: [TokenId.ftm, TokenId.usdc],
+    productIds: [TokenId.FTM, TokenId.USDC],
     direction: Directions.Long,
     status: PositionChangeStatuses.Liquidated,
     rows: [

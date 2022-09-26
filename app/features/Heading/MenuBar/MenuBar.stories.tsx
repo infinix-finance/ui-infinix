@@ -1,5 +1,5 @@
-import { NetworkId, WalletId } from "@/defi";
 import { SWITCH_CONNECTION_MSG } from "@/constants/messages";
+import { NetworkId, WalletId } from "@/defi";
 import { getInitialState, useStore } from "@/stores/root";
 import { Meta, Story } from "@storybook/react";
 import { MenuBar } from "./MenuBar";
@@ -46,7 +46,7 @@ Disconnected.decorators = [
 export const ConnectedToAvalanche = Template.bind({});
 ConnectedToAvalanche.decorators = [
   (Story) => {
-    createStore(NetworkId.avalanche);
+    createStore(NetworkId.avalancheTestnet);
     return <Story />;
   },
 ];

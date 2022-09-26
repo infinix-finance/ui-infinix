@@ -29,6 +29,7 @@ export const Select = ({
   value,
   options,
   searchable,
+  showDescription = true,
   maxHeight = 57,
   ...rest
 }: SelectProps) => {
@@ -89,7 +90,7 @@ export const Select = ({
           <Item
             productIds={option.productIds}
             assets={option.assets}
-            showDescription={Boolean(option.productIds)}
+            showDescription={showDescription && Boolean(option.productIds)}
           />
         </MenuItem>
       ))}

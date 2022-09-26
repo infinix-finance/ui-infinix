@@ -55,7 +55,7 @@ describe("formatters", () => {
 
     it("should return the number with token symbol", () => {
       const result = formatNumber(new BigNumber(320), {
-        productId: TokenId.usdc,
+        productId: TokenId.USDC,
       });
 
       expect(result).toBe("320.00 USDC");
@@ -65,7 +65,7 @@ describe("formatters", () => {
       const result = formatNumber(new BigNumber(320), {
         base: 4,
         prefix: "$",
-        productId: TokenId.usdc,
+        productId: TokenId.USDC,
       });
 
       expect(result).toBe("$320.0000 USDC");
@@ -124,7 +124,7 @@ describe("formatters", () => {
 
   describe("formatPair", () => {
     it("should format BTC/USDC", () => {
-      const result = formatPair(PairId.btcusdc);
+      const result = formatPair(PairId.BTCUSDC);
 
       expect(result).toBe("BTC/USDC");
     });

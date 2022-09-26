@@ -1,74 +1,74 @@
 import { Token, TokenId } from "./types";
 
 export const TOKENS: { [key in TokenId]: Token } = {
-  [TokenId.btc]: {
-    id: TokenId.btc,
+  [TokenId.BTC]: {
+    id: TokenId.BTC,
     icon: "/tokens/bitcoin.svg",
     symbol: "BTC",
     name: "Bitcoin",
   },
-  [TokenId.usdc]: {
-    id: TokenId.usdc,
+  [TokenId.USDC]: {
+    id: TokenId.USDC,
     icon: "/tokens/usd-coin-usdc.svg",
     symbol: "USDC",
     name: "USDC",
   },
-  [TokenId.eth]: {
-    id: TokenId.eth,
+  [TokenId.ETH]: {
+    id: TokenId.ETH,
     icon: "/tokens/eth-mainnet.svg",
     symbol: "ETH",
     name: "Ethereum",
   },
-  [TokenId.matic]: {
-    id: TokenId.matic,
+  [TokenId.MATIC]: {
+    id: TokenId.MATIC,
     icon: "/tokens/polygon-matic.svg",
     symbol: "MATIC",
     name: "Matic",
   },
-  [TokenId.avax]: {
-    id: TokenId.avax,
+  [TokenId.AVAX]: {
+    id: TokenId.AVAX,
     icon: "/tokens/avalanche.svg",
     symbol: "AVAX",
     name: "Avalanche",
   },
-  [TokenId.ftm]: {
-    id: TokenId.ftm,
+  [TokenId.FTM]: {
+    id: TokenId.FTM,
     icon: "/tokens/fantom.svg",
     symbol: "FTM",
     name: "Fantom",
   },
-  [TokenId.movr]: {
-    id: TokenId.movr,
+  [TokenId.MOVR]: {
+    id: TokenId.MOVR,
     icon: "/tokens/movr.svg",
     symbol: "MOVR",
     name: "Moonriver",
   },
-  [TokenId.dot]: {
-    id: TokenId.dot,
+  [TokenId.DOT]: {
+    id: TokenId.DOT,
     icon: "/tokens/polkadot.svg",
     symbol: "DOT",
     name: "Pokadot",
   },
-  [TokenId.pica]: {
-    id: TokenId.pica,
+  [TokenId.PICA]: {
+    id: TokenId.PICA,
     icon: "/tokens/picasso.svg",
     symbol: "PICA",
     name: "Picasso",
   },
-  [TokenId.ksm]: {
-    id: TokenId.ksm,
+  [TokenId.KSM]: {
+    id: TokenId.KSM,
     icon: "/tokens/dotsama-kusama.svg",
     symbol: "KSM",
     name: "Kusama",
   },
-  [TokenId.chaos]: {
-    id: TokenId.chaos,
+  [TokenId.CHAOS]: {
+    id: TokenId.CHAOS,
     icon: "/tokens/chaos.svg",
     symbol: "CHAOS",
     name: "Chaos",
   },
-  [TokenId.sol]: {
-    id: TokenId.sol,
+  [TokenId.SOL]: {
+    id: TokenId.SOL,
     icon: "/tokens/solana.svg",
     symbol: "SOL",
     name: "Solana",

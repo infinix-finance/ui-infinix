@@ -1,10 +1,10 @@
-import BigNumber from "bignumber.js";
 import { Meta, Story } from "@storybook/react";
+import BigNumber from "bignumber.js";
 
 import { getInitialState, useStore } from "@/stores/root";
 
-import { TradingSidebar } from "./TradingSidebar";
 import { PairId } from "@/defi";
+import { TradingSidebar } from "./TradingSidebar";
 
 export default {
   title: "features/Contents/TradingSidebar",
@@ -16,7 +16,7 @@ const createStore = (balance: number) => {
 
   store.rates = {
     ...store.rates,
-    pair: PairId.ethusdc,
+    pair: PairId.ETHUSDC,
     exchangeRate: new BigNumber(100),
   };
   store.tradingSidebar.balance = new BigNumber(balance);

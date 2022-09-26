@@ -21,20 +21,20 @@ const Template: Story<ProductAssetProps> = (args) => (
 export const TokenAssets = Template.bind({});
 TokenAssets.args = {
   ...defaultArgs,
-  productIds: [TokenId.eth, TokenId.ftm],
+  productIds: [TokenId.ETH, TokenId.FTM],
 };
 
 export const TokenAssetsWithDescription = Template.bind({});
 TokenAssetsWithDescription.args = {
   ...defaultArgs,
-  productIds: [TokenId.eth, TokenId.ftm],
+  productIds: [TokenId.ETH, TokenId.FTM],
   showDescription: true,
 };
 
 export const MarketAsset = Template.bind({});
 MarketAsset.args = {
   ...defaultArgs,
-  productIds: [MarketId.crypto],
+  productIds: [MarketId.Crypto],
 };
 
 export const NetworkAsset = Template.bind({});

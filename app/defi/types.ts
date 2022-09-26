@@ -1,16 +1,16 @@
 export enum TokenId {
-  btc = "btc",
-  usdc = "usdc",
-  eth = "eth",
-  matic = "matic",
-  avax = "avax",
-  movr = "movr",
-  ftm = "ftm",
-  ksm = "ksm",
-  dot = "dot",
-  pica = "pica",
-  chaos = "chaos",
-  sol = "solana",
+  BTC = "BTC",
+  USDC = "USDC",
+  ETH = "ETH",
+  MATIC = "MATIC",
+  AVAX = "AVAX",
+  MOVR = "MOVR",
+  FTM = "FTM",
+  KSM = "KSM",
+  DOT = "DOT",
+  PICA = "PICA",
+  CHAOS = "CHAOS",
+  SOL = "SOL",
 }
 
 export type Token = {
@@ -21,7 +21,7 @@ export type Token = {
 };
 
 export enum CommodityId {
-  gold = "gold",
+  XAU = "XAU",
 }
 
 export type Commodity = {
@@ -32,13 +32,13 @@ export type Commodity = {
 };
 
 export enum IndexId {
-  goog = "goog",
+  GOOG = "GOOG",
   BATCH04 = "BATCH04",
   BATCP04 = "BATCP04",
   CNCAD00 = "CNCAD00",
   ACRCA00 = "ACRCA00",
-  "Bitcoin Index" = "SPBTC",
-  "Ethereum Index" = "SPETH",
+  SPBTC = "SPBTC",
+  SPETH = "SPETH",
 }
 
 export type Index = {
@@ -87,11 +87,11 @@ export type Protocol = {
 };
 
 export enum MarketId {
-  sp500 = "sp500",
-  SPPlatts = "S&P Platts",
-  SPIndices = "S&P Indices",
-  crypto = "crypto",
-  commodities = "commodities",
+  SP500 = "SP500",
+  SPPlatts = "SPPlatts",
+  SPIndices = "SPIndices",
+  Crypto = "Crypto",
+  Commodities = "Commodities",
 }
 
 export type Market = {
@@ -132,21 +132,21 @@ export type Product =
   | Protocol;
 
 export enum PairId {
-  btcusdc = "btcusdc",
-  ethusdc = "ethusdc",
-  avaxusdc = "avaxusdc",
-  ftmusdc = "ftmusdc",
-  movrusdc = "movrusdc",
-  chaosusdc = "chaosusdc",
-  solusdc = "solsusdc",
+  BTCUSDC = "BTCUSDC",
+  ETHUSDC = "ETHUSDC",
+  AVAXUSDC = "AVAXUSDC",
+  FTMUSDC = "FTMUSDC",
+  MOVRUSDC = "MOVRUSDC",
+  CHAOSUSDC = "CHAOSUSDC",
+  SOLUSDC = "SOLUSDC",
   BATCH04 = "BATCH04",
   BATCP04 = "BATCP04",
   CNCAD00 = "CNCAD00",
   ACRCA00 = "ACRCA00",
-  "Bitcoin Index" = "Bitcoin Index",
-  "Ethereum Index" = "Ethereum Index",
-  xauusdc = "xausdc",
-  googusdc = "googusdc",
+  SPBTC = "SPBTC",
+  SPETH = "SPETH",
+  XAUUSD = "XAUUSD",
+  GOOGUSDC = "GOOGUSDC",
 }
 
 export type Pair = {

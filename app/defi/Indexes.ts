@@ -1,8 +1,8 @@
 import { Index, IndexId } from "./types";
 
 export const INDEXES: { [key in IndexId]: Index } = {
-  [IndexId.goog]: {
-    id: IndexId.goog,
+  [IndexId.GOOG]: {
+    id: IndexId.GOOG,
     icon: "/indexes/google.svg",
     symbol: "GOOG",
     name: "Google",
@@ -31,14 +31,14 @@ export const INDEXES: { [key in IndexId]: Index } = {
     symbol: "CNCAD00",
     name: "CNCAD00",
   },
-  [IndexId["Bitcoin Index"]]: {
-    id: IndexId["Bitcoin Index"],
+  [IndexId.SPBTC]: {
+    id: IndexId.SPBTC,
     icon: "/indexes/bitcoin.svg", // TODO
     symbol: "SPBTC",
     name: "Bitcoin Index",
   },
-  [IndexId["Ethereum Index"]]: {
-    id: IndexId["Ethereum Index"],
+  [IndexId.SPETH]: {
+    id: IndexId.SPETH,
     icon: "/indexes/eth-mainnet.svg", // TODO
     symbol: "SPETH",
     name: "Ethereum Index",

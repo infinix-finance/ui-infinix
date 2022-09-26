@@ -51,7 +51,7 @@ InputAlone.args = {};
 
 export const InputWithProducts = Template.bind({});
 InputWithProducts.args = {
-  productIds: [TokenId.usdc],
+  productIds: [TokenId.USDC],
 };
 
 export const InputWithEndAndornment = Template.bind({});
@@ -61,7 +61,7 @@ InputWithEndAndornment.args = {
 
 export const RightAlignedInputWithProducts = Template.bind({});
 RightAlignedInputWithProducts.args = {
-  productIds: [TokenId.usdc],
+  productIds: [TokenId.USDC],
   alignEnd: true,
 };
 

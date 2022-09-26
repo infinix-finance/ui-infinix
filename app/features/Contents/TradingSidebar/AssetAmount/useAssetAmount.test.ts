@@ -1,9 +1,9 @@
 import { act, renderHook } from "@testing-library/react";
 import BigNumber from "bignumber.js";
 
-import useAssetAmount from "./useAssetAmount";
-import React from "react";
 import { getInitialState, useStore } from "@/stores/root";
+import React from "react";
+import useAssetAmount from "./useAssetAmount";
 
 const createStore = (balance: number, exchangeRate: number) => {
   const store = getInitialState();
@@ -35,8 +35,8 @@ describe("useAssetAmount", () => {
     expect(result.current).toMatchObject({
       base: "",
       quote: "",
-      baseProduct: "btc",
-      quoteProduct: "usdc",
+      baseProduct: "BTC",
+      quoteProduct: "USDC",
       formattedBalance: "Balance: 0.00 USDC",
       commonProps: {
         disabled: true,
@@ -51,8 +51,8 @@ describe("useAssetAmount", () => {
     expect(result.current).toMatchObject({
       base: "",
       quote: "",
-      baseProduct: "btc",
-      quoteProduct: "usdc",
+      baseProduct: "BTC",
+      quoteProduct: "USDC",
       formattedBalance: "Balance: 22,000.00 USDC",
       commonProps: {
         disabled: false,

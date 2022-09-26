@@ -10,10 +10,15 @@ import {
   PairDropdownConfig,
 } from "./utils";
 
+const defaultDropdownPayload = { searchable: false, options: [] };
+
 export default function useTopBar() {
-  const [marketsList, setMarketsList] =
-    useState<MarketDropdownConfig | null>(null);
-  const [pairsList, setPairsList] = useState<PairDropdownConfig | null>(null);
+  const [marketsList, setMarketsList] = useState<MarketDropdownConfig>(
+    defaultDropdownPayload
+  );
+  const [pairsList, setPairsList] = useState<PairDropdownConfig>(
+    defaultDropdownPayload
+  );
   const rates = useStore((state) => state.rates);
   const markets = useStore((state) => state.markets);
   const mostRecentPositionPrice = useStore(getMostRecentPositionPrice);
@@ -26,7 +31,7 @@ export default function useTopBar() {
     if (!markets.ready) return;
 
     setMarketsList(generateMarketDropdownProps());
-    setPairsList(generatePairDropdownProps());
+    setPairsList(generatePairDropdownProps(rates.market));
   }, [markets.ready]);
 
   const handlePairChange = (pair: string | PairId) => {
@@ -38,10 +43,12 @@ export default function useTopBar() {
 
   const handleMarketChange = (maketId: string) => {
     const selectedMarketId = maketId as MarketId;
-    const selectedPair = pairsList![selectedMarketId].options[0].value;
+    const pairs = generatePairDropdownProps(selectedMarketId);
+    const selectedPair = pairs.options[0].value;
 
     rates.changeMarket(selectedMarketId);
     handlePairChange(selectedPair);
+    setPairsList(pairs);
   };
 
   return {

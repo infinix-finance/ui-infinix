@@ -28,7 +28,7 @@ describe("userPositions slice", () => {
         .getState()
         .markets.getPairName("0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1");
 
-      expect(result).toBe("avaxusdc");
+      expect(result).toBe("AVAXUSDC");
     });
 
     test("should return empty string for non-existent amm", () => {

@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { Box, SxProps } from "@mui/material";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { useState } from "react";
 
-import { Select } from "./Select";
 import { TokenId } from "@/defi";
+import { Select } from "./Select";
 import { SelectProps } from "./Select.types";
 
 const SelectsStories = (props: SelectProps) => {
@@ -71,19 +71,19 @@ SingleTokenSelects.args = {
   options: [
     {
       value: "select1",
-      productIds: [TokenId.ftm],
+      productIds: [TokenId.FTM],
     },
     {
       value: "select2",
-      productIds: [TokenId.usdc],
+      productIds: [TokenId.USDC],
     },
     {
       value: "select3",
-      productIds: [TokenId.avax],
+      productIds: [TokenId.AVAX],
     },
     {
       value: "select4",
-      productIds: [TokenId.chaos],
+      productIds: [TokenId.CHAOS],
       disabled: true,
     },
   ],
@@ -95,15 +95,15 @@ MultiTokenSelects.args = {
   options: [
     {
       value: "select1",
-      productIds: [TokenId.ftm, TokenId.usdc],
+      productIds: [TokenId.FTM, TokenId.USDC],
     },
     {
       value: "select3",
-      productIds: [TokenId.avax, TokenId.usdc],
+      productIds: [TokenId.AVAX, TokenId.USDC],
     },
     {
       value: "select4",
-      productIds: [TokenId.chaos, TokenId.usdc],
+      productIds: [TokenId.CHAOS, TokenId.USDC],
       disabled: true,
     },
   ],
@@ -115,45 +115,45 @@ ScrollableSelect.args = {
   options: [
     {
       value: "select1",
-      productIds: [TokenId.ftm, TokenId.usdc],
+      productIds: [TokenId.FTM, TokenId.USDC],
     },
     {
       value: "select3",
-      productIds: [TokenId.avax, TokenId.usdc],
+      productIds: [TokenId.AVAX, TokenId.USDC],
     },
     {
       value: "select4",
-      productIds: [TokenId.chaos, TokenId.usdc],
+      productIds: [TokenId.CHAOS, TokenId.USDC],
     },
     {
       value: "select5",
-      productIds: [TokenId.chaos, TokenId.usdc],
+      productIds: [TokenId.CHAOS, TokenId.USDC],
     },
     {
       value: "select6",
-      productIds: [TokenId.chaos, TokenId.usdc],
+      productIds: [TokenId.CHAOS, TokenId.USDC],
     },
     {
       value: "select7",
-      productIds: [TokenId.chaos, TokenId.usdc],
+      productIds: [TokenId.CHAOS, TokenId.USDC],
     },
     {
       value: "select8",
-      productIds: [TokenId.chaos, TokenId.usdc],
+      productIds: [TokenId.CHAOS, TokenId.USDC],
     },
     {
       value: "select9",
-      productIds: [TokenId.chaos, TokenId.usdc],
+      productIds: [TokenId.CHAOS, TokenId.USDC],
       disabled: true,
     },
     {
       value: "select10",
-      productIds: [TokenId.chaos, TokenId.usdc],
+      productIds: [TokenId.CHAOS, TokenId.USDC],
       disabled: true,
     },
     {
       value: "select11",
-      productIds: [TokenId.chaos, TokenId.usdc],
+      productIds: [TokenId.CHAOS, TokenId.USDC],
       disabled: true,
     },
   ],

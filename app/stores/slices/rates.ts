@@ -26,8 +26,8 @@ export interface RatesSlice {
 
 export const createRatesSlice: CustomStateCreator<RatesSlice> = (set, get) => ({
   rates: {
-    market: MarketId.crypto,
-    pair: PairId.btcusdc,
+    market: MarketId.Crypto,
+    pair: PairId.BTCUSDC,
     exchangeRate: new BigNumber(0),
     percentageChange: 0,
     percentageValue: "$0.00",

@@ -36,7 +36,7 @@ export interface HeaderProps {
 
 export const Header = ({
   timeframe = Timeframes._1d,
-  pairId = PairId.btcusdc,
+  pairId = PairId.BTCUSDC,
   price = new BigNumber(140.32),
   change = new BigNumber(0.1234),
   percentage = 12.44,
@@ -53,7 +53,7 @@ export const Header = ({
     <Box sx={containerStyle}>
       <Box sx={topStyle}>
         <ProductAsset
-          productIds={[TokenId.btc]}
+          productIds={[TokenId.BTC]}
           showLabel={false}
           iconSize={48}
         />
