@@ -14,8 +14,8 @@ export default {
 const createStore = (balance: number) => {
   const store = getInitialState();
 
-  store.rates = {
-    ...store.rates,
+  store.ui = {
+    ...store.ui,
     pair: PairId.ETHUSDC,
     exchangeRate: new BigNumber(100),
   };

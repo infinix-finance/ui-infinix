@@ -1,8 +1,8 @@
 import BigNumber from "bignumber.js";
 
 import { getPair } from "@/defi";
-import { formatNumber, toFixedNumber } from "@/utils/formatters";
 import { useStore } from "@/stores/root";
+import { formatNumber, toFixedNumber } from "@/utils/formatters";
 
 import {
   calculateBaseAmount,
@@ -12,7 +12,7 @@ import {
 } from "./helpers";
 
 export default function useAssetAmount() {
-  const { pair } = useStore((state) => state.rates);
+  const { pair } = useStore((state) => state.ui);
   const {
     balance: balanceValue,
     amounts: { base, quote },

@@ -1,34 +1,31 @@
 import { MarketId, PairId } from "@/defi";
 import { AppState, CustomStateCreator } from "../types";
 
-interface RatesProps {
+interface UIProps {
   market: MarketId;
   pair: PairId;
 }
 
-export interface RatesSlice {
-  rates: RatesProps & {
+export interface UISlice {
+  ui: UIProps & {
     changeMarket: (marketId: MarketId) => void;
     changePair: (pairId: PairId) => void;
   };
 }
 
-export const createRatesSlice: CustomStateCreator<RatesSlice> = (set, get) => ({
-  rates: {
+export const createUISlice: CustomStateCreator<UISlice> = (set, get) => ({
+  ui: {
     market: MarketId.Crypto,
     pair: PairId.BTCUSDC,
 
     changeMarket: (marketId: MarketId) =>
       set(function changeMarket(state: AppState) {
-        state.rates.market = marketId;
-
-        This comment since it's not preceeded by 2 forward slashes, will make 
-        this code useless or probably even the whole application would stop working.
+        state.ui.market = marketId;
       }),
 
     changePair: (pairId: PairId) =>
       set(function changePair(state: AppState) {
-        state.rates.pair = pairId;
+        state.ui.pair = pairId;
       }),
   },
 });

@@ -1,6 +1,6 @@
-import create from "zustand";
 import { useEffect } from "react";
 import { io, Socket } from "socket.io-client";
+import create from "zustand";
 
 import { useStore } from "@/stores/root";
 
@@ -78,7 +78,7 @@ export const useSocketConnection = () => {
 export const useSocketAmmInfo = (address: string) => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setAmmInfo } = useStore((state) => state.amm);
-  const { pair } = useStore((state) => state.rates); // TODO: remove when ready
+  const { pair } = useStore((state) => state.ui); // TODO: remove when ready
 
   useEffect(() => {
     if (!connected) return;
@@ -95,7 +95,7 @@ export const useSocketAmmInfo = (address: string) => {
 export const useSocketPriceFeed = (feedKey: string) => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setPriceFeed } = useStore((state) => state.priceHistory);
-  const { pair } = useStore((state) => state.rates); // TODO: remove when ready
+  const { pair } = useStore((state) => state.ui); // TODO: remove when ready
 
   useEffect(() => {
     if (!connected) return;
@@ -128,7 +128,7 @@ export const useSocketUserPositions = (user: string) => {
 export const useSocketRecentPositions = (amm: string) => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setPositions } = useStore((state) => state.recentPositions);
-  const { pair } = useStore((state) => state.rates); // TODO: remove when ready
+  const { pair } = useStore((state) => state.ui); // TODO: remove when ready
 
   useEffect(() => {
     if (!connected) return;

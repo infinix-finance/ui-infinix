@@ -9,25 +9,25 @@ export const INDEXES: { [key in IndexId]: Index } = {
   },
   [IndexId.ACRCA00]: {
     id: IndexId.ACRCA00,
-    icon: "/indexes/google.svg", // TODO
+    icon: "/indexes/sp500.svg", // TODO
     symbol: "ACRCA00",
     name: "ACRCA00",
   },
   [IndexId.BATCH04]: {
     id: IndexId.BATCH04,
-    icon: "/indexes/google.svg", // TODO
+    icon: "/indexes/sp500.svg", // TODO
     symbol: "BATCH04",
     name: "BATCH04",
   },
   [IndexId.BATCP04]: {
     id: IndexId.BATCP04,
-    icon: "/indexes/google.svg", // TODO
+    icon: "/indexes/sp500.svg", // TODO
     symbol: "BATCP04",
     name: "BATCP04",
   },
   [IndexId.CNCAD00]: {
     id: IndexId.CNCAD00,
-    icon: "/indexes/google.svg", // TODO
+    icon: "/indexes/sp500.svg", // TODO
     symbol: "CNCAD00",
     name: "CNCAD00",
   },

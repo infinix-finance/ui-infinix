@@ -13,7 +13,7 @@ import {
 
 export const TopBar = () => {
   const {
-    rates,
+    ui,
     mostRecentPositionPrice,
     priceValues,
     marketsList,
@@ -27,14 +27,14 @@ export const TopBar = () => {
       <Box sx={dropdownContainerStyle}>
         <Select
           sx={selectStyle}
-          value={marketsList.options.length ? rates.market : ""}
+          value={marketsList.options.length ? ui.market : ""}
           showDescription={false}
           setValue={handleMarketChange}
           {...marketsList}
         />
         <Select
           sx={selectStyle}
-          value={pairsList.options.length ? rates.pair : ""}
+          value={pairsList.options.length ? ui.pair : ""}
           setValue={handlePairChange}
           {...pairsList}
         />

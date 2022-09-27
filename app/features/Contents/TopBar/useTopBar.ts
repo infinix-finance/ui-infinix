@@ -19,7 +19,7 @@ export default function useTopBar() {
   const [pairsList, setPairsList] = useState<PairDropdownConfig>(
     defaultDropdownPayload
   );
-  const rates = useStore((state) => state.rates);
+  const ui = useStore((state) => state.ui);
   const markets = useStore((state) => state.markets);
   const mostRecentPositionPrice = useStore(getMostRecentPositionPrice);
   const priceValues = useStore(getTopBarValues);
@@ -31,11 +31,11 @@ export default function useTopBar() {
     if (!markets.ready) return;
 
     setMarketsList(generateMarketDropdownProps());
-    setPairsList(generatePairDropdownProps(rates.market));
+    setPairsList(generatePairDropdownProps(ui.market));
   }, [markets.ready]);
 
   const handlePairChange = (pair: string | PairId) => {
-    rates.changePair(pair as PairId);
+    ui.changePair(pair as PairId);
     priceHistory.clear();
     amm.clear();
     recentPositions.clear();
@@ -46,13 +46,13 @@ export default function useTopBar() {
     const pairs = generatePairDropdownProps(selectedMarketId);
     const selectedPair = pairs.options[0].value;
 
-    rates.changeMarket(selectedMarketId);
+    ui.changeMarket(selectedMarketId);
     handlePairChange(selectedPair);
     setPairsList(pairs);
   };
 
   return {
-    rates,
+    ui,
     mostRecentPositionPrice,
     priceValues,
     marketsList,

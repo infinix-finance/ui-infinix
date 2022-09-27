@@ -35,7 +35,7 @@ const createStore = (initialize: boolean) => {
     ];
   }
 
-  store.rates.market = MarketId.Crypto;
+  store.ui.market = MarketId.Crypto;
 
   store.markets = {
     ...store.markets,
@@ -48,9 +48,8 @@ const createStore = (initialize: boolean) => {
     ready: true,
   };
 
-  store.rates.fetchDetails = () => {};
-  store.rates.changeMarket = () => {};
-  store.rates.changePair = () => {};
+  store.ui.changeMarket = () => {};
+  store.ui.changePair = () => {};
 
   useStore.setState(store);
 };

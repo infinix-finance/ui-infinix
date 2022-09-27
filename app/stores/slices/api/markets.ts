@@ -25,24 +25,7 @@ export const createMarketsSlice: CustomStateCreator<MarketsSlice> = (
 
     setMarkets: (markets: Markets) => {
       set(function setMarkets(state: AppState) {
-        // state.markets.list = markets;
-        state.markets.list = {
-          Crypto: {
-            BTCUSDC: "0x0",
-            SOLUSDC: "0x0",
-            AVAXUSDC: "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
-          },
-          SPPlatts: {
-            BATCH04: "0x0",
-            BATCP04: "0x0",
-            CNCAD00: "0x0",
-            ACRCA00: "0x0",
-          },
-          SPIndices: {
-            SPBTC: "0x0",
-            SPETH: "0x0",
-          },
-        };
+        state.markets.list = markets;
         state.markets.ready = true;
 
         // TODO: Remove when markets data provides amm address as well
