@@ -3,14 +3,20 @@
 import { ColumnProps, RowProps } from "@/components";
 import { useClearingHouse } from "@/hooks/contracts";
 import { useStore } from "@/stores/root";
+import { useEffect, useState } from "react";
 import { createDataProvider } from "./utils";
 
 export default function usePositionsGrid() {
-  const { getPositions } = useStore((state) => state.userPositions);
-  const { getPairName } = useStore((state) => state.markets);
+  const [dataProvider, setDataProvider] = useState<{}[]>([]);
+  const { getPositions, list } = useStore((state) => state.userPositions);
+  const { getPairName, ready } = useStore((state) => state.markets);
   const { closePosition } = useClearingHouse();
-  const positions = getPositions();
-  const dataProvider = createDataProvider(positions, getPairName);
+
+  useEffect(() => {
+    if (!ready) return;
+
+    setDataProvider(createDataProvider(getPositions(), getPairName));
+  }, [ready, list]);
 
   const handleHeaderClick = (column: ColumnProps) => {
     console.log("header clicked", column);

@@ -17,7 +17,6 @@ const createStore = (balance: number) => {
   store.ui = {
     ...store.ui,
     pair: PairId.ETHUSDC,
-    exchangeRate: new BigNumber(100),
   };
   store.tradingSidebar.balance = new BigNumber(balance);
   store.tradingSidebar.slippage = 1.6;

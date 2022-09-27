@@ -29,7 +29,6 @@ const createStore = (balance: number, exchangeRate: number) => {
   store.ui = {
     ...store.ui,
     pair: PairId.ETHUSDC,
-    exchangeRate: new BigNumber(exchangeRate),
   };
 
   useStore.setState(store);

@@ -1,12 +1,20 @@
 /* istanbul ignore file */
+import { useEffect, useState } from "react";
+
 import { ColumnProps, RowProps } from "@/components";
 import { useStore } from "@/stores/root";
 import { createDataProvider } from "./utils";
 
 export default function useHistoryGrid() {
-  const { getHistory } = useStore((state) => state.userPositions);
-  const history = getHistory();
-  const dataProvider = createDataProvider(history);
+  const [dataProvider, setDataProvider] = useState<{}[]>([]);
+  const { getHistory, list } = useStore((state) => state.userPositions);
+  const { ready } = useStore((state) => state.markets);
+
+  useEffect(() => {
+    if (!ready) return;
+
+    setDataProvider(createDataProvider(getHistory()));
+  }, [ready, list]);
 
   const handleHeaderClick = (column: ColumnProps) => {
     console.log("header clicked", column);
