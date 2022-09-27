@@ -1,29 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TopBar utils generateMarketDropdownProps should generate S&P 500 market dropdown props 1`] = `
+exports[`TopBar utils generateMarketDropdownProps should generate S&P Indices market dropdown props 1`] = `
 Object {
   "options": Array [
     Object {
       "productIds": Array [
-        "gold",
-        "usdc",
+        "SPBTC",
+        "USDC",
       ],
-      "value": "xausdc",
+      "value": "SPBTC",
+    },
+    Object {
+      "productIds": Array [
+        "SPETH",
+        "USDC",
+      ],
+      "value": "SPETH",
     },
   ],
   "searchable": true,
 }
 `;
 
-exports[`TopBar utils generateMarketDropdownProps should generate commodities market dropdown props 1`] = `
+exports[`TopBar utils generateMarketDropdownProps should generate S&P Platts market dropdown props 1`] = `
 Object {
   "options": Array [
     Object {
       "productIds": Array [
-        "goog",
-        "usdc",
+        "BATCH04",
+        "USDC",
       ],
-      "value": "googusdc",
+      "value": "BATCH04",
+    },
+    Object {
+      "productIds": Array [
+        "BATCP04",
+        "USDC",
+      ],
+      "value": "BATCP04",
+    },
+    Object {
+      "productIds": Array [
+        "CNCAD00",
+        "USDC",
+      ],
+      "value": "CNCAD00",
+    },
+    Object {
+      "productIds": Array [
+        "ACRCA00",
+        "USDC",
+      ],
+      "value": "ACRCA00",
     },
   ],
   "searchable": true,
@@ -35,45 +63,24 @@ Object {
   "options": Array [
     Object {
       "productIds": Array [
-        "btc",
-        "usdc",
+        "BTC",
+        "USDC",
       ],
-      "value": "btcusdc",
+      "value": "BTCUSDC",
     },
     Object {
       "productIds": Array [
-        "eth",
-        "usdc",
+        "AVAX",
+        "USDC",
       ],
-      "value": "ethusdc",
+      "value": "AVAXUSDC",
     },
     Object {
       "productIds": Array [
-        "avax",
-        "usdc",
+        "SOL",
+        "USDC",
       ],
-      "value": "avaxusdc",
-    },
-    Object {
-      "productIds": Array [
-        "chaos",
-        "usdc",
-      ],
-      "value": "chaosusdc",
-    },
-    Object {
-      "productIds": Array [
-        "ftm",
-        "usdc",
-      ],
-      "value": "ftmusdc",
-    },
-    Object {
-      "productIds": Array [
-        "movr",
-        "usdc",
-      ],
-      "value": "movrusdc",
+      "value": "SOLUSDC",
     },
   ],
   "searchable": true,
@@ -85,21 +92,21 @@ Object {
   "options": Array [
     Object {
       "productIds": Array [
-        "sp500",
+        "Crypto",
       ],
-      "value": "sp500",
+      "value": "Crypto",
     },
     Object {
       "productIds": Array [
-        "crypto",
+        "SPPlatts",
       ],
-      "value": "crypto",
+      "value": "SPPlatts",
     },
     Object {
       "productIds": Array [
-        "commodities",
+        "SPIndices",
       ],
-      "value": "commodities",
+      "value": "SPIndices",
     },
   ],
   "searchable": true,

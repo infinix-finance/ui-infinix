@@ -1,11 +1,32 @@
-import { getPairs, MarketId } from "@/defi";
+import { getPairs, MarketId, PairId, ProductId, ProductIds } from "@/defi";
 import { MARKETS } from "@/defi/Markets";
+import { useStore } from "@/stores/root";
 
-export const generateMarketDropdownProps = () => {
-  const options = Object.values(MARKETS).map((market) => ({
-    value: market.id,
-    productIds: [market.id],
-  }));
+export type MarketDropdownConfig = {
+  searchable: boolean;
+  options: {
+    value: ProductId;
+    productIds: ProductIds;
+  }[];
+};
+
+export type PairDropdownConfig = {
+  searchable: boolean;
+  options: {
+    value: PairId;
+    productIds: ProductIds;
+  }[];
+};
+
+export const generateMarketDropdownProps = (): MarketDropdownConfig => {
+  const options = Object.values(MARKETS)
+    .filter(
+      (market) => ![MarketId.Commodities, MarketId.SP500].includes(market.id)
+    )
+    .map((market) => ({
+      value: market.id,
+      productIds: [market.id],
+    }));
 
   return {
     searchable: true,
@@ -13,18 +34,19 @@ export const generateMarketDropdownProps = () => {
   };
 };
 
-export const generatePairDropdownProps = () => {
-  const pairDropdownPropsMapper = (marketId: MarketId) => ({
-    searchable: true,
-    options: getPairs(marketId).map((pair) => ({
+export const generatePairDropdownProps = (
+  marketId: MarketId
+): PairDropdownConfig => {
+  const pairList = useStore.getState().markets.getFlattenedPairs();
+  const options = getPairs(marketId)
+    .filter((pair) => !!pairList[pair.id])
+    .map((pair) => ({
       value: pair.id,
       productIds: pair.productIds,
-    })),
-  });
+    }));
 
   return {
-    [MarketId.commodities]: pairDropdownPropsMapper(MarketId.commodities),
-    [MarketId.crypto]: pairDropdownPropsMapper(MarketId.crypto),
-    [MarketId.sp500]: pairDropdownPropsMapper(MarketId.sp500),
+    searchable: true,
+    options,
   };
 };

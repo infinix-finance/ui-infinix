@@ -1,3 +1,4 @@
+import { MarketId } from "@/defi";
 import { getInitialState, useStore } from "@/stores/root";
 import { Meta, Story } from "@storybook/react";
 import { TopBar } from "./TopBar";
@@ -13,6 +14,7 @@ const createStore = (initialize: boolean) => {
   if (initialize) {
     store.amm = {
       ...store.amm,
+      id: "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
       underlyingPrice: "44249911500751726257",
       price: 16.69214589,
       tradingVolume: "600000000000000000000",
@@ -33,9 +35,21 @@ const createStore = (initialize: boolean) => {
     ];
   }
 
-  store.rates.fetchDetails = () => {};
-  store.rates.changeMarket = () => {};
-  store.rates.changePair = () => {};
+  store.ui.market = MarketId.Crypto;
+
+  store.markets = {
+    ...store.markets,
+    list: {
+      Crypto: {
+        BTCUSDC: "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
+        AVAXUSDX: "0x0",
+      },
+    },
+    ready: true,
+  };
+
+  store.ui.changeMarket = () => {};
+  store.ui.changePair = () => {};
 
   useStore.setState(store);
 };

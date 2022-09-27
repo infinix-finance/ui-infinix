@@ -66,7 +66,7 @@ describe("userPositions slice", () => {
     test("should copy over amm and calculate pairId", () => {
       const expected = {
         amm: "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
-        pairId: PairId.avaxusdc,
+        pairId: PairId.AVAXUSDC,
       };
 
       const [firstItem] = useStore.getState().userPositions.getHistory();

@@ -14,4 +14,5 @@ export type SelectProps = {
   options: Option[];
   searchable?: boolean;
   maxHeight?: number;
+  showDescription?: boolean;
 } & InputProps;

@@ -1,44 +1,79 @@
 import { CommodityId, IndexId, MarketId, Pair, PairId, TokenId } from "./types";
 
 export const PAIRS: { [key in PairId]: Pair } = {
-  [PairId.btcusdc]: {
-    id: PairId.btcusdc,
-    marketId: MarketId.crypto,
-    productIds: [TokenId.btc, TokenId.usdc],
+  [PairId.BTCUSDC]: {
+    id: PairId.BTCUSDC,
+    marketId: MarketId.Crypto,
+    productIds: [TokenId.BTC, TokenId.USDC],
   },
-  [PairId.ethusdc]: {
-    id: PairId.ethusdc,
-    marketId: MarketId.crypto,
-    productIds: [TokenId.eth, TokenId.usdc],
+  [PairId.ETHUSDC]: {
+    id: PairId.ETHUSDC,
+    marketId: MarketId.Crypto,
+    productIds: [TokenId.ETH, TokenId.USDC],
   },
-  [PairId.avaxusdc]: {
-    id: PairId.avaxusdc,
-    marketId: MarketId.crypto,
-    productIds: [TokenId.avax, TokenId.usdc],
+  [PairId.AVAXUSDC]: {
+    id: PairId.AVAXUSDC,
+    marketId: MarketId.Crypto,
+    productIds: [TokenId.AVAX, TokenId.USDC],
   },
-  [PairId.chaosusdc]: {
-    id: PairId.chaosusdc,
-    marketId: MarketId.crypto,
-    productIds: [TokenId.chaos, TokenId.usdc],
+  [PairId.CHAOSUSDC]: {
+    id: PairId.CHAOSUSDC,
+    marketId: MarketId.Crypto,
+    productIds: [TokenId.CHAOS, TokenId.USDC],
   },
-  [PairId.ftmusdc]: {
-    id: PairId.ftmusdc,
-    marketId: MarketId.crypto,
-    productIds: [TokenId.ftm, TokenId.usdc],
+  [PairId.FTMUSDC]: {
+    id: PairId.FTMUSDC,
+    marketId: MarketId.Crypto,
+    productIds: [TokenId.FTM, TokenId.USDC],
   },
-  [PairId.movrusdc]: {
-    id: PairId.movrusdc,
-    marketId: MarketId.crypto,
-    productIds: [TokenId.movr, TokenId.usdc],
+  [PairId.MOVRUSDC]: {
+    id: PairId.MOVRUSDC,
+    marketId: MarketId.Crypto,
+    productIds: [TokenId.MOVR, TokenId.USDC],
   },
-  [PairId.googusdc]: {
-    id: PairId.googusdc,
-    marketId: MarketId.commodities,
-    productIds: [IndexId.goog, TokenId.usdc],
+  [PairId.SOLUSDC]: {
+    id: PairId.SOLUSDC,
+    marketId: MarketId.Crypto,
+    productIds: [TokenId.SOL, TokenId.USDC],
   },
-  [PairId.xauusdc]: {
-    id: PairId.xauusdc,
-    marketId: MarketId.sp500,
-    productIds: [CommodityId.gold, TokenId.usdc],
+  [PairId.BATCH04]: {
+    id: PairId.BATCH04,
+    marketId: MarketId.SPPlatts,
+    productIds: [IndexId.BATCH04, TokenId.USDC],
+  },
+  [PairId.BATCP04]: {
+    id: PairId.BATCP04,
+    marketId: MarketId.SPPlatts,
+    productIds: [IndexId.BATCP04, TokenId.USDC],
+  },
+  [PairId.CNCAD00]: {
+    id: PairId.CNCAD00,
+    marketId: MarketId.SPPlatts,
+    productIds: [IndexId.CNCAD00, TokenId.USDC],
+  },
+  [PairId.ACRCA00]: {
+    id: PairId.ACRCA00,
+    marketId: MarketId.SPPlatts,
+    productIds: [IndexId.ACRCA00, TokenId.USDC],
+  },
+  [PairId.SPBTC]: {
+    id: PairId.SPBTC,
+    marketId: MarketId.SPIndices,
+    productIds: [IndexId.SPBTC, TokenId.USDC],
+  },
+  [PairId.SPETH]: {
+    id: PairId.SPETH,
+    marketId: MarketId.SPIndices,
+    productIds: [IndexId.SPETH, TokenId.USDC],
+  },
+  [PairId.GOOGUSDC]: {
+    id: PairId.GOOGUSDC,
+    marketId: MarketId.Commodities,
+    productIds: [IndexId.GOOG, TokenId.USDC],
+  },
+  [PairId.XAUUSD]: {
+    id: PairId.XAUUSD,
+    marketId: MarketId.SP500,
+    productIds: [CommodityId.XAU, TokenId.USDC],
   },
 };

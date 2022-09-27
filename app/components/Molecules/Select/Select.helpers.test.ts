@@ -24,19 +24,19 @@ const assetOptions: Option[] = [
 const productOptions: Option[] = [
   {
     value: "item1",
-    productIds: [TokenId.avax],
+    productIds: [TokenId.AVAX],
   },
   {
     value: "item2",
-    productIds: [TokenId.usdc],
+    productIds: [TokenId.USDC],
   },
   {
     value: "item3",
-    productIds: [TokenId.eth, TokenId.ftm],
+    productIds: [TokenId.ETH, TokenId.FTM],
   },
   {
     value: "item4",
-    productIds: [TokenId.ksm],
+    productIds: [TokenId.KSM],
   },
 ];
 

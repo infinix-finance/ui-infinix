@@ -12,7 +12,7 @@ export const NETWORKS: {
     icon: "/networks/mainnet.svg",
     defaultTokenSymbol: "ETH",
     publicRpcUrl: "",
-    nativeToken: TokenId.eth,
+    nativeToken: TokenId.ETH,
   },
   [NetworkId.arbitrum]: {
     name: "Arbitrum",
@@ -23,7 +23,7 @@ export const NETWORKS: {
     icon: "/networks/arbitrum.svg",
     defaultTokenSymbol: "ETH",
     publicRpcUrl: "https://arb1.arbitrum.io/rpc",
-    nativeToken: TokenId.eth,
+    nativeToken: TokenId.ETH,
   },
   [NetworkId.polygon]: {
     name: "Polygon",
@@ -34,7 +34,7 @@ export const NETWORKS: {
     icon: "/networks/polygon.svg",
     defaultTokenSymbol: "MATIC",
     publicRpcUrl: "https://rpc-mainnet.maticvigil.com/",
-    nativeToken: TokenId.eth,
+    nativeToken: TokenId.ETH,
   },
   [NetworkId.avalancheTestnet]: {
     name: "Avalanche Fuji",
@@ -45,7 +45,7 @@ export const NETWORKS: {
     icon: "/networks/avalanche.svg",
     defaultTokenSymbol: "AVAX",
     publicRpcUrl: "https://api.avax-test.network/ext/bc/C/rpc",
-    nativeToken: TokenId.avax,
+    nativeToken: TokenId.AVAX,
     etherscanLink: "https://testnet.snowtrace.io/",
     secondsPerBlock: 2.82,
   },
@@ -58,7 +58,7 @@ export const NETWORKS: {
     icon: "/networks/avalanche.svg",
     defaultTokenSymbol: "AVAX",
     publicRpcUrl: "https://api.avax.network/ext/bc/C/rpc",
-    nativeToken: TokenId.avax,
+    nativeToken: TokenId.AVAX,
   },
   [NetworkId.moonriver]: {
     name: "Moonriver",
@@ -69,7 +69,7 @@ export const NETWORKS: {
     icon: "/networks/moonriver.svg",
     defaultTokenSymbol: "MOVR",
     publicRpcUrl: "https://rpc.moonriver.moonbeam.network",
-    nativeToken: TokenId.eth,
+    nativeToken: TokenId.ETH,
   },
   [NetworkId.fantom]: {
     name: "Fantom",
@@ -80,6 +80,6 @@ export const NETWORKS: {
     icon: "/networks/fantom.svg",
     defaultTokenSymbol: "FTM",
     publicRpcUrl: "https://rpc.ftm.tools",
-    nativeToken: TokenId.ftm,
+    nativeToken: TokenId.FTM,
   },
 };

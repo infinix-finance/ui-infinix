@@ -31,24 +31,24 @@ describe("defi utils", () => {
   describe("token related", () => {
     test("should return ethereum token props", () => {
       const expected = {
-        id: TokenId.eth,
+        id: TokenId.ETH,
         icon: "/tokens/eth-mainnet.svg",
         symbol: "ETH",
         name: "Ethereum",
       };
-      const token = getToken(TokenId.eth);
+      const token = getToken(TokenId.ETH);
 
       expect(token).toEqual(expected);
     });
 
     test("should return true for an existing token id", () => {
-      const result = isToken(TokenId.eth);
+      const result = isToken(TokenId.ETH);
 
       expect(result).toBe(true);
     });
 
     test("should return false for a non-token id", () => {
-      const result = isToken(MarketId.commodities);
+      const result = isToken(MarketId.Commodities);
 
       expect(result).toBe(false);
     });
@@ -57,24 +57,24 @@ describe("defi utils", () => {
   describe("commodity related", () => {
     test("should return gold commodity props", () => {
       const expected = {
-        id: CommodityId.gold,
+        id: CommodityId.XAU,
         icon: "/commodities/gold.svg",
         symbol: "XAU",
         name: "Gold",
       };
-      const commodity = getCommodity(CommodityId.gold);
+      const commodity = getCommodity(CommodityId.XAU);
 
       expect(commodity).toEqual(expected);
     });
 
     test("should return true for an existing commodity id", () => {
-      const result = isCommodity(CommodityId.gold);
+      const result = isCommodity(CommodityId.XAU);
 
       expect(result).toBe(true);
     });
 
     test("should return false for a non-commodity id", () => {
-      const result = isCommodity(MarketId.commodities);
+      const result = isCommodity(MarketId.Commodities);
 
       expect(result).toBe(false);
     });
@@ -83,24 +83,24 @@ describe("defi utils", () => {
   describe("index related", () => {
     test("should return google index props", () => {
       const expected = {
-        id: IndexId.goog,
+        id: IndexId.GOOG,
         icon: "/indexes/google.svg",
         symbol: "GOOG",
         name: "Google",
       };
-      const index = getIndex(IndexId.goog);
+      const index = getIndex(IndexId.GOOG);
 
       expect(index).toEqual(expected);
     });
 
     test("should return true for an existing index id", () => {
-      const result = isIndex(IndexId.goog);
+      const result = isIndex(IndexId.GOOG);
 
       expect(result).toBe(true);
     });
 
     test("should return false for a non-index id", () => {
-      const result = isIndex(MarketId.commodities);
+      const result = isIndex(MarketId.Commodities);
 
       expect(result).toBe(false);
     });
@@ -117,7 +117,7 @@ describe("defi utils", () => {
         icon: "/networks/avalanche.svg",
         defaultTokenSymbol: "AVAX",
         publicRpcUrl: "https://api.avax.network/ext/bc/C/rpc",
-        nativeToken: TokenId.avax,
+        nativeToken: TokenId.AVAX,
       };
       const index = getNetwork(NetworkId.avalanche);
 
@@ -131,7 +131,7 @@ describe("defi utils", () => {
     });
 
     test("should return false for a non-network id", () => {
-      const result = isNetwork(MarketId.commodities);
+      const result = isNetwork(MarketId.Commodities);
 
       expect(result).toBe(false);
     });
@@ -157,7 +157,7 @@ describe("defi utils", () => {
     });
 
     test("should return false for a non-network id", () => {
-      const result = isProtocol(MarketId.commodities);
+      const result = isProtocol(MarketId.Commodities);
 
       expect(result).toBe(false);
     });
@@ -166,24 +166,24 @@ describe("defi utils", () => {
   describe("market related", () => {
     test("should return crypto market props", () => {
       const expected = {
-        id: MarketId.crypto,
+        id: MarketId.Crypto,
         name: "Crypto",
         symbol: "Crypto",
         icon: "/markets/crypto.svg",
       };
-      const index = getMarket(MarketId.crypto);
+      const index = getMarket(MarketId.Crypto);
 
       expect(index).toEqual(expected);
     });
 
     test("should return true for an existing market id", () => {
-      const result = isMarket(MarketId.crypto);
+      const result = isMarket(MarketId.Crypto);
 
       expect(result).toBe(true);
     });
 
     test("should return false for a non-market id", () => {
-      const result = isMarket(TokenId.avax);
+      const result = isMarket(TokenId.AVAX);
 
       expect(result).toBe(false);
     });
@@ -209,7 +209,7 @@ describe("defi utils", () => {
     });
 
     test("should return false for a non-wallet id", () => {
-      const result = isWallet(TokenId.avax);
+      const result = isWallet(TokenId.AVAX);
 
       expect(result).toBe(false);
     });
@@ -218,12 +218,12 @@ describe("defi utils", () => {
   describe("product(all the above combined) related", () => {
     test("should return ethereum token props", () => {
       const expected = {
-        id: TokenId.eth,
+        id: TokenId.ETH,
         icon: "/tokens/eth-mainnet.svg",
         symbol: "ETH",
         name: "Ethereum",
       };
-      const index = getProduct(TokenId.eth);
+      const index = getProduct(TokenId.ETH);
 
       expect(index).toEqual(expected);
     });
@@ -256,26 +256,26 @@ describe("defi utils", () => {
   });
 
   describe("getPairs", () => {
-    test("should return all pairs regardless of it's market category ", () => {
+    test("should return all pairs regardless of it's market category", () => {
       const pairs = getPairs();
 
-      expect(pairs.length).toBe(8);
+      expect(pairs.length).toBe(15);
     });
 
     test("should return crypto pairs", () => {
-      const pairs = getPairs(MarketId.crypto);
+      const pairs = getPairs(MarketId.Crypto);
 
-      expect(pairs.length).toBe(6);
+      expect(pairs.length).toBe(7);
     });
 
     test("should return commodity pairs", () => {
-      const pairs = getPairs(MarketId.commodities);
+      const pairs = getPairs(MarketId.Commodities);
 
       expect(pairs.length).toBe(1);
     });
 
     test("should return index pairs", () => {
-      const pairs = getPairs(MarketId.sp500);
+      const pairs = getPairs(MarketId.SP500);
 
       expect(pairs.length).toBe(1);
     });

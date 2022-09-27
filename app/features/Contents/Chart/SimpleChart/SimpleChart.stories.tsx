@@ -24,7 +24,7 @@ export const PositiveChanges = Template.bind({});
 PositiveChanges.args = {
   initialData,
   timeframe: Timeframes._1m,
-  pairId: PairId.btcusdc,
+  pairId: PairId.BTCUSDC,
   price: new BigNumber(140.32),
   change: new BigNumber(0.1234),
   percentage: 12.44,
@@ -35,7 +35,7 @@ export const NegativeChanges = Template.bind({});
 NegativeChanges.args = {
   initialData,
   timeframe: Timeframes._1m,
-  pairId: PairId.btcusdc,
+  pairId: PairId.BTCUSDC,
   price: new BigNumber(10.201),
   change: new BigNumber(-26.34),
   percentage: -1.77,
