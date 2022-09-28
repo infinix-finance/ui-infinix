@@ -1,7 +1,9 @@
-import { useStore } from "@/stores/root";
-import { getSidebarNotifications } from "@/stores/slices/notifications";
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
+
+import { useStore } from "@/stores/root";
+import { getSidebarNotifications } from "@/stores/slices/notifications";
+import { useToken } from "@/hooks/contracts";
 
 import { ButtonBar } from "./ButtonBar";
 import { Notifications, Selections } from "./ButtonBar/types";
@@ -12,6 +14,7 @@ export const MenuBar = () => {
   const [selected, setSelected] = useState<Selections | null>(null);
   const sidebarNotifications = useStore(getSidebarNotifications);
   const { chainId, active } = useStore((state) => state.connection);
+  const { mintToken, getTokenBalance, loading } = useToken();
   const { getNotificationsHistoryStats } = useStore(
     (state) => state.userPositions
   );
@@ -27,7 +30,7 @@ export const MenuBar = () => {
   };
 
   const handleGetUsdcClick = () => {
-    // TODO: Implement when ready
+    mintToken("100").then(getTokenBalance);
   };
 
   return (
@@ -35,7 +38,7 @@ export const MenuBar = () => {
       <Button
         variant="text"
         size="medium"
-        disabled={!active}
+        disabled={!active || loading}
         onClick={handleGetUsdcClick}
       >
         Get USDC
