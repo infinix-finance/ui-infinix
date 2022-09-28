@@ -1,20 +1,28 @@
 import { Contract, providers } from "ethers";
 
 import {
-  ERC20,
+  BasicTokenWithMint,
   ClearingHouse,
-  ERC20__factory,
+  BasicTokenWithMint__factory,
   ClearingHouse__factory,
 } from "./types";
 
-export const getERC20Contract = (
-  address: string,
-  signer: providers.JsonRpcSigner
-) => new Contract(address, ERC20__factory.abi, signer) as ERC20;
-
-export const getClearingHouseContract = (signer: providers.JsonRpcSigner) =>
+export const getTokenContract = (
+  signer: providers.JsonRpcSigner,
+  address?: string
+) =>
   new Contract(
-    process.env.CLEARING_HOUSE!,
+    address || process.env.USDC!,
+    BasicTokenWithMint__factory.abi,
+    signer
+  ) as BasicTokenWithMint;
+
+export const getClearingHouseContract = (
+  signer: providers.JsonRpcSigner,
+  address?: string
+) =>
+  new Contract(
+    address || process.env.CLEARING_HOUSE!,
     ClearingHouse__factory.abi,
     signer
   ) as ClearingHouse;
