@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
+import { render, screen } from "@testing-library/react";
 
-import * as stories from "./TopBar.stories";
 import { checkScreenTexts } from "@/utils/testUtils";
+import * as stories from "./TopBar.stories";
 
 const { WithoutData, WithData } = composeStories(stories);
 
@@ -10,7 +10,7 @@ describe("TopBar", () => {
   test("should render the not yet initialized state", () => {
     render(<WithoutData />);
 
-    checkScreenTexts(["Crypto", "BTC/USDC", "$0.00", "0.0000%", "00:00:00"]);
+    checkScreenTexts(["Crypto", "AVAX/USDC", "$0.00", "0.0000%", "00:00:00"]);
     expect(screen.queryAllByTestId("InfoOutlinedIcon")).toHaveLength(4);
   });
 

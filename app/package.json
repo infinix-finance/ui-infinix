@@ -7,7 +7,7 @@
     "build": "npm run partytown && next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
+    "test": "set TZ=UTC && jest",
     "test:watch": "jest --watch",
     "partytown": "partytown copylib public/~partytown",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest",

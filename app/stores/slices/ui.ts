@@ -16,7 +16,7 @@ export interface UISlice {
 export const createUISlice: CustomStateCreator<UISlice> = (set, get) => ({
   ui: {
     market: MarketId.Crypto,
-    pair: PairId.BTCUSDC,
+    pair: PairId.AVAXUSDC,
 
     changeMarket: (marketId: MarketId) =>
       set(function changeMarket(state: AppState) {

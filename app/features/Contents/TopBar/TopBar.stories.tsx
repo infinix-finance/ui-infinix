@@ -41,8 +41,8 @@ const createStore = (initialize: boolean) => {
     ...store.markets,
     list: {
       Crypto: {
-        BTCUSDC: "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
-        AVAXUSDX: "0x0",
+        BTCUSDC: "0x0",
+        AVAXUSDC: "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
       },
     },
     ready: true,

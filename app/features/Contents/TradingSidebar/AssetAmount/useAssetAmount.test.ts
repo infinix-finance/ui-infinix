@@ -35,7 +35,7 @@ describe("useAssetAmount", () => {
     expect(result.current).toMatchObject({
       base: "",
       quote: "",
-      baseProduct: "BTC",
+      baseProduct: "AVAX",
       quoteProduct: "USDC",
       formattedBalance: "Balance: 0.00 USDC",
       commonProps: {
@@ -51,7 +51,7 @@ describe("useAssetAmount", () => {
     expect(result.current).toMatchObject({
       base: "",
       quote: "",
-      baseProduct: "BTC",
+      baseProduct: "AVAX",
       quoteProduct: "USDC",
       formattedBalance: "Balance: 22,000.00 USDC",
       commonProps: {
