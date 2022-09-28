@@ -10,7 +10,7 @@ import {
 import BigNumber from "bignumber.js";
 
 import { ProductAsset } from "@/components";
-import { getPair, getProduct, PairId, Timeframes, TokenId } from "@/defi";
+import { getPair, getProduct, PairId, Timeframes } from "@/defi";
 import { formatNumber, formatPercentage } from "@/utils/formatters";
 
 import {
@@ -53,7 +53,7 @@ export const Header = ({
     <Box sx={containerStyle}>
       <Box sx={topStyle}>
         <ProductAsset
-          productIds={[TokenId.BTC]}
+          productIds={[baseProductId]}
           showLabel={false}
           iconSize={48}
         />

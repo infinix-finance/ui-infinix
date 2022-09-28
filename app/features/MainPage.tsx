@@ -1,20 +1,17 @@
 /* istanbul ignore file */
-import { Box } from "@mui/material";
-
+import { useContractConnection } from "@/hooks/contracts";
+import {
+  useSocketAmmInfo,
+  useSocketConnection,
+  useSocketPriceFeed,
+  useSocketRecentPositions,
+  useSocketUserPositions,
+} from "@/hooks/socket";
+import { useNotistack } from "@/hooks/useNotistack";
+import { useMetamaskConnection } from "@/hooks/wallet";
 import { Contents } from "./Contents";
 import { Heading } from "./Heading";
-import { containerStyle } from "./MainPage.styles";
-
-import { useMetamaskConnection } from "@/hooks/wallet";
-import { useContractConnection } from "@/hooks/contracts";
-import { useNotistack } from "@/hooks/useNotistack";
-import {
-  useSocketConnection,
-  useSocketAmmInfo,
-  useSocketPriceFeed,
-  useSocketUserPositions,
-  useSocketRecentPositions,
-} from "@/hooks/socket";
+import { Loader } from "./Loader";
 
 export const MainPage = () => {
   useMetamaskConnection();
@@ -32,9 +29,9 @@ export const MainPage = () => {
   useNotistack();
 
   return (
-    <Box sx={containerStyle}>
+    <Loader>
       <Heading />
       <Contents />
-    </Box>
+    </Loader>
   );
 };
