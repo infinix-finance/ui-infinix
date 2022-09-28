@@ -18,7 +18,7 @@ export default function usePositionsGrid() {
     if (!ready) return;
 
     setDataProvider(getPositionsGridData());
-  }, [ready, list]);
+  }, [ready, list, getPositionsGridData]);
 
   const handleHeaderClick = (column: ColumnProps) => {
     console.log("header clicked", column);

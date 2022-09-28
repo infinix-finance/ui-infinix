@@ -1,4 +1,10 @@
-import { Pair, PairId } from "@/defi";
+import {
+  Directions,
+  Pair,
+  PairId,
+  PositionChangeStatuses,
+  ProductIds,
+} from "@/defi";
 import { PositionData, PositionEvent } from "@/types/api";
 
 export interface UserPositionData extends PositionData {
@@ -44,4 +50,20 @@ export interface HistoryGridData {
   total: string;
   fee: string;
   profitAndLoss: string;
+}
+
+export interface NotificationHistoryData {
+  id: string;
+  productIds: ProductIds;
+  direction: Directions;
+  status: PositionChangeStatuses;
+  rows: {
+    label: string;
+    value: string;
+  }[];
+}
+
+export interface NotificationsHistoryStats {
+  populated: boolean;
+  unread: boolean;
 }

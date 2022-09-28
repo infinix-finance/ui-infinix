@@ -14,7 +14,7 @@ export default function useHistoryGrid() {
     if (!ready) return;
 
     setDataProvider(getHistoryGridData());
-  }, [ready, list]);
+  }, [ready, list, getHistoryGridData]);
 
   const handleHeaderClick = (column: ColumnProps) => {
     console.log("header clicked", column);

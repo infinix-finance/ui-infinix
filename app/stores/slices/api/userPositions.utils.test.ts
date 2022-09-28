@@ -2,6 +2,7 @@ import { PairId } from "@/defi";
 import { getInitialState, useStore } from "@/stores/root";
 import {
   createHistoryGridData,
+  createNotificationHistoryData,
   createPositionGridData,
   transformHistory,
   transformPositions,
@@ -179,6 +180,44 @@ describe("userPositions slice", () => {
 
       const [firstRow] = createPositionGridData(
         transformPositions(list, useStore.getState())
+      );
+
+      expect(firstRow).toMatchObject(expected);
+    });
+  });
+
+  describe("createNotificationHistoryData", () => {
+    test("should return a notification entry as expected", () => {
+      const expected = {
+        direction: "short",
+        id: "1654832745000AVAXUSDC",
+        productIds: ["AVAX", "USDC"],
+        rows: [
+          {
+            label: "10/06/2022",
+            value: "03:45:45",
+          },
+          {
+            label: "Entry Price",
+            value: "$82.00",
+          },
+          {
+            label: "Mark Price",
+            value: "$44.49",
+          },
+          {
+            label: "Position Size",
+            value: "-0.00",
+          },
+          {
+            label: "Liq. Price (est.)",
+            value: "",
+          },
+        ],
+        status: "Open",
+      };
+      const [firstRow] = createNotificationHistoryData(
+        transformHistory(list, useStore.getState())
       );
 
       expect(firstRow).toMatchObject(expected);

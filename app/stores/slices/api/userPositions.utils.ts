@@ -3,6 +3,7 @@ import {
   getPair,
   mapOriginalPositionStatus,
   OriginalPositionChangeStatuses,
+  PositionChangeStatuses,
 } from "@/defi";
 import { AppState } from "@/stores/types";
 import { Position } from "@/types/api";
@@ -16,6 +17,7 @@ import {
 import { format, secondsToMilliseconds } from "date-fns";
 import {
   HistoryGridData,
+  NotificationHistoryData,
   PositionGridData,
   UserPositionData,
   UserPositionEvent,
@@ -125,6 +127,50 @@ export const createHistoryGridData = (
       total: formatUsdValue(totalPrice),
       fee: formatUsdValue(fee),
       profitAndLoss: "", // TODO: provide when available
+    };
+  });
+};
+
+export const createNotificationHistoryData = (
+  history: UserPositionEvent[]
+): NotificationHistoryData[] => {
+  return history.map((historyEntry) => {
+    const pair = getPair(historyEntry.pairId);
+    const size = toTokenUnit(historyEntry.size!);
+    const direction = size.lt(0) ? Directions.Short : Directions.Long;
+    const entryPrice = toTokenUnit(historyEntry.entryPrice);
+    const markPrice = toTokenUnit(historyEntry.underlyingPrice);
+    const realizedPnl = toTokenUnit(historyEntry.realizedPnl!);
+    const timestamp = secondsToMilliseconds(historyEntry.timestamp);
+    const status = mapOriginalPositionStatus(
+      historyEntry.type as OriginalPositionChangeStatuses
+    );
+    const isOpen = status === PositionChangeStatuses.Open;
+
+    const commonProps = {
+      id: timestamp + pair.id,
+      productIds: pair.productIds,
+      direction,
+      status,
+      rows: [
+        {
+          label: format(timestamp, "dd/MM/yyyy"),
+          value: format(timestamp, "HH:mm:ss"),
+        },
+      ],
+    };
+    const additionalRows = isOpen
+      ? [
+          { label: "Entry Price", value: formatUsdValue(entryPrice) },
+          { label: "Mark Price", value: formatUsdValue(markPrice) },
+          { label: "Position Size", value: formatNumber(size, { base: 2 }) },
+          { label: "Liq. Price (est.)", value: "" },
+        ]
+      : [{ label: "PnL (ROE%)", value: formatUsdValue(realizedPnl) }];
+
+    return {
+      ...commonProps,
+      rows: [...commonProps.rows, ...additionalRows],
     };
   });
 };

@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "set TZ=UTC && jest",
-    "test:watch": "jest --watch",
+    "test:watch": "set TZ=UTC && jest --watch",
     "partytown": "partytown copylib public/~partytown",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest",
     "postinstall": "node ./.scripts/postinstall.js",

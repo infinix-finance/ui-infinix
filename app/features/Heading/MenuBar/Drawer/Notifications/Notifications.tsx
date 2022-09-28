@@ -1,9 +1,9 @@
-import { Box, Button, Typography } from "@mui/material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import { Box, Button, Typography } from "@mui/material";
 
 import { Notification } from "./Notification";
-import { notifications } from "./mock";
 
+import { useStore } from "@/stores/root";
 import {
   bellIconStyle,
   buttonStyle,
@@ -12,11 +12,13 @@ import {
   listStyle,
 } from "./Notifications.styles";
 
-export const Notifications = ({
-  mockEmpty = false,
-}: {
-  mockEmpty?: boolean;
-}) => {
+export const Notifications = () => {
+  const { getNotificationsHistoryData } = useStore(
+    (state) => state.userPositions
+  );
+  const notifications = getNotificationsHistoryData();
+  const isEmpty = !notifications.length;
+
   const handleClearAllClick = () => {
     console.log("clear all");
   };
@@ -28,12 +30,12 @@ export const Notifications = ({
         color="primary"
         variant="outlined"
         fullWidth={false}
-        disabled={mockEmpty}
+        disabled={isEmpty}
         onClick={handleClearAllClick}
       >
         Clear all
       </Button>
-      {mockEmpty && (
+      {isEmpty && (
         <Box sx={emptyContainerStyle}>
           <NotificationsNoneOutlinedIcon sx={bellIconStyle} />
           <Typography variant="body2" color="secondary.graishLavender">
@@ -41,7 +43,7 @@ export const Notifications = ({
           </Typography>
         </Box>
       )}
-      {!mockEmpty && (
+      {!isEmpty && (
         <Box sx={listStyle}>
           {notifications.map((notification, idx) => (
             <Notification
