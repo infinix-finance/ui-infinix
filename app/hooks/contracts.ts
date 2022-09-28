@@ -2,13 +2,13 @@ import { BigNumber, providers, utils } from "ethers";
 import { useCallback, useEffect, useState } from "react";
 import create from "zustand";
 
-import { getClearingHouseContract, getERC20Contract } from "@/defi/contracts";
-import { ClearingHouse } from "@/defi/contracts/types";
+import { getClearingHouseContract, getTokenContract } from "@/defi/contracts";
+import { ClearingHouse, BasicTokenWithMint } from "@/defi/contracts/types";
 import { NetworkId } from "@/defi/types";
 import { useStore } from "@/stores/root";
 
 interface ContractList {
-  signer?: providers.JsonRpcSigner;
+  basicTokenWithMint?: BasicTokenWithMint;
   clearingHouse?: ClearingHouse;
 }
 
@@ -47,41 +47,57 @@ export const useContractConnection = () => {
     const signer = provider.getSigner();
 
     setContracts({
-      signer,
+      basicTokenWithMint: getTokenContract(signer),
       clearingHouse: getClearingHouseContract(signer),
     });
   }, [active, setContracts]);
 };
 
-export const useERC20 = () => {
-  const { active, account } = useStore((state) => state.connection);
+export const useToken = () => {
+  const [loading, setLoading] = useState(false);
+  const { active, account, chainId } = useStore((state) => state.connection);
   const { setBalance } = useStore((state) => state.tradingSidebar);
-  const { quoteAsset } = useStore((state) => state.amm);
-  const { signer } = useContractStore((state) => state);
+  const { basicTokenWithMint } = useContractStore((state) => state);
+  const gasLimit = gasAmount(chainId);
 
   const getTokenBalance = useCallback(async () => {
-    if (!active || !signer || !account) return;
+    if (!active || !account || !basicTokenWithMint) return;
 
     try {
-      // for testing, "0x9983F755Bbd60d1886CbfE103c98C272AA0F03d6" can be used instead
-      const erc20 = getERC20Contract(quoteAsset, signer);
-      const result = await erc20.balanceOf(account);
+      const result = await basicTokenWithMint.balanceOf(account);
       result && setBalance(utils.formatUnits(result));
     } catch (error) {
       console.error(error);
     }
-  }, [active, account, quoteAsset, signer, setBalance]);
+  }, [active, account, basicTokenWithMint, setBalance]);
+
+  const mintToken = async (amount: string) => {
+    if (!active || !basicTokenWithMint) return;
+
+    setLoading(true);
+    try {
+      const result = await basicTokenWithMint.mint(
+        utils.parseUnits(amount),
+        gasLimit
+      );
+      await result.wait();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (!active) return;
 
-    // TODO: Put back after testing
-    // getTokenBalance();
-    setBalance("10000");
-  }, [active, getTokenBalance, setBalance]);
+    getTokenBalance();
+  }, [active, getTokenBalance]);
 
   return {
     getTokenBalance,
+    mintToken,
+    loading,
   };
 };
 
@@ -90,41 +106,32 @@ export const useERC20 = () => {
 export const useClearingHouse = () => {
   const [loading, setLoading] = useState(false);
   const { active, account, chainId } = useStore((state) => state.connection);
-  const { signer, clearingHouse } = useContractStore((state) => state);
+  const { basicTokenWithMint, clearingHouse } = useContractStore(
+    (state) => state
+  );
   const gasLimit = gasAmount(chainId);
 
   const openPosition = async (
     amm: string,
-    quoteAsset: string,
     side: number,
     quoteAssetAmount: string,
     leverage: number,
     baseAssetAmountLimit: string
   ) => {
-    if (!active || !account || !clearingHouse || !signer) return;
+    if (!active || !account || !clearingHouse || !basicTokenWithMint) return;
 
     setLoading(true);
     try {
       const amountToSpend = utils.parseUnits(quoteAssetAmount);
-      const erc20 = getERC20Contract(quoteAsset, signer);
 
-      const allowance: BigNumber = await erc20.allowance(
+      const allowance: BigNumber = await basicTokenWithMint.allowance(
         account,
         clearingHouse.address
       );
 
       // approve spending if necessary first
       if (allowance.lt(amountToSpend)) {
-        // to increase allowance we first have to reduce it to 0
-        if (allowance.gt(0)) {
-          const reduction = await erc20.approve(
-            clearingHouse.address,
-            0,
-            gasLimit
-          );
-          await reduction.wait();
-        }
-        const approval = await erc20.approve(
+        const approval = await basicTokenWithMint.approve(
           clearingHouse.address,
           amountToSpend,
           gasLimit
