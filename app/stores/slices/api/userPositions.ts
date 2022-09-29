@@ -1,22 +1,33 @@
-import { OriginalPositionChangeStatuses, PairId } from "@/defi";
-import { Position, PositionData, PositionEvent } from "@/types/api";
+import { Position } from "@/types/api";
 import { AppState, CustomStateCreator } from "../../types";
+import {
+  HistoryGridData,
+  NotificationHistoryData,
+  NotificationsHistoryStats,
+  PositionGridData,
+  UserPositionData,
+  UserPositionEvent,
+} from "./userPositions.types";
+import {
+  createHistoryGridData,
+  createNotificationHistoryData,
+  createPositionGridData,
+  transformHistory,
+  transformPositions,
+} from "./userPositions.utils";
 
 interface UserPositionsProps {
-  list: Position[];
-}
-
-export interface UserPositionEvent extends PositionEvent {
-  amm: string;
-  pairId: PairId;
-  leverage: string; // remove when Juraj is ready.
+  positionsList: UserPositionData[];
+  positionsHistory: UserPositionEvent[];
 }
 
 export interface UserPositionsSlice {
   userPositions: UserPositionsProps & {
     setPositions: (positions: Position[]) => void;
-    getPositions: () => PositionData[];
-    getHistory: () => UserPositionEvent[];
+    getPositionsGridData: () => PositionGridData[];
+    getHistoryGridData: () => HistoryGridData[];
+    getNotificationsHistoryData: () => NotificationHistoryData[];
+    getNotificationsHistoryStats: () => NotificationsHistoryStats;
   };
 }
 
@@ -24,45 +35,43 @@ export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
   (set, get) => ({
     userPositions: {
       list: [],
+      positionsList: [],
+      positionsHistory: [],
 
       setPositions: (positions: Position[]) => {
         set(function setPositions(state: AppState) {
-          state.userPositions.list = positions;
+          state.userPositions.positionsList = transformPositions(
+            positions,
+            get()
+          );
+          state.userPositions.positionsHistory = transformHistory(
+            positions,
+            get()
+          );
         });
       },
 
-      getPositions: (): PositionData[] => {
-        return get()
-          .userPositions.list.map(({ position }) => ({
-            ...position,
-            pairId: get().markets.getPairName(position.amm),
-          }))
-          .sort((a, b) => b.timestamp - a.timestamp);
+      getPositionsGridData: (): PositionGridData[] => {
+        return createPositionGridData(get().userPositions.positionsList);
       },
 
-      getHistory: (): UserPositionEvent[] => {
-        return get()
-          .userPositions.list.reduce(
-            (target: UserPositionEvent[], { position, history }) => {
-              const enhancedHistory = history.map((current, idx) => {
-                const prevEntry =
-                  current.type === OriginalPositionChangeStatuses.Mgn && idx > 0
-                    ? history[idx - 1]
-                    : {};
+      getHistoryGridData: (): HistoryGridData[] => {
+        return createHistoryGridData(get().userPositions.positionsHistory);
+      },
 
-                return {
-                  ...prevEntry,
-                  ...current,
-                  amm: position.amm,
-                  pairId: get().markets.getPairName(position.amm),
-                } as UserPositionEvent;
-              });
+      getNotificationsHistoryData: (): NotificationHistoryData[] => {
+        return createNotificationHistoryData(
+          get().userPositions.positionsHistory
+        );
+      },
 
-              return [...target, ...enhancedHistory];
-            },
-            []
-          )
-          .sort((a, b) => b.timestamp - a.timestamp);
+      getNotificationsHistoryStats: (): NotificationsHistoryStats => {
+        const history = get().userPositions.positionsHistory;
+
+        return {
+          populated: !!history.length,
+          unread: !!history.filter(({ notification }) => notification).length,
+        };
       },
     },
   });

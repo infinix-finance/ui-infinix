@@ -15,6 +15,15 @@ export const MenuBar = () => {
   const sidebarNotifications = useStore(getSidebarNotifications);
   const { chainId, active } = useStore((state) => state.connection);
   const { mintToken, getTokenBalance, loading } = useToken();
+  const { getNotificationsHistoryStats } = useStore(
+    (state) => state.userPositions
+  );
+  const stats = getNotificationsHistoryStats();
+  const notificationKind = stats.unread
+    ? Notifications.unread
+    : stats.populated
+    ? Notifications.active
+    : Notifications.inactive;
 
   const handleGetAvaxClick = () => {
     window.open("https://faucet.avax.network/", "_blank");
@@ -46,7 +55,7 @@ export const MenuBar = () => {
       <ButtonBar
         selected={selected}
         onSelect={setSelected}
-        notification={Notifications.inactive}
+        notification={notificationKind}
         networkId={chainId}
       />
       <Drawer
