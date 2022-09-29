@@ -7,14 +7,16 @@ import { HistoryGridData } from "@/stores/slices/api/userPositions.types";
 
 export default function useHistoryGrid() {
   const [dataProvider, setDataProvider] = useState<HistoryGridData[]>([]);
-  const { getHistoryGridData, list } = useStore((state) => state.userPositions);
+  const { getHistoryGridData, positionsHistory } = useStore(
+    (state) => state.userPositions
+  );
   const { ready } = useStore((state) => state.markets);
 
   useEffect(() => {
     if (!ready) return;
 
     setDataProvider(getHistoryGridData());
-  }, [ready, list, getHistoryGridData]);
+  }, [ready, positionsHistory, getHistoryGridData]);
 
   const handleHeaderClick = (column: ColumnProps) => {
     console.log("header clicked", column);

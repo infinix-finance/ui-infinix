@@ -17,7 +17,6 @@ import {
 } from "./userPositions.utils";
 
 interface UserPositionsProps {
-  list: Position[];
   positionsList: UserPositionData[];
   positionsHistory: UserPositionEvent[];
 }
@@ -41,7 +40,6 @@ export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
 
       setPositions: (positions: Position[]) => {
         set(function setPositions(state: AppState) {
-          state.userPositions.list = positions;
           state.userPositions.positionsList = transformPositions(
             positions,
             get()

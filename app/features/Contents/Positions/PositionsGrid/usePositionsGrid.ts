@@ -8,7 +8,7 @@ import { PositionGridData } from "@/stores/slices/api/userPositions.types";
 
 export default function usePositionsGrid() {
   const [dataProvider, setDataProvider] = useState<PositionGridData[]>([]);
-  const { getPositionsGridData, list } = useStore(
+  const { getPositionsGridData, positionsList } = useStore(
     (state) => state.userPositions
   );
   const { ready } = useStore((state) => state.markets);
@@ -18,7 +18,7 @@ export default function usePositionsGrid() {
     if (!ready) return;
 
     setDataProvider(getPositionsGridData());
-  }, [ready, list, getPositionsGridData]);
+  }, [ready, positionsList, getPositionsGridData]);
 
   const handleHeaderClick = (column: ColumnProps) => {
     console.log("header clicked", column);
