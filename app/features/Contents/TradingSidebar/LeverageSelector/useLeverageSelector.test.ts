@@ -17,6 +17,11 @@ const createStore = (balance: number) => {
     balance: new BigNumber(balance),
   };
 
+  store.connection = {
+    ...store.connection,
+    active: true,
+  };
+
   useStore.setState(store);
 };
 

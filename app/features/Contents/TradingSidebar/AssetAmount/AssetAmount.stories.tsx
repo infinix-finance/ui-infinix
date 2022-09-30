@@ -31,6 +31,11 @@ const createStore = (balance: number, exchangeRate: number) => {
     pairId: PairId.ETHUSDC,
   };
 
+  store.connection = {
+    ...store.connection,
+    active: true,
+  };
+
   useStore.setState(store);
 };
 

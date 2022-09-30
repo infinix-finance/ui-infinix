@@ -24,6 +24,11 @@ const createStore = (balance: number, exchangeRate: number) => {
     price: exchangeRate,
   };
 
+  store.connection = {
+    ...store.connection,
+    active: true,
+  };
+
   useStore.setState(store);
 };
 

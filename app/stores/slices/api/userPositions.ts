@@ -60,13 +60,18 @@ export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
       },
 
       getNotificationsHistoryData: (): NotificationHistoryData[] => {
+        if (!get().connection.active) return [];
+
         return createNotificationHistoryData(
           get().userPositions.positionsHistory
         );
       },
 
       getNotificationsHistoryStats: (): NotificationsHistoryStats => {
-        const history = get().userPositions.positionsHistory;
+        const isWalletConnected = get().connection.active;
+        const history = isWalletConnected
+          ? get().userPositions.positionsHistory
+          : [];
 
         return {
           populated: !!history.length,

@@ -3,6 +3,7 @@ import {
   getPair,
   mapOriginalPositionStatus,
   OriginalPositionChangeStatuses,
+  PairId,
   PositionChangeStatuses,
 } from "@/defi";
 import { AppState } from "@/stores/types";
@@ -30,7 +31,7 @@ export const transformPositions = (
   return positions
     .map(({ position }) => ({
       ...position,
-      pairId: state.markets.getPairName(position.amm),
+      pairId: state.markets.getPairName(position.amm) as PairId,
     }))
     .sort((a, b) => b.timestamp - a.timestamp);
 };
