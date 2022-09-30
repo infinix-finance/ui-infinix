@@ -75,10 +75,10 @@ export const useSocketConnection = () => {
   }, [socket, connected, setMarkets]);
 };
 
-export const useSocketAmmInfo = (address: string) => {
+export const useSocketAmmInfo = () => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setAmmInfo } = useStore((state) => state.amm);
-  const { pair } = useStore((state) => state.ui); // TODO: remove when ready
+  const { amm } = useStore((state) => state.markets);
 
   useEffect(() => {
     if (!connected) return;
@@ -87,26 +87,26 @@ export const useSocketAmmInfo = (address: string) => {
       socket,
       SocketEvents.ammInfo,
       setAmmInfo,
-      address
+      amm
     );
-  }, [address, connected, socket, setAmmInfo, pair]);
+  }, [connected, socket, setAmmInfo, amm]);
 };
 
-export const useSocketPriceFeed = (feedKey: string) => {
+export const useSocketPriceFeed = () => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setPriceFeed } = useStore((state) => state.priceHistory);
-  const { pair } = useStore((state) => state.ui); // TODO: remove when ready
+  const { dataFeedId } = useStore((state) => state.amm);
 
   useEffect(() => {
-    if (!connected) return;
+    if (!connected || !dataFeedId) return;
 
     return addChannelCommunication(
       socket,
       SocketEvents.pairPrices,
       setPriceFeed,
-      feedKey
+      dataFeedId
     );
-  }, [feedKey, connected, socket, setPriceFeed, pair]);
+  }, [dataFeedId, connected, socket, setPriceFeed]);
 };
 
 export const useSocketUserPositions = (user: string) => {
@@ -125,10 +125,10 @@ export const useSocketUserPositions = (user: string) => {
   }, [user, connected, socket, setPositions]);
 };
 
-export const useSocketRecentPositions = (amm: string) => {
+export const useSocketRecentPositions = () => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setPositions } = useStore((state) => state.recentPositions);
-  const { pair } = useStore((state) => state.ui); // TODO: remove when ready
+  const { amm } = useStore((state) => state.markets);
 
   useEffect(() => {
     if (!connected) return;
@@ -139,5 +139,5 @@ export const useSocketRecentPositions = (amm: string) => {
       setPositions,
       amm
     );
-  }, [amm, connected, socket, setPositions, pair]);
+  }, [amm, connected, socket, setPositions, amm]);
 };

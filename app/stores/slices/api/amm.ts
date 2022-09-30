@@ -35,7 +35,12 @@ export const createAmmSlice: CustomStateCreator<AmmSlice> = (set, _get) => ({
   amm: {
     ...getDefaultData(),
 
-    setAmmInfo: (amm: Amm) => {
+    setAmmInfo: (amm: Amm | string) => {
+      if (typeof amm === "string") {
+        console.error(amm);
+        return;
+      }
+
       set(function setAmmInfo(state: AppState) {
         state.amm = { ...state.amm, ...amm };
       });

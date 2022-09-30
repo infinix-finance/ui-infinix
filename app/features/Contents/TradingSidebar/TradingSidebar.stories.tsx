@@ -14,9 +14,9 @@ export default {
 const createStore = (balance: number) => {
   const store = getInitialState();
 
-  store.ui = {
-    ...store.ui,
-    pair: PairId.ETHUSDC,
+  store.markets = {
+    ...store.markets,
+    pairId: PairId.ETHUSDC,
   };
   store.tradingSidebar.balance = new BigNumber(balance);
   store.tradingSidebar.slippage = 1.6;
