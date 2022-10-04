@@ -10,7 +10,7 @@ export default function useOpenPosition() {
     (state) => state.tradingSidebar
   );
   const { id } = useStore((state) => state.amm);
-  const { openPosition } = useClearingHouse();
+  const { openPosition, loading } = useClearingHouse();
   const { getTokenBalance } = useToken();
 
   const handleOpenPosition = () => {
@@ -38,5 +38,6 @@ export default function useOpenPosition() {
 
   return {
     handleOpenPosition,
+    loading,
   };
 }
