@@ -1,4 +1,3 @@
-import { MarketId } from "@/defi";
 import { getInitialState, useStore } from "@/stores/root";
 import { Meta, Story } from "@storybook/react";
 import { TopBar } from "./TopBar";
@@ -35,8 +34,6 @@ const createStore = (initialize: boolean) => {
     ];
   }
 
-  store.ui.market = MarketId.Crypto;
-
   store.markets = {
     ...store.markets,
     list: {
@@ -44,12 +41,15 @@ const createStore = (initialize: boolean) => {
         BTCUSDC: "0x0",
         AVAXUSDC: "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
       },
+      SPPlatts: {
+        BATCH04: "0x0",
+      },
+      SPIndices: {
+        SPBTC: "0x0",
+      },
     },
     ready: true,
   };
-
-  store.ui.changeMarket = () => {};
-  store.ui.changePair = () => {};
 
   useStore.setState(store);
 };

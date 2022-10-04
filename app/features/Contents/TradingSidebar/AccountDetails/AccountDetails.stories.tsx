@@ -1,5 +1,5 @@
-import BigNumber from "bignumber.js";
 import { Meta, Story } from "@storybook/react";
+import BigNumber from "bignumber.js";
 
 import { getInitialState, useStore } from "@/stores/root";
 
@@ -21,6 +21,11 @@ const createStore = (balance: number, quoteValue: number) => {
       quoteValue: new BigNumber(quoteValue),
     },
     balance: new BigNumber(balance),
+  };
+
+  store.connection = {
+    ...store.connection,
+    active: true,
   };
 
   useStore.setState(store);
