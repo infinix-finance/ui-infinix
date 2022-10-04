@@ -37,7 +37,7 @@ const useContractStore = create<ContractStore>((set) => ({
 }));
 
 export const useContractConnection = () => {
-  const { active } = useStore((state) => state.connection);
+  const { active, chainId } = useStore((state) => state.connection);
   const { setContracts } = useContractStore((state) => state);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export const useContractConnection = () => {
       basicTokenWithMint: getTokenContract(signer),
       clearingHouse: getClearingHouseContract(signer),
     });
-  }, [active, setContracts]);
+  }, [active, chainId, setContracts]);
 };
 
 export const useToken = () => {

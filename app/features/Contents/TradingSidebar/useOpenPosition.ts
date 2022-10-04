@@ -5,6 +5,7 @@ import { useToken, useClearingHouse } from "@/hooks/contracts";
 import { Directions } from "@/defi/Directions";
 
 export default function useOpenPosition() {
+  const { chainId } = useStore((state) => state.connection);
   const { amounts, direction, slippage, leverage } = useStore(
     (state) => state.tradingSidebar
   );
@@ -33,7 +34,7 @@ export default function useOpenPosition() {
 
   useEffect(() => {
     getTokenBalance();
-  }, [getTokenBalance]);
+  }, [chainId, getTokenBalance]);
 
   return {
     handleOpenPosition,
