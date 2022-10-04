@@ -1,6 +1,6 @@
 import { AlertColor } from "@mui/material";
 
-import { SWITCH_CONNECTION_MSG } from "@/constants/messages";
+import { SWITCH_CONNECTION_MSG, NO_CONNECTION_MSG } from "@/constants/messages";
 import { isSupportedNetwork, NetworkId, WalletId } from "@/defi";
 import { AppState, CustomStateCreator } from "../types";
 
@@ -33,10 +33,15 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
 
     updateDetails: (details: ConnectionProps) => {
       const showNotification = Boolean(
-        details.chainId && !isSupportedNetwork(details.chainId)
+        !details.active ||
+          (details.chainId && !isSupportedNetwork(details.chainId))
       );
 
-      updateDetailsHelper(showNotification, get, details.switchNetwork);
+      updateDetailsHelper(
+        showNotification,
+        get,
+        details.active ? details.switchNetwork : undefined
+      );
 
       set(function updateDetails(state: AppState) {
         state.connection = { ...state.connection, ...details };
@@ -49,7 +54,7 @@ export const createConnectionSlice: CustomStateCreator<ConnectionSlice> = (
 const updateDetailsHelper = (
   show: boolean,
   get: () => AppState,
-  onAction: () => void
+  onAction?: () => void
 ) => {
   const { notifications } = get();
 
@@ -57,7 +62,7 @@ const updateDetailsHelper = (
     const payload = {
       severity: "error" as AlertColor,
       visible: true,
-      title: SWITCH_CONNECTION_MSG,
+      title: onAction ? SWITCH_CONNECTION_MSG : NO_CONNECTION_MSG,
       actionLabel: "Switch",
       onAction,
     };
