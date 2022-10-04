@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { useStore } from "@/stores/root";
 import { useToken, useClearingHouse } from "@/hooks/contracts";
 import { Directions } from "@/defi/Directions";
@@ -28,6 +30,10 @@ export default function useOpenPosition() {
       amounts.baseValue.multipliedBy(slippage).toString()
     ).then(getTokenBalance);
   };
+
+  useEffect(() => {
+    getTokenBalance();
+  }, [getTokenBalance]);
 
   return {
     handleOpenPosition,

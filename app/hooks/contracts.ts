@@ -60,7 +60,7 @@ export const useToken = () => {
   const { basicTokenWithMint } = useContractStore((state) => state);
   const gasLimit = gasAmount(chainId);
 
-  const getTokenBalance = useCallback(async () => {
+  const getTokenBalance = async () => {
     if (!active || !account || !basicTokenWithMint) return;
 
     try {
@@ -69,7 +69,7 @@ export const useToken = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [active, account, basicTokenWithMint, setBalance]);
+  };
 
   const mintToken = async (amount: string) => {
     if (!active || !basicTokenWithMint) return;
@@ -87,12 +87,6 @@ export const useToken = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (!active) return;
-
-    getTokenBalance();
-  }, [active, getTokenBalance]);
 
   return {
     getTokenBalance,
