@@ -36,10 +36,6 @@ export const createMarketsSlice: CustomStateCreator<MarketsSlice> = (
       set(function setMarkets(state: AppState) {
         state.markets.list = markets;
         state.markets.ready = true;
-
-        // TODO: Remove when markets data provides amm address as well
-        state.markets.list[state.markets.marketId][state.markets.pairId] =
-          "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1";
       });
 
       set(function setAmm(state: AppState) {

@@ -1,6 +1,7 @@
 import { PositionEvent } from "@/types/api";
 import { formatUsdValue, toTokenUnit } from "@/utils/formatters";
 import { AppState, CustomStateCreator } from "../../types";
+import { handleError } from "../slices.utils";
 
 interface RecentPositionsProps {
   list: PositionEvent[];
@@ -14,11 +15,15 @@ export interface RecentPositionsSlice {
 }
 
 export const createRecentPositionsSlice: CustomStateCreator<RecentPositionsSlice> =
-  (set, _get) => ({
+  (set, get) => ({
     recentPositions: {
       list: [],
 
       setPositions: (events: PositionEvent[]) => {
+        if (handleError(get(), events)) {
+          return;
+        }
+
         set(function setPositions(state: AppState) {
           state.recentPositions.list = events;
         });

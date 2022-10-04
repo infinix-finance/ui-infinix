@@ -1,5 +1,6 @@
 import { Position } from "@/types/api";
 import { AppState, CustomStateCreator } from "../../types";
+import { handleError } from "../slices.utils";
 import {
   HistoryGridData,
   NotificationHistoryData,
@@ -39,6 +40,10 @@ export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
       positionsHistory: [],
 
       setPositions: (positions: Position[]) => {
+        if (handleError(get(), positions)) {
+          return;
+        }
+
         set(function setPositions(state: AppState) {
           state.userPositions.positionsList = transformPositions(
             positions,

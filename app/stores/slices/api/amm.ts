@@ -7,6 +7,7 @@ import {
   toTokenUnit,
 } from "@/utils/formatters";
 import { AppState, CustomStateCreator } from "../../types";
+import { handleError } from "../slices.utils";
 
 const getDefaultData = () => ({
   id: "",
@@ -31,13 +32,12 @@ export interface AmmSlice {
   };
 }
 
-export const createAmmSlice: CustomStateCreator<AmmSlice> = (set, _get) => ({
+export const createAmmSlice: CustomStateCreator<AmmSlice> = (set, get) => ({
   amm: {
     ...getDefaultData(),
 
-    setAmmInfo: (amm: Amm | string) => {
-      if (typeof amm === "string") {
-        console.error(amm);
+    setAmmInfo: (amm: Amm) => {
+      if (handleError(get(), amm)) {
         return;
       }
 

@@ -21,9 +21,7 @@ export const MainPage = () => {
   useSocketAmmInfo();
   useSocketRecentPositions();
   useSocketPriceFeed();
-
-  // TODO: Remove after testing
-  useSocketUserPositions("0xb9c3a80c8e903df935f1cdf9688f5bd154002b8b");
+  useSocketUserPositions();
 
   return (
     <Loader>

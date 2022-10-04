@@ -109,20 +109,21 @@ export const useSocketPriceFeed = () => {
   }, [dataFeedId, connected, socket, setPriceFeed]);
 };
 
-export const useSocketUserPositions = (user: string) => {
+export const useSocketUserPositions = () => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setPositions } = useStore((state) => state.userPositions);
+  const { account } = useStore((state) => state.connection);
 
   useEffect(() => {
-    if (!connected) return;
+    if (!connected || !account) return;
 
     return addChannelCommunication(
       socket,
       SocketEvents.userPositions,
       setPositions,
-      user
+      account
     );
-  }, [user, connected, socket, setPositions]);
+  }, [account, connected, socket, setPositions]);
 };
 
 export const useSocketRecentPositions = () => {

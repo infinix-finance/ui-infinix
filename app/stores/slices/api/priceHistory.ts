@@ -2,6 +2,7 @@ import { PriceUpdate } from "@/types/api";
 import { AppState, CustomStateCreator } from "../../types";
 
 import { toTokenUnit } from "@/utils/formatters";
+import { handleError } from "../slices.utils";
 
 interface PriceHistoryProps {
   latest: string;
@@ -17,13 +18,17 @@ export interface PriceHistorySlice {
 
 export const createPriceHistorySlice: CustomStateCreator<PriceHistorySlice> = (
   set,
-  _get
+  get
 ) => ({
   priceHistory: {
     latest: "0",
     feed: [],
 
     setPriceFeed: (feed: { history: PriceUpdate[] }) => {
+      if (handleError(get(), feed)) {
+        return;
+      }
+
       set(function setPriceFeed(state: AppState) {
         const [latest] = feed.history.slice(-1);
         state.priceHistory.latest = latest?.price || "0";
