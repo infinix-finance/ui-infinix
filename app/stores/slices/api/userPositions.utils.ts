@@ -64,7 +64,11 @@ export const transformHistory = (
 export const createPositionGridData = (
   positions: UserPositionData[]
 ): PositionGridData[] => {
-  return positions.map((position) => {
+  const activePositions = positions.filter((position) => {
+    return position.active === true;
+  });
+
+  return activePositions.map((position) => {
     const pair = getPair(position.pairId);
     const size = toTokenUnit(position.size);
     const direction = size.lt(0) ? Directions.Short : Directions.Long;
