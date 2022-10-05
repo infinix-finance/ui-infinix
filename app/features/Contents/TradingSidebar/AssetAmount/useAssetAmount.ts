@@ -12,7 +12,8 @@ import {
 } from "./helpers";
 
 export default function useAssetAmount() {
-  const { pair } = useStore((state) => state.ui);
+  const { active } = useStore((state) => state.connection);
+  const { pairId } = useStore((state) => state.markets);
   const {
     balance: balanceValue,
     amounts: { base, quote },
@@ -24,11 +25,11 @@ export default function useAssetAmount() {
   const exchangeRate = price;
 
   const balance = <BigNumber>balanceValue;
-  const [baseProduct, quoteProduct] = getPair(pair).productIds;
+  const [baseProduct, quoteProduct] = getPair(pairId).productIds;
   const formattedBalance = `Balance: ${formatNumber(balance, {
     productId: quoteProduct,
   })}`;
-  const isDisabled = balance.isEqualTo(0);
+  const isDisabled = balance.isEqualTo(0) || !active;
   const commonProps = {
     InputProps: {
       inputProps: {

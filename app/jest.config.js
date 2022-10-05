@@ -6,20 +6,20 @@ module.exports = {
     "!**/node_modules/**",
     "!**/.storybook/**",
     "!**/pages/**",
+    "!**/defi/contracts/**",
     "!**/styles/**",
     "!**/*.stories.tsx",
     "!**/*.styles.ts",
     "!**/*.test.{ts,tsx}",
+    "!**/*mock*.{ts,tsx}",
+    "!**/*config*.{ts,tsx}",
     "!**/index.{ts,tsx}",
     "!**/(*.types|types).ts",
     "!**/utils/(Contentful|mock|testUtils).ts",
 
     // This will be included once their data are not mocked and static
     "!**/stores/**",
-
-    // Impossible to test wallet interactions
-    "!**/hooks/wallet.ts",
-    "!**/hooks/useNotistack.ts",
+    "!**/hooks/**",
   ],
   collectCoverage: true,
   moduleNameMapper: {

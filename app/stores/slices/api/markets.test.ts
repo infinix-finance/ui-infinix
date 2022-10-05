@@ -1,3 +1,4 @@
+import { PairId } from "@/defi";
 import { getInitialState, useStore } from "@/stores/root";
 
 describe("userPositions slice", () => {
@@ -33,6 +34,20 @@ describe("userPositions slice", () => {
 
     test("should return empty string for non-existent amm", () => {
       const result = useStore.getState().markets.getPairName("0x123456789");
+
+      expect(result).toBe("");
+    });
+  });
+
+  describe("getAmm", () => {
+    test("should return AVAXUSDC's amm", () => {
+      const result = useStore.getState().markets.getAmm(PairId.AVAXUSDC);
+
+      expect(result).toBe("0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1");
+    });
+
+    test("should return empty string for non-existent amm", () => {
+      const result = useStore.getState().markets.getAmm(PairId.XAUUSD);
 
       expect(result).toBe("");
     });

@@ -22,6 +22,11 @@ const createStore = (amount: number) => {
     },
   };
 
+  store.connection = {
+    ...store.connection,
+    active: true,
+  };
+
   useStore.setState(store);
 };
 

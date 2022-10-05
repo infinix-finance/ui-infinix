@@ -21,8 +21,10 @@ import {
 export const SlippageEditor = () => {
   const [open, setOpen] = useState(false);
   const { slippage, setSlippage } = useStore((state) => state.tradingSidebar);
+  const { active } = useStore((state) => state.connection);
   const [newSlippage, setNewSlippage] = useState(slippage);
-  const isValid = useStore(getIsBalanceSet);
+  const isBalanceSet = useStore(getIsBalanceSet);
+  const isValid = isBalanceSet && active;
   const formattedSlippage = formatNumber(new BigNumber(slippage), {
     base: 1,
     suffix: "%",

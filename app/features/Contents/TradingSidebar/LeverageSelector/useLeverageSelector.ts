@@ -8,7 +8,9 @@ export default function useLeverageSelector() {
     leverage,
     setLeverage,
   } = useStore((store) => store.tradingSidebar);
-  const isValid = useStore(getIsBalanceSet);
+  const { active } = useStore((state) => state.connection);
+  const isBalanceSet = useStore(getIsBalanceSet);
+  const isValid = isBalanceSet && active;
 
   const buyingPowerLabel = `Buying power (${leverage}x)`;
   const buyingPower = isValid

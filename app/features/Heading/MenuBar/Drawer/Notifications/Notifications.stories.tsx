@@ -22,6 +22,10 @@ const createStore = (empty: boolean) => {
 
   store.markets.list = marketsList;
   store.markets.ready = true;
+  store.connection = {
+    ...store.connection,
+    active: true,
+  };
   useStore.setState(store);
   !empty && useStore.getState().userPositions.setPositions(positions);
 };

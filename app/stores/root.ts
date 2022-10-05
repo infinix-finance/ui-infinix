@@ -10,7 +10,6 @@ import { createRecentPositionsSlice } from "./slices/api/recentPositions";
 import { createUserPositionsSlice } from "./slices/api/userPositions";
 import { createConnectionSlice } from "./slices/connection";
 import { createNotificationsSlice } from "./slices/notifications";
-import { createUISlice } from "./slices/ui";
 import { AppState, CustomStateCreator } from "./types";
 
 import { createTradingSidebarSlice } from "@/features/Contents/TradingSidebar/TradingSidebar.slice";
@@ -23,7 +22,6 @@ export const useStore = create<AppState>()(
   addMiddlewares((...params) => ({
     ...createConnectionSlice(...params),
     ...createNotificationsSlice(...params),
-    ...createUISlice(...params),
     ...createTradingSidebarSlice(...params),
     ...createMarketsSlice(...params),
     ...createAmmSlice(...params),

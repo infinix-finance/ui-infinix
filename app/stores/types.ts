@@ -8,7 +8,6 @@ import { RecentPositionsSlice } from "./slices/api/recentPositions";
 import { UserPositionsSlice } from "./slices/api/userPositions";
 import { ConnectionSlice } from "./slices/connection";
 import { NotificationsSlice } from "./slices/notifications";
-import { UISlice } from "./slices/ui";
 
 import { TradingSidebarSlice } from "@/features/Contents/TradingSidebar/TradingSidebar.slice";
 
@@ -20,7 +19,6 @@ export interface CustomStateCreator<T>
 export type AppState = WritableDraft<
   ConnectionSlice &
     NotificationsSlice &
-    UISlice &
     TradingSidebarSlice &
     MarketsSlice &
     AmmSlice &
