@@ -18,7 +18,12 @@ const SearchInputsStories = (props: SearchInputProps) => {
     <Box sx={boxStyle}>
       <SearchInput value={value} setValue={setValue} {...props} />
       <SearchInput value="" placeholder="Placeholder text" {...props} />
-      <SearchInput value="Disabled text" {...props} disabled />
+      <SearchInput
+        value="Disabled text"
+        setValue={setValue}
+        {...props}
+        disabled
+      />
     </Box>
   );
 };
