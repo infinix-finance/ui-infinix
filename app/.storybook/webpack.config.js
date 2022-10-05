@@ -3,6 +3,7 @@ const path = require("path");
 module.exports = ({ config }) => {
   // Alternately, for an alias:
   config.resolve.alias = {
+    "@": path.resolve(__dirname, ".."),
     "@/pages": path.resolve(__dirname, "..", "pages"),
     "@/components": path.resolve(__dirname, "..", "components"),
     "@/features": path.resolve(__dirname, "..", "features"),

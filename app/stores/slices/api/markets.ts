@@ -57,6 +57,7 @@ export const createMarketsSlice: CustomStateCreator<MarketsSlice> = (
       });
     },
 
+    // TODO: This should be done only once when setting the list with BE data
     getFlattenedPairs: () => {
       const markets = Object.entries(get().markets.list);
       return markets.reduce((result, [, pairs]) => {
