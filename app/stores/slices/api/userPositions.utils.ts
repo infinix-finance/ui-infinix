@@ -56,7 +56,7 @@ export const transformHistory = (
           pairId: state.markets.getPairName(position.amm),
         };
         const additionalProps = isClosing
-          ? R.pick(["timestamp", "status"], current)
+          ? R.pick(["timestamp", "type"], current)
           : current;
 
         return {

@@ -20,6 +20,34 @@ export const historyEntry2 = {
   size: "-1",
   fundingPayment: "0",
 };
+export const historyEntry3 = {
+  timestamp: 1664975248,
+  type: "Opening",
+  margin: "15000000000000000000",
+  size: "149775336994508237",
+  fee: "0",
+  realizedPnl: "0",
+  unrealizedPnlAfter: "0",
+  fundingPayment: "0",
+  leverage: "1000000000000000000",
+  entryPrice: "100150000000000000430",
+  underlyingPrice: "43971761781891197785",
+  notification: true,
+};
+export const historyEntry4 = {
+  timestamp: 1664975437,
+  type: "Closing",
+  margin: "0",
+  size: "0",
+  fee: "0",
+  realizedPnl: "-65",
+  unrealizedPnlAfter: "0",
+  fundingPayment: "0",
+  leverage: "0",
+  entryPrice: "0",
+  underlyingPrice: "43971761781891197785",
+  notification: true,
+};
 export const positionEntry1 = {
   amm: "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
   leverage: "2000000000000000000",
@@ -43,6 +71,6 @@ export const positionEntry1 = {
 export const positions = [
   {
     position: positionEntry1,
-    history: [historyEntry1, historyEntry2],
+    history: [historyEntry1, historyEntry2, historyEntry3, historyEntry4],
   },
 ];
