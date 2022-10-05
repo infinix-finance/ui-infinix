@@ -8,7 +8,6 @@ import { LeverageSelector } from "./LeverageSelector";
 import { PriceDetails } from "./PriceDetails";
 import { SlippageEditor } from "./SlippageEditor";
 
-import { useClearingHouse } from "@/hooks/contracts";
 import { useStore } from "@/stores/root";
 import { capitalize } from "@/utils/formatters";
 import {

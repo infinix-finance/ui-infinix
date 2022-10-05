@@ -1,12 +1,12 @@
 import BigNumber from "bignumber.js";
 
+import { Directions } from "@/defi/Directions";
 import { AppState, CustomStateCreator } from "@/stores/types";
 import {
   formatLeverage,
   formatPercentage,
   formatUsdValue,
 } from "@/utils/formatters";
-import { Directions } from "@/defi/Directions";
 
 interface TradingSidebarStoreProps {
   balance: BigNumber;

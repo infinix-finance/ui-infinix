@@ -1,3 +1,5 @@
+import * as R from "ramda";
+
 import {
   Directions,
   getPair,
@@ -43,16 +45,23 @@ export const transformHistory = (
   return positions
     .reduce((target: UserPositionEvent[], { position, history }) => {
       const enhancedHistory = history.map((current, idx) => {
+        const isMarginChanging =
+          current.type === OriginalPositionChangeStatuses.Mgn;
+        const isClosing = current.type === OriginalPositionChangeStatuses.Close;
         const prevEntry =
-          current.type === OriginalPositionChangeStatuses.Mgn && idx > 0
-            ? history[idx - 1]
-            : {};
-
-        return {
+          (isMarginChanging || isClosing) && idx > 0 ? history[idx - 1] : {};
+        const defaultProps = {
           ...prevEntry,
-          ...current,
           amm: position.amm,
           pairId: state.markets.getPairName(position.amm),
+        };
+        const additionalProps = isClosing
+          ? R.pick(["timestamp", "status"], current)
+          : current;
+
+        return {
+          ...defaultProps,
+          ...additionalProps,
         } as UserPositionEvent;
       });
 
