@@ -3,6 +3,7 @@ import { io, Socket } from "socket.io-client";
 import create from "zustand";
 
 import { useStore } from "@/stores/root";
+import { isAmmInfoValid } from "@/stores/slices/api/amm";
 
 interface SocketStore {
   socket: Socket;
@@ -79,9 +80,10 @@ export const useSocketAmmInfo = () => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setAmmInfo } = useStore((state) => state.amm);
   const { amm } = useStore((state) => state.markets);
+  const ammInfoValid = useStore(isAmmInfoValid);
 
   useEffect(() => {
-    if (!connected) return;
+    if (!connected && ammInfoValid) return;
 
     return addChannelCommunication(
       socket,
@@ -89,17 +91,18 @@ export const useSocketAmmInfo = () => {
       setAmmInfo,
       amm
     );
-  }, [connected, socket, setAmmInfo, amm]);
+  }, [connected, socket, setAmmInfo, amm, ammInfoValid]);
 };
 
 export const useSocketPriceFeed = () => {
   const { socket, connected } = useSocketStore((state) => state);
-  const { setPriceFeed } = useStore((state) => state.priceHistory);
+  const { setPriceFeed, setReady } = useStore((state) => state.priceHistory);
   const { dataFeedId } = useStore((state) => state.amm);
 
   useEffect(() => {
     if (!connected || !dataFeedId) return;
 
+    setReady(false);
     return addChannelCommunication(
       socket,
       SocketEvents.pairPrices,
@@ -128,17 +131,18 @@ export const useSocketUserPositions = () => {
 
 export const useSocketRecentPositions = () => {
   const { socket, connected } = useSocketStore((state) => state);
-  const { setPositions } = useStore((state) => state.recentPositions);
+  const { setPositions, setReady } = useStore((state) => state.recentPositions);
   const { amm } = useStore((state) => state.markets);
 
   useEffect(() => {
     if (!connected) return;
 
+    setReady(false);
     return addChannelCommunication(
       socket,
       SocketEvents.ammPositions,
       setPositions,
       amm
     );
-  }, [amm, connected, socket, setPositions, amm]);
+  }, [amm, connected, socket, setPositions]);
 };

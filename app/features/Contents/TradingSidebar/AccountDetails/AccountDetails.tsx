@@ -5,7 +5,10 @@ import { InstrumentPanel } from "./InstrumentPanel";
 
 import { useLayout } from "@/hooks/responsive";
 import { useStore } from "@/stores/root";
-import { getAccountDetails } from "../TradingSidebar.slice";
+import {
+  getAccountDetails,
+  isTradingSidebarEnabled,
+} from "../TradingSidebar.slice";
 
 import {
   containerStyle,
@@ -15,8 +18,8 @@ import {
 } from "./AccountDetails.styles";
 
 export const AccountDetails = () => {
-  const { data, isBalanceSet, freeMargin } = useStore(getAccountDetails);
-  const { active } = useStore((state) => state.connection);
+  const { data, freeMargin } = useStore(getAccountDetails);
+  const tradingSidebarEnabled = useStore(isTradingSidebarEnabled);
   const { isSmallDesktop } = useLayout();
 
   return (
@@ -27,7 +30,7 @@ export const AccountDetails = () => {
         const shouldShowSecondValue = !!row.value2;
 
         return (
-          <Box sx={rowStyle(isBalanceSet && active)} key={row.label}>
+          <Box sx={rowStyle(tradingSidebarEnabled)} key={row.label}>
             <Typography variant="body2">{row.label}</Typography>
             <Box sx={valuesStyle}>
               {shouldShowFirstValue && (

@@ -1,22 +1,25 @@
 /* istanbul ignore file */
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 import { Header, HeaderProps } from "./Header";
 import useSimpleChart from "./useSimpleChart";
 
 import {
-  containerStyle,
   chartContainerStyle,
   chartStyle,
+  containerStyle,
+  progressStyle,
 } from "./SimpleChart.styles";
 
 export interface SimpleChartProps extends HeaderProps {
   initialData: any[];
   update?: any[];
+  loading: boolean;
 }
 
 export default function SimpleChart({
   initialData,
+  loading,
   update = [],
   ...rest
 }: SimpleChartProps) {
@@ -25,9 +28,16 @@ export default function SimpleChart({
   return (
     <Box sx={containerStyle}>
       <Header {...rest} />
-      <Box sx={chartContainerStyle}>
-        <Box ref={chartContainerRef} sx={chartStyle} />
-      </Box>
+      {loading && (
+        <Box sx={progressStyle}>
+          <CircularProgress />
+        </Box>
+      )}
+      {!loading && (
+        <Box sx={chartContainerStyle}>
+          <Box ref={chartContainerRef} sx={chartStyle} />
+        </Box>
+      )}
     </Box>
   );
 }

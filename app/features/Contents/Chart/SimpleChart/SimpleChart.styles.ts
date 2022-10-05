@@ -16,3 +16,11 @@ export const chartStyle = {
   height: "100%",
   position: "absolute",
 };
+
+export const progressStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  height: "100%",
+};

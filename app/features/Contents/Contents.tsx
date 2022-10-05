@@ -1,15 +1,14 @@
 /* istanbul ignore file */
 import { Box } from "@mui/material";
 
+import { AlertNotification } from "@/components";
+import { useStore } from "@/stores/root";
+import { Chart } from "./Chart";
+import { Positions } from "./Positions";
+import { RecentTrades } from "./RecentTrades";
+import { ResolutionGuard } from "./ResolutionGuard";
 import { TopBar } from "./TopBar";
 import { TradingSidebar } from "./TradingSidebar";
-import { Chart } from "./Chart";
-import { RecentTrades } from "./RecentTrades";
-import { Positions } from "./Positions";
-import { ResolutionGuard } from "./ResolutionGuard";
-import { useLayout } from "@/hooks/responsive";
-import { useStore } from "@/stores/root";
-import { AlertNotification } from "@/components";
 
 import {
   containerStyle,
@@ -23,7 +22,6 @@ export const Contents = () => {
   const { top: notification, hideTopNotification } = useStore(
     (store) => store.notifications
   );
-  const { unsupportedResolution } = useLayout();
 
   return (
     <Box sx={containerStyle}>
@@ -36,7 +34,7 @@ export const Contents = () => {
         />
       )}
       <ResolutionGuard />
-      <Box sx={subContainerStyle(unsupportedResolution)}>
+      <Box sx={subContainerStyle}>
         <Box sx={mainContentStyle}>
           <TopBar />
           <Box sx={midContainerStyle}>

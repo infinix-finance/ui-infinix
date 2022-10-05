@@ -13,6 +13,7 @@ import { containerStyle } from "./Chart.styles";
 export const Chart = () => {
   const initialData = useStore(getHistoryData);
   const latestPriceInfo = useStore(getLatestPriceInfo);
+  const { ready } = useStore((store) => store.priceHistory);
   const { pairId } = useStore((state) => state.markets);
 
   return (
@@ -24,6 +25,7 @@ export const Chart = () => {
         price={latestPriceInfo.lastPrice}
         change={latestPriceInfo.change}
         percentage={latestPriceInfo.percentageChange}
+        loading={!ready}
       />
     </Box>
   );

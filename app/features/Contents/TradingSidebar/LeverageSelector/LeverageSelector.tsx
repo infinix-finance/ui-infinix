@@ -19,7 +19,7 @@ const LEVERAGES = [1, 3, 5, 7, 10];
 
 export const LeverageSelector = () => {
   const {
-    isValid,
+    tradingSidebarEnabled,
     leverage,
     buyingPowerLabel,
     buyingPower,
@@ -30,10 +30,16 @@ export const LeverageSelector = () => {
   return (
     <Box sx={containerStyle}>
       <Box sx={buyingPowerStyle}>
-        <Typography sx={buyingPowerLabelStyle(isValid)} variant="inputLabel">
+        <Typography
+          sx={buyingPowerLabelStyle(tradingSidebarEnabled)}
+          variant="inputLabel"
+        >
           {buyingPowerLabel}
         </Typography>
-        <Typography sx={buyingPowerLabelStyle(isValid)} variant="inputLabel">
+        <Typography
+          sx={buyingPowerLabelStyle(tradingSidebarEnabled)}
+          variant="inputLabel"
+        >
           {buyingPower}
         </Typography>
       </Box>
@@ -47,7 +53,7 @@ export const LeverageSelector = () => {
           value={leverage}
           exclusive
           color="primary"
-          disabled={!isValid}
+          disabled={!tradingSidebarEnabled}
           onChange={handleChangeLeverage}
         >
           {LEVERAGES.map((leverage) => (

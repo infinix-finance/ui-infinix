@@ -9,16 +9,14 @@ export const containerStyle = (theme: Theme) => ({
   overflowY: "hidden",
 });
 
-export const subContainerStyle =
-  (hideScrollBar: boolean) => (theme: Theme) => ({
-    display: "flex",
-    flexDirection: "row",
-    position: "relative",
-    backgroundColor: theme.palette.secondary.deeperBlackberry,
-    flex: 1,
-    overflowY: hideScrollBar ? "hidden" : "auto",
-    overflowX: "hidden",
-  });
+export const subContainerStyle = (theme: Theme) => ({
+  display: "flex",
+  flexDirection: "row",
+  position: "relative",
+  backgroundColor: theme.palette.secondary.deeperBlackberry,
+  flex: 1,
+  overflow: "hidden",
+});
 
 export const notificationStyle = (theme: Theme) => ({
   [theme.breakpoints.up("lg")]: {
@@ -47,5 +45,5 @@ export const midContainerStyle = (theme: Theme) => ({
   display: "flex",
   flex: 1,
   gap: theme.spacing(3),
-  height: "60%",
+  /* height: "60%", */
 });

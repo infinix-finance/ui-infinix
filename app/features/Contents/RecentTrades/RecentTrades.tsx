@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 import { ColumnProps, DataGrid, RowProps } from "@/components";
 
@@ -28,16 +28,18 @@ const columns: ColumnProps[] = [
 ];
 
 export const RecentTrades = () => {
-  const { dataProvider } = useRecentTrades();
+  const { dataProvider, loading } = useRecentTrades();
 
   return (
-    <Box sx={containerStyle}>
+    <Box sx={containerStyle(loading)}>
       <DataGrid
         columns={columns}
         dataProvider={dataProvider}
         hover={false}
         showPlaceholder={false}
-      />
+      >
+        {loading && <CircularProgress />}
+      </DataGrid>
     </Box>
   );
 };

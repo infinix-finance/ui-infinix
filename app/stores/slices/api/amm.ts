@@ -77,3 +77,11 @@ export const getTopBarValues = (state: AppState) => {
     countDownMillis,
   };
 };
+
+export const isIndexPriceValid = (state: AppState) => {
+  return !!state.amm.price;
+};
+
+export const isAmmInfoValid = ({ amm: { id, dataFeedId } }: AppState) => {
+  return (!id && !dataFeedId) || (!!id && !!dataFeedId);
+};

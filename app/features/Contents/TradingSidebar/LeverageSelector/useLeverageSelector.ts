@@ -1,6 +1,6 @@
 import { useStore } from "@/stores/root";
 import { formatNumber } from "@/utils/formatters";
-import { getIsBalanceSet } from "../TradingSidebar.slice";
+import { isTradingSidebarEnabled } from "../TradingSidebar.slice";
 
 export default function useLeverageSelector() {
   const {
@@ -8,12 +8,10 @@ export default function useLeverageSelector() {
     leverage,
     setLeverage,
   } = useStore((store) => store.tradingSidebar);
-  const { active } = useStore((state) => state.connection);
-  const isBalanceSet = useStore(getIsBalanceSet);
-  const isValid = isBalanceSet && active;
+  const tradingSidebarEnabled = useStore(isTradingSidebarEnabled);
 
   const buyingPowerLabel = `Buying power (${leverage}x)`;
-  const buyingPower = isValid
+  const buyingPower = tradingSidebarEnabled
     ? formatNumber(quoteValue.multipliedBy(leverage), { prefix: "$" })
     : "-";
 
@@ -25,7 +23,7 @@ export default function useLeverageSelector() {
   };
 
   return {
-    isValid,
+    tradingSidebarEnabled,
     leverage,
     buyingPowerLabel,
     buyingPower,
