@@ -1,13 +1,16 @@
+import { useEffect } from "react";
+
 import { useStore } from "@/stores/root";
 import { useToken, useClearingHouse } from "@/hooks/contracts";
 import { Directions } from "@/defi/Directions";
 
 export default function useOpenPosition() {
+  const { chainId } = useStore((state) => state.connection);
   const { amounts, direction, slippage, leverage } = useStore(
     (state) => state.tradingSidebar
   );
   const { id } = useStore((state) => state.amm);
-  const { openPosition } = useClearingHouse();
+  const { openPosition, loading } = useClearingHouse();
   const { getTokenBalance } = useToken();
 
   const handleOpenPosition = () => {
@@ -29,7 +32,12 @@ export default function useOpenPosition() {
     ).then(getTokenBalance);
   };
 
+  useEffect(() => {
+    getTokenBalance();
+  }, [chainId, getTokenBalance]);
+
   return {
     handleOpenPosition,
+    loading,
   };
 }

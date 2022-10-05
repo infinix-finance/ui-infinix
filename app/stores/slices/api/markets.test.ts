@@ -11,7 +11,7 @@ describe("userPositions slice", () => {
         list: {
           Crypto: {
             BTCUSDC: "0x0",
-            AVAXUSDC: "0xe5639cbb02ec3bd65c77e128b0c7350aeefb2bd1",
+            AVAXUSDC: "0xe5639cBB02ec3bd65c77e128b0c7350aeefb2bd1",
           },
           Other: {
             EURUSD: "0x0",

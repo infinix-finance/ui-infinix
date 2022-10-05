@@ -1,11 +1,13 @@
 import { BigNumber, providers, utils } from "ethers";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import create from "zustand";
 
 import { getClearingHouseContract, getTokenContract } from "@/defi/contracts";
 import { ClearingHouse, BasicTokenWithMint } from "@/defi/contracts/types";
 import { NetworkId } from "@/defi/types";
 import { useStore } from "@/stores/root";
+
+import { useSnackbar } from "@/components/Organisms/Snackbar/useSnackbar";
 
 interface ContractList {
   basicTokenWithMint?: BasicTokenWithMint;
@@ -19,6 +21,21 @@ interface ContractStore extends ContractList {
 const toDecimalStruct = (d: BigNumber) => ({
   d,
 });
+
+const handleTxError = (
+  err: string,
+  title: string,
+  description: string,
+  show: Function
+) => {
+  if (!err.includes("user rejected transaction")) {
+    show({
+      title,
+      description,
+    });
+    console.error(err);
+  }
+};
 
 // TODO: We should decide whether we want to use this or not
 // we are using this to speed up transactions for testing
@@ -37,7 +54,7 @@ const useContractStore = create<ContractStore>((set) => ({
 }));
 
 export const useContractConnection = () => {
-  const { active } = useStore((state) => state.connection);
+  const { active, chainId } = useStore((state) => state.connection);
   const { setContracts } = useContractStore((state) => state);
 
   useEffect(() => {
@@ -50,11 +67,12 @@ export const useContractConnection = () => {
       basicTokenWithMint: getTokenContract(signer),
       clearingHouse: getClearingHouseContract(signer),
     });
-  }, [active, setContracts]);
+  }, [active, chainId, setContracts]);
 };
 
 export const useToken = () => {
   const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const { active, account, chainId } = useStore((state) => state.connection);
   const { setBalance } = useStore((state) => state.tradingSidebar);
   const { basicTokenWithMint } = useContractStore((state) => state);
@@ -69,7 +87,7 @@ export const useToken = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [active, account, basicTokenWithMint, setBalance]);
+  }, [account, active, basicTokenWithMint, setBalance]);
 
   const mintToken = async (amount: string) => {
     if (!active || !basicTokenWithMint) return;
@@ -82,17 +100,16 @@ export const useToken = () => {
       );
       await result.wait();
     } catch (error) {
-      console.error(error);
+      handleTxError(
+        JSON.stringify(error),
+        "Failed to mint token",
+        "See the console for more details",
+        enqueueSnackbar
+      );
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (!active) return;
-
-    getTokenBalance();
-  }, [active, getTokenBalance]);
 
   return {
     getTokenBalance,
@@ -105,6 +122,7 @@ export const useToken = () => {
 // e.g. store transaction hashes in local storage and ask for their receipts to determine initial loading status
 export const useClearingHouse = () => {
   const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const { active, account, chainId } = useStore((state) => state.connection);
   const { basicTokenWithMint, clearingHouse } = useContractStore(
     (state) => state
@@ -149,7 +167,12 @@ export const useClearingHouse = () => {
       );
       await result.wait();
     } catch (error) {
-      console.error(error);
+      handleTxError(
+        JSON.stringify(error),
+        "Failed to open position",
+        "See the console for more details",
+        enqueueSnackbar
+      );
     } finally {
       setLoading(false);
     }
@@ -167,7 +190,12 @@ export const useClearingHouse = () => {
       );
       await result.wait();
     } catch (error) {
-      console.error(error);
+      handleTxError(
+        JSON.stringify(error),
+        "Failed to close position",
+        "See the console for more details",
+        enqueueSnackbar
+      );
     } finally {
       setLoading(false);
     }

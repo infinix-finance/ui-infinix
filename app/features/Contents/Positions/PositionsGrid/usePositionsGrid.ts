@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 import { ColumnProps, RowProps } from "@/components";
-import { useClearingHouse } from "@/hooks/contracts";
+import { useToken, useClearingHouse } from "@/hooks/contracts";
 import { useStore } from "@/stores/root";
 import { PositionGridData } from "@/stores/slices/api/userPositions.types";
 
@@ -13,6 +13,7 @@ export default function usePositionsGrid() {
   );
   const { ready } = useStore((state) => state.markets);
   const { closePosition } = useClearingHouse();
+  const { getTokenBalance } = useToken();
 
   useEffect(() => {
     if (!ready) return;
@@ -25,7 +26,8 @@ export default function usePositionsGrid() {
   };
 
   const handleRowClick = (row: RowProps, column: ColumnProps) => {
-    column.key === "close" && closePosition(row.amm, row.originalSize);
+    // TODO: We might need to replace "0" with something else later
+    column.key === "close" && closePosition(row.amm, "0").then(getTokenBalance);
   };
 
   return {
