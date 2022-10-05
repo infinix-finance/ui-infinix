@@ -25,8 +25,7 @@ import { getIsQuoteSet } from "./TradingSidebar.slice";
 import useOpenPosition from "./useOpenPosition";
 
 export const TradingSidebar = () => {
-  const { loading } = useClearingHouse();
-  const { handleOpenPosition } = useOpenPosition();
+  const { handleOpenPosition, loading } = useOpenPosition();
   const { direction } = useStore((state) => state.tradingSidebar);
   const notifications = useStore(getCreatePositionNotifications);
   const isQuoteSet = useStore(getIsQuoteSet);

@@ -63,7 +63,12 @@ const pnlCellRenderer = (row: RowProps, column: ColumnProps) => (
 );
 
 const closeHeaderRenderer = (column: ColumnProps, onClick: HeaderClickFunc) => (
-  <Button variant="contained" size="small" onClick={() => onClick(column)}>
+  <Button
+    variant="contained"
+    size="small"
+    disabled={true} // TODO: Remove after we add this functionality
+    onClick={() => onClick(column)}
+  >
     Close All
   </Button>
 );

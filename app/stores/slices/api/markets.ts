@@ -61,15 +61,12 @@ export const createMarketsSlice: CustomStateCreator<MarketsSlice> = (
     getFlattenedPairs: () => {
       const markets = Object.entries(get().markets.list);
       return markets.reduce((result, [, pairs]) => {
-        const updatedPairs = Object.entries(pairs).reduce(
-          (acc, [pair, amm]) => ({
-            ...acc,
-            [pair]: amm.toLowerCase(),
-          }),
-          {}
-        );
-
-        return { ...result, ...updatedPairs };
+        // making sure all pair addresses are lowercase
+        const pairsLowercase: { [pair: string]: string } = {};
+        for (const [pairId, address] of Object.entries(pairs)) {
+          pairsLowercase[pairId] = address.toLowerCase();
+        }
+        return { ...result, ...pairsLowercase };
       }, {});
     },
 
