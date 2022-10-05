@@ -7,7 +7,7 @@ import { Modal, Select } from "@/components";
 
 import { useStore } from "@/stores/root";
 import { formatNumber } from "@/utils/formatters";
-import { getIsBalanceSet } from "../TradingSidebar.slice";
+import { isTradingSidebarEnabled } from "../TradingSidebar.slice";
 
 import {
   actionStyle,
@@ -21,10 +21,8 @@ import {
 export const SlippageEditor = () => {
   const [open, setOpen] = useState(false);
   const { slippage, setSlippage } = useStore((state) => state.tradingSidebar);
-  const { active } = useStore((state) => state.connection);
+  const tradingSidebarEnabled = useStore(isTradingSidebarEnabled);
   const [newSlippage, setNewSlippage] = useState(slippage);
-  const isBalanceSet = useStore(getIsBalanceSet);
-  const isValid = isBalanceSet && active;
   const formattedSlippage = formatNumber(new BigNumber(slippage), {
     base: 1,
     suffix: "%",
@@ -69,11 +67,17 @@ export const SlippageEditor = () => {
 
   return (
     <Box sx={containerStyle}>
-      <Typography sx={slippageLabelStyle(isValid)} variant="inputLabel">
+      <Typography
+        sx={slippageLabelStyle(tradingSidebarEnabled)}
+        variant="inputLabel"
+      >
         Slippage
       </Typography>
       <Box sx={actionStyle}>
-        <Typography sx={slippageLabelStyle(isValid)} variant="inputLabel">
+        <Typography
+          sx={slippageLabelStyle(tradingSidebarEnabled)}
+          variant="inputLabel"
+        >
           {formattedSlippage}
         </Typography>
         <Button variant="outlined" size="small" onClick={handleOpen}>

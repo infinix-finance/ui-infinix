@@ -7,11 +7,13 @@ import { handleError } from "../slices.utils";
 interface PriceHistoryProps {
   latest: string;
   feed: PriceUpdate[];
+  ready: boolean;
 }
 
 export interface PriceHistorySlice {
   priceHistory: PriceHistoryProps & {
     setPriceFeed: (feed: { history: PriceUpdate[] }) => void;
+    setReady: (ready: boolean) => void;
     clear: () => void;
   };
 }
@@ -23,6 +25,7 @@ export const createPriceHistorySlice: CustomStateCreator<PriceHistorySlice> = (
   priceHistory: {
     latest: "0",
     feed: [],
+    ready: false,
 
     setPriceFeed: (feed: { history: PriceUpdate[] }) => {
       if (handleError(get(), feed)) {
@@ -33,10 +36,19 @@ export const createPriceHistorySlice: CustomStateCreator<PriceHistorySlice> = (
         const [latest] = feed.history.slice(-1);
         state.priceHistory.latest = latest?.price || "0";
         state.priceHistory.feed = feed.history;
+        state.priceHistory.ready = true;
+      });
+    },
+
+    setReady: (ready: boolean) => {
+      set(function setReady(state: AppState) {
+        state.priceHistory.ready = ready;
       });
     },
 
     clear: () => {
+      get().priceHistory.setReady(false);
+
       set(function clear(state: AppState) {
         state.priceHistory.latest = "0";
         state.priceHistory.feed = [];

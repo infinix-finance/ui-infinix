@@ -4,6 +4,7 @@ import { getPair } from "@/defi";
 import { useStore } from "@/stores/root";
 import { formatNumber, toFixedNumber } from "@/utils/formatters";
 
+import { isSidebarInputsEnabled } from "../TradingSidebar.slice";
 import {
   calculateBaseAmount,
   calculateQuoteAmount,
@@ -12,7 +13,6 @@ import {
 } from "./helpers";
 
 export default function useAssetAmount() {
-  const { active } = useStore((state) => state.connection);
   const { pairId } = useStore((state) => state.markets);
   const {
     balance: balanceValue,
@@ -20,6 +20,7 @@ export default function useAssetAmount() {
     setAmounts,
   } = useStore((state) => state.tradingSidebar);
   const { price } = useStore((state) => state.amm);
+  const sidebarInputsEnabled = useStore(isSidebarInputsEnabled);
 
   // TODO: We need to confirm if it should not be underlyingPrice instead
   const exchangeRate = price;
@@ -29,7 +30,6 @@ export default function useAssetAmount() {
   const formattedBalance = `Balance: ${formatNumber(balance, {
     productId: quoteProduct,
   })}`;
-  const isDisabled = balance.isEqualTo(0) || !active;
   const commonProps = {
     InputProps: {
       inputProps: {
@@ -39,7 +39,7 @@ export default function useAssetAmount() {
       },
     },
     alignEnd: true,
-    disabled: isDisabled,
+    disabled: !sidebarInputsEnabled,
     type: "number",
     placeholder: "0",
   };

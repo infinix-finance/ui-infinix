@@ -35,7 +35,6 @@ export interface UserPositionsSlice {
 export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
   (set, get) => ({
     userPositions: {
-      list: [],
       positionsList: [],
       positionsHistory: [],
 

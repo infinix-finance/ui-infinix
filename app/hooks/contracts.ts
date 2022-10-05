@@ -1,9 +1,9 @@
 import { BigNumber, providers, utils } from "ethers";
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import create from "zustand";
 
 import { getClearingHouseContract, getTokenContract } from "@/defi/contracts";
-import { ClearingHouse, BasicTokenWithMint } from "@/defi/contracts/types";
+import { BasicTokenWithMint, ClearingHouse } from "@/defi/contracts/types";
 import { NetworkId } from "@/defi/types";
 import { useStore } from "@/stores/root";
 

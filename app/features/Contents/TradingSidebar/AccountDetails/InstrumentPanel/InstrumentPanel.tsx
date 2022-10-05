@@ -1,3 +1,4 @@
+import { formatPercentage } from "@/utils/formatters";
 import { Box, Typography } from "@mui/material";
 
 import {
@@ -22,7 +23,7 @@ export const InstrumentPanel = ({ percentage }: InstrumentPanelProps) => {
         variant="body3"
         color="secondary.graishLavender"
       >
-        {percentage}%
+        {formatPercentage(percentage)}
       </Typography>
       <Box sx={alertLevelStyle} />
       <Box sx={mediumLevelStyle} />

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-import { useStore } from "@/stores/root";
-import { useToken, useClearingHouse } from "@/hooks/contracts";
 import { Directions } from "@/defi/Directions";
+import { useClearingHouse, useToken } from "@/hooks/contracts";
+import { useStore } from "@/stores/root";
 
 export default function useOpenPosition() {
   const { chainId } = useStore((state) => state.connection);

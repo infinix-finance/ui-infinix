@@ -1,6 +1,6 @@
 import { Theme } from "@mui/material";
 
-export const containerStyle = (theme: Theme) => ({
+export const containerStyle = (loading: boolean) => (theme: Theme) => ({
   backgroundColor: theme.palette.secondary.blackberry,
   height: "100%",
   width: "17.5rem",
@@ -10,8 +10,16 @@ export const containerStyle = (theme: Theme) => ({
     width: "22.5rem",
   },
 
+  "& .MuiTableContainer-root": {
+    height: loading ? "100%" : undefined,
+  },
+
   "& .MuiTableRow-root": {
     backgroundColor: "transparent",
+
+    "& .MuiTableCell-root": {
+      backgroundColor: "transparent",
+    },
 
     "& .MuiTableCell-root.MuiTableCell-head": {
       padding: theme.spacing(2, 0.5),

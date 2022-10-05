@@ -8,7 +8,6 @@ import { LeverageSelector } from "./LeverageSelector";
 import { PriceDetails } from "./PriceDetails";
 import { SlippageEditor } from "./SlippageEditor";
 
-import { useClearingHouse } from "@/hooks/contracts";
 import { useStore } from "@/stores/root";
 import { capitalize } from "@/utils/formatters";
 import {
@@ -21,14 +20,14 @@ import {
 
 import { AlertNotification } from "@/components";
 import { getCreatePositionNotifications } from "@/stores/slices/notifications";
-import { getIsQuoteSet } from "./TradingSidebar.slice";
+import { isTradingSidebarEnabled } from "./TradingSidebar.slice";
 import useOpenPosition from "./useOpenPosition";
 
 export const TradingSidebar = () => {
   const { handleOpenPosition, loading } = useOpenPosition();
   const { direction } = useStore((state) => state.tradingSidebar);
+  const tradingSidebarEnabled = useStore(isTradingSidebarEnabled);
   const notifications = useStore(getCreatePositionNotifications);
-  const isQuoteSet = useStore(getIsQuoteSet);
 
   return (
     <Box sx={containerStyle}>
@@ -46,7 +45,7 @@ export const TradingSidebar = () => {
             <Button
               variant={direction}
               onClick={handleOpenPosition}
-              disabled={loading || !isQuoteSet}
+              disabled={loading || !tradingSidebarEnabled}
             >
               Confirm {capitalize(direction)}
             </Button>
