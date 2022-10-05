@@ -30,10 +30,10 @@ export const Notifications = () => {
         color="primary"
         variant="outlined"
         fullWidth={false}
-        disabled={isEmpty}
+        disabled={true} // TODO: Replace with isEmpty after adding this functionality
         onClick={handleClearAllClick}
       >
-        Clear all
+        Clear All
       </Button>
       {isEmpty && (
         <Box sx={emptyContainerStyle}>
