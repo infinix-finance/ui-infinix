@@ -8,6 +8,7 @@ import { NetworkId } from "@/defi/types";
 import { useStore } from "@/stores/root";
 
 import { useSnackbar } from "@/components/Organisms/Snackbar/useSnackbar";
+import { getSelectedNetwork } from "@/stores/slices/connection";
 
 interface ContractList {
   basicTokenWithMint?: BasicTokenWithMint;
@@ -127,7 +128,11 @@ export const useClearingHouse = () => {
   const { basicTokenWithMint, clearingHouse } = useContractStore(
     (state) => state
   );
+  const { addCloseEvent, removeCloseEvent } = useStore(
+    (state) => state.userPositions
+  );
   const gasLimit = gasAmount(chainId);
+  const network = useStore(getSelectedNetwork);
 
   const openPosition = async (
     amm: string,
@@ -165,7 +170,15 @@ export const useClearingHouse = () => {
         toDecimalStruct(utils.parseUnits(baseAssetAmountLimit)),
         gasLimit
       );
-      await result.wait();
+      const confirmed = await result.wait();
+      enqueueSnackbar({
+        title: "Success",
+        description: "Position creation was successfull",
+        severity: "success",
+        url: network.etherscanLink
+          ? `${network.etherscanLink}block/${confirmed.blockHash}`
+          : undefined,
+      });
     } catch (error) {
       handleTxError(
         JSON.stringify(error),
@@ -182,13 +195,22 @@ export const useClearingHouse = () => {
     if (!active || !clearingHouse) return;
 
     setLoading(true);
+    addCloseEvent(amm);
     try {
       const result = await clearingHouse.closePosition(
         amm,
         toDecimalStruct(utils.parseUnits(quoteAssetAmountLimit).abs()),
         gasLimit
       );
-      await result.wait();
+      const confirmed = await result.wait();
+      enqueueSnackbar({
+        title: "Success",
+        description: "You have successfully closed the position",
+        severity: "success",
+        url: network.etherscanLink
+          ? `${network.etherscanLink}block/${confirmed.blockHash}`
+          : undefined,
+      });
     } catch (error) {
       handleTxError(
         JSON.stringify(error),
@@ -198,6 +220,7 @@ export const useClearingHouse = () => {
       );
     } finally {
       setLoading(false);
+      removeCloseEvent(amm);
     }
   };
 

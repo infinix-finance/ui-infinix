@@ -22,7 +22,7 @@ describe("Notifications", () => {
       "Mark Price",
       "$44.49",
       "Position Size",
-      "-0.00",
+      "0.00",
       "Liq. Price (est.)",
     ]);
   });

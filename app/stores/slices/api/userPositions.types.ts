@@ -33,6 +33,7 @@ export interface PositionGridData {
   liquidationPrice: string;
   profitAndLoss: string;
   isInProfit: boolean;
+  isClosing: boolean;
 }
 
 export interface HistoryGridData {

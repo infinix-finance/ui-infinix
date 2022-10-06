@@ -12,6 +12,7 @@ import {
   RowProps,
 } from "@/components";
 import { useStore } from "@/stores/root";
+import { LoadingButton } from "@mui/lab";
 import { ConnectionOverlay } from "../ConnectionOverlay";
 import {
   negativePnlStyle,
@@ -78,9 +79,14 @@ const closeCellRenderer = (
   column: ColumnProps,
   onClick: RowClickFunc
 ) => (
-  <Button variant="outlined" size="small" onClick={() => onClick(row, column)}>
+  <LoadingButton
+    variant="outlined"
+    size="small"
+    loading={row.isClosing}
+    onClick={() => onClick(row, column)}
+  >
     Close
-  </Button>
+  </LoadingButton>
 );
 
 const shareCellRenderer = (
