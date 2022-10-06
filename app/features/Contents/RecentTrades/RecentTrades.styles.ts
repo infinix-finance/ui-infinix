@@ -2,7 +2,6 @@ import { Theme } from "@mui/material";
 
 export const containerStyle = (loading: boolean) => (theme: Theme) => ({
   backgroundColor: theme.palette.secondary.blackberry,
-  height: "100%",
   width: "17.5rem",
   borderRadius: "0.5rem",
   overflowY: "hidden",
