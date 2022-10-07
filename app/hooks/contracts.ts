@@ -170,13 +170,16 @@ export const useClearingHouse = () => {
         toDecimalStruct(utils.parseUnits(baseAssetAmountLimit)),
         gasLimit
       );
+      // clear previously initiated close events in order to remove
+      // the loading indicator for the new/updated position
+      removeCloseEvent(amm);
       const confirmed = await result.wait();
       enqueueSnackbar({
         title: "Success",
-        description: "Position creation was successfull",
+        description: "Position was successfully opened",
         severity: "success",
         url: network.etherscanLink
-          ? `${network.etherscanLink}block/${confirmed.blockHash}`
+          ? `${network.etherscanLink}tx/${confirmed.transactionHash}`
           : undefined,
       });
     } catch (error) {
@@ -205,10 +208,10 @@ export const useClearingHouse = () => {
       const confirmed = await result.wait();
       enqueueSnackbar({
         title: "Success",
-        description: "You have successfully closed the position",
+        description: "Position was successfully closed",
         severity: "success",
         url: network.etherscanLink
-          ? `${network.etherscanLink}block/${confirmed.blockHash}`
+          ? `${network.etherscanLink}tx/${confirmed.transactionHash}`
           : undefined,
       });
     } catch (error) {
@@ -218,9 +221,11 @@ export const useClearingHouse = () => {
         "See the console for more details",
         enqueueSnackbar
       );
+      // remove the close event only in case of failure
+      // in order to allow the user to retry closing it
+      removeCloseEvent(amm);
     } finally {
       setLoading(false);
-      removeCloseEvent(amm);
     }
   };
 

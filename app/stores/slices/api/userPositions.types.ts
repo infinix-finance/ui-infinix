@@ -24,6 +24,7 @@ export interface PositionGridData {
   originalSize: string;
   symbol: string;
   direction: string;
+  originalDirection: Directions;
   directionColor: string;
   leverage: string;
   size: string;

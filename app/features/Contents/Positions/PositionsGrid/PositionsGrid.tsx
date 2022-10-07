@@ -11,6 +11,7 @@ import {
   RowClickFunc,
   RowProps,
 } from "@/components";
+import { Directions } from "@/defi";
 import { useStore } from "@/stores/root";
 import { LoadingButton } from "@mui/lab";
 import { ConnectionOverlay } from "../ConnectionOverlay";
@@ -40,7 +41,7 @@ const leverageCellRenderer = (row: RowProps, column: ColumnProps) => (
 
 const sizeCellRenderer = (row: RowProps, column: ColumnProps) => (
   <Box display="flex" flexDirection="row" gap={1}>
-    {row.isInProfit ? (
+    {row.originalDirection === Directions.Long ? (
       <ArrowDropUpIcon sx={positivePnlStyle} />
     ) : (
       <ArrowDropDownIcon sx={negativePnlStyle} />

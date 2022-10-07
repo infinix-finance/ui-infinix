@@ -93,6 +93,7 @@ export const createPositionGridData = (
       id: pair.id,
       symbol: formatPair(pair.id),
       direction: capitalize(direction),
+      originalDirection: direction,
       directionColor:
         direction === Directions.Long ? "alert.lemon" : "alert.guava",
       leverage: `${formatNumber(leverage, { base: 0 })}X`,
