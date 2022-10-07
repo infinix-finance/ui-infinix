@@ -41,10 +41,11 @@ export const formatNumber = (
 
   if (convertedNum.isNaN()) return "";
 
+  const roundedNum = convertedNum.decimalPlaces(base);
   const product = productId ? getProduct(productId).symbol : null;
   const calculatedSuffix = suffix ? suffix : product ? ` ${product}` : "";
-  const calculatedSign = showSign && convertedNum.gt(0) ? "+" : "";
-  const formattedAmount = convertedNum.toFormat(
+  const calculatedSign = showSign && roundedNum.gt(0) ? "+" : "";
+  const formattedAmount = roundedNum.toFormat(
     base,
     defaultFormat(
       withThousandSeparator,

@@ -113,7 +113,7 @@ describe("userPositions slice", () => {
 
     test("should return a history grid entry with status=Margin Changing as expected", () => {
       const expected = {
-        amount: "-0.00",
+        amount: "0.00",
         date: "10/06/2022",
         direction: "Short",
         directionColor: "alert.guava",
@@ -174,12 +174,14 @@ describe("userPositions slice", () => {
           productIds: ["AVAX", "USDC"],
         },
         profitAndLoss: "",
-        size: "-0.00 USDC",
+        size: "0.00 USDC",
         symbol: "AVAX/USDC",
+        isClosing: false,
       };
 
       const [firstRow] = createPositionGridData(
-        transformPositions(positions, useStore.getState())
+        transformPositions(positions, useStore.getState()),
+        []
       );
 
       expect(firstRow).toMatchObject(expected);
@@ -207,7 +209,7 @@ describe("userPositions slice", () => {
           },
           {
             label: "Position Size",
-            value: "-0.00",
+            value: "0.00",
           },
           {
             label: "Liq. Price (est.)",

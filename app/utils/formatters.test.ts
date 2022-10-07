@@ -86,6 +86,24 @@ describe("formatters", () => {
 
       expect(result).toBe("-2.00");
     });
+
+    it("should round the number to the given precision under the hood in order to avoid side effects", () => {
+      const result = formatNumber(new BigNumber(-0.012345), {
+        base: 1,
+        showSign: true,
+      });
+
+      expect(result).toBe("0.0");
+    });
+
+    it("should round the number to the given precision under the hood in order to avoid side effects", () => {
+      const result = formatNumber(new BigNumber(-0.05678), {
+        base: 1,
+        showSign: true,
+      });
+
+      expect(result).toBe("-0.1");
+    });
   });
 
   describe("toFixedAmount", () => {

@@ -1,5 +1,6 @@
 /* istanbul ignore file */
-import { Box, Button, Divider } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { Box, Divider } from "@mui/material";
 
 import { AccountDetails } from "./AccountDetails";
 import { AssetAmount } from "./AssetAmount";
@@ -42,13 +43,14 @@ export const TradingSidebar = () => {
             <LeverageSelector />
             <PriceDetails />
             <SlippageEditor />
-            <Button
+            <LoadingButton
+              loading={loading}
               variant={direction}
               onClick={handleOpenPosition}
               disabled={loading || !tradingSidebarEnabled}
             >
               Confirm {capitalize(direction)}
-            </Button>
+            </LoadingButton>
           </Box>
           <Divider sx={dividerStyle} />
           <AccountDetails />

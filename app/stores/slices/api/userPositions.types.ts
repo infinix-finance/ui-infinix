@@ -24,6 +24,7 @@ export interface PositionGridData {
   originalSize: string;
   symbol: string;
   direction: string;
+  originalDirection: Directions;
   directionColor: string;
   leverage: string;
   size: string;
@@ -33,6 +34,7 @@ export interface PositionGridData {
   liquidationPrice: string;
   profitAndLoss: string;
   isInProfit: boolean;
+  isClosing: boolean;
 }
 
 export interface HistoryGridData {

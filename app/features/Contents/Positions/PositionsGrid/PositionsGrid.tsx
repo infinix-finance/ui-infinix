@@ -11,7 +11,9 @@ import {
   RowClickFunc,
   RowProps,
 } from "@/components";
+import { Directions } from "@/defi";
 import { useStore } from "@/stores/root";
+import { LoadingButton } from "@mui/lab";
 import { ConnectionOverlay } from "../ConnectionOverlay";
 import {
   negativePnlStyle,
@@ -39,7 +41,7 @@ const leverageCellRenderer = (row: RowProps, column: ColumnProps) => (
 
 const sizeCellRenderer = (row: RowProps, column: ColumnProps) => (
   <Box display="flex" flexDirection="row" gap={1}>
-    {row.isInProfit ? (
+    {row.originalDirection === Directions.Long ? (
       <ArrowDropUpIcon sx={positivePnlStyle} />
     ) : (
       <ArrowDropDownIcon sx={negativePnlStyle} />
@@ -78,9 +80,14 @@ const closeCellRenderer = (
   column: ColumnProps,
   onClick: RowClickFunc
 ) => (
-  <Button variant="outlined" size="small" onClick={() => onClick(row, column)}>
+  <LoadingButton
+    variant="outlined"
+    size="small"
+    loading={row.isClosing}
+    onClick={() => onClick(row, column)}
+  >
     Close
-  </Button>
+  </LoadingButton>
 );
 
 const shareCellRenderer = (

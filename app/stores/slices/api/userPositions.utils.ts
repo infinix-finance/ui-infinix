@@ -71,7 +71,8 @@ export const transformHistory = (
 };
 
 export const createPositionGridData = (
-  positions: UserPositionData[]
+  positions: UserPositionData[],
+  closeEvents: string[]
 ): PositionGridData[] => {
   const activePositions = positions.filter((position) => {
     return position.active === true;
@@ -81,7 +82,7 @@ export const createPositionGridData = (
     const pair = getPair(position.pairId);
     const size = toTokenUnit(position.size);
     const direction = size.lt(0) ? Directions.Short : Directions.Long;
-    const leverage = toTokenUnit(position.leverage);
+    const leverage = toTokenUnit(position.leverage).integerValue();
     const entryPrice = toTokenUnit(position.entryPrice);
     const markPrice = toTokenUnit(position.underlyingPrice);
 
@@ -92,6 +93,7 @@ export const createPositionGridData = (
       id: pair.id,
       symbol: formatPair(pair.id),
       direction: capitalize(direction),
+      originalDirection: direction,
       directionColor:
         direction === Directions.Long ? "alert.lemon" : "alert.guava",
       leverage: `${formatNumber(leverage, { base: 0 })}X`,
@@ -104,6 +106,7 @@ export const createPositionGridData = (
       liquidationPrice: "", // TODO: provide when available
       profitAndLoss: "", // TODO: provide when available
       isInProfit: false,
+      isClosing: closeEvents.includes(position.amm),
     };
   });
 };
@@ -115,7 +118,7 @@ export const createHistoryGridData = (
     const pair = getPair(historyEntry.pairId);
     const size = toTokenUnit(historyEntry.size!);
     const direction = size.lt(0) ? Directions.Short : Directions.Long;
-    const leverage = toTokenUnit(historyEntry.leverage);
+    const leverage = toTokenUnit(historyEntry.leverage).integerValue();
     const entryPrice = toTokenUnit(historyEntry.entryPrice);
     const totalPrice = entryPrice.multipliedBy(size).abs();
     const fee = toTokenUnit(historyEntry.fee!);
