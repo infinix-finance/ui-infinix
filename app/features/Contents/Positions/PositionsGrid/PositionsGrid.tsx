@@ -39,6 +39,15 @@ const leverageCellRenderer = (row: RowProps, column: ColumnProps) => (
   </Box>
 );
 
+const timeCellRenderer = (row: RowProps) => (
+  <Box display="flex" flexDirection="column" gap={1}>
+    <Typography variant="body3">{row.date}</Typography>
+    <Typography variant="caption" color="secondary.graishLavender">
+      {row.time}
+    </Typography>
+  </Box>
+);
+
 const sizeCellRenderer = (row: RowProps, column: ColumnProps) => (
   <Box display="flex" flexDirection="row" gap={1}>
     {row.originalDirection === Directions.Long ? (
@@ -112,10 +121,10 @@ const columns: ColumnProps[] = [
     width: "1px",
     cellRenderer: leverageCellRenderer,
   },
+  { title: "Last Update", key: "time", cellRenderer: timeCellRenderer },
   { title: "Size", key: "size", cellRenderer: sizeCellRenderer },
   { title: "Entry Price", key: "entryPrice" },
   { title: "Mark Price", key: "markPrice" },
-  { title: "Margin Ratio", key: "marginRatio" },
   {
     title: "Liq. Price (est.)",
     key: "liquidationPrice",

@@ -1,7 +1,6 @@
 import { MarketId, PairId } from "@/defi";
 import { useStore } from "@/stores/root";
 import { getTopBarValues } from "@/stores/slices/api/amm";
-import { getMostRecentPositionPrice } from "@/stores/slices/api/recentPositions";
 import { useEffect, useState } from "react";
 import {
   generateMarketDropdownProps,
@@ -20,7 +19,6 @@ export default function useTopBar() {
     defaultDropdownPayload
   );
   const markets = useStore((state) => state.markets);
-  const mostRecentPositionPrice = useStore(getMostRecentPositionPrice);
   const priceValues = useStore(getTopBarValues);
   const priceHistory = useStore((state) => state.priceHistory);
   const amm = useStore((state) => state.amm);
@@ -52,7 +50,6 @@ export default function useTopBar() {
 
   return {
     markets,
-    mostRecentPositionPrice,
     priceValues,
     marketsList,
     pairsList,

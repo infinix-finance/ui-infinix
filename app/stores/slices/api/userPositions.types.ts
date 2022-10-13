@@ -28,9 +28,10 @@ export interface PositionGridData {
   directionColor: string;
   leverage: string;
   size: string;
+  date: string;
+  time: string;
   entryPrice: string;
   markPrice: string;
-  marginRatio: string;
   liquidationPrice: string;
   profitAndLoss: string;
   isInProfit: boolean;

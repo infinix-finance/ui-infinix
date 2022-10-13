@@ -16,7 +16,7 @@ import {
   positions,
 } from "@/__mocks__/positionsMock";
 
-describe("userPositions slice", () => {
+describe("userPositions slice utils", () => {
   beforeAll(() => {
     const initialState = getInitialState();
     const state = {
@@ -90,7 +90,7 @@ describe("userPositions slice", () => {
         directionColor: "alert.lemon",
         fee: "$0.00",
         id: "1664975437000AVAXUSDC",
-        leverage: "1X",
+        leverage: "1.0X",
         pair: {
           id: "AVAXUSDC",
           marketId: "Crypto",
@@ -119,7 +119,7 @@ describe("userPositions slice", () => {
         directionColor: "alert.guava",
         fee: "$0.00",
         id: "1654832745000AVAXUSDC",
-        leverage: "2X",
+        leverage: "2.0X",
         pair: {
           id: "AVAXUSDC",
           marketId: "Crypto",
@@ -163,9 +163,8 @@ describe("userPositions slice", () => {
         entryPrice: "$82.00",
         id: "AVAXUSDC",
         isInProfit: false,
-        leverage: "2X",
+        leverage: "2.0X",
         liquidationPrice: "",
-        marginRatio: "",
         markPrice: "$44.49",
         originalSize: "-1",
         pair: {
@@ -177,6 +176,8 @@ describe("userPositions slice", () => {
         size: "0.00 USDC",
         symbol: "AVAX/USDC",
         isClosing: false,
+        date: "10/06/2022",
+        time: "03:45:45",
       };
 
       const [firstRow] = createPositionGridData(

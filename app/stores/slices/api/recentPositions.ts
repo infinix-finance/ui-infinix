@@ -1,5 +1,4 @@
 import { PositionEvent } from "@/types/api";
-import { formatUsdValue, toTokenUnit } from "@/utils/formatters";
 import { AppState, CustomStateCreator } from "../../types";
 import { handleError } from "../slices.utils";
 
@@ -48,10 +47,3 @@ export const createRecentPositionsSlice: CustomStateCreator<RecentPositionsSlice
       },
     },
   });
-
-export const getMostRecentPositionPrice = (state: AppState) => {
-  const [mostRecentPosition] = state.recentPositions.list;
-
-  const price = toTokenUnit(mostRecentPosition?.entryPrice);
-  return formatUsdValue(price);
-};
