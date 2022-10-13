@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 
 import { Directions } from "@/defi/Directions";
-import { isIndexPriceValid } from "@/stores/slices/api/amm";
+import { isMarkPriceValid } from "@/stores/slices/api/amm";
 import { AppState, CustomStateCreator } from "@/stores/types";
 import {
   formatLeverage,
@@ -91,15 +91,13 @@ export const isTradingSidebarEnabled = (state: AppState) => {
     getIsBalanceSet(state) &&
     getIsQuoteSet(state) &&
     state.connection.active &&
-    isIndexPriceValid(state)
+    isMarkPriceValid(state)
   );
 };
 
 export const isSidebarInputsEnabled = (state: AppState) => {
   return (
-    getIsBalanceSet(state) &&
-    state.connection.active &&
-    isIndexPriceValid(state)
+    getIsBalanceSet(state) && state.connection.active && isMarkPriceValid(state)
   );
 };
 

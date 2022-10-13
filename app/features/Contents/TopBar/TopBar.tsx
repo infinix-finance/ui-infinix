@@ -14,7 +14,6 @@ import {
 export const TopBar = () => {
   const {
     markets,
-    mostRecentPositionPrice,
     priceValues,
     marketsList,
     pairsList,
@@ -39,7 +38,6 @@ export const TopBar = () => {
           {...pairsList}
         />
       </Box>
-      <TooltipLabel label="Entry Price" value={mostRecentPositionPrice} />
       <TooltipLabel label="Mark Price" value={priceValues.markPrice} />
       <TooltipLabel label="Index Price" value={priceValues.indexPrice} />
       <TooltipLabel label="Funding" value={priceValues.fundingRate} />
