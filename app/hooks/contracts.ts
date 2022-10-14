@@ -8,6 +8,7 @@ import { NetworkId } from "@/defi/types";
 import { useStore } from "@/stores/root";
 
 import { useSnackbar } from "@/components/Organisms/Snackbar/useSnackbar";
+import { getSelectedNetwork } from "@/stores/slices/connection";
 
 interface ContractList {
   basicTokenWithMint?: BasicTokenWithMint;
@@ -127,7 +128,11 @@ export const useClearingHouse = () => {
   const { basicTokenWithMint, clearingHouse } = useContractStore(
     (state) => state
   );
+  const { addCloseEvent, removeCloseEvent } = useStore(
+    (state) => state.userPositions
+  );
   const gasLimit = gasAmount(chainId);
+  const network = useStore(getSelectedNetwork);
 
   const openPosition = async (
     amm: string,
@@ -165,7 +170,18 @@ export const useClearingHouse = () => {
         toDecimalStruct(utils.parseUnits(baseAssetAmountLimit)),
         gasLimit
       );
-      await result.wait();
+      // clear previously initiated close events in order to remove
+      // the loading indicator for the new/updated position
+      removeCloseEvent(amm);
+      const confirmed = await result.wait();
+      enqueueSnackbar({
+        title: "Success",
+        description: "Position was successfully opened",
+        severity: "success",
+        url: network.etherscanLink
+          ? `${network.etherscanLink}tx/${confirmed.transactionHash}`
+          : undefined,
+      });
     } catch (error) {
       handleTxError(
         JSON.stringify(error),
@@ -182,13 +198,22 @@ export const useClearingHouse = () => {
     if (!active || !clearingHouse) return;
 
     setLoading(true);
+    addCloseEvent(amm);
     try {
       const result = await clearingHouse.closePosition(
         amm,
         toDecimalStruct(utils.parseUnits(quoteAssetAmountLimit).abs()),
         gasLimit
       );
-      await result.wait();
+      const confirmed = await result.wait();
+      enqueueSnackbar({
+        title: "Success",
+        description: "Position was successfully closed",
+        severity: "success",
+        url: network.etherscanLink
+          ? `${network.etherscanLink}tx/${confirmed.transactionHash}`
+          : undefined,
+      });
     } catch (error) {
       handleTxError(
         JSON.stringify(error),
@@ -196,6 +221,9 @@ export const useClearingHouse = () => {
         "See the console for more details",
         enqueueSnackbar
       );
+      // remove the close event only in case of failure
+      // in order to allow the user to retry closing it
+      removeCloseEvent(amm);
     } finally {
       setLoading(false);
     }

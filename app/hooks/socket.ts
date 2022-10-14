@@ -79,11 +79,11 @@ export const useSocketConnection = () => {
 export const useSocketAmmInfo = () => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setAmmInfo } = useStore((state) => state.amm);
-  const { amm } = useStore((state) => state.markets);
+  const { amm, ready: marketsReady } = useStore((state) => state.markets);
   const ammInfoValid = useStore(isAmmInfoValid);
 
   useEffect(() => {
-    if (!connected && ammInfoValid) return;
+    if (!connected && !marketsReady && ammInfoValid) return;
 
     return addChannelCommunication(
       socket,
@@ -91,7 +91,7 @@ export const useSocketAmmInfo = () => {
       setAmmInfo,
       amm
     );
-  }, [connected, socket, setAmmInfo, amm, ammInfoValid]);
+  }, [connected, socket, setAmmInfo, amm, marketsReady, ammInfoValid]);
 };
 
 export const useSocketPriceFeed = () => {
@@ -116,9 +116,10 @@ export const useSocketUserPositions = () => {
   const { socket, connected } = useSocketStore((state) => state);
   const { setPositions } = useStore((state) => state.userPositions);
   const { account } = useStore((state) => state.connection);
+  const { ready: marketsReady } = useStore((state) => state.markets);
 
   useEffect(() => {
-    if (!connected || !account) return;
+    if (!connected || !account || !marketsReady) return;
 
     return addChannelCommunication(
       socket,
@@ -126,7 +127,7 @@ export const useSocketUserPositions = () => {
       setPositions,
       account
     );
-  }, [account, connected, socket, setPositions]);
+  }, [account, connected, socket, marketsReady, setPositions]);
 };
 
 export const useSocketRecentPositions = () => {
@@ -135,7 +136,7 @@ export const useSocketRecentPositions = () => {
   const { amm } = useStore((state) => state.markets);
 
   useEffect(() => {
-    if (!connected) return;
+    if (!connected || !amm) return;
 
     setReady(false);
     return addChannelCommunication(

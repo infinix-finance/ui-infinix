@@ -2,8 +2,9 @@ import BigNumber from "bignumber.js";
 
 import { getPair } from "@/defi";
 import { useStore } from "@/stores/root";
-import { formatNumber, toFixedNumber } from "@/utils/formatters";
+import { formatNumber, toFixedNumber, toTokenUnit } from "@/utils/formatters";
 
+import { useEffect } from "react";
 import { isSidebarInputsEnabled } from "../TradingSidebar.slice";
 import {
   calculateBaseAmount,
@@ -16,14 +17,12 @@ export default function useAssetAmount() {
   const { pairId } = useStore((state) => state.markets);
   const {
     balance: balanceValue,
-    amounts: { base, quote },
+    amounts: { base, baseValue, quote, quoteValue },
     setAmounts,
   } = useStore((state) => state.tradingSidebar);
-  const { price } = useStore((state) => state.amm);
+  const { underlyingPrice } = useStore((state) => state.amm);
   const sidebarInputsEnabled = useStore(isSidebarInputsEnabled);
-
-  // TODO: We need to confirm if it should not be underlyingPrice instead
-  const exchangeRate = price;
+  const exchangeRate = toTokenUnit(underlyingPrice);
 
   const balance = <BigNumber>balanceValue;
   const [baseProduct, quoteProduct] = getPair(pairId).productIds;
@@ -43,6 +42,16 @@ export default function useAssetAmount() {
     type: "number",
     placeholder: "0",
   };
+
+  // calculate quote amount from base amount and mark price
+  // TODO: the terms of base/quote used in the application are the opposite, this needs to be fixed
+  useEffect(() => {
+    if (baseValue.eq(0)) return;
+
+    const baseAmount = toFixedNumber(quoteValue.dividedBy(exchangeRate));
+
+    setAmounts(baseAmount, quote);
+  }, [underlyingPrice]);
 
   const handleMaxClick = () => {
     const baseAmount = toFixedNumber(balance.dividedBy(exchangeRate));

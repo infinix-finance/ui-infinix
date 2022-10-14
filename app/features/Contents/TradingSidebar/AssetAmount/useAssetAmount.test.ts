@@ -2,6 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import BigNumber from "bignumber.js";
 
 import { getInitialState, useStore } from "@/stores/root";
+import { toBaseUnit } from "@/utils/formatters";
 import React from "react";
 import useAssetAmount from "./useAssetAmount";
 
@@ -21,7 +22,7 @@ const createStore = (balance: number, exchangeRate: number) => {
 
   store.amm = {
     ...store.amm,
-    price: exchangeRate,
+    underlyingPrice: toBaseUnit(exchangeRate).toString(),
   };
 
   store.connection = {

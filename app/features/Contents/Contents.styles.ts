@@ -44,6 +44,6 @@ export const mainContentStyle = (theme: Theme) => ({
 export const midContainerStyle = (theme: Theme) => ({
   display: "flex",
   flex: 1,
+  overflow: "hidden",
   gap: theme.spacing(3),
-  /* height: "60%", */
 });

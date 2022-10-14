@@ -71,7 +71,8 @@ export const transformHistory = (
 };
 
 export const createPositionGridData = (
-  positions: UserPositionData[]
+  positions: UserPositionData[],
+  closeEvents: string[]
 ): PositionGridData[] => {
   const activePositions = positions.filter((position) => {
     return position.active === true;
@@ -84,6 +85,7 @@ export const createPositionGridData = (
     const leverage = toTokenUnit(position.leverage);
     const entryPrice = toTokenUnit(position.entryPrice);
     const markPrice = toTokenUnit(position.underlyingPrice);
+    const timestamp = secondsToMilliseconds(position.timestamp);
 
     return {
       pair,
@@ -92,18 +94,21 @@ export const createPositionGridData = (
       id: pair.id,
       symbol: formatPair(pair.id),
       direction: capitalize(direction),
+      originalDirection: direction,
       directionColor:
         direction === Directions.Long ? "alert.lemon" : "alert.guava",
-      leverage: `${formatNumber(leverage, { base: 0 })}X`,
+      leverage: `${formatNumber(leverage, { base: 1 })}X`,
       size: formatNumber(size, {
         productId: pair.productIds[1],
       }),
+      date: format(timestamp, "dd/MM/yyyy"),
+      time: format(timestamp, "HH:mm:ss"),
       entryPrice: formatUsdValue(entryPrice),
       markPrice: formatUsdValue(markPrice),
-      marginRatio: "", // TODO: provide when available
       liquidationPrice: "", // TODO: provide when available
       profitAndLoss: "", // TODO: provide when available
       isInProfit: false,
+      isClosing: closeEvents.includes(position.amm),
     };
   });
 };
@@ -132,7 +137,7 @@ export const createHistoryGridData = (
       direction: capitalize(direction),
       directionColor:
         direction === Directions.Long ? "alert.lemon" : "alert.guava",
-      leverage: `${leverage}X`,
+      leverage: `${formatNumber(leverage, { base: 1 })}X`,
       date: format(timestamp, "dd/MM/yyyy"),
       time: format(timestamp, "HH:mm:ss"),
       type: capitalize(type),

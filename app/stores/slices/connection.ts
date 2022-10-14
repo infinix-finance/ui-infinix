@@ -1,7 +1,7 @@
 import { AlertColor } from "@mui/material";
 
-import { SWITCH_CONNECTION_MSG, NO_CONNECTION_MSG } from "@/constants/messages";
-import { isSupportedNetwork, NetworkId, WalletId } from "@/defi";
+import { NO_CONNECTION_MSG, SWITCH_CONNECTION_MSG } from "@/constants/messages";
+import { isSupportedNetwork, NetworkId, NETWORKS, WalletId } from "@/defi";
 import { AppState, CustomStateCreator } from "../types";
 
 interface ConnectionProps {
@@ -75,4 +75,8 @@ const updateDetailsHelper = (
 
   notifications.hideSidebarNotification();
   notifications.hideCreatePositionNotification();
+};
+
+export const getSelectedNetwork = (state: AppState) => {
+  return NETWORKS[state.connection.chainId as NetworkId];
 };

@@ -91,7 +91,7 @@ const columns: ColumnProps[] = [
   { title: "Total", key: "total" },
   { title: "Fee", key: "fee" },
   {
-    title: "Realited Profit",
+    title: "Realized Profit",
     key: "profitAndLoss",
     cellRenderer: pnlCellRenderer,
   },

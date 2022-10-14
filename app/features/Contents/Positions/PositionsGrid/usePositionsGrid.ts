@@ -1,25 +1,14 @@
 /* istanbul ignore file */
-import { useEffect, useState } from "react";
 
 import { ColumnProps, RowProps } from "@/components";
-import { useToken, useClearingHouse } from "@/hooks/contracts";
+import { useClearingHouse, useToken } from "@/hooks/contracts";
 import { useStore } from "@/stores/root";
-import { PositionGridData } from "@/stores/slices/api/userPositions.types";
 
 export default function usePositionsGrid() {
-  const [dataProvider, setDataProvider] = useState<PositionGridData[]>([]);
-  const { getPositionsGridData, positionsList } = useStore(
-    (state) => state.userPositions
-  );
-  const { ready } = useStore((state) => state.markets);
+  const { getPositionsGridData } = useStore((state) => state.userPositions);
   const { closePosition } = useClearingHouse();
   const { getTokenBalance } = useToken();
-
-  useEffect(() => {
-    if (!ready) return;
-
-    setDataProvider(getPositionsGridData());
-  }, [ready, positionsList, getPositionsGridData]);
+  const dataProvider = getPositionsGridData();
 
   const handleHeaderClick = (column: ColumnProps) => {
     console.log("header clicked", column);

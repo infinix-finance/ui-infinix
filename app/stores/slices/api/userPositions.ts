@@ -20,6 +20,7 @@ import {
 interface UserPositionsProps {
   positionsList: UserPositionData[];
   positionsHistory: UserPositionEvent[];
+  closeEvents: string[];
 }
 
 export interface UserPositionsSlice {
@@ -29,6 +30,9 @@ export interface UserPositionsSlice {
     getHistoryGridData: () => HistoryGridData[];
     getNotificationsHistoryData: () => NotificationHistoryData[];
     getNotificationsHistoryStats: () => NotificationsHistoryStats;
+    addCloseEvent: (amm: string) => void;
+    removeCloseEvent: (amm: string) => void;
+    isCloseEventInProgress: (amm: string) => boolean;
   };
 }
 
@@ -37,6 +41,7 @@ export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
     userPositions: {
       positionsList: [],
       positionsHistory: [],
+      closeEvents: [],
 
       setPositions: (positions: Position[]) => {
         if (handleError(get(), positions)) {
@@ -56,7 +61,8 @@ export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
       },
 
       getPositionsGridData: (): PositionGridData[] => {
-        return createPositionGridData(get().userPositions.positionsList);
+        const { positionsList, closeEvents } = get().userPositions;
+        return createPositionGridData(positionsList, closeEvents);
       },
 
       getHistoryGridData: (): HistoryGridData[] => {
@@ -81,6 +87,25 @@ export const createUserPositionsSlice: CustomStateCreator<UserPositionsSlice> =
           populated: !!history.length,
           unread: !!history.filter(({ notification }) => notification).length,
         };
+      },
+
+      addCloseEvent: (amm: string) => {
+        set(function addCloseEvent(state: AppState) {
+          state.userPositions.closeEvents.push(amm);
+        });
+      },
+
+      removeCloseEvent: (amm: string) => {
+        set(function removeCloseEvent(state: AppState) {
+          state.userPositions.closeEvents =
+            state.userPositions.closeEvents.filter(
+              (currentAmm) => currentAmm !== amm
+            );
+        });
+      },
+
+      isCloseEventInProgress: (amm: string): boolean => {
+        return get().userPositions.closeEvents.includes(amm);
       },
     },
   });

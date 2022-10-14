@@ -1,7 +1,7 @@
 /* istanbul ignore file */
-import create from "zustand";
 import { createChart, IChartApi, ISeriesApi, Time } from "lightweight-charts";
 import { useEffect, useRef } from "react";
+import create from "zustand";
 
 import { chartConfig, lineSeriesConfig } from "./config";
 
@@ -25,7 +25,7 @@ export default function useSimpleChart(initialData: any[], update: any[]) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!initialData.length) return;
+    if (!initialData.length || !chartContainerRef.current) return;
 
     const chartInstance = createChart(chartContainerRef.current!, chartConfig);
     const lineSeriesInstance = chartInstance.addLineSeries(lineSeriesConfig);

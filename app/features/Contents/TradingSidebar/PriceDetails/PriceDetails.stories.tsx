@@ -27,11 +27,6 @@ const createStore = (amount: number) => {
     active: true,
   };
 
-  store.amm = {
-    ...store.amm,
-    price: 1,
-  };
-
   useStore.setState(store);
 };
 

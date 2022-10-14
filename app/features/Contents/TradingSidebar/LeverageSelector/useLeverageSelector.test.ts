@@ -24,7 +24,7 @@ const createStore = (balance: number) => {
 
   store.amm = {
     ...store.amm,
-    price: 1,
+    underlyingPrice: "1000000000000000000",
   };
 
   useStore.setState(store);

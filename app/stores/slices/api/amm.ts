@@ -82,6 +82,11 @@ export const isIndexPriceValid = (state: AppState) => {
   return !!state.amm.price;
 };
 
+export const isMarkPriceValid = (state: AppState) => {
+  const markPrice = toTokenUnit(state.amm.underlyingPrice);
+  return markPrice.gt(0);
+};
+
 export const isAmmInfoValid = ({ amm: { id, dataFeedId } }: AppState) => {
   return (!id && !dataFeedId) || (!!id && !!dataFeedId);
 };

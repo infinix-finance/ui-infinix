@@ -24,15 +24,18 @@ export interface PositionGridData {
   originalSize: string;
   symbol: string;
   direction: string;
+  originalDirection: Directions;
   directionColor: string;
   leverage: string;
   size: string;
+  date: string;
+  time: string;
   entryPrice: string;
   markPrice: string;
-  marginRatio: string;
   liquidationPrice: string;
   profitAndLoss: string;
   isInProfit: boolean;
+  isClosing: boolean;
 }
 
 export interface HistoryGridData {

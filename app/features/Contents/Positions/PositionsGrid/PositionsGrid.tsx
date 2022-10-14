@@ -11,7 +11,9 @@ import {
   RowClickFunc,
   RowProps,
 } from "@/components";
+import { Directions } from "@/defi";
 import { useStore } from "@/stores/root";
+import { LoadingButton } from "@mui/lab";
 import { ConnectionOverlay } from "../ConnectionOverlay";
 import {
   negativePnlStyle,
@@ -37,9 +39,18 @@ const leverageCellRenderer = (row: RowProps, column: ColumnProps) => (
   </Box>
 );
 
+const timeCellRenderer = (row: RowProps) => (
+  <Box display="flex" flexDirection="column" gap={1}>
+    <Typography variant="body3">{row.date}</Typography>
+    <Typography variant="caption" color="secondary.graishLavender">
+      {row.time}
+    </Typography>
+  </Box>
+);
+
 const sizeCellRenderer = (row: RowProps, column: ColumnProps) => (
   <Box display="flex" flexDirection="row" gap={1}>
-    {row.isInProfit ? (
+    {row.originalDirection === Directions.Long ? (
       <ArrowDropUpIcon sx={positivePnlStyle} />
     ) : (
       <ArrowDropDownIcon sx={negativePnlStyle} />
@@ -78,9 +89,14 @@ const closeCellRenderer = (
   column: ColumnProps,
   onClick: RowClickFunc
 ) => (
-  <Button variant="outlined" size="small" onClick={() => onClick(row, column)}>
+  <LoadingButton
+    variant="outlined"
+    size="small"
+    loading={row.isClosing}
+    onClick={() => onClick(row, column)}
+  >
     Close
-  </Button>
+  </LoadingButton>
 );
 
 const shareCellRenderer = (
@@ -105,10 +121,10 @@ const columns: ColumnProps[] = [
     width: "1px",
     cellRenderer: leverageCellRenderer,
   },
+  { title: "Last Update", key: "time", cellRenderer: timeCellRenderer },
   { title: "Size", key: "size", cellRenderer: sizeCellRenderer },
   { title: "Entry Price", key: "entryPrice" },
   { title: "Mark Price", key: "markPrice" },
-  { title: "Margin Ratio", key: "marginRatio" },
   {
     title: "Liq. Price (est.)",
     key: "liquidationPrice",

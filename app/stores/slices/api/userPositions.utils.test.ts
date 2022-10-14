@@ -16,7 +16,7 @@ import {
   positions,
 } from "@/__mocks__/positionsMock";
 
-describe("userPositions slice", () => {
+describe("userPositions slice utils", () => {
   beforeAll(() => {
     const initialState = getInitialState();
     const state = {
@@ -90,7 +90,7 @@ describe("userPositions slice", () => {
         directionColor: "alert.lemon",
         fee: "$0.00",
         id: "1664975437000AVAXUSDC",
-        leverage: "1X",
+        leverage: "1.0X",
         pair: {
           id: "AVAXUSDC",
           marketId: "Crypto",
@@ -113,13 +113,13 @@ describe("userPositions slice", () => {
 
     test("should return a history grid entry with status=Margin Changing as expected", () => {
       const expected = {
-        amount: "-0.00",
+        amount: "0.00",
         date: "10/06/2022",
         direction: "Short",
         directionColor: "alert.guava",
         fee: "$0.00",
         id: "1654832745000AVAXUSDC",
-        leverage: "2X",
+        leverage: "2.0X",
         pair: {
           id: "AVAXUSDC",
           marketId: "Crypto",
@@ -163,9 +163,8 @@ describe("userPositions slice", () => {
         entryPrice: "$82.00",
         id: "AVAXUSDC",
         isInProfit: false,
-        leverage: "2X",
+        leverage: "2.0X",
         liquidationPrice: "",
-        marginRatio: "",
         markPrice: "$44.49",
         originalSize: "-1",
         pair: {
@@ -174,12 +173,16 @@ describe("userPositions slice", () => {
           productIds: ["AVAX", "USDC"],
         },
         profitAndLoss: "",
-        size: "-0.00 USDC",
+        size: "0.00 USDC",
         symbol: "AVAX/USDC",
+        isClosing: false,
+        date: "10/06/2022",
+        time: "03:45:45",
       };
 
       const [firstRow] = createPositionGridData(
-        transformPositions(positions, useStore.getState())
+        transformPositions(positions, useStore.getState()),
+        []
       );
 
       expect(firstRow).toMatchObject(expected);
@@ -207,7 +210,7 @@ describe("userPositions slice", () => {
           },
           {
             label: "Position Size",
-            value: "-0.00",
+            value: "0.00",
           },
           {
             label: "Liq. Price (est.)",
