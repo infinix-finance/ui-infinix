@@ -10,7 +10,6 @@ export default function useLeverageSelector() {
   } = useStore((store) => store.tradingSidebar);
   const tradingSidebarEnabled = useStore(isTradingSidebarEnabled);
 
-  const buyingPowerLabel = `Buying power (${leverage}x)`;
   const buyingPower = tradingSidebarEnabled
     ? formatNumber(quoteValue.multipliedBy(leverage), { prefix: "$" })
     : "-";
@@ -25,7 +24,6 @@ export default function useLeverageSelector() {
   return {
     tradingSidebarEnabled,
     leverage,
-    buyingPowerLabel,
     buyingPower,
     handleChangeLeverage,
   };

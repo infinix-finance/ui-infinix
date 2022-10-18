@@ -11,12 +11,12 @@ describe("TopBar", () => {
     render(<WithoutData />);
 
     checkScreenTexts(["Crypto", "AVAX/USDC", "$0.00", "0.0000%", "00:00:00"]);
-    expect(screen.queryAllByTestId("InfoOutlinedIcon")).toHaveLength(3);
+    expect(screen.queryAllByTestId("InfoOutlinedIcon")).toHaveLength(2);
   });
 
   test("should render the component with data", () => {
     render(<WithData />);
 
-    checkScreenTexts(["$44.25", "$16.69", "0.0563%", "$600.00", "00:10:05"]);
+    checkScreenTexts(["$16.69", "0.0563%", "$600.00", "00:10:05"]);
   });
 });

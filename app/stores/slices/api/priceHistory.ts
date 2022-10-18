@@ -2,6 +2,7 @@ import { PriceUpdate } from "@/types/api";
 import { AppState, CustomStateCreator } from "../../types";
 
 import { toTokenUnit } from "@/utils/formatters";
+import BigNumber from "bignumber.js";
 import { handleError } from "../slices.utils";
 
 interface PriceHistoryProps {
@@ -69,14 +70,13 @@ export const getHistoryData = (state: AppState) => {
 };
 
 export const getLatestPriceInfo = (state: AppState) => {
-  const [first] = state.priceHistory.feed.slice(0);
-  const firstPrice = toTokenUnit(first?.price);
+  const [penultimate] = state.priceHistory.feed.slice(-2, -1);
+  const penultimatePrice = toTokenUnit(penultimate?.price);
   const lastPrice = toTokenUnit(state.priceHistory.latest);
-  const change = lastPrice.minus(firstPrice);
+  const change = lastPrice.minus(penultimatePrice);
   const percentageChange = change
-    ? lastPrice
-        .div(firstPrice)
-        .multipliedBy(100)
+    ? new BigNumber(100)
+        .minus(lastPrice.div(penultimatePrice).multipliedBy(100))
         .multipliedBy(change.lt(0) ? -1 : 1)
         .toNumber()
     : 0;

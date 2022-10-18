@@ -7,6 +7,7 @@ import {
   formatLeverage,
   formatPercentage,
   formatUsdValue,
+  toTokenUnit,
 } from "@/utils/formatters";
 
 interface TradingSidebarStoreProps {
@@ -104,13 +105,37 @@ export const isSidebarInputsEnabled = (state: AppState) => {
 export const getPriceDetails = (state: AppState) => {
   const EMPTY = "-";
   const isQuoteSet = getIsQuoteSet(state);
+  const tradingSidebarEnabled = isTradingSidebarEnabled(state);
 
-  // TODO: Needs to be replaced with proper calculations
+  if (!isQuoteSet || !tradingSidebarEnabled) {
+    return {
+      entry: EMPTY,
+      liquidation: EMPTY,
+      impact: EMPTY,
+      tradingFee: EMPTY,
+    };
+  }
+
+  const quoteAssetReserve = toTokenUnit(state.amm.quoteAssetReserve);
+  const baseAssetReserve = toTokenUnit(state.amm.baseAssetReserve);
+  const entryPrice = quoteAssetReserve
+    .plus(state.tradingSidebar.amounts.quoteValue)
+    .div(baseAssetReserve.plus(state.tradingSidebar.amounts.baseValue));
+  const impact = new BigNumber(100).minus(
+    entryPrice.div(quoteAssetReserve.div(baseAssetReserve)).multipliedBy(100)
+  );
+  const liquidationPrice = state.tradingSidebar.amounts.quoteValue.multipliedBy(
+    process.env.LIQ_FEE_RATIO!
+  );
+  const tradingFee = state.tradingSidebar.amounts.quoteValue.multipliedBy(
+    process.env.TRANS_FEE_RATIO!
+  );
+
   return {
-    entry: isQuoteSet ? formatUsdValue(new BigNumber(0)) : EMPTY,
-    liquidation: isQuoteSet ? formatUsdValue(new BigNumber(0)) : EMPTY,
-    impact: isQuoteSet ? formatPercentage(new BigNumber(0)) : EMPTY,
-    tradingFee: isQuoteSet ? formatUsdValue(new BigNumber(0)) : EMPTY,
+    entry: formatUsdValue(entryPrice),
+    liquidation: formatUsdValue(liquidationPrice),
+    impact: formatPercentage(impact, 1),
+    tradingFee: formatUsdValue(tradingFee),
   };
 };
 

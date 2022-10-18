@@ -37,9 +37,9 @@ export interface HeaderProps {
 export const Header = ({
   timeframe = Timeframes._1d,
   pairId = PairId.BTCUSDC,
-  price = new BigNumber(140.32),
-  change = new BigNumber(0.1234),
-  percentage = 12.44,
+  price = new BigNumber(0),
+  change = new BigNumber(0),
+  percentage = 0,
   onChange = () => {},
 }: HeaderProps) => {
   const [baseProductId, quoteProductId] = getPair(pairId).productIds;

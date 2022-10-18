@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
+import { render, screen } from "@testing-library/react";
 import * as stories from "./PriceDetails.stories";
 
 import { checkScreenTexts } from "@/utils/testUtils";
@@ -22,6 +22,6 @@ describe("PriceDetails", () => {
   test("should render the component when quote is set", () => {
     render(<Valid />);
 
-    checkScreenTexts(["$0.00", "$0.00", "0%", "$0.00"]);
+    checkScreenTexts(["$108.70", "$1.25", "1.4%", "$0.10"]);
   });
 });

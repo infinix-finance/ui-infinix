@@ -12,7 +12,11 @@ import {
 import { PositionStatus } from "@/components/Atoms/PositionStatus";
 import { useStore } from "@/stores/root";
 import { ConnectionOverlay } from "../ConnectionOverlay";
-import { neutralIndicatorStyle } from "../Positions.styles";
+import {
+  negativePnlStyle,
+  neutralIndicatorStyle,
+  positivePnlStyle,
+} from "../Positions.styles";
 import useHistoryGrid from "./useHistoryGrid";
 
 const symbolCellRenderer = (row: RowProps, column: ColumnProps) => (
@@ -45,13 +49,18 @@ const timeCellRenderer = (row: RowProps) => (
   </Box>
 );
 
-const pnlCellRenderer = (row: RowProps, column: ColumnProps) => (
-  <Box display="flex" flexDirection="column" gap={1}>
-    <Typography variant="body3" color={row.directionColor}>
-      {row[column.key]}
-    </Typography>
-  </Box>
-);
+const pnlCellRenderer = (row: RowProps, column: ColumnProps) => {
+  const sx = row.originalProfitAndLoss.gte(0)
+    ? positivePnlStyle
+    : negativePnlStyle;
+  return (
+    <Box display="flex" flexDirection="column" gap={1}>
+      <Typography variant="body3" sx={sx}>
+        {row[column.key]}
+      </Typography>
+    </Box>
+  );
+};
 
 const exportHeaderRenderer = (
   column: ColumnProps,

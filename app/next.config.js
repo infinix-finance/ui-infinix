@@ -11,6 +11,8 @@ const nextConfig = {
     API_URL: process.env.API_URL,
     CLEARING_HOUSE: process.env.CLEARING_HOUSE,
     USDC: process.env.USDC,
+    LIQ_FEE_RATIO: process.env.LIQ_FEE_RATIO,
+    TRANS_FEE_RATIO: process.env.TRANS_FEE_RATIO,
   },
   pwa: {
     dest: "public",

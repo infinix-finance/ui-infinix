@@ -18,6 +18,8 @@ export interface Amm {
   dataFeedId: string;
   price: number;
   nextFunding: number;
+  baseAssetReserve: string;
+  quoteAssetReserve: string;
 }
 
 export interface PriceUpdate {
