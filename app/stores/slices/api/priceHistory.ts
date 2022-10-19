@@ -1,8 +1,8 @@
 import { PriceUpdate } from "@/types/api";
 import { AppState, CustomStateCreator } from "../../types";
 
+import { calculateChange, calculateChangePercentage } from "@/utils/calcs";
 import { toTokenUnit } from "@/utils/formatters";
-import BigNumber from "bignumber.js";
 import { handleError } from "../slices.utils";
 
 interface PriceHistoryProps {
@@ -73,12 +73,9 @@ export const getLatestPriceInfo = (state: AppState) => {
   const [penultimate] = state.priceHistory.feed.slice(-2, -1);
   const penultimatePrice = toTokenUnit(penultimate?.price);
   const lastPrice = toTokenUnit(state.priceHistory.latest);
-  const change = lastPrice.minus(penultimatePrice);
+  const change = calculateChange(lastPrice, penultimatePrice);
   const percentageChange = change
-    ? new BigNumber(100)
-        .minus(lastPrice.div(penultimatePrice).multipliedBy(100))
-        .multipliedBy(change.lt(0) ? -1 : 1)
-        .toNumber()
+    ? calculateChangePercentage(lastPrice, penultimatePrice).toNumber()
     : 0;
 
   return {
