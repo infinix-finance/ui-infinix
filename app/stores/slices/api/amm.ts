@@ -23,6 +23,8 @@ const getDefaultData = () => ({
   dataFeedId: "",
   price: 0,
   nextFunding: 0,
+  baseAssetReserve: "",
+  quoteAssetReserve: "",
 });
 
 export interface AmmSlice {
@@ -58,8 +60,6 @@ export const createAmmSlice: CustomStateCreator<AmmSlice> = (set, get) => ({
 });
 
 export const getTopBarValues = (state: AppState) => {
-  const rawMarkPrice = toTokenUnit(state.amm.underlyingPrice);
-  const markPrice = formatUsdValue(rawMarkPrice);
   const indexPrice = formatUsdValue(state.amm.price || 0);
   const rawTotalVolume = toTokenUnit(state.amm.tradingVolume);
   const totalVolume = formatUsdValue(rawTotalVolume);
@@ -70,7 +70,6 @@ export const getTopBarValues = (state: AppState) => {
   const countDownMillis = Math.max(nextFundingMillis - now, 0);
 
   return {
-    markPrice,
     indexPrice,
     totalVolume,
     fundingRate,

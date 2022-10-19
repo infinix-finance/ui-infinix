@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
+import { render, screen } from "@testing-library/react";
 import * as stories from "./AccountDetails.stories";
 
 import { checkScreenTexts } from "@/utils/testUtils";
@@ -19,7 +19,6 @@ describe("AccountDetails", () => {
     checkScreenTexts([
       "Net USDC Value",
       "Free Collateral",
-      "Buying Power",
       "Margin Ratio",
       "Leverage",
       "Risk Profile",

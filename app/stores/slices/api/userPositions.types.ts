@@ -6,6 +6,7 @@ import {
   ProductIds,
 } from "@/defi";
 import { PositionData, PositionEvent } from "@/types/api";
+import BigNumber from "bignumber.js";
 
 export interface UserPositionData extends PositionData {
   pairId: PairId;
@@ -34,6 +35,7 @@ export interface PositionGridData {
   markPrice: string;
   liquidationPrice: string;
   profitAndLoss: string;
+  originalProfitAndLoss: BigNumber;
   isInProfit: boolean;
   isClosing: boolean;
 }

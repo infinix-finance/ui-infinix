@@ -17,6 +17,7 @@ import {
   formatUsdValue,
   toTokenUnit,
 } from "@/utils/formatters";
+import BigNumber from "bignumber.js";
 import { format, secondsToMilliseconds } from "date-fns";
 import {
   HistoryGridData,
@@ -80,12 +81,30 @@ export const createPositionGridData = (
 
   return activePositions.map((position) => {
     const pair = getPair(position.pairId);
+    const [baseCcy, quoteCcy] = pair.productIds;
     const size = toTokenUnit(position.size);
     const direction = size.lt(0) ? Directions.Short : Directions.Long;
     const leverage = toTokenUnit(position.leverage);
     const entryPrice = toTokenUnit(position.entryPrice);
+    const openNotional = toTokenUnit(position.openNotional);
     const markPrice = toTokenUnit(position.underlyingPrice);
     const timestamp = secondsToMilliseconds(position.timestamp);
+    const baseSize = formatNumber(size.abs(), {
+      productId: baseCcy,
+    });
+    const quoteSize = entryPrice.multipliedBy(size).abs();
+    const formattedQuoteSize = formatNumber(quoteSize, {
+      productId: quoteCcy,
+    });
+    const liquidationPrice = formatUsdValue(
+      openNotional.multipliedBy(new BigNumber(process.env.LIQ_FEE_RATIO!))
+    );
+    const profitAndLoss = toTokenUnit(position.unrealizedPnl);
+    const formattedProfitAndLoss = formatNumber(profitAndLoss, {
+      productId: quoteCcy,
+    });
+    const pnlROE = profitAndLoss.div(quoteSize).multipliedBy(100);
+    const formattedPnlROE = formatNumber(pnlROE.isNaN() ? 0 : pnlROE);
 
     return {
       pair,
@@ -98,15 +117,14 @@ export const createPositionGridData = (
       directionColor:
         direction === Directions.Long ? "alert.lemon" : "alert.guava",
       leverage: `${formatNumber(leverage, { base: 1 })}X`,
-      size: formatNumber(size, {
-        productId: pair.productIds[1],
-      }),
+      size: `${baseSize} (${formattedQuoteSize})`,
       date: format(timestamp, "dd/MM/yyyy"),
       time: format(timestamp, "HH:mm:ss"),
       entryPrice: formatUsdValue(entryPrice),
       markPrice: formatUsdValue(markPrice),
-      liquidationPrice: "", // TODO: provide when available
-      profitAndLoss: "", // TODO: provide when available
+      liquidationPrice,
+      profitAndLoss: `${formattedProfitAndLoss} (${formattedPnlROE}%)`,
+      originalProfitAndLoss: profitAndLoss,
       isInProfit: false,
       isClosing: closeEvents.includes(position.amm),
     };
@@ -118,17 +136,18 @@ export const createHistoryGridData = (
 ): HistoryGridData[] => {
   return history.map((historyEntry) => {
     const pair = getPair(historyEntry.pairId);
+    const [, quoteCcy] = pair.productIds;
     const size = toTokenUnit(historyEntry.size!);
     const direction = size.lt(0) ? Directions.Short : Directions.Long;
     const leverage = toTokenUnit(historyEntry.leverage);
     const entryPrice = toTokenUnit(historyEntry.entryPrice);
     const totalPrice = entryPrice.multipliedBy(size).abs();
     const fee = toTokenUnit(historyEntry.fee!);
-    const realizedPnl = toTokenUnit(historyEntry.realizedPnl!);
     const timestamp = secondsToMilliseconds(historyEntry.timestamp);
     const type = mapOriginalPositionStatus(
       historyEntry.type as OriginalPositionChangeStatuses
     );
+    const profitAndLoss = toTokenUnit(historyEntry.realizedPnl);
 
     return {
       pair,
@@ -145,7 +164,10 @@ export const createHistoryGridData = (
       price: formatUsdValue(entryPrice),
       total: formatUsdValue(totalPrice),
       fee: formatUsdValue(fee),
-      profitAndLoss: "", // TODO: provide when available
+      profitAndLoss: formatNumber(profitAndLoss, {
+        productId: quoteCcy,
+      }),
+      originalProfitAndLoss: profitAndLoss,
     };
   });
 };

@@ -10,7 +10,7 @@ export default {
   component: PriceDetails,
 } as Meta<typeof PriceDetails>;
 
-const createStore = (amount: number) => {
+const createStore = (baseAmount: number, quoteAmount: number) => {
   const store = getInitialState();
 
   store.tradingSidebar = {
@@ -18,7 +18,8 @@ const createStore = (amount: number) => {
     leverage: 3,
     amounts: {
       ...store.tradingSidebar.amounts,
-      quoteValue: new BigNumber(amount),
+      baseValue: new BigNumber(baseAmount),
+      quoteValue: new BigNumber(quoteAmount),
     },
   };
 
@@ -26,6 +27,15 @@ const createStore = (amount: number) => {
     ...store.connection,
     active: true,
   };
+
+  store.amm = {
+    ...store.amm,
+    underlyingPrice: "1111111111111111111",
+    baseAssetReserve: "95235933160933348370",
+    quoteAssetReserve: "10500238374418629152713",
+  };
+
+  store.tradingSidebar.balance = new BigNumber(1000);
 
   useStore.setState(store);
 };
@@ -37,7 +47,7 @@ const Template: Story<typeof PriceDetails> = (args) => {
 export const Default = Template.bind({});
 Default.decorators = [
   (Story) => {
-    createStore(0);
+    createStore(0, 0);
     return <Story />;
   },
 ];
@@ -45,7 +55,7 @@ Default.decorators = [
 export const Valid = Template.bind({});
 Valid.decorators = [
   (Story) => {
-    createStore(1000);
+    createStore(2.28, 100);
     return <Story />;
   },
 ];

@@ -67,11 +67,16 @@ const liquidationPriceCellRenderer = (row: RowProps, column: ColumnProps) => (
   </Typography>
 );
 
-const pnlCellRenderer = (row: RowProps, column: ColumnProps) => (
-  <Typography variant="body3" color={row.directionColor}>
-    {row[column.key]}
-  </Typography>
-);
+const pnlCellRenderer = (row: RowProps, column: ColumnProps) => {
+  const sx = row.originalProfitAndLoss.gte(0)
+    ? positivePnlStyle
+    : negativePnlStyle;
+  return (
+    <Typography variant="body3" sx={sx}>
+      {row[column.key]}
+    </Typography>
+  );
+};
 
 const closeHeaderRenderer = (column: ColumnProps, onClick: HeaderClickFunc) => (
   <Button
@@ -104,7 +109,12 @@ const shareCellRenderer = (
   column: ColumnProps,
   onClick: RowClickFunc
 ) => (
-  <Button variant="outlined" size="small" onClick={() => onClick(row, column)}>
+  <Button
+    variant="outlined"
+    size="small"
+    onClick={() => onClick(row, column)}
+    disabled
+  >
     <ShareOutlinedIcon sx={{ width: "0.875rem", height: "0.875rem" }} />
   </Button>
 );
@@ -122,7 +132,11 @@ const columns: ColumnProps[] = [
     cellRenderer: leverageCellRenderer,
   },
   { title: "Last Update", key: "time", cellRenderer: timeCellRenderer },
-  { title: "Size", key: "size", cellRenderer: sizeCellRenderer },
+  {
+    title: "Nominal Position Size",
+    key: "size",
+    cellRenderer: sizeCellRenderer,
+  },
   { title: "Entry Price", key: "entryPrice" },
   { title: "Mark Price", key: "markPrice" },
   {

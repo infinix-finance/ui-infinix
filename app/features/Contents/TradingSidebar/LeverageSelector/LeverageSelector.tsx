@@ -18,13 +18,8 @@ import {
 const LEVERAGES = [1, 3, 5, 7, 10];
 
 export const LeverageSelector = () => {
-  const {
-    tradingSidebarEnabled,
-    leverage,
-    buyingPowerLabel,
-    buyingPower,
-    handleChangeLeverage,
-  } = useLeverageSelector();
+  const { tradingSidebarEnabled, leverage, buyingPower, handleChangeLeverage } =
+    useLeverageSelector();
   const { isSmallDesktop } = useLayout();
 
   return (
@@ -34,7 +29,7 @@ export const LeverageSelector = () => {
           sx={buyingPowerLabelStyle(tradingSidebarEnabled)}
           variant="inputLabel"
         >
-          {buyingPowerLabel}
+          Nominal Position Size
         </Typography>
         <Typography
           sx={buyingPowerLabelStyle(tradingSidebarEnabled)}

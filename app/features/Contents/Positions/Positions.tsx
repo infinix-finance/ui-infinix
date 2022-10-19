@@ -74,6 +74,7 @@ export const Positions = () => {
             color="primary"
             exclusive
             onChange={handleSizeToggleChange}
+            disabled
           >
             <ToggleButton sx={toggleButtonStyle} value={Sizes.small}>
               <TableRowsOutlinedIcon />
