@@ -66,7 +66,12 @@ const exportHeaderRenderer = (
   column: ColumnProps,
   onClick: HeaderClickFunc
 ) => (
-  <Button variant="contained" size="small" onClick={() => onClick(column)}>
+  <Button
+    variant="contained"
+    size="small"
+    onClick={() => onClick(column)}
+    disabled
+  >
     Export History
   </Button>
 );
@@ -76,7 +81,12 @@ const shareCellRenderer = (
   column: ColumnProps,
   onClick: RowClickFunc
 ) => (
-  <Button variant="outlined" size="small" onClick={() => onClick(row, column)}>
+  <Button
+    variant="outlined"
+    size="small"
+    onClick={() => onClick(row, column)}
+    disabled
+  >
     <ShareOutlinedIcon sx={{ width: "0.875rem", height: "0.875rem" }} />
   </Button>
 );
