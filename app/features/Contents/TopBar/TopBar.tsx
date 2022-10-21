@@ -38,7 +38,6 @@ export const TopBar = () => {
           {...pairsList}
         />
       </Box>
-      <TooltipLabel label="Mark Price" value={priceValues.markPrice} />
       <TooltipLabel label="Index Price" value={priceValues.indexPrice} />
       <TooltipLabel label="Funding" value={priceValues.fundingRate} />
       <VolumeLabel value={priceValues.totalVolume} />

@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
 import { composeStories } from "@storybook/testing-react";
+import { render, screen } from "@testing-library/react";
 import * as stories from "./LeverageSelector.stories";
 
 import { checkScreenTexts } from "@/utils/testUtils";
@@ -17,6 +17,6 @@ describe("AssetAmount", () => {
   test("should render the component when balance is not set", () => {
     render(<Valid />);
 
-    checkScreenTexts(["Buying power (3x)", "$300.00"]);
+    checkScreenTexts(["Nominal Position Size", "$300.00"]);
   });
 });
